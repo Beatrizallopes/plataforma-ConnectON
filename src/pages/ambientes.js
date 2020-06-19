@@ -28,44 +28,55 @@ const Ambientes = () => {
 class ListaAmbientes extends React.Component {
   state = {
     data: [
-      { id: "0", name: "Escritório", qtdMod:2 },
-      { id: "1", name: "Estacionamento", qtdMod:4 },
-      { id: "2", name: "Expedição", qtdMod:1 },
+      { id: "0", name: "Escritório", qtdMod:2, cor:"rgba(255, 255, 255, 0.24)" },
+      { id: "1", name: "Estacionamento", qtdMod:4, cor: "red" },
+      { id: "2", name: "Expedição", qtdMod:1, cor: "yellow"},
     ]
   };
+  letra = this.state.data[0].name.substring(0,1); 
   qtdAmb = this.state.data.length - 1;
   render() {
     return (
       <SafeAreaView>
+        <Text style={styles.letra}>{this.letra}</Text>
         <View style={styles.grupo}>
         <FlatList
           data={this.state.data}
           keyExtractor={item => item.id}
           renderItem={({ item }) => {
             if(item.id <this.qtdAmb){
-              return (
-                <View style={styles.item}>
-                   {/* <Image style={styles.iconeFavorito} source={require('./../images/icons/naoFavorito.png')}/> */}
-                 <Text style={styles.text}>
-                   {item.name} 
-                   </Text>
-                   <Text style={styles.infoQuantidade}>{item.qtdMod}
-                   <Image source={require('./../images/icons/setaDireita.png')}/>
-                   </Text>
-                 
-                </View>
-                     );}
+              if(item.id === "0"){ // Se é o primeiro item da lista
+                return (
+                  <View style={indicador(item.cor,"inicial")}>
+                   <Text style={styles.text}>
+                     {item.name} 
+                     </Text>
+                     <Text style={styles.infoQuantidade}>{item.qtdMod}
+                     <Image source={require('./../images/icons/setaDireita.png')}/>
+                     </Text>                  
+                  </View>
+                       );
+              } else { // Não é o primeiro nem o último item da lista
+                return (
+                  <View style={indicador(item.cor,"meio")}>
+                   <Text style={styles.text}>
+                     {item.name} 
+                     </Text>
+                     <Text style={styles.infoQuantidade}>{item.qtdMod}
+                     <Image source={require('./../images/icons/setaDireita.png')}/>
+                     </Text>                  
+                  </View>
+                       );
+              }}
             else{  
               return (
-                <View style={styles.itemFinal}>
+                <View style={indicador(item.cor,"final")}>
                   <Text style={styles.text}>{item.name}</Text>
                   <Text style={styles.infoQuantidade}>{item.qtdMod}
                    <Image source={require('./../images/icons/setaDireita.png')}/>
                    </Text>
                 </View>
-              );
-
-            }
+              );}
            
           }}
         />
@@ -97,7 +108,6 @@ const styles = StyleSheet.create({
  campoPesquisa:{
   height:44,
   padding: 12,
-  // Deveria ser padding: 10px 12px
   width:"90%",
   left: 16,
   backgroundColor: "rgba(255, 255, 255,0.13)",
@@ -122,21 +132,34 @@ const styles = StyleSheet.create({
   borderRadius: 12,
   width:"90%",
   alignSelf:"center",
-  marginTop:52,
+  marginTop:110,
+ 
+ },
+ itemInicial:{
+  height: 48,
+  borderBottomColor: "rgba(255, 255, 255, 0.12)",
+  borderBottomWidth: 1,
+  borderLeftWidth:8,
+  borderLeftColor: "rgba(255, 255, 255, 0.24)",
+  borderTopStartRadius:12,
  },
  item: {
   height: 48,
   borderBottomColor: "rgba(255, 255, 255, 0.12)",
   borderBottomWidth: 1,
+  borderLeftWidth:8,
+  borderLeftColor: "rgba(255, 255, 255, 0.24)",
 },
 itemFinal: {
   height: 48,
+  borderLeftWidth:8,
+  borderLeftColor: "rgba(255, 255, 255, 0.24)",
+  borderBottomStartRadius:12,
 },
 text: {
   color: "#FFFFFF",
   fontSize: 17,
   position: "absolute",
-  // width: 183,
   height: 24,
   left: 8,
   top: 12,
@@ -151,8 +174,51 @@ infoQuantidade: {
 },
 iconeFavorito:{
 //  alignSelf:"flex-start",
+},
+letra:{
+  color:"#FFFFFF",
+  fontWeight: "600",
+  fontSize: 17,
+  lineHeight: 22,
+  position: "absolute",
+  width: 10,
+  height: 24,
+  left: "5%",
+  marginTop:84,
 }
 });
+// Indicador que muda de cor
+var indicador = function(myColor, tipo) {
+  if(tipo=='inicial'){
+    return {
+      height: 48,
+      borderBottomColor: "rgba(255, 255, 255, 0.12)",
+      borderBottomWidth: 1,
+      borderLeftWidth:8,
+      borderLeftColor: myColor,
+      borderTopStartRadius:12,
+    }
+  };
+  if(tipo=='meio'){
+    return {
+      height: 48,
+      borderBottomColor: "rgba(255, 255, 255, 0.12)",
+      borderBottomWidth: 1,
+      borderLeftWidth:8,
+      borderLeftColor: myColor,
+    }
+  };
+  if(tipo=='final'){
+    return {
+      height: 48,
+      borderLeftWidth:8,
+      borderLeftColor: myColor,
+      borderBottomStartRadius:12,
+    }
+  }
+  
+}
+
 
 // Exportando o componente (página) Ambientes:
 export default Ambientes;
