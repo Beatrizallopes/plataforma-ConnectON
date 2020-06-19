@@ -1,17 +1,19 @@
-// Informações que preciso nessa página: uma lista dos ambientes que o usuário tem acesso. Para cada ambiente, preciso das informações: nome, quantidade de módulos nele, cor o indicador e se é um favorito ou não
+// Informações que preciso nessa página: uma lista dos ambientes que o usuário tem acesso. Para cada ambiente, preciso das informações: nome, quantidade de módulos nele, cor o indicador e se é um favorito ou não.
 
 import React  from 'react';
-import { StyleSheet, View, Text, ScrollView, TextInput, Image, Button,  FlatList, SafeAreaView,} from 'react-native';
+import { StyleSheet, View, Text, ScrollView, TextInput, Image, Button,  FlatList, SafeAreaView,TouchableWithoutFeedback} from 'react-native';
+import { initialWindowMetrics } from 'react-native-safe-area-context';
 
 const Ambientes = () => {
   return (
    <View style={styles.body}>
      <View style={styles.header}>
-     {/* <Button style ={styles.Addbutton}
-              onPress={() => alert('This is a button!')}
-              title=""
-              color="red"
-            /> */}
+     <TouchableWithoutFeedback onPress={() => alert("Adicionar Ambiente")}>
+       <Image  style={{position: "absolute", right: 22,top: 54}} source={require('./../images/icons/adicionar.png')}/>
+      </TouchableWithoutFeedback>
+      <TouchableWithoutFeedback onPress={() => alert("Mais Informações")}>
+       <Image  style={{position: "absolute", right: 66,top: 54}} source={require('./../images/icons/more.png')}/>
+      </TouchableWithoutFeedback>
      </View>
       <Text style={styles.titulo}>
            Ambientes
@@ -47,22 +49,22 @@ class ListaAmbientes extends React.Component {
           keyExtractor={item => item.id}
           renderItem={({ item }) => {
             // Definindo o ícone de favorito
-            // var urlIconeFav = item.favorito === 1 ? require('./../images/icons/favorito.png'): require('./../images/icons/naoFavorito.png');
-            // var urlIconeFav = item.favorito === 1 ? "é favorito": "não é favorito";
-            var urlIconeFav =  require('./../images/icons/naoFavorito.png');
-            var oi = "oi";
+           var urlIconeFav =  require('./../images/icons/naoFavorito.png');
             if (item.favorito){ 
               urlIconeFav = require('./../images/icons/favorito.png');
-              oi = "xau";
             }
             if(item.id <this.qtdAmb){
               if(item.id === "0"){ // Se é o primeiro item da lista
                 return (
                   <View style={indicador(item.cor,"inicial")}>
+                  <TouchableWithoutFeedback onPress={() => item.name= "oi"}>
                     <Image  style={styles.iconeFavorito} source={urlIconeFav}/>
+                    </TouchableWithoutFeedback>
                    <Text style={styles.text}>
+                     {item.favorito}
                      {item.name} 
                      </Text>
+                    
                      <Text style={styles.infoQuantidade}>{item.qtdMod}
                      <Image source={require('./../images/icons/setaDireita.png')}/>
                      </Text>                  
@@ -178,7 +180,7 @@ letra:{
   width: 10,
   height: 24,
   left: "5%",
-  marginTop:84,
+  marginTop:80,
 }
 });
 // Estilos Dinâmicos
@@ -212,8 +214,5 @@ var indicador = function(myColor, tipo) {
   }
   
 }
-
-
-
 // Exportando o componente (página) Ambientes:
 export default Ambientes;
