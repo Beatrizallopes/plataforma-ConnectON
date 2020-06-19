@@ -1,3 +1,5 @@
+// Informações que preciso nessa página: uma lista dos ambientes que o usuário tem acesso. Para cada ambiente, preciso das informações: nome, quantidade de módulos nele, cor o indicador e se é um favorito ou não
+
 import React  from 'react';
 import { StyleSheet, View, Text, ScrollView, TextInput, Image, Button,  FlatList, SafeAreaView,} from 'react-native';
 
@@ -28,9 +30,9 @@ const Ambientes = () => {
 class ListaAmbientes extends React.Component {
   state = {
     data: [
-      { id: "0", name: "Escritório", qtdMod:2, cor:"rgba(255, 255, 255, 0.24)" },
-      { id: "1", name: "Estacionamento", qtdMod:4, cor: "red" },
-      { id: "2", name: "Expedição", qtdMod:1, cor: "yellow"},
+      { id: "0", name: "Escritório", qtdMod:2, cor:"#80908A",favorito:true},
+      { id: "1", name: "Estacionamento", qtdMod:4, cor: "#CD9C44", favorito: false },
+      { id: "2", name: "Expedição", qtdMod:1, cor: "#6888CF", favorito:true},
     ]
   };
   letra = this.state.data[0].name.substring(0,1); 
@@ -44,10 +46,20 @@ class ListaAmbientes extends React.Component {
           data={this.state.data}
           keyExtractor={item => item.id}
           renderItem={({ item }) => {
+            // Definindo o ícone de favorito
+            // var urlIconeFav = item.favorito === 1 ? require('./../images/icons/favorito.png'): require('./../images/icons/naoFavorito.png');
+            // var urlIconeFav = item.favorito === 1 ? "é favorito": "não é favorito";
+            var urlIconeFav =  require('./../images/icons/naoFavorito.png');
+            var oi = "oi";
+            if (item.favorito){ 
+              urlIconeFav = require('./../images/icons/favorito.png');
+              oi = "xau";
+            }
             if(item.id <this.qtdAmb){
               if(item.id === "0"){ // Se é o primeiro item da lista
                 return (
                   <View style={indicador(item.cor,"inicial")}>
+                    <Image  style={styles.iconeFavorito} source={urlIconeFav}/>
                    <Text style={styles.text}>
                      {item.name} 
                      </Text>
@@ -59,6 +71,7 @@ class ListaAmbientes extends React.Component {
               } else { // Não é o primeiro nem o último item da lista
                 return (
                   <View style={indicador(item.cor,"meio")}>
+                    <Image  style={styles.iconeFavorito} source={urlIconeFav}/>
                    <Text style={styles.text}>
                      {item.name} 
                      </Text>
@@ -68,16 +81,16 @@ class ListaAmbientes extends React.Component {
                   </View>
                        );
               }}
-            else{  
-              return (
+            else{   // Se for o último item da lista:
+              return ( 
                 <View style={indicador(item.cor,"final")}>
+                  <Image  style={styles.iconeFavorito} source={urlIconeFav}/>
                   <Text style={styles.text}>{item.name}</Text>
                   <Text style={styles.infoQuantidade}>{item.qtdMod}
                    <Image source={require('./../images/icons/setaDireita.png')}/>
                    </Text>
                 </View>
-              );}
-           
+              );}           
           }}
         />
         </View>
@@ -135,27 +148,6 @@ const styles = StyleSheet.create({
   marginTop:110,
  
  },
- itemInicial:{
-  height: 48,
-  borderBottomColor: "rgba(255, 255, 255, 0.12)",
-  borderBottomWidth: 1,
-  borderLeftWidth:8,
-  borderLeftColor: "rgba(255, 255, 255, 0.24)",
-  borderTopStartRadius:12,
- },
- item: {
-  height: 48,
-  borderBottomColor: "rgba(255, 255, 255, 0.12)",
-  borderBottomWidth: 1,
-  borderLeftWidth:8,
-  borderLeftColor: "rgba(255, 255, 255, 0.24)",
-},
-itemFinal: {
-  height: 48,
-  borderLeftWidth:8,
-  borderLeftColor: "rgba(255, 255, 255, 0.24)",
-  borderBottomStartRadius:12,
-},
 text: {
   color: "#FFFFFF",
   fontSize: 17,
@@ -163,7 +155,7 @@ text: {
   height: 24,
   left: 8,
   top: 12,
-  marginLeft:8,
+  marginLeft:48,// 56 - 8 = 48
   lineHeight: 22,
   letterSpacing: -0.408, 
 },
@@ -173,7 +165,9 @@ infoQuantidade: {
   marginHorizontal:4,
 },
 iconeFavorito:{
-//  alignSelf:"flex-start",
+position: "absolute",
+left: 8,
+top: 12,
 },
 letra:{
   color:"#FFFFFF",
@@ -187,7 +181,7 @@ letra:{
   marginTop:84,
 }
 });
-// Indicador que muda de cor
+// Estilos Dinâmicos
 var indicador = function(myColor, tipo) {
   if(tipo=='inicial'){
     return {
@@ -218,6 +212,7 @@ var indicador = function(myColor, tipo) {
   }
   
 }
+
 
 
 // Exportando o componente (página) Ambientes:
