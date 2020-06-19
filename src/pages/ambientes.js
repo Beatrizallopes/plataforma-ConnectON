@@ -1,14 +1,17 @@
 // Informações que preciso nessa página: uma lista dos ambientes que o usuário tem acesso. Para cada ambiente, preciso das informações: nome, quantidade de módulos nele, cor o indicador e se é um favorito ou não.
-
+// Pegando os dados utilizados e tratando-os:
+import listaAmbientes from './../dados';
+// 
 import React  from 'react';
 import { StyleSheet, View, Text, ScrollView, TextInput, Image, Button,  FlatList, SafeAreaView,TouchableWithoutFeedback} from 'react-native';
 import { initialWindowMetrics } from 'react-native-safe-area-context';
+import grupos from './../funcoes';
 
 const Ambientes = () => {
   return (
    <View style={styles.body}>
      <View style={styles.header}>
-     <TouchableWithoutFeedback onPress={() => alert("Adicionar Ambiente")}>
+     <TouchableWithoutFeedback onPress={() => alert("Adicionar ambiente")}>
        <Image  style={{position: "absolute", right: 22,top: 54}} source={require('./../images/icons/adicionar.png')}/>
       </TouchableWithoutFeedback>
       <TouchableWithoutFeedback onPress={() => alert("Mais Informações")}>
@@ -16,20 +19,19 @@ const Ambientes = () => {
       </TouchableWithoutFeedback>
      </View>
       <Text style={styles.titulo}>
-           Ambientes
+           Ambientes 
       </Text>
       <TextInput style={styles.campoPesquisa}>
           <Image style={styles.icone} source={require('./../images/icons/buscar.png')}/>
            Buscar Ambiente ... 
       </TextInput> 
-          <ListaAmbientes></ListaAmbientes>
+          <GrupoAmbientes></GrupoAmbientes>
    </View>
   );
 };
 
 // Criando o componente Lista
-
-class ListaAmbientes extends React.Component {
+class GrupoAmbientes extends React.Component {
   state = {
     data: [
       { id: "0", name: "Escritório", qtdMod:2, cor:"#80908A",favorito:true},
@@ -100,7 +102,6 @@ class ListaAmbientes extends React.Component {
     );
   }
 }
-
 // Estilização dos componentes 
 const styles = StyleSheet.create({
  titulo:{
