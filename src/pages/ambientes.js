@@ -35,9 +35,11 @@ const Ambientes = () => {
 class GrupoAmbientes extends React.Component {
   render() {
     var tamanho = grupos.length;
+
     const itemLista = grupos.map((grupo) => {
       var letra = grupo[0].nome.substring(0,1); 
       var qtdAmb = grupo.length - 1;
+
       const item = grupo.map((ambiente) => {
         var urlIconeFav =  require('./../images/icons/naoFavorito.png');      
         if (ambiente.ehFavorito){ 
@@ -47,7 +49,7 @@ class GrupoAmbientes extends React.Component {
 
           if(ambiente.id === "0"){ // Se é o primeiro item da lista
             return (
-                <View style={indicador(ambiente.cor,"inicial")}>
+                <View style={indicador(ambiente.cor,"inicial")} key={ambiente.id}>
                 <TouchableWithoutFeedback onPress={() => alert("Favoritar!")}>
                   <Image  style={styles.iconeFavorito} source={urlIconeFav}/>
                   </TouchableWithoutFeedback>
@@ -62,7 +64,7 @@ class GrupoAmbientes extends React.Component {
                     )
           } else { // Não é o primeiro nem o último item da lista
               return (
-                <View style={indicador(ambiente.cor,"meio")}>
+                <View style={indicador(ambiente.cor,"meio")} key={ambiente.id}>
                 <Image  style={styles.iconeFavorito} source={urlIconeFav}/>
                  <Text style={styles.text}>
                    {ambiente.nome} 
@@ -78,7 +80,7 @@ class GrupoAmbientes extends React.Component {
         else{            
           if(qtdAmb == 0){
             return (      // Se for o único item da lista
-                <View style={indicador(ambiente.cor,"unico")}>
+                <View style={indicador(ambiente.cor,"unico")} key={ambiente.id}>
                   <Image  style={styles.iconeFavorito} source={urlIconeFav}/>
                   <Text style={styles.text}>{ambiente.nome}</Text>
                   <Text style={styles.infoQuantidade}>{ambiente.qtdMod}
@@ -88,7 +90,7 @@ class GrupoAmbientes extends React.Component {
               )
             } else { // Se for o último item da lista:
               return ( 
-                <View style={indicador(ambiente.cor,"final")}>
+                <View style={indicador(ambiente.cor,"final")} key={ambiente.id}>
                   <Image  style={styles.iconeFavorito} source={urlIconeFav}/>
                   <Text style={styles.text}>{ambiente.nome} </Text>
                   <Text style={styles.infoQuantidade}>{ambiente.qtdMod}
@@ -100,7 +102,7 @@ class GrupoAmbientes extends React.Component {
         }
       }) // Terminou o primeiro map
       return(
-        <SafeAreaView>
+        <SafeAreaView key={letra} >
           <Text style={styles.letra}>{letra}</Text>
           <View style={styles.linha}>
             {item}                 
@@ -109,7 +111,8 @@ class GrupoAmbientes extends React.Component {
             ) 
           }) // terminou o segundo map         
        return itemLista
-          }}
+          }
+        }
         
 // Estilização dos componentes 
 const styles = StyleSheet.create({
