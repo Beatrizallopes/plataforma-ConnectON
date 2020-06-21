@@ -53,11 +53,11 @@ class GrupoAmbientes extends React.Component {
               if (item.ehFavorito){ 
                 urlIconeFav = require('./../images/icons/favorito.png');
               }
-              if(item.id <this.qtdAmb){
+              if(item.id < qtdAmb){
                 if(item.id === "0"){ // Se é o primeiro item da lista
                   return (
                     <View style={indicador(item.cor,"inicial")}>
-                    <TouchableWithoutFeedback onPress={() => item.name= "oi"}>
+                    <TouchableWithoutFeedback onPress={() => alert("Favoritar!")}>
                       <Image  style={styles.iconeFavorito} source={urlIconeFav}/>
                       </TouchableWithoutFeedback>
                      <Text style={styles.text}>
@@ -82,17 +82,33 @@ class GrupoAmbientes extends React.Component {
                     </View>
                          );
                 }}
-              else{   // Se for o último item da lista:
-                return ( 
-                  <View style={indicador(item.cor,"final")}>
-                    <Image  style={styles.iconeFavorito} source={urlIconeFav}/>
-                    <Text style={styles.text}>{item.nome}
-                    </Text>
-                    <Text style={styles.infoQuantidade}>{item.qtdMod}
-                     <Image source={require('./../images/icons/setaDireita.png')}/>
-                     </Text>
-                  </View>
-                );}           
+              else{            
+                if(qtdAmb == 0){
+                  return (      // Se for o único item da lista
+                    <View style={indicador(item.cor,"unico")}>
+                      <Image  style={styles.iconeFavorito} source={urlIconeFav}/>
+                      <Text style={styles.text}>{item.nome} 
+                      </Text>
+                      <Text style={styles.infoQuantidade}>{item.qtdMod}
+                       <Image source={require('./../images/icons/setaDireita.png')}/>
+                       </Text>
+                    </View>
+                  );
+                } else { // Se for o último item da lista:
+                  return ( 
+                    <View style={indicador(item.cor,"final")}>
+                      <Image  style={styles.iconeFavorito} source={urlIconeFav}/>
+                      <Text style={styles.text}>{item.nome} 
+                      </Text>
+                      <Text style={styles.infoQuantidade}>{item.qtdMod}
+                       <Image source={require('./../images/icons/setaDireita.png')}/>
+                       </Text>
+                    </View>
+                  );
+
+                }
+                
+              }           
             }}
           />
         </View>
@@ -210,6 +226,15 @@ var indicador = function(myColor, tipo) {
       borderLeftWidth:8,
       borderLeftColor: myColor,
       borderBottomStartRadius:12,
+    }
+  }
+  if(tipo=='unico'){
+    return {
+      height: 48,
+      borderLeftWidth:8,
+      borderLeftColor: myColor,
+      borderBottomStartRadius:12,
+      borderTopStartRadius:12,
     }
   }
   
