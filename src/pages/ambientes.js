@@ -7,11 +7,11 @@ import { StyleSheet, View, Text, ScrollView, TextInput, Image, Button,  FlatList
 import { initialWindowMetrics } from 'react-native-safe-area-context';
 import grupos from '../funcoes/separarGruposAlfa';
 
-var tamanho = grupos.length;
+
 
 const Ambientes = () => {
   return (
-   <View style={styles.body}>
+   <ScrollView style={styles.body}>
      <View style={styles.header}>
      <TouchableWithoutFeedback onPress={() => alert("Adicionar ambiente")}>
        <Image  style={{position: "absolute", right: 22,top: 54}} source={require('./../images/icons/adicionar.png')}/>
@@ -29,29 +29,23 @@ const Ambientes = () => {
       </TextInput> 
       
           <GrupoAmbientes></GrupoAmbientes>
-   </View>
+   </ScrollView>
   );
 };
 
 // Criando o componente Lista
 class GrupoAmbientes extends React.Component {
-  // state = {
-  //   data: [
-  //     { id: "0", name: "Escritório", qtdMod:2, cor:"#80908A",favorito:true},
-  //     { id: "1", name: "Estacionamento", qtdMod:4, cor: "#CD9C44", favorito: false },
-  //     { id: "2", name: "Expedição", qtdMod:1, cor: "#6888CF", favorito:true},
-  //   ]
-  // };
   render() {
-    for(var i=0;i<tamanho;i++){     
-     var letra = grupos[i][0].nome.substring(0,1); 
-      var qtdAmb = grupos[i].length - 1;
+    var tamanho = grupos.length;
+    const itemLista = grupos.map((grupo) => {
+      var letra = grupo[0].nome.substring(0,1); 
+      var qtdAmb = grupo.length - 1;
       return (
         <SafeAreaView>
           <Text style={styles.letra}>{letra}</Text>
-          <View style={styles.grupo}>
+          <View style={styles.linha}>
           <FlatList
-            data={grupos[i]}
+            data={grupo}
             keyExtractor={(item, index) => index.toString()}
             renderItem={({ item }) => {
               // Definindo o ícone de favorito
@@ -92,7 +86,8 @@ class GrupoAmbientes extends React.Component {
                 return ( 
                   <View style={indicador(item.cor,"final")}>
                     <Image  style={styles.iconeFavorito} source={urlIconeFav}/>
-                    <Text style={styles.text}>{item.nome}</Text>
+                    <Text style={styles.text}>{item.nome}
+                    </Text>
                     <Text style={styles.infoQuantidade}>{item.qtdMod}
                      <Image source={require('./../images/icons/setaDireita.png')}/>
                      </Text>
@@ -100,10 +95,11 @@ class GrupoAmbientes extends React.Component {
                 );}           
             }}
           />
-          </View>
+        </View>
         </SafeAreaView>
       );
-    }
+    })  
+    return itemLista; 
   }
 }
 // Estilização dos componentes 
@@ -147,12 +143,12 @@ const styles = StyleSheet.create({
    backgroundColor:"red",
  },
  // Estilização da Lista:
- grupo:{
+ linha:{
   backgroundColor: "linear-gradient(0deg, rgba(255, 255, 255, 0.11), rgba(255, 255, 255, 0.11))",
   borderRadius: 12,
   width:"90%",
   alignSelf:"center",
-  marginTop:110,
+  marginTop:52,
  },
 text: {
   color: "#FFFFFF",
@@ -184,7 +180,7 @@ letra:{
   width: 10,
   height: 24,
   left: "5%",
-  marginTop:80,
+  marginTop:18,
 }
 });
 // Estilos Dinâmicos
