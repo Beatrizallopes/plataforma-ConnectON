@@ -5,7 +5,9 @@ import listaAmbientes from './../dados';
 import React  from 'react';
 import { StyleSheet, View, Text, ScrollView, TextInput, Image, Button,  FlatList, SafeAreaView,TouchableWithoutFeedback} from 'react-native';
 import { initialWindowMetrics } from 'react-native-safe-area-context';
-import grupos from './../funcoes';
+import grupos from '../funcoes/separarGruposAlfa';
+
+var tamanho = grupos.length;
 
 const Ambientes = () => {
   return (
@@ -25,6 +27,7 @@ const Ambientes = () => {
           <Image style={styles.icone} source={require('./../images/icons/buscar.png')}/>
            Buscar Ambiente ... 
       </TextInput> 
+      
           <GrupoAmbientes></GrupoAmbientes>
    </View>
   );
@@ -32,74 +35,76 @@ const Ambientes = () => {
 
 // Criando o componente Lista
 class GrupoAmbientes extends React.Component {
-  state = {
-    data: [
-      { id: "0", name: "Escritório", qtdMod:2, cor:"#80908A",favorito:true},
-      { id: "1", name: "Estacionamento", qtdMod:4, cor: "#CD9C44", favorito: false },
-      { id: "2", name: "Expedição", qtdMod:1, cor: "#6888CF", favorito:true},
-    ]
-  };
-  letra = this.state.data[0].name.substring(0,1); 
-  qtdAmb = this.state.data.length - 1;
+  // state = {
+  //   data: [
+  //     { id: "0", name: "Escritório", qtdMod:2, cor:"#80908A",favorito:true},
+  //     { id: "1", name: "Estacionamento", qtdMod:4, cor: "#CD9C44", favorito: false },
+  //     { id: "2", name: "Expedição", qtdMod:1, cor: "#6888CF", favorito:true},
+  //   ]
+  // };
   render() {
-    return (
-      <SafeAreaView>
-        <Text style={styles.letra}>{this.letra}</Text>
-        <View style={styles.grupo}>
-        <FlatList
-          data={this.state.data}
-          keyExtractor={item => item.id}
-          renderItem={({ item }) => {
-            // Definindo o ícone de favorito
-           var urlIconeFav =  require('./../images/icons/naoFavorito.png');
-            if (item.favorito){ 
-              urlIconeFav = require('./../images/icons/favorito.png');
-            }
-            if(item.id <this.qtdAmb){
-              if(item.id === "0"){ // Se é o primeiro item da lista
-                return (
-                  <View style={indicador(item.cor,"inicial")}>
-                  <TouchableWithoutFeedback onPress={() => item.name= "oi"}>
+    for(var i=0;i<tamanho;i++){     
+     var letra = grupos[i][1].nome.substring(0,1); 
+      var qtdAmb = grupos[i].length - 1;
+      return (
+        <SafeAreaView>
+          <Text style={styles.letra}>{letra}</Text>
+          <View style={styles.grupo}>
+          <FlatList
+            data={grupos[i]}
+            keyExtractor={(item, index) => index.toString()}
+            renderItem={({ item }) => {
+              // Definindo o ícone de favorito
+             var urlIconeFav =  require('./../images/icons/naoFavorito.png');
+              if (item.ehFavorito){ 
+                urlIconeFav = require('./../images/icons/favorito.png');
+              }
+              if(item.id <this.qtdAmb){
+                if(item.id === "0"){ // Se é o primeiro item da lista
+                  return (
+                    <View style={indicador(item.cor,"inicial")}>
+                    <TouchableWithoutFeedback onPress={() => item.name= "oi"}>
+                      <Image  style={styles.iconeFavorito} source={urlIconeFav}/>
+                      </TouchableWithoutFeedback>
+                     <Text style={styles.text}>
+                       {item.ehFavorito}
+                       {item.nome} 
+                       </Text>
+                      
+                       <Text style={styles.infoQuantidade}>{item.qtdMod}
+                       <Image source={require('./../images/icons/setaDireita.png')}/>
+                       </Text>                  
+                    </View>
+                         );
+                } else { // Não é o primeiro nem o último item da lista
+                  return (
+                    <View style={indicador(item.cor,"meio")}>
+                      <Image  style={styles.iconeFavorito} source={urlIconeFav}/>
+                     <Text style={styles.text}>
+                       {item.nome} 
+                       </Text>
+                       <Text style={styles.infoQuantidade}>{item.qtdMod}
+                       <Image source={require('./../images/icons/setaDireita.png')}/>
+                       </Text>                  
+                    </View>
+                         );
+                }}
+              else{   // Se for o último item da lista:
+                return ( 
+                  <View style={indicador(item.cor,"final")}>
                     <Image  style={styles.iconeFavorito} source={urlIconeFav}/>
-                    </TouchableWithoutFeedback>
-                   <Text style={styles.text}>
-                     {item.favorito}
-                     {item.name} 
-                     </Text>
-                    
-                     <Text style={styles.infoQuantidade}>{item.qtdMod}
+                    <Text style={styles.text}>{item.nome}</Text>
+                    <Text style={styles.infoQuantidade}>{item.qtdMod}
                      <Image source={require('./../images/icons/setaDireita.png')}/>
-                     </Text>                  
-                  </View>
-                       );
-              } else { // Não é o primeiro nem o último item da lista
-                return (
-                  <View style={indicador(item.cor,"meio")}>
-                    <Image  style={styles.iconeFavorito} source={urlIconeFav}/>
-                   <Text style={styles.text}>
-                     {item.name} 
                      </Text>
-                     <Text style={styles.infoQuantidade}>{item.qtdMod}
-                     <Image source={require('./../images/icons/setaDireita.png')}/>
-                     </Text>                  
                   </View>
-                       );
-              }}
-            else{   // Se for o último item da lista:
-              return ( 
-                <View style={indicador(item.cor,"final")}>
-                  <Image  style={styles.iconeFavorito} source={urlIconeFav}/>
-                  <Text style={styles.text}>{item.name}</Text>
-                  <Text style={styles.infoQuantidade}>{item.qtdMod}
-                   <Image source={require('./../images/icons/setaDireita.png')}/>
-                   </Text>
-                </View>
-              );}           
-          }}
-        />
-        </View>
-      </SafeAreaView>
-    );
+                );}           
+            }}
+          />
+          </View>
+        </SafeAreaView>
+      );
+    }
   }
 }
 // Estilização dos componentes 

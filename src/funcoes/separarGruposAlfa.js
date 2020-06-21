@@ -1,6 +1,6 @@
 // Outra possível solução é ordenar na ordem alfabetica. Compara a primeira leitra com o anterior. Se for igual, fica no grupo j. Se for direrente, grupo j+1.
 // Função para agrupar os nomes dos ambientes de acordo com a primeira letra
-import listaAmbientes from './dados';
+import listaAmbientes from '../dados';
 var grupos = [];
 // function organizaGrupos(){
 var qtdAmbientes = listaAmbientes.length;
@@ -162,4 +162,12 @@ for(var i=0;i<qtdAmbientes;i++){
   if (grupoZ.length>1){
     grupos.push(grupoZ);
   }
+  // function adicionarId(){
+    for(var x=0;x<grupos.length;x++){ 
+      for(var y=0;y<grupos[x].length;y++){
+        grupos[x][y].id = (y-1).toString();
+
+      }
+    }
+  // }
 export default grupos;

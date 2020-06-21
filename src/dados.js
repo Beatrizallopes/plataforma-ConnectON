@@ -6,6 +6,6 @@ var listaAmbientes = [
     { nome: "Descompressão", qtdMod:2, cor:"#6888CF",ehFavorito:false},
     { nome: "RH", qtdMod:2, cor:"#6888CF",ehFavorito:true},
     { nome: "Estacionamento", qtdMod:0, cor:"#CD9C44",ehFavorito:false},
-    { nome: "Copa", qtdMod:3, cor:"#CD9C44",ehFavorito:false},
+    { nome: "Copa", qtdMod:3, cor:"#CD9C44",ehFavorito:true},
 ];
 export default listaAmbientes;
