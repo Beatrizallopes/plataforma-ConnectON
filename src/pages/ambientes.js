@@ -44,7 +44,7 @@ class GrupoAmbientes extends React.Component {
   // };
   render() {
     for(var i=0;i<tamanho;i++){     
-     var letra = grupos[i][1].nome.substring(0,1); 
+     var letra = grupos[i][0].nome.substring(0,1); 
       var qtdAmb = grupos[i].length - 1;
       return (
         <SafeAreaView>
@@ -69,8 +69,7 @@ class GrupoAmbientes extends React.Component {
                      <Text style={styles.text}>
                        {item.ehFavorito}
                        {item.nome} 
-                       </Text>
-                      
+                       </Text>                    
                        <Text style={styles.infoQuantidade}>{item.qtdMod}
                        <Image source={require('./../images/icons/setaDireita.png')}/>
                        </Text>                  
@@ -154,7 +153,6 @@ const styles = StyleSheet.create({
   width:"90%",
   alignSelf:"center",
   marginTop:110,
- 
  },
 text: {
   color: "#FFFFFF",

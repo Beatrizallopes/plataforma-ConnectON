@@ -166,8 +166,8 @@ for(var i=0;i<qtdAmbientes;i++){
     for(var x=0;x<grupos.length;x++){ 
       for(var y=0;y<grupos[x].length;y++){
         grupos[x][y].id = (y-1).toString();
-
       }
+      grupos[x].splice(0,1);
     }
   // }
 export default grupos;
