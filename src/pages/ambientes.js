@@ -3,7 +3,7 @@
 import listaAmbientes from './../dados';
 // 
 import React  from 'react';
-import { StyleSheet, View, Text, ScrollView, TextInput, Image, Button,  FlatList, SafeAreaView,TouchableWithoutFeedback} from 'react-native';
+import { StyleSheet, View, Text, ScrollView, TextInput, Image, Button,  FlatList, SafeAreaView,TouchableWithoutFeedback,VirtualizedList} from 'react-native';
 import { initialWindowMetrics } from 'react-native-safe-area-context';
 import grupos from '../funcoes/separarGruposAlfa';
 
@@ -26,13 +26,11 @@ const Ambientes = () => {
       <TextInput style={styles.campoPesquisa}>
           <Image style={styles.icone} source={require('./../images/icons/buscar.png')}/>
            Buscar Ambiente ... 
-      </TextInput> 
-      
+      </TextInput>       
           <GrupoAmbientes></GrupoAmbientes>
    </ScrollView>
   );
 };
-
 // Criando o componente Lista
 class GrupoAmbientes extends React.Component {
   render() {
@@ -40,84 +38,79 @@ class GrupoAmbientes extends React.Component {
     const itemLista = grupos.map((grupo) => {
       var letra = grupo[0].nome.substring(0,1); 
       var qtdAmb = grupo.length - 1;
-      return (
+      const item = grupo.map((ambiente) => {
+        var urlIconeFav =  require('./../images/icons/naoFavorito.png');      
+        if (ambiente.ehFavorito){ 
+          urlIconeFav = require('./../images/icons/favorito.png');
+        }
+        if(ambiente.id < qtdAmb){
+
+          if(ambiente.id === "0"){ // Se é o primeiro item da lista
+            return (
+                <View style={indicador(ambiente.cor,"inicial")}>
+                <TouchableWithoutFeedback onPress={() => alert("Favoritar!")}>
+                  <Image  style={styles.iconeFavorito} source={urlIconeFav}/>
+                  </TouchableWithoutFeedback>
+                 <Text style={styles.text}>
+                   {ambiente.ehFavorito}
+                   {ambiente.nome} 
+                   </Text>                    
+                   <Text style={styles.infoQuantidade}>{ambiente.qtdMod}
+                   <Image source={require('./../images/icons/setaDireita.png')}/>
+                   </Text>                  
+                </View>
+                    )
+          } else { // Não é o primeiro nem o último item da lista
+              return (
+                <View style={indicador(ambiente.cor,"meio")}>
+                <Image  style={styles.iconeFavorito} source={urlIconeFav}/>
+                 <Text style={styles.text}>
+                   {ambiente.nome} 
+                   </Text>
+                   <Text style={styles.infoQuantidade}>{ambiente.qtdMod}
+                   <Image source={require('./../images/icons/setaDireita.png')}/>
+                   </Text>                  
+                </View>
+              )
+            }
+          } // Fim do primeiro if (ambiente.id < qtdAmb)
+
+        else{            
+          if(qtdAmb == 0){
+            return (      // Se for o único item da lista
+                <View style={indicador(ambiente.cor,"unico")}>
+                  <Image  style={styles.iconeFavorito} source={urlIconeFav}/>
+                  <Text style={styles.text}>{ambiente.nome}</Text>
+                  <Text style={styles.infoQuantidade}>{ambiente.qtdMod}
+                    <Image source={require('./../images/icons/setaDireita.png')}/>
+                  </Text>
+                </View>
+              )
+            } else { // Se for o último item da lista:
+              return ( 
+                <View style={indicador(ambiente.cor,"final")}>
+                  <Image  style={styles.iconeFavorito} source={urlIconeFav}/>
+                  <Text style={styles.text}>{ambiente.nome} </Text>
+                  <Text style={styles.infoQuantidade}>{ambiente.qtdMod}
+                   <Image source={require('./../images/icons/setaDireita.png')}/>
+                  </Text>
+                </View>
+              )
+              }
+        }
+      }) // Terminou o primeiro map
+      return(
         <SafeAreaView>
           <Text style={styles.letra}>{letra}</Text>
           <View style={styles.linha}>
-          <FlatList
-            data={grupo}
-            keyExtractor={(item, index) => index.toString()}
-            renderItem={({ item }) => {
-              // Definindo o ícone de favorito
-             var urlIconeFav =  require('./../images/icons/naoFavorito.png');
-              if (item.ehFavorito){ 
-                urlIconeFav = require('./../images/icons/favorito.png');
-              }
-              if(item.id < qtdAmb){
-                if(item.id === "0"){ // Se é o primeiro item da lista
-                  return (
-                    <View style={indicador(item.cor,"inicial")}>
-                    <TouchableWithoutFeedback onPress={() => alert("Favoritar!")}>
-                      <Image  style={styles.iconeFavorito} source={urlIconeFav}/>
-                      </TouchableWithoutFeedback>
-                     <Text style={styles.text}>
-                       {item.ehFavorito}
-                       {item.nome} 
-                       </Text>                    
-                       <Text style={styles.infoQuantidade}>{item.qtdMod}
-                       <Image source={require('./../images/icons/setaDireita.png')}/>
-                       </Text>                  
-                    </View>
-                         );
-                } else { // Não é o primeiro nem o último item da lista
-                  return (
-                    <View style={indicador(item.cor,"meio")}>
-                      <Image  style={styles.iconeFavorito} source={urlIconeFav}/>
-                     <Text style={styles.text}>
-                       {item.nome} 
-                       </Text>
-                       <Text style={styles.infoQuantidade}>{item.qtdMod}
-                       <Image source={require('./../images/icons/setaDireita.png')}/>
-                       </Text>                  
-                    </View>
-                         );
-                }}
-              else{            
-                if(qtdAmb == 0){
-                  return (      // Se for o único item da lista
-                    <View style={indicador(item.cor,"unico")}>
-                      <Image  style={styles.iconeFavorito} source={urlIconeFav}/>
-                      <Text style={styles.text}>{item.nome} 
-                      </Text>
-                      <Text style={styles.infoQuantidade}>{item.qtdMod}
-                       <Image source={require('./../images/icons/setaDireita.png')}/>
-                       </Text>
-                    </View>
-                  );
-                } else { // Se for o último item da lista:
-                  return ( 
-                    <View style={indicador(item.cor,"final")}>
-                      <Image  style={styles.iconeFavorito} source={urlIconeFav}/>
-                      <Text style={styles.text}>{item.nome} 
-                      </Text>
-                      <Text style={styles.infoQuantidade}>{item.qtdMod}
-                       <Image source={require('./../images/icons/setaDireita.png')}/>
-                       </Text>
-                    </View>
-                  );
-
-                }
-                
-              }           
-            }}
-          />
-        </View>
+            {item}                 
+          </View>
         </SafeAreaView>
-      );
-    })  
-    return itemLista; 
-  }
-}
+            ) 
+          }) // terminou o segundo map         
+       return itemLista
+          }}
+        
 // Estilização dos componentes 
 const styles = StyleSheet.create({
  titulo:{
@@ -240,4 +233,5 @@ var indicador = function(myColor, tipo) {
   
 }
 // Exportando o componente (página) Ambientes:
-export default Ambientes;
+export default Ambientes
+
