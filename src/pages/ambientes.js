@@ -44,71 +44,43 @@ const Ambientes = () => {
 class GrupoAmbientes extends React.Component {
   render() {
     var tamanho = grupos.length;
-
     const itemLista = grupos.map((grupo) => {
       var letra = grupo[0].nome.substring(0,1); 
       var qtdAmb = grupo.length - 1;
-
+      var posicao;
       const item = grupo.map((ambiente) => {
+        if(ambiente.id <qtdAmb){
+          if(ambiente.id==="0"){
+            posicao = "inicial";
+          }
+          else{
+            posicao = "meio";
+          }
+        } else {
+          if(qtdAmb===0){
+            posicao = "unico"
+          } else{
+            posicao = "final"
+          }
+        }
         var urlIconeFav =  require('./../images/icons/naoFavorito.png');      
         if (ambiente.ehFavorito){ 
           urlIconeFav = require('./../images/icons/favorito.png');
         }
-        if(ambiente.id < qtdAmb){
-
-          if(ambiente.id === "0"){ // Se é o primeiro item da lista
-            return (
-                <View style={indicador(ambiente.cor,"inicial")} key={ambiente.id}>
-                <TouchableWithoutFeedback onPress={() => alert("Favoritar!")}>
-                  <Image  style={styles.iconeFavorito} source={urlIconeFav}/>
-                  </TouchableWithoutFeedback>
-                 <Text style={styles.text}>
-                   {ambiente.ehFavorito}
-                   {ambiente.nome} 
-                   </Text>                    
-                   <Text style={styles.infoQuantidade}>{ambiente.qtdMod}
-                   <Image source={require('./../images/icons/setaDireita.png')}/>
-                   </Text>                  
-                </View>
-                    )
-          } else { // Não é o primeiro nem o último item da lista
-              return (
-                <View style={indicador(ambiente.cor,"meio")} key={ambiente.id}>
-                <Image  style={styles.iconeFavorito} source={urlIconeFav}/>
-                 <Text style={styles.text}>
-                   {ambiente.nome} 
-                   </Text>
-                   <Text style={styles.infoQuantidade}>{ambiente.qtdMod}
-                   <Image source={require('./../images/icons/setaDireita.png')}/>
-                   </Text>                  
-                </View>
+        return (
+          <View style={indicador(ambiente.cor,posicao)} key={ambiente.id}>
+          <TouchableWithoutFeedback onPress={() => alert("Favoritar!")}>
+            <Image  style={styles.iconeFavorito} source={urlIconeFav}/>
+            </TouchableWithoutFeedback>
+           <Text style={styles.text}>
+             {ambiente.ehFavorito}
+             {ambiente.nome} 
+             </Text>                    
+             <Text style={styles.infoQuantidade}>{ambiente.qtdMod}
+             <Image source={require('./../images/icons/setaDireita.png')}/>
+             </Text>                  
+          </View>
               )
-            }
-          } // Fim do primeiro if (ambiente.id < qtdAmb)
-
-        else{            
-          if(qtdAmb == 0){
-            return (      // Se for o único item da lista
-                <View style={indicador(ambiente.cor,"unico")} key={ambiente.id}>
-                  <Image  style={styles.iconeFavorito} source={urlIconeFav}/>
-                  <Text style={styles.text}>{ambiente.nome}</Text>
-                  <Text style={styles.infoQuantidade}>{ambiente.qtdMod}
-                    <Image source={require('./../images/icons/setaDireita.png')}/>
-                  </Text>
-                </View>
-              )
-            } else { // Se for o último item da lista:
-              return ( 
-                <View style={indicador(ambiente.cor,"final")} key={ambiente.id}>
-                  <Image  style={styles.iconeFavorito} source={urlIconeFav}/>
-                  <Text style={styles.text}>{ambiente.nome} </Text>
-                  <Text style={styles.infoQuantidade}>{ambiente.qtdMod}
-                   <Image source={require('./../images/icons/setaDireita.png')}/>
-                  </Text>
-                </View>
-              )
-              }
-        }
       }) // Terminou o primeiro map
       return(
         <SafeAreaView key={letra} >
