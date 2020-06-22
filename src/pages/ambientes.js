@@ -2,8 +2,8 @@
 // Pegando os dados utilizados e tratando-os:
 import listaAmbientes from './../dados';
 // 
-import React  from 'react';
-import { StyleSheet, View, Text, ScrollView, TextInput, Image, Button,  FlatList, SafeAreaView,TouchableWithoutFeedback,VirtualizedList} from 'react-native';
+import React from 'react';
+import { StyleSheet, View, Text, ScrollView, TextInput, Image, Button,  FlatList, SafeAreaView,TouchableWithoutFeedback} from 'react-native';
 import { initialWindowMetrics } from 'react-native-safe-area-context';
 import grupos from '../funcoes/separarGruposAlfa';
 
@@ -12,6 +12,7 @@ import grupos from '../funcoes/separarGruposAlfa';
 const Ambientes = () => {
   return (
    <ScrollView style={styles.body}>
+     {/* Início do header */}
      <View style={styles.header}>
      <TouchableWithoutFeedback onPress={() => alert("Adicionar ambiente")}>
        <Image  style={{position: "absolute", right: 22,top: 54}} source={require('./../images/icons/adicionar.png')}/>
@@ -19,15 +20,23 @@ const Ambientes = () => {
       <TouchableWithoutFeedback onPress={() => alert("Mais Informações")}>
        <Image  style={{position: "absolute", right: 66,top: 54}} source={require('./../images/icons/more.png')}/>
       </TouchableWithoutFeedback>
-     </View>
+     </View> 
+     {/* Fim do header */}
       <Text style={styles.titulo}>
            Ambientes 
       </Text>
       <TextInput style={styles.campoPesquisa}>
           <Image style={styles.icone} source={require('./../images/icons/buscar.png')}/>
            Buscar Ambiente ... 
-      </TextInput>       
+      </TextInput>
+      <View style={styles.switchFav}>
+        <Text style={styles.switchFavSel}>Todos</Text>
+        <TouchableWithoutFeedback onPress={() => alert("Trocar")}>
+        <Text style={styles.switchFavNotSel}>Favoritos</Text>
+        </TouchableWithoutFeedback>
+      </View>       
           <GrupoAmbientes></GrupoAmbientes>
+          <View style={{height:20}}></View>
    </ScrollView>
   );
 };
@@ -193,6 +202,37 @@ letra:{
   height: 24,
   left: "5%",
   marginTop:18,
+},
+// Estilo do switch
+switchFav:{
+  width:"90%",
+  height: 32,
+  left: 16,
+  backgroundColor:"rgba(255, 255, 255, 0.1)",
+  borderRadius: 8,
+  marginTop:12,
+},
+switchFavSel:{
+  height: 32,
+  width: "50%",
+  backgroundColor:"rgba(255, 255, 255, 0.1)",
+  borderRadius: 8,
+  fontSize: 12,
+  lineHeight: 16,
+  textAlign: "center",
+  textAlignVertical:"center",
+  color: "#FFFFFF",
+},
+switchFavNotSel:{
+  // height: 32,
+  left:"50%",
+  width: "50%",
+  fontSize: 12,
+  lineHeight: 16,
+  textAlign: "center",
+  // textAlignVertical:"center",
+  color: "#FFFFFF",
+  top:"-75%",
 }
 });
 // Estilos Dinâmicos
