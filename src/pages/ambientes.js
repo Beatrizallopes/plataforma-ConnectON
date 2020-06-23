@@ -1,13 +1,13 @@
 // Informações que preciso nessa página: uma lista dos ambientes que o usuário tem acesso. Para cada ambiente, preciso das informações: nome, quantidade de módulos nele, cor o indicador e se é um favorito ou não.
 // Pegando os dados utilizados e tratando-os:
 import listaAmbientes from './../dados';
-// 
 import React from 'react';
 import { StyleSheet, View, Text, ScrollView, TextInput, Image, Button,  FlatList, SafeAreaView,TouchableWithoutFeedback} from 'react-native';
 import { initialWindowMetrics } from 'react-native-safe-area-context';
+import gruposFav from '../funcoes/filtrarFavoritos';
 import grupos from '../funcoes/separarGruposAlfa';
 
-
+var gruposTela = grupos;
 
 const Ambientes = () => {
   return (
@@ -31,7 +31,7 @@ const Ambientes = () => {
       </TextInput>
       <View style={styles.switchFav}>
         <Text style={styles.switchFavSel}>Todos</Text>
-        <TouchableWithoutFeedback onPress={() => alert("Trocar")}>
+        <TouchableWithoutFeedback onPress={() => alert("trocar")}>
         <Text style={styles.switchFavNotSel}>Favoritos</Text>
         </TouchableWithoutFeedback>
       </View>       
@@ -43,8 +43,8 @@ const Ambientes = () => {
 // Criando o componente Lista
 class GrupoAmbientes extends React.Component {
   render() {
-    var tamanho = grupos.length;
-    const itemLista = grupos.map((grupo) => {
+    var tamanho = gruposTela.length;
+    const itemLista = gruposTela.map((grupo) => {
       var letra = grupo[0].nome.substring(0,1); 
       var qtdAmb = grupo.length - 1;
       var posicao;
@@ -52,8 +52,7 @@ class GrupoAmbientes extends React.Component {
         if(ambiente.id <qtdAmb){
           if(ambiente.id==="0"){
             posicao = "inicial";
-          }
-          else{
+          } else{
             posicao = "meio";
           }
         } else {
@@ -90,7 +89,7 @@ class GrupoAmbientes extends React.Component {
           </View>
         </SafeAreaView>
             ) 
-          }) // terminou o segundo map         
+          }) // Terminou o segundo map         
        return itemLista
           }
         }
