@@ -33,7 +33,7 @@ const Ambiente = ({navigation}) => {
           Notificações 
       </Text>
       <TouchableWithoutFeedback onPress={() => alert("Notificações")}>
-        <Image style={{position:"absolute",marginRight: 4,right:"8%",top:"39%"}} source={require('./../images/icons/setaDireitaTransp.png')}/>
+        <Image style={{position:"absolute",marginRight: 4,right:"8%",top:"36%"}} source={require('./../images/icons/setaDireitaTransp.png')}/>
       </TouchableWithoutFeedback>
       {/* Automações */}
       <View style={styles.automaçõesView}>
@@ -46,8 +46,8 @@ const Ambiente = ({navigation}) => {
 
       </View>
       {/* Dispositivos */}
-      <View>
-        <Text> Dispositivos </Text>
+      <View style={styles.dispositivosView}>
+        <Text style={{color: "white",fontSize: 17,fontStyle:"normal",fontWeight: "600"}}> Dispositivos </Text>
       </View>
    </ScrollView>
   );
@@ -147,7 +147,12 @@ const styles = StyleSheet.create({
   left: 4,
   marginEnd:8,
   marginTop:23,
-  }
+  },
+  dispositivosView:{
+    left:16,
+    marginTop:"8%",
+   
+  },
 
 })
 
