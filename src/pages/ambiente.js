@@ -58,8 +58,10 @@ class ListaAuto extends React.Component {
     const item = listaAutomacoes.map((automacao)=>{
       return(
         <View style={styles.automação} key={automacao.cod}>
-          <Text style={{color: "white",fontSize: 17,fontStyle:"normal",fontWeight: "600", left: 8, top: 8}}>{automacao.nome}</Text>
-          <Text style={{color: "white",fontSize: 17,fontStyle:"normal",fontWeight: "600", left: 8, top: 8}}>{automacao.nome}</Text>
+          <Text style={{color: "white",fontSize: 17,fontStyle:"normal",fontWeight: "600", left: 8, top: 8,lineHeight: 22}}>{automacao.nome}</Text>
+          <Text style={{color: ambiente.cor,fontSize: 11,fontStyle:"normal",fontWeight: "normal", left: 8, top: 8}}>{automacao.horario}</Text>
+          <Text style={{color: "white",fontSize: 15,fontStyle:"normal",fontWeight: "normal", left: 8, top: 45,letterSpacing: -0.24,lineHeight: 20}}>{automacao.proxEvento}</Text>
+          <Text style={{color: "rgba(255, 255, 255, 0.6)",fontSize: 11,fontStyle:"normal",fontWeight: "normal", left: 8, top: 48,lineHeight: 13}}>{automacao.mensagem}</Text>
         </View>
       )
     })
