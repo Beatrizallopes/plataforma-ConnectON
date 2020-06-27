@@ -12,29 +12,38 @@ const Ambiente = ({navigation}) => {
       <Image  style={{position: "absolute", top: "55%"}} source={require('./../images/icons/setaLaranjaEsq.png')}/>
       </TouchableWithoutFeedback>
       <Text style={styles.ambientes}> Ambientes </Text>
-     
 
       <TouchableWithoutFeedback onPress={() => alert("Editar Ambiente")}>
       <Text style={styles.editar}> Editar </Text>
       </TouchableWithoutFeedback>
+
      </View> 
+     {/* Fim do Header */}
 
       <Text style={styles.titulo}>
            {ambiente.nome}
       </Text>  
-        <Text style={styles.notificações}>
-          Notificações 
-        </Text>
-        <TouchableWithoutFeedback onPress={() => alert("Notificações")}>
-        <Image style={{position:"absolute",marginRight: 4,right:"8%",top:"82%"}} source={require('./../images/icons/setaDireitaTransp.png')}/>
-      </TouchableWithoutFeedback>
 
+      <Text style={styles.notificações}>
+          Notificações 
+      </Text>
+      <TouchableWithoutFeedback onPress={() => alert("Notificações")}>
+        <Image style={{position:"absolute",marginRight: 4,right:"8%",top:"60%"}} source={require('./../images/icons/setaDireitaTransp.png')}/>
+      </TouchableWithoutFeedback>
+      {/* Automações */}
+      <View style={styles.automaçõesView}>
+        
+      <Text style={{color: "white",fontSize: 17,fontStyle:"normal",fontWeight: "600"}}> Automações
+      </Text>
+
+      </View>
+      {/* Dispositivos */}
+      <View>
+        <Text> Dispositivos </Text>
+      </View>
    </ScrollView>
   );
 };
-
-
-
 
 // Estilização dos componentes 
 const styles = StyleSheet.create({
@@ -96,7 +105,11 @@ const styles = StyleSheet.create({
   letterSpacing: -0.408,
   color: "#FFFFFF",
   marginTop:"10%",
- }
+ },
+ automaçõesView:{
+   left:16,
+   marginTop:"8%"
+ },
 })
 
 export default Ambiente
