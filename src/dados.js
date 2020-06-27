@@ -8,4 +8,8 @@ var listaAmbientes = [
     { nome: "Estacionamento", qtdMod:0, cor:"#CD9C44",ehFavorito:true},
     { nome: "Copa", qtdMod:3, cor:"#CD9C44",ehFavorito:true},
 ];
+var listaAutomacoes = [
+    {nome:"Expediente",horario:"08:00 as 18:00",proxEvento:"00:17:34",mensagem:"Encerrará em breve"},
+    {nome:"Hora Extra",horario:" ",proxEvento:"Sábado, 08:00 as 18:00",mensagem:"Daqui a 3 dias"}
+]
 export default listaAmbientes;

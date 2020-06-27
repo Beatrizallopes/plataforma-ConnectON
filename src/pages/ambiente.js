@@ -1,7 +1,12 @@
 import React from 'react';
 import { StyleSheet, View, Text, ScrollView, TextInput, Image, Button,  FlatList, SafeAreaView,TouchableWithoutFeedback} from 'react-native';
-import listaAmbientes from "../dados"
+import listaAmbientes from "../dados";
+// import listaAutomacoes from "../dados";
 import { ReloadInstructions } from 'react-native/Libraries/NewAppScreen';
+var listaAutomacoes = [
+  {nome:"Expediente",horario:"08:00 as 18:00",proxEvento:"00:17:34",mensagem:"Encerrará em breve",cod:"1"},
+  {nome:"Hora Extra",horario:" ",proxEvento:"Sábado, 08:00 as 18:00",mensagem:"Daqui a 3 dias",cod:"2"}
+]
 var ambiente = listaAmbientes[0];
 const Ambiente = ({navigation}) => {
   return (
@@ -28,13 +33,16 @@ const Ambiente = ({navigation}) => {
           Notificações 
       </Text>
       <TouchableWithoutFeedback onPress={() => alert("Notificações")}>
-        <Image style={{position:"absolute",marginRight: 4,right:"8%",top:"60%"}} source={require('./../images/icons/setaDireitaTransp.png')}/>
+        <Image style={{position:"absolute",marginRight: 4,right:"8%",top:"39%"}} source={require('./../images/icons/setaDireitaTransp.png')}/>
       </TouchableWithoutFeedback>
       {/* Automações */}
       <View style={styles.automaçõesView}>
-        
+
       <Text style={{color: "white",fontSize: 17,fontStyle:"normal",fontWeight: "600"}}> Automações
       </Text>
+      <ScrollView style={styles.listaAutomações} horizontal={true}>
+        <ListaAuto></ListaAuto>
+      </ScrollView>
 
       </View>
       {/* Dispositivos */}
@@ -44,6 +52,20 @@ const Ambiente = ({navigation}) => {
    </ScrollView>
   );
 };
+// Criando o componente Lista de Automações
+class ListaAuto extends React.Component {
+  render() {
+    const item = listaAutomacoes.map((automacao)=>{
+      return(
+        <View style={styles.automação} key={automacao.cod}>
+          <Text style={{color: "white",fontSize: 17,fontStyle:"normal",fontWeight: "600", left: 8, top: 8}}>{automacao.nome}</Text>
+          <Text style={{color: "white",fontSize: 17,fontStyle:"normal",fontWeight: "600", left: 8, top: 8}}>{automacao.nome}</Text>
+        </View>
+      )
+    })
+    return item;
+        }
+        }
 
 // Estilização dos componentes 
 const styles = StyleSheet.create({
@@ -108,8 +130,23 @@ const styles = StyleSheet.create({
  },
  automaçõesView:{
    left:16,
-   marginTop:"8%"
+   marginTop:"8%",
+  
  },
+ listaAutomações:{
+   width:"100%",
+   height:149, 
+  },
+  automação:{
+  width: 248,
+  height: 126,
+  backgroundColor: "rgba(255, 255, 255,0.13)",
+  borderRadius: 12,
+  left: 4,
+  marginEnd:8,
+  marginTop:23,
+  }
+
 })
 
 export default Ambiente
