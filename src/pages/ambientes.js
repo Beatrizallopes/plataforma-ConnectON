@@ -1,12 +1,8 @@
 // Informações que preciso nessa página: uma lista dos ambientes que o usuário tem acesso. Para cada ambiente, preciso das informações: nome, quantidade de módulos nele, cor o indicador e se é um favorito ou não.
 // Pegando os dados utilizados e tratando-os:
-import listaAmbientes from './../dados';
 import React from 'react';
 import { StyleSheet, View, Text, ScrollView, TextInput, Image, Button,  FlatList, SafeAreaView,TouchableWithoutFeedback} from 'react-native';
-import { initialWindowMetrics } from 'react-native-safe-area-context';
 import grupos from '../funcoes/separarGruposAlfa';
-import Ambiente from './ambiente';
-
 
 
 const Ambientes = ({ navigation}) => {
@@ -94,13 +90,7 @@ class GrupoAmbientes extends React.Component {
        return itemLista
           }
         }
-// Tentativa de fazer navegação para tela de ambiente
-function irAmbiente(){
-  alert("oi");
-  // AppContainer.navigation.navigate("Ambiente");
-}
-
-
+        
 // Estilização dos componentes 
 const styles = StyleSheet.create({
  titulo:{

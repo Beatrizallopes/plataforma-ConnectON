@@ -1,13 +1,12 @@
 import React  from 'react';
 import { NavigationContainer, useIsFocused } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { StyleSheet, Image } from 'react-native'; // Importando os componentes que vão ser usados
+import { createStackNavigator } from '@react-navigation/stack';
 import Ambientes from "./ambientes"; // Importando a página Ambientes
 import AmbientesFav from "./ambientesFav"; // Importando a página Ambientes
 import Ambiente from "./ambiente" // Importando a página de Ambiente
 import Automacoes from "./automacoes"; // Importando a página Automações
-import { StyleSheet, Image } from 'react-native'; // Importando os componentes que vão ser usados
-import MenuInf from "../components/menuInf"
-import { createStackNavigator } from '@react-navigation/stack';
 
 const Stack = createStackNavigator();
 function AmbientesStack() {
@@ -27,7 +26,15 @@ function AmbientesStack() {
           headerShown: false,
         }}
       />
+      {/* <Stack.Screen
+        name="Ambiente"
+        component={Ambiente}
+        options={{
+          headerShown: false,
+        }}
+      /> */}
     </Stack.Navigator>
+    
   );
 }
 function AutomacoesStack() {
@@ -101,7 +108,7 @@ const App = () => {
      >
           <Tab.Screen name="Ambientes" component={AmbientesStack} />
           <Tab.Screen name="Automações" component={AutomacoesStack} />
-          <Tab.Screen name="Consumo" component={Automacoes} />
+          <Tab.Screen name="Consumo" component={Ambiente} />
           <Tab.Screen name="Configurações" component={Automacoes} />
         </Tab.Navigator>
  </NavigationContainer>
