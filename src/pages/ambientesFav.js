@@ -5,11 +5,7 @@ import React from 'react';
 import { StyleSheet, View, Text, ScrollView, TextInput, Image, Button,  FlatList, SafeAreaView,TouchableWithoutFeedback} from 'react-native';
 import { initialWindowMetrics } from 'react-native-safe-area-context';
 import gruposFav from '../funcoes/filtrarFavoritos';
-import grupos from '../funcoes/separarGruposAlfa';
 import Ambiente from './ambiente';
-import { createStackNavigator } from '@react-navigation/stack';
-
-var gruposTela = gruposFav;
 
 
 const AmbientesFav = ({navigation}) => {
@@ -26,7 +22,7 @@ const AmbientesFav = ({navigation}) => {
      </View> 
      {/* Fim do header */}
       <Text style={styles.titulo}>
-           Ambientes Favoritos
+           Ambientes 
       </Text>
       <TextInput style={styles.campoPesquisa}>
           <Image style={styles.icone} source={require('./../images/icons/buscar.png')}/>
@@ -34,9 +30,9 @@ const AmbientesFav = ({navigation}) => {
       </TextInput>
       <View style={styles.switchFav}>
       <TouchableWithoutFeedback onPress={() =>navigation.navigate('Ambientes')}> 
-        <Text style={styles.switchFavSel}>Todos</Text>
+        <Text style={styles.switchFavNotSel}>Todos</Text>
         </TouchableWithoutFeedback>
-        <Text style={styles.switchFavNotSel}>Favoritos</Text>
+        <Text style={styles.switchFavSel}>Favoritos</Text>
     
       </View>       
           <GrupoAmbientes></GrupoAmbientes>
@@ -48,8 +44,8 @@ const AmbientesFav = ({navigation}) => {
 // Criando o componente Lista
 class GrupoAmbientes extends React.Component {
   render() {
-    var tamanho = gruposTela.length;
-    const itemLista = gruposTela.map((grupo) => {
+    var tamanho = gruposFav.length;
+    const itemLista = gruposFav.map((grupo) => {
       var letra = grupo[0].nome.substring(0,1); 
       var qtdAmb = grupo.length - 1;
       var posicao;
@@ -195,6 +191,7 @@ switchFav:{
   marginTop:12,
 },
 switchFavSel:{
+  left:"50%",
   height: 32,
   width: "50%",
   backgroundColor:"rgba(255, 255, 255, 0.1)",
@@ -204,17 +201,15 @@ switchFavSel:{
   textAlign: "center",
   textAlignVertical:"center",
   color: "#FFFFFF",
+  top:"-50%",
 },
 switchFavNotSel:{
-  // height: 32,
-  left:"50%",
   width: "50%",
   fontSize: 12,
   lineHeight: 16,
   textAlign: "center",
-  // textAlignVertical:"center",
   color: "#FFFFFF",
-  top:"-75%",
+  top:"20%",
 }
 });
 // Estilos Dinâmicos

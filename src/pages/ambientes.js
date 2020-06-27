@@ -4,12 +4,10 @@ import listaAmbientes from './../dados';
 import React from 'react';
 import { StyleSheet, View, Text, ScrollView, TextInput, Image, Button,  FlatList, SafeAreaView,TouchableWithoutFeedback} from 'react-native';
 import { initialWindowMetrics } from 'react-native-safe-area-context';
-import gruposFav from '../funcoes/filtrarFavoritos';
 import grupos from '../funcoes/separarGruposAlfa';
 import Ambiente from './ambiente';
-import { createStackNavigator } from '@react-navigation/stack';
 
-var gruposTela = grupos;
+
 
 const Ambientes = ({ navigation}) => {
   return (
@@ -46,8 +44,8 @@ const Ambientes = ({ navigation}) => {
 // Criando o componente Lista
 class GrupoAmbientes extends React.Component {
   render() {
-    var tamanho = gruposTela.length;
-    const itemLista = gruposTela.map((grupo) => {
+    var tamanho = grupos.length;
+    const itemLista = grupos.map((grupo) => {
       var letra = grupo[0].nome.substring(0,1); 
       var qtdAmb = grupo.length - 1;
       var posicao;
