@@ -1,54 +1,16 @@
 import React  from 'react';
 import { NavigationContainer, useIsFocused } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import Ambientes from "./ambientes"; // Importando a página Ambientes
-import AmbientesFav from "./ambientesFav"; // Importando a página Ambientes
-import Ambiente from "./ambiente" // Importando a página de Ambiente
-import Automacoes from "./automacoes"; // Importando a página Automações
+import Automacoes from "../pages/automacoes"; // Importando a página Automações
+import Ambientes from "../pages/ambientes"; // Importando a página Ambientes
 import { StyleSheet, Image } from 'react-native'; // Importando os componentes que vão ser usados
-import MenuInf from "../components/menuInf"
-import { createStackNavigator } from '@react-navigation/stack';
-
-const Stack = createStackNavigator();
-function AmbientesStack() {
-  return (
-    <Stack.Navigator initialRouteName='Ambientes'>
-      <Stack.Screen
-        name="Ambientes"
-        component={Ambientes}
-        options={{
-          headerShown: false,
-        }}
-      />
-     <Stack.Screen
-        name="Ambientes Favoritos"
-        component={AmbientesFav}
-        options={{
-          headerShown: false,
-        }}
-      />
-    </Stack.Navigator>
-  );
-}
-function AutomacoesStack() {
-  return (
-    <Stack.Navigator initialRouteName='Automações'>
-      <Stack.Screen
-        name="Automações"
-        component={Automacoes}
-        options={{
-          headerShown: false,
-        }}
-      />
-    </Stack.Navigator>
-  );
-}
 
 const Tab = createBottomTabNavigator(); // Criando o menu inferior
-const App = () => {
-  return (
-  <NavigationContainer>
-    <Tab.Navigator 
+
+const MenuInf = () => {
+    return (
+    //   <NavigationContainer independent={true}> 
+     <Tab.Navigator 
      screenOptions={({route}) => ({
       tabBarIcon:({focused}) => {
   
@@ -99,14 +61,15 @@ const App = () => {
   
      }}
      >
-          <Tab.Screen name="Ambientes" component={AmbientesStack} />
-          <Tab.Screen name="Automações" component={AutomacoesStack} />
+          <Tab.Screen name="Ambientes" component={Ambientes} />
+          <Tab.Screen name="Automações" component={Automacoes} />
           <Tab.Screen name="Consumo" component={Automacoes} />
           <Tab.Screen name="Configurações" component={Automacoes} />
         </Tab.Navigator>
- </NavigationContainer>
-  );
-};
-
-
-export default App;
+        // </NavigationContainer> 
+  
+    );
+  };
+  
+  export default MenuInf;
+  

@@ -1,6 +1,6 @@
 // Informações que preciso nessa página: uma lista dos ambientes que o usuário tem acesso. Para cada ambiente, preciso das informações: nome, quantidade de módulos nele, cor o indicador e se é um favorito ou não.
 // Pegando os dados utilizados e tratando-os:
-import listaAmbientes from './../dados';
+import listaAmbientes from '../dados';
 import React from 'react';
 import { StyleSheet, View, Text, ScrollView, TextInput, Image, Button,  FlatList, SafeAreaView,TouchableWithoutFeedback} from 'react-native';
 import { initialWindowMetrics } from 'react-native-safe-area-context';
@@ -9,9 +9,10 @@ import grupos from '../funcoes/separarGruposAlfa';
 import Ambiente from './ambiente';
 import { createStackNavigator } from '@react-navigation/stack';
 
-var gruposTela = grupos;
+var gruposTela = gruposFav;
 
-const Ambientes = ({ navigation}) => {
+
+const AmbientesFav = ({navigation}) => {
   return (
    <ScrollView style={styles.body}>
      {/* Início do header */}
@@ -25,17 +26,18 @@ const Ambientes = ({ navigation}) => {
      </View> 
      {/* Fim do header */}
       <Text style={styles.titulo}>
-           Ambientes 
+           Ambientes Favoritos
       </Text>
       <TextInput style={styles.campoPesquisa}>
           <Image style={styles.icone} source={require('./../images/icons/buscar.png')}/>
            Buscar Ambiente ... 
       </TextInput>
       <View style={styles.switchFav}>
+      <TouchableWithoutFeedback onPress={() =>navigation.navigate('Ambientes')}> 
         <Text style={styles.switchFavSel}>Todos</Text>
-        <TouchableWithoutFeedback onPress={() => navigation.navigate('Ambientes Favoritos')}> 
-        <Text style={styles.switchFavNotSel}>Favoritos</Text>
         </TouchableWithoutFeedback>
+        <Text style={styles.switchFavNotSel}>Favoritos</Text>
+    
       </View>       
           <GrupoAmbientes></GrupoAmbientes>
           <View style={{height:20}}></View>
@@ -256,5 +258,5 @@ var indicador = function(myColor, tipo) {
   
 }
 // Exportando o componente (página) Ambientes:
-export default Ambientes
+export default AmbientesFav
 
