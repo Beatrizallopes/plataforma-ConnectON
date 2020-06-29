@@ -5,7 +5,12 @@ import listaAmbientes from "../dados";
 import { ReloadInstructions } from 'react-native/Libraries/NewAppScreen';
 var listaAutomacoes = [
   {nome:"Expediente",horario:"08:00 as 18:00",proxEvento:"00:17:34",mensagem:"Encerrará em breve",cod:"1"},
-  {nome:"Hora Extra",horario:" ",proxEvento:"Sábado, 08:00 as 18:00",mensagem:"Daqui a 3 dias",cod:"2"}
+  {nome:"Hora Extra",horario:" ",proxEvento:"Sábado, 08:00 as 18:00",mensagem:"Daqui a 3 dias",cod:"2"},
+  {nome:"Intervalo",horario:"12:00 as 14:00 ",proxEvento:"Segunda, 12:00 as 14:00",mensagem:"Daqui a 5 dias",cod:"3"},
+]
+var listaDispositivos = [
+  {nome:"Ar-Condicionado Digital Inverter 17,000 Btu/h Frio 8-Polo", marca:"Sansung", modelo:"AR18NVFPCWKNAZ", cod:"1"},
+  {nome:"Ar-Condicionado Split Hi Wall LG Dual Inverter Voice 12000 ", marca:"Sansung", modelo:"S4-W12JA31A", cod:"2"},
 ]
 var ambiente = listaAmbientes[0];
 const Ambiente = ({navigation}) => {
@@ -33,7 +38,7 @@ const Ambiente = ({navigation}) => {
           Notificações 
       </Text>
       <TouchableWithoutFeedback onPress={() => alert("Notificações")}>
-        <Image style={{position:"absolute",marginRight: 4,right:"8%",top:"36%"}} source={require('./../images/icons/setaDireitaTransp.png')}/>
+        <Image style={{position:"absolute",marginRight: 4,right:"8%",top:"22%"}} source={require('./../images/icons/setaDireitaTransp.png')}/>
       </TouchableWithoutFeedback>
       {/* Automações */}
       <View style={styles.automaçõesView}>
@@ -46,8 +51,13 @@ const Ambiente = ({navigation}) => {
 
       </View>
       {/* Dispositivos */}
+      <Text style={styles.dispositivosTitulo}> Dispositivos </Text>
       <View style={styles.dispositivosView}>
-        <Text style={{color: "white",fontSize: 17,fontStyle:"normal",fontWeight: "600"}}> Dispositivos </Text>
+        
+        <ListaDispo></ListaDispo>
+        <View style={styles.dispositivo}>
+        <Text style={styles.dispositivoNome}>Adicionar dispositivo</Text>
+        </View>
       </View>
    </ScrollView>
   );
@@ -55,13 +65,33 @@ const Ambiente = ({navigation}) => {
 // Criando o componente Lista de Automações
 class ListaAuto extends React.Component {
   render() {
-    const item = listaAutomacoes.map((automacao)=>{
+    const itemD = listaAutomacoes.map((automacao)=>{
       return(
         <View style={styles.automação} key={automacao.cod}>
           <Text style={{color: "white",fontSize: 17,fontStyle:"normal",fontWeight: "600", left: 8, top: 8,lineHeight: 22}}>{automacao.nome}</Text>
           <Text style={{color: ambiente.cor,fontSize: 11,fontStyle:"normal",fontWeight: "normal", left: 8, top: 8}}>{automacao.horario}</Text>
           <Text style={{color: "white",fontSize: 15,fontStyle:"normal",fontWeight: "normal", left: 8, top: 45,letterSpacing: -0.24,lineHeight: 20}}>{automacao.proxEvento}</Text>
           <Text style={{color: "rgba(255, 255, 255, 0.6)",fontSize: 11,fontStyle:"normal",fontWeight: "normal", left: 8, top: 48,lineHeight: 13}}>{automacao.mensagem}</Text>
+         </View>
+      )
+    })
+    return itemD;
+        }
+        }
+  // Criando o componente Lista de Dispositivos
+class ListaDispo extends React.Component {
+  render() {
+    const item = listaDispositivos.map((dispositivo)=>{
+      var marca = dispositivo.marca.toLowerCase();
+      var srcLogo = '../images/logomarcasDispositivos/'+ marca + '.png';
+      // var buscaImagem = require(srcLogo);
+      var buscaImagem = require('../images/logomarcasDispositivos/sansung.png');
+      return(
+        <View style={styles.dispositivo} key={dispositivo.cod}>
+          {/* <Image  source={buscaImagem}/> */}
+        <Text style={styles.dispositivoNome}>{dispositivo.nome} </Text>
+        <Text style={styles.dispositivoModelo}>{dispositivo.modelo}</Text>
+       
         </View>
       )
     })
@@ -148,11 +178,61 @@ const styles = StyleSheet.create({
   marginEnd:8,
   marginTop:23,
   },
-  dispositivosView:{
+  dispositivosTitulo:{
+    color: "white",
+    fontSize: 17,
+    fontStyle:"normal",
+    fontWeight: "600",
     left:16,
     marginTop:"8%",
-   
+    marginBottom:17,
   },
+  dispositivosView:{
+    left:16, 
+    flex: 1,
+    flexDirection:"row",
+    flexWrap:"wrap",
+    // justifyContent: "space-between",
+  },
+  dispositivo:{
+    //  width: 168,
+    width:"45%",
+    height: 126,
+    backgroundColor: "rgba(255, 255, 255,0.13)",
+    borderRadius: 12,
+    left: 4,
+    marginEnd:8,
+    marginTop:8,
+    flexDirection:"column",
+    
+    
+    },
+  dispositivoNome:{
+    position:"relative",
+    color: "white",
+    fontSize: 13,
+    fontStyle:"normal",
+    fontWeight: "600",
+    left: "4.76%", 
+    right:"4.76%", 
+    top: "37%",
+    lineHeight: 18,
+    height: 54,
+    width:"90%", 
+    letterSpacing: -0.078
+  },
+  dispositivoModelo: {
+    // position:"relative",
+    // bottom:"0%",
+    top: "40%",
+    left: "4.76%",
+    color: "rgba(255, 255, 255, 0.5)",
+    fontSize: 11,
+    lineHeight:13,
+    fontStyle:"normal",
+    fontWeight: "normal",
+    // marginTop:"5%",
+    }
 
 })
 
