@@ -41,8 +41,8 @@ import { useNavigation } from '@react-navigation/native';
              </TouchableWithoutFeedback>
             <Text style={styles.text}>{ambiente.ehFavorito}{ambiente.nome} </Text>  
             {/* <TouchableWithoutFeedback onPress={() => alert("Ir p/ ambiente")}>      */}
-           {/* <TouchableWithoutFeedback onPress={navigation.navigate('Ambiente',{ambienteSelecionado:0})}>              */}
-           <TouchableWithoutFeedback onPress={() => navigation.navigate('Ambiente')}> 
+           <TouchableWithoutFeedback onPress={() => navigation.navigate('Ambiente',{ambienteSelecionado:2})}>             
+           {/* <TouchableWithoutFeedback onPress={() => navigation.navigate('Ambiente')}>  */}
              <Text style={styles.infoQuantidade}>{ambiente.qtdMod}
                <Image style={{borderWidth:10,borderColor:"red"}}source={require('./../images/icons/setaDireita.png')}/>         
              </Text>

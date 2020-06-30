@@ -5,6 +5,7 @@ import listaAmbientes from "../dados";
 import { ReloadInstructions } from 'react-native/Libraries/NewAppScreen';
 
 // Alguns dados utilizados para "simular" o banco de dados ///////////////////////////////////////////////////////////////////////////////////
+
 var listaAutomacoes = [
   {nome:"Expediente",horario:"08:00 as 18:00",proxEvento:"00:17:34",mensagem:"Encerrará em breve",cod:"1"},
   {nome:"Hora Extra",horario:" ",proxEvento:"Sábado, 08:00 as 18:00",mensagem:"Daqui a 3 dias",cod:"2"},
@@ -58,14 +59,14 @@ class ListaDispo extends React.Component {
         }
 
 // Componente referente à página Ambiente (que utiliza os componentes criados anteriormente) /////////////////////////////////////////////////
-// const Ambiente = ({navigation},ambienteSelecionado) => {
-  // var ambiente = listaAmbientes[ambienteSelecionado]; // ambiente
-
-  const Ambiente = ({navigation}) => {
+const Ambiente = ({route,navigation}) => {  
+  const {ambienteSelecionado} = route.params;
+   ambiente = listaAmbientes[ambienteSelecionado]; 
+  // const Ambiente = ({navigation}) => {
   return (
    <ScrollView style={styles.body}>
      <View style={styles.header}>
-        <TouchableWithoutFeedback onPress={() =>navigation.navigate("Ambientes") }>
+        <TouchableWithoutFeedback onPress={() => navigation.navigate("Ambientes") }>
           <Image  style={{position: "absolute", top: "55%"}} source={require('./../images/icons/setaLaranjaEsq.png')}/>
         </TouchableWithoutFeedback>
         <Text style={styles.ambientes}> Ambientes </Text>

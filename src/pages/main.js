@@ -111,7 +111,7 @@ const App = () => {
      >
           <Tab.Screen name="Ambientes" component={AmbientesStack} />
           <Tab.Screen name="Automações" component={AutomacoesStack} />
-          <Tab.Screen name="Consumo" component={Ambiente} />
+          <Tab.Screen name="Consumo" component={Automacoes} />
           <Tab.Screen name="Configurações" component={Automacoes} />
         </Tab.Navigator>
  </NavigationContainer>
