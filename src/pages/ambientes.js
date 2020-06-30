@@ -1,10 +1,62 @@
-// Informações que preciso nessa página: uma lista dos ambientes que o usuário tem acesso. Para cada ambiente, preciso das informações: nome, quantidade de módulos nele, cor o indicador e se é um favorito ou não.
-// Pegando os dados utilizados e tratando-os:
+// Lista de imports necessários ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 import React from 'react';
 import { StyleSheet, View, Text, ScrollView, TextInput, Image, Button,  FlatList, SafeAreaView,TouchableWithoutFeedback} from 'react-native';
 import grupos from '../funcoes/separarGruposAlfa';
 
-
+// Componentes que farão parte da Página /////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Criando o componente Lista de Ambientes
+// const GrupoAmbientes = () => {
+class GrupoAmbientes extends React.Component {
+  render() {
+    var tamanho = grupos.length;
+    const itemLista = grupos.map((grupo) => {
+      var letra = grupo[0].nome.substring(0,1); 
+      var qtdAmb = grupo.length - 1;
+      var posicao;
+      const item = grupo.map((ambiente) => {
+        if(ambiente.id <qtdAmb){
+          if(ambiente.id==="0"){
+            posicao = "inicial";
+          } else{
+            posicao = "meio";
+          }
+        } else {
+          if(qtdAmb===0){
+            posicao = "unico"
+          } else{
+            posicao = "final"
+          }
+        }
+        var urlIconeFav =  require('./../images/icons/naoFavorito.png');      
+        if (ambiente.ehFavorito){ 
+          urlIconeFav = require('./../images/icons/favorito.png');
+        }
+        return (
+          <View style={indicador(ambiente.cor,posicao)} key={ambiente.id}>
+            <TouchableWithoutFeedback onPress={() => alert("Favoritar!")}>
+              <Image  style={styles.iconeFavorito} source={urlIconeFav}/>
+            </TouchableWithoutFeedback>
+            <Text style={styles.text}>{ambiente.ehFavorito}{ambiente.nome} </Text>                    
+             <Text style={styles.infoQuantidade}>{ambiente.qtdMod}
+               <Image source={require('./../images/icons/setaDireita.png')}/>
+             </Text>                  
+          </View>
+              )
+      }) // Terminou o primeiro map
+      return(
+        <SafeAreaView key={letra} >
+          <Text style={styles.letra}>{letra}</Text>
+          <View style={styles.linha}>
+            {item}                 
+          </View>
+        </SafeAreaView>
+            ) 
+          }) // Terminou o segundo map         
+       return itemLista
+          }
+        }
+        
+// Componente referente à página Ambientes (que utiliza o componente criado anteriormente) /////////////////////////////////////////////////
 const Ambientes = ({ navigation}) => {
   return (
    <ScrollView style={styles.body}>
@@ -37,61 +89,8 @@ const Ambientes = ({ navigation}) => {
    </ScrollView>
   );
 };
-// Criando o componente Lista
-class GrupoAmbientes extends React.Component {
-  render() {
-    var tamanho = grupos.length;
-    const itemLista = grupos.map((grupo) => {
-      var letra = grupo[0].nome.substring(0,1); 
-      var qtdAmb = grupo.length - 1;
-      var posicao;
-      const item = grupo.map((ambiente) => {
-        if(ambiente.id <qtdAmb){
-          if(ambiente.id==="0"){
-            posicao = "inicial";
-          } else{
-            posicao = "meio";
-          }
-        } else {
-          if(qtdAmb===0){
-            posicao = "unico"
-          } else{
-            posicao = "final"
-          }
-        }
-        var urlIconeFav =  require('./../images/icons/naoFavorito.png');      
-        if (ambiente.ehFavorito){ 
-          urlIconeFav = require('./../images/icons/favorito.png');
-        }
-        return (
-          <View style={indicador(ambiente.cor,posicao)} key={ambiente.id}>
-          <TouchableWithoutFeedback onPress={() => alert("Favoritar!")}>
-            <Image  style={styles.iconeFavorito} source={urlIconeFav}/>
-            </TouchableWithoutFeedback>
-           <Text style={styles.text}>
-             {ambiente.ehFavorito}
-             {ambiente.nome} 
-             </Text>                    
-             <Text style={styles.infoQuantidade}>{ambiente.qtdMod}
-             <Image source={require('./../images/icons/setaDireita.png')}/>
-             </Text>                  
-          </View>
-              )
-      }) // Terminou o primeiro map
-      return(
-        <SafeAreaView key={letra} >
-          <Text style={styles.letra}>{letra}</Text>
-          <View style={styles.linha}>
-            {item}                 
-          </View>
-        </SafeAreaView>
-            ) 
-          }) // Terminou o segundo map         
-       return itemLista
-          }
-        }
-        
-// Estilização dos componentes 
+
+// Estilização dos componentes ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 const styles = StyleSheet.create({
  titulo:{
    color:"white",
@@ -243,6 +242,6 @@ var indicador = function(myColor, tipo) {
   }
   
 }
-// Exportando o componente (página) Ambientes:
+// Exportando a página ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 export default Ambientes
 

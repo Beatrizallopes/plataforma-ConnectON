@@ -1,4 +1,4 @@
-// Lista de imports necessários:
+// Lista de imports necessários ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 import React from 'react';
 import { StyleSheet, View, Text, ScrollView, TextInput, Image, Button,  FlatList, SafeAreaView,TouchableWithoutFeedback} from 'react-native';
 import listaAmbientes from "../dados";
@@ -56,7 +56,7 @@ class ListaDispo extends React.Component {
         }
         }
 
-// Componente referente à página Ambiente (que utiliza os dois componentes criados anteriormente) /////////////////////////////////////////////////
+// Componente referente à página Ambiente (que utiliza os componentes criados anteriormente) /////////////////////////////////////////////////
 const Ambiente = ({navigation}) => {
   return (
    <ScrollView style={styles.body}>
