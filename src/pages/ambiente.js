@@ -56,7 +56,10 @@ const Ambiente = ({navigation}) => {
         
         <ListaDispo></ListaDispo>
         <View style={styles.dispositivo}>
-        <Text style={styles.dispositivoNome}>Adicionar dispositivo</Text>
+          <TouchableWithoutFeedback onPress={() => alert("Adicionar dispositivo!")}>
+          <Image  style={{position: "absolute", top:8, left:8}} source={require('./../images/icons/adicionarCirculo.png')}/>
+          </TouchableWithoutFeedback>
+          <Text style={{position:"relative", color: "white",fontSize: 15, left: "4.76%", right:"4.76%", top: "77%", letterSpacing: -0.24}}>Adicionar dispositivo</Text>
         </View>
       </View>
    </ScrollView>
@@ -68,10 +71,10 @@ class ListaAuto extends React.Component {
     const itemD = listaAutomacoes.map((automacao)=>{
       return(
         <View style={styles.automação} key={automacao.cod}>
-          <Text style={{color: "white",fontSize: 17,fontStyle:"normal",fontWeight: "600", left: 8, top: 8,lineHeight: 22}}>{automacao.nome}</Text>
-          <Text style={{color: ambiente.cor,fontSize: 11,fontStyle:"normal",fontWeight: "normal", left: 8, top: 8}}>{automacao.horario}</Text>
-          <Text style={{color: "white",fontSize: 15,fontStyle:"normal",fontWeight: "normal", left: 8, top: 45,letterSpacing: -0.24,lineHeight: 20}}>{automacao.proxEvento}</Text>
-          <Text style={{color: "rgba(255, 255, 255, 0.6)",fontSize: 11,fontStyle:"normal",fontWeight: "normal", left: 8, top: 48,lineHeight: 13}}>{automacao.mensagem}</Text>
+          <Text style={styles.automaçãoNome}>{automacao.nome}</Text>
+          <Text style={styles.automaçãoHorario}>{automacao.horario}</Text>
+          <Text style={styles.automaçãoProxEv}>{automacao.proxEvento}</Text>
+          <Text style={styles.automaçãoMensagem}>{automacao.mensagem}</Text>
          </View>
       )
     })
@@ -90,8 +93,7 @@ class ListaDispo extends React.Component {
         <View style={styles.dispositivo} key={dispositivo.cod}>
           {/* <Image  source={buscaImagem}/> */}
         <Text style={styles.dispositivoNome}>{dispositivo.nome} </Text>
-        <Text style={styles.dispositivoModelo}>{dispositivo.modelo}</Text>
-       
+        <Text style={styles.dispositivoModelo}>{dispositivo.modelo}</Text>      
         </View>
       )
     })
@@ -178,6 +180,40 @@ const styles = StyleSheet.create({
   marginEnd:8,
   marginTop:23,
   },
+  automaçãoNome: {
+    color: "white",
+    fontSize: 17,
+    fontStyle:"normal",
+    fontWeight: "600",
+    left: 8,
+    top: 8,
+    lineHeight: 22
+  },
+  automaçãoHorario:{
+    color: ambiente.cor,
+    fontSize: 11,
+    fontStyle:"normal",
+    fontWeight: "normal",
+    left: 8, 
+    top: 8
+  },
+  automaçãoProxEv:{
+    color: "white",
+    fontSize: 15,
+    fontStyle:"normal",
+    fontWeight: "normal", 
+    left: 8, 
+    top: 45,
+    letterSpacing: -0.24,
+    lineHeight: 20
+  },
+  automaçãoMensagem:{
+    color: "rgba(255, 255, 255, 0.6)",
+    fontSize: 11,fontStyle:"normal",
+    fontWeight: "normal", 
+    left: 8, 
+    top: 48,
+    lineHeight: 13},
   dispositivosTitulo:{
     color: "white",
     fontSize: 17,
@@ -204,8 +240,6 @@ const styles = StyleSheet.create({
     marginEnd:8,
     marginTop:8,
     flexDirection:"column",
-    
-    
     },
   dispositivoNome:{
     position:"relative",
