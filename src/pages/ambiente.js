@@ -14,7 +14,8 @@ var listaDispositivos = [
   {nome:"Ar-Condicionado Digital Inverter 17,000 Btu/h Frio 8-Polo", marca:"Sansung", modelo:"AR18NVFPCWKNAZ", cod:"1"},
   {nome:"Ar-Condicionado Split Hi Wall LG Dual Inverter Voice 12000 ", marca:"Sansung", modelo:"S4-W12JA31A", cod:"2"},
 ]
-var ambiente = listaAmbientes[0]; // ambiente 
+var ambiente = listaAmbientes[0];
+
 
 // Componentes que farão parte da Página /////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Componente Lista de Automações
@@ -57,7 +58,10 @@ class ListaDispo extends React.Component {
         }
 
 // Componente referente à página Ambiente (que utiliza os componentes criados anteriormente) /////////////////////////////////////////////////
-const Ambiente = ({navigation}) => {
+// const Ambiente = ({navigation},ambienteSelecionado) => {
+  // var ambiente = listaAmbientes[ambienteSelecionado]; // ambiente
+
+  const Ambiente = ({navigation}) => {
   return (
    <ScrollView style={styles.body}>
      <View style={styles.header}>

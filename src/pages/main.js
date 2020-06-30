@@ -26,13 +26,13 @@ function AmbientesStack() {
           headerShown: false,
         }}
       />
-      {/* <Stack.Screen
+      <Stack.Screen
         name="Ambiente"
         component={Ambiente}
         options={{
           headerShown: false,
         }}
-      /> */}
+      />
     </Stack.Navigator>
     
   );
