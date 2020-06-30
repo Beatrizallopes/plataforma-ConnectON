@@ -1,8 +1,10 @@
+// Lista de imports necessários:
 import React from 'react';
 import { StyleSheet, View, Text, ScrollView, TextInput, Image, Button,  FlatList, SafeAreaView,TouchableWithoutFeedback} from 'react-native';
 import listaAmbientes from "../dados";
-// import listaAutomacoes from "../dados";
 import { ReloadInstructions } from 'react-native/Libraries/NewAppScreen';
+
+// Alguns dados utilizados para "simular" o banco de dados ///////////////////////////////////////////////////////////////////////////////////
 var listaAutomacoes = [
   {nome:"Expediente",horario:"08:00 as 18:00",proxEvento:"00:17:34",mensagem:"Encerrará em breve",cod:"1"},
   {nome:"Hora Extra",horario:" ",proxEvento:"Sábado, 08:00 as 18:00",mensagem:"Daqui a 3 dias",cod:"2"},
@@ -12,60 +14,10 @@ var listaDispositivos = [
   {nome:"Ar-Condicionado Digital Inverter 17,000 Btu/h Frio 8-Polo", marca:"Sansung", modelo:"AR18NVFPCWKNAZ", cod:"1"},
   {nome:"Ar-Condicionado Split Hi Wall LG Dual Inverter Voice 12000 ", marca:"Sansung", modelo:"S4-W12JA31A", cod:"2"},
 ]
-var ambiente = listaAmbientes[0];
-const Ambiente = ({navigation}) => {
-  return (
-   <ScrollView style={styles.body}>
+var ambiente = listaAmbientes[0]; // ambiente 
 
-     <View style={styles.header}>
-      <TouchableWithoutFeedback onPress={() =>navigation.navigate("Ambientes") }>
-      <Image  style={{position: "absolute", top: "55%"}} source={require('./../images/icons/setaLaranjaEsq.png')}/>
-      </TouchableWithoutFeedback>
-      <Text style={styles.ambientes}> Ambientes </Text>
-
-      <TouchableWithoutFeedback onPress={() => alert("Editar Ambiente")}>
-      <Text style={styles.editar}> Editar </Text>
-      </TouchableWithoutFeedback>
-
-     </View> 
-     {/* Fim do Header */}
-
-      <Text style={styles.titulo}>
-           {ambiente.nome}
-      </Text>  
-
-      <Text style={styles.notificações}>
-          Notificações 
-      </Text>
-      <TouchableWithoutFeedback onPress={() => alert("Notificações")}>
-        <Image style={{position:"absolute",marginRight: 4,right:"8%",top:"22%"}} source={require('./../images/icons/setaDireitaTransp.png')}/>
-      </TouchableWithoutFeedback>
-      {/* Automações */}
-      <View style={styles.automaçõesView}>
-
-      <Text style={{color: "white",fontSize: 17,fontStyle:"normal",fontWeight: "600"}}> Automações
-      </Text>
-      <ScrollView style={styles.listaAutomações} horizontal={true}>
-        <ListaAuto></ListaAuto>
-      </ScrollView>
-
-      </View>
-      {/* Dispositivos */}
-      <Text style={styles.dispositivosTitulo}> Dispositivos </Text>
-      <View style={styles.dispositivosView}>
-        
-        <ListaDispo></ListaDispo>
-        <View style={styles.dispositivo}>
-          <TouchableWithoutFeedback onPress={() => alert("Adicionar dispositivo!")}>
-          <Image  style={{position: "absolute", top:8, left:8}} source={require('./../images/icons/adicionarCirculo.png')}/>
-          </TouchableWithoutFeedback>
-          <Text style={{position:"relative", color: "white",fontSize: 15, left: "4.76%", right:"4.76%", top: "77%", letterSpacing: -0.24}}>Adicionar dispositivo</Text>
-        </View>
-      </View>
-   </ScrollView>
-  );
-};
-// Criando o componente Lista de Automações
+// Componentes que farão parte da Página /////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Componente Lista de Automações
 class ListaAuto extends React.Component {
   render() {
     const itemD = listaAutomacoes.map((automacao)=>{
@@ -81,17 +33,20 @@ class ListaAuto extends React.Component {
     return itemD;
         }
         }
-  // Criando o componente Lista de Dispositivos
+// Componente Lista de Dispositivos
 class ListaDispo extends React.Component {
   render() {
     const item = listaDispositivos.map((dispositivo)=>{
       var marca = dispositivo.marca.toLowerCase();
-      var srcLogo = '../images/logomarcasDispositivos/'+ marca + '.png';
+      // var src = '../images/logomarcasDispositivos/'+ marca + '.png';
+      // var srcLogo = src.toString();
+      // var srcLogo = '../images/logomarcasDispositivos/sansung.png';
       // var buscaImagem = require(srcLogo);
-      var buscaImagem = require('../images/logomarcasDispositivos/sansung.png');
+      // Não estou conseguindo pegar as variáveis e utilizar no require: https://github.com/facebook/react-native/issues/6391
+       var buscaImagem = require('../images/logomarcasDispositivos/sansung.png');
       return(
         <View style={styles.dispositivo} key={dispositivo.cod}>
-          {/* <Image  source={buscaImagem}/> */}
+          <Image  source={buscaImagem} style={{left: "5%",top:"9%"}}/>
         <Text style={styles.dispositivoNome}>{dispositivo.nome} </Text>
         <Text style={styles.dispositivoModelo}>{dispositivo.modelo}</Text>      
         </View>
@@ -101,7 +56,57 @@ class ListaDispo extends React.Component {
         }
         }
 
-// Estilização dos componentes 
+// Componente referente à página Ambiente (que utiliza os dois componentes criados anteriormente) /////////////////////////////////////////////////
+const Ambiente = ({navigation}) => {
+  return (
+   <ScrollView style={styles.body}>
+     <View style={styles.header}>
+        <TouchableWithoutFeedback onPress={() =>navigation.navigate("Ambientes") }>
+          <Image  style={{position: "absolute", top: "55%"}} source={require('./../images/icons/setaLaranjaEsq.png')}/>
+        </TouchableWithoutFeedback>
+        <Text style={styles.ambientes}> Ambientes </Text>
+        <TouchableWithoutFeedback onPress={() => alert("Editar Ambiente")}>
+         <Text style={styles.editar}> Editar </Text>
+        </TouchableWithoutFeedback> 
+     </View> 
+      {/* Fim do header */}
+      <Text style={styles.titulo}>
+           {ambiente.nome}
+      </Text>  
+      <Text style={styles.notificações}>
+          Notificações 
+      </Text>
+      <TouchableWithoutFeedback onPress={() => alert("Notificações")}>
+        <Image style={{position:"absolute",marginRight: 4,right:"8%",top:"22%"}} source={require('./../images/icons/setaDireitaTransp.png')}/>
+      </TouchableWithoutFeedback>
+
+      {/* Automações */}
+      <View style={styles.automaçõesView}>
+        <Text style={{color: "white",fontSize: 17,fontStyle:"normal",fontWeight: "600"}}> Automações</Text>
+        <ScrollView style={styles.listaAutomações} horizontal={true}>
+          <ListaAuto></ListaAuto>
+        </ScrollView>
+      </View>
+
+      {/* Dispositivos */}
+      <Text style={styles.dispositivosTitulo}> Dispositivos </Text>
+      <View style={styles.dispositivosView}>
+        <ListaDispo></ListaDispo>
+        {/* Adicionar dispositivo: */}
+        <View style={styles.dispositivo}>
+          <TouchableWithoutFeedback onPress={() => alert("Adicionar dispositivo!")}>
+            <Image  style={{position: "absolute", top:8, left:8}} source={require('./../images/icons/adicionarCirculo.png')}/>
+          </TouchableWithoutFeedback>
+          <Text style={{position:"relative", color: "white",fontSize: 15, left: "4.76%", right:"4.76%", top: "77%", letterSpacing: -0.24}}>Adicionar dispositivo</Text>
+        </View> 
+      </View>
+
+   </ScrollView>
+  );
+};
+
+
+// Estilização dos componentes ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 const styles = StyleSheet.create({
  titulo:{
    color:ambiente.cor,
@@ -120,7 +125,6 @@ const styles = StyleSheet.create({
    flex:1,
    backgroundColor: "#000000",
  },
-
  icone:{
   width: 24,
   height: 24,
@@ -172,13 +176,13 @@ const styles = StyleSheet.create({
    height:149, 
   },
   automação:{
-  width: 248,
-  height: 126,
-  backgroundColor: "rgba(255, 255, 255,0.13)",
-  borderRadius: 12,
-  left: 4,
-  marginEnd:8,
-  marginTop:23,
+    width: 248,
+    height: 126,
+    backgroundColor: "rgba(255, 255, 255,0.13)",
+    borderRadius: 12,
+    left: 4,
+    marginEnd:8,
+    marginTop:23,
   },
   automaçãoNome: {
     color: "white",
@@ -228,7 +232,6 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection:"row",
     flexWrap:"wrap",
-    // justifyContent: "space-between",
   },
   dispositivo:{
     //  width: 168,
@@ -249,27 +252,25 @@ const styles = StyleSheet.create({
     fontWeight: "600",
     left: "4.76%", 
     right:"4.76%", 
-    top: "37%",
+    top: "20%",
     lineHeight: 18,
     height: 54,
     width:"90%", 
     letterSpacing: -0.078
   },
   dispositivoModelo: {
-    // position:"relative",
-    // bottom:"0%",
-    top: "40%",
+    top: "25%",
     left: "4.76%",
     color: "rgba(255, 255, 255, 0.5)",
     fontSize: 11,
     lineHeight:13,
     fontStyle:"normal",
     fontWeight: "normal",
-    // marginTop:"5%",
     }
 
 })
 
+// Exportando a página ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 export default Ambiente
 
 
