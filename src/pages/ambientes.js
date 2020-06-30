@@ -3,10 +3,12 @@ import React,{useState}  from 'react';
 import { StyleSheet, View, Text, ScrollView, TextInput, Image, Button,  FlatList, SafeAreaView,TouchableWithoutFeedback} from 'react-native';
 import grupos from '../funcoes/separarGruposAlfa';
 import gruposFav from '../funcoes/filtrarFavoritos';
+import { useNavigation } from '@react-navigation/native';
 
 // Componentes que farão parte da Página /////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Criando o componente Lista de Ambientes
- const GrupoAmbientes = ({navigation}) => {
+ const GrupoAmbientes = () => {
+  const navigation = useNavigation();
     var tamanho = grupos.length;
     const itemLista = grupos.map((grupo) => {
       var letra = grupo[0].nome.substring(0,1); 
@@ -31,15 +33,16 @@ import gruposFav from '../funcoes/filtrarFavoritos';
         if (favorito){ 
           urlIconeFav = require('./../images/icons/favorito.png');
         }
+        
         return (
           <View style={indicador(ambiente.cor,posicao)} key={ambiente.id}>
             <TouchableWithoutFeedback   onPress={() => {setfavorito(!favorito);}}>
               <Image source={urlIconeFav} style={{left: 30}, {top: 12}} ></Image>
              </TouchableWithoutFeedback>
             <Text style={styles.text}>{ambiente.ehFavorito}{ambiente.nome} </Text>  
-            <TouchableWithoutFeedback onPress={() => alert("Ir p/ ambiente")}>     
+            {/* <TouchableWithoutFeedback onPress={() => alert("Ir p/ ambiente")}>      */}
            {/* <TouchableWithoutFeedback onPress={navigation.navigate('Ambiente',{ambienteSelecionado:0})}>              */}
-           {/* <TouchableWithoutFeedback onPress={navigation.navigate('Ambiente')}>  */}
+           <TouchableWithoutFeedback onPress={() => navigation.navigate('Ambiente')}> 
              <Text style={styles.infoQuantidade}>{ambiente.qtdMod}
                <Image style={{borderWidth:10,borderColor:"red"}}source={require('./../images/icons/setaDireita.png')}/>         
              </Text>

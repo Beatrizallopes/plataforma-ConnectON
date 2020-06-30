@@ -8,15 +8,16 @@ import AmbientesFav from "./ambientesFav"; // Importando a página Ambientes
 import Ambiente from "./ambiente" // Importando a página de Ambiente
 import Automacoes from "./automacoes"; // Importando a página Automações
 
-const Stack = createStackNavigator();
+const Stack = createStackNavigator()
 function AmbientesStack() {
   return (
-    <Stack.Navigator initialRouteName='Ambientes'>
+    <Stack.Navigator initialRouteName='Ambientes'  >
       <Stack.Screen
         name="Ambientes"
         component={Ambientes}
         options={{
           headerShown: false,
+          animationEnabled:false,
         }}
       />
      <Stack.Screen
@@ -24,6 +25,7 @@ function AmbientesStack() {
         component={AmbientesFav}
         options={{
           headerShown: false,
+          animationEnabled:false,
         }}
       />
       <Stack.Screen
@@ -31,6 +33,7 @@ function AmbientesStack() {
         component={Ambiente}
         options={{
           headerShown: false,
+          animationEnabled:false,
         }}
       />
     </Stack.Navigator>
