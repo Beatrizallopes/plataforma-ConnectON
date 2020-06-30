@@ -10,9 +10,8 @@ import {
   TouchableWithoutFeedback,
 } from 'react-native';
 
-var x = false;
 const Automacoes = () => {
-  const [favorito, setfavorito] = useState(x);
+  const [favorito, setfavorito] = useState(false);
   var urlIconeFav =  require('./../images/icons/naoFavorito.png');      
   if (favorito){ 
    urlIconeFav = require('./../images/icons/favorito.png');

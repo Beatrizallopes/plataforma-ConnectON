@@ -1,19 +1,18 @@
 // Lista de imports necessários ////////////////////////////////////////////////////////////////////////////////////////////////////////////
-import React from 'react';
+import React,{useState}  from 'react';
 import { StyleSheet, View, Text, ScrollView, TextInput, Image, Button,  FlatList, SafeAreaView,TouchableWithoutFeedback} from 'react-native';
 import grupos from '../funcoes/separarGruposAlfa';
 
 // Componentes que farão parte da Página /////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Criando o componente Lista de Ambientes
-// const GrupoAmbientes = () => {
-class GrupoAmbientes extends React.Component {
-  render() {
+ const GrupoAmbientes = () => {
     var tamanho = grupos.length;
     const itemLista = grupos.map((grupo) => {
       var letra = grupo[0].nome.substring(0,1); 
       var qtdAmb = grupo.length - 1;
       var posicao;
       const item = grupo.map((ambiente) => {
+        const [favorito, setfavorito] = useState(ambiente.ehFavorito);
         if(ambiente.id <qtdAmb){
           if(ambiente.id==="0"){
             posicao = "inicial";
@@ -28,14 +27,14 @@ class GrupoAmbientes extends React.Component {
           }
         }
         var urlIconeFav =  require('./../images/icons/naoFavorito.png');      
-        if (ambiente.ehFavorito){ 
+        if (favorito){ 
           urlIconeFav = require('./../images/icons/favorito.png');
         }
         return (
           <View style={indicador(ambiente.cor,posicao)} key={ambiente.id}>
-            <TouchableWithoutFeedback onPress={() => alert("Favoritar!")}>
-              <Image  style={styles.iconeFavorito} source={urlIconeFav}/>
-            </TouchableWithoutFeedback>
+            <TouchableWithoutFeedback hitSlop={{top:5,left:5,bottom:5,right:5}} onPress={() => {setfavorito(!favorito);}}>
+              <Image source={urlIconeFav} style={{left: 8, top: 12,}} ></Image>
+             </TouchableWithoutFeedback>
             <Text style={styles.text}>{ambiente.ehFavorito}{ambiente.nome} </Text>                    
              <Text style={styles.infoQuantidade}>{ambiente.qtdMod}
                <Image source={require('./../images/icons/setaDireita.png')}/>
@@ -54,7 +53,7 @@ class GrupoAmbientes extends React.Component {
           }) // Terminou o segundo map         
        return itemLista
           }
-        }
+        // }
         
 // Componente referente à página Ambientes (que utiliza o componente criado anteriormente) /////////////////////////////////////////////////
 const Ambientes = ({ navigation}) => {
@@ -152,7 +151,8 @@ text: {
 infoQuantidade: {
   textAlign: "right",
   color: "rgba(235, 235, 245, 0.6)",
-  marginHorizontal:4,
+  marginHorizontal:10,
+  bottom:"40%"
 },
 iconeFavorito:{
 position: "absolute",
