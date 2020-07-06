@@ -10,10 +10,13 @@ import { useNavigation } from '@react-navigation/native';
  const GrupoAmbientes = () => {
   const navigation = useNavigation();
     var tamanho = grupos.length;
+    var i = 0;
     const itemLista = grupos.map((grupo) => {
       var letra = grupo[0].nome.substring(0,1); 
       var qtdAmb = grupo.length - 1;
       var posicao;
+      var numGrupo = i;
+      i = i+1; // Identificar qual o grupo
       const item = grupo.map((ambiente) => {
         const [favorito, setfavorito] = useState(ambiente.ehFavorito);
         if(ambiente.id <qtdAmb){
@@ -39,9 +42,9 @@ import { useNavigation } from '@react-navigation/native';
             <TouchableWithoutFeedback   onPress={() => {setfavorito(!favorito);}}>
               <Image source={urlIconeFav} style={{left: 30}, {top: 12}} ></Image>
              </TouchableWithoutFeedback>
-            <Text style={styles.text}>{ambiente.ehFavorito}{ambiente.nome} </Text>  
+            <Text style={styles.text}>{ambiente.ehFavorito}{ambiente.nome}</Text>  
             {/* <TouchableWithoutFeedback onPress={() => alert("Ir p/ ambiente")}>      */}
-           <TouchableWithoutFeedback onPress={() => navigation.navigate('Ambiente',{ambienteSelecionado:2})}>             
+           <TouchableWithoutFeedback onPress={() => navigation.navigate('Ambiente',{grupoSelecionado:numGrupo,ambienteSelecionado:ambiente.id,codAmbiente:ambiente.cod})}>             
            {/* <TouchableWithoutFeedback onPress={() => navigation.navigate('Ambiente')}>  */}
              <Text style={styles.infoQuantidade}>{ambiente.qtdMod}
                <Image style={{borderWidth:10,borderColor:"red"}}source={require('./../images/icons/setaDireita.png')}/>         

@@ -3,7 +3,7 @@ import React from 'react';
 import { StyleSheet, View, Text, ScrollView, TextInput, Image, Button,  FlatList, SafeAreaView,TouchableWithoutFeedback} from 'react-native';
 import listaAmbientes from "../dados";
 import { ReloadInstructions } from 'react-native/Libraries/NewAppScreen';
-
+import grupos from "../funcoes/separarGruposAlfa";
 // Alguns dados utilizados para "simular" o banco de dados ///////////////////////////////////////////////////////////////////////////////////
 
 var listaAutomacoes = [
@@ -61,7 +61,11 @@ class ListaDispo extends React.Component {
 // Componente referente à página Ambiente (que utiliza os componentes criados anteriormente) /////////////////////////////////////////////////
 const Ambiente = ({route,navigation}) => {  
   const {ambienteSelecionado} = route.params;
-   ambiente = listaAmbientes[ambienteSelecionado]; 
+  const {grupoSelecionado} = route.params;
+  const {codAmbiente}=route.params;
+  ambiente = grupos[grupoSelecionado][ambienteSelecionado]; 
+  //  ambiente = grupos[0][0];
+   // ambiente = listaAmbientes[ambienteSelecionado]; 
   // const Ambiente = ({navigation}) => {
   return (
    <ScrollView style={styles.body}>
@@ -69,7 +73,7 @@ const Ambiente = ({route,navigation}) => {
         <TouchableWithoutFeedback onPress={() => navigation.navigate("Ambientes") }>
           <Image  style={{position: "absolute", top: "55%"}} source={require('./../images/icons/setaLaranjaEsq.png')}/>
         </TouchableWithoutFeedback>
-        <Text style={styles.ambientes}> Ambientes </Text>
+        <Text style={styles.ambientes}> Ambientes  </Text>
         <TouchableWithoutFeedback onPress={() => alert("Editar Ambiente")}>
          <Text style={styles.editar}> Editar </Text>
         </TouchableWithoutFeedback> 
