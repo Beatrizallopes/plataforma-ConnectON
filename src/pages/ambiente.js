@@ -12,8 +12,8 @@ var listaAutomacoes = [
   {nome:"Intervalo",horario:"12:00 as 14:00 ",proxEvento:"Segunda, 12:00 as 14:00",mensagem:"Daqui a 5 dias",cod:"3"},
 ]
 var listaDispositivos = [
-  {nome:"Ar-Condicionado Digital Inverter 17,000 Btu/h Frio 8-Polo", marca:"Sansung", modelo:"AR18NVFPCWKNAZ", cod:"1"},
-  {nome:"Ar-Condicionado Split Hi Wall LG Dual Inverter Voice 12000 ", marca:"Sansung", modelo:"S4-W12JA31A", cod:"2"},
+  {nome:"Ar-Condicionado Digital Inverter 17,000 Btu/h Frio 8-Polo", marca:"Sansung", modelo:"AR18NVFPCWKNAZ", cod:"1", temperatura: "24", velocidade:3},
+  {nome:"Ar-Condicionado Split Hi Wall LG Dual Inverter Voice 12000 ", marca:"Sansung", modelo:"S4-W12JA31A", cod:"2", temperatura:"17",velocidade:2},
 ]
 var ambiente = listaAmbientes[0];
 
@@ -36,12 +36,10 @@ class ListaAuto extends React.Component {
         }
         }
 // Componente Lista de Dispositivos
-// class ListaDispo extends React.Component {
   const ListaDispo = ()=> {
+  const item = listaDispositivos.map((dispositivo)=>{
   const [modalVisible, setModalVisible] = useState(false);
-  // render() {
-    const item = listaDispositivos.map((dispositivo)=>{
-      var marca = dispositivo.marca.toLowerCase();
+  var marca = dispositivo.marca.toLowerCase();
       // var src = '../images/logomarcasDispositivos/'+ marca + '.png';
       // var srcLogo = src.toString();
       // var srcLogo = '../images/logomarcasDispositivos/sansung.png';
@@ -56,38 +54,43 @@ class ListaAuto extends React.Component {
         </TouchableWithoutFeedback>
         
         <Text style={styles.dispositivoModelo}>{dispositivo.modelo}</Text>  
-            {/* Teste Modal*/}
-            <Modal
-        animationType="slide"
-        transparent={true}
-        visible={modalVisible}
-        onRequestClose={() => {
-          Alert.alert("Modal has been closed.");
-        }}
-      >
+      {/* Controle*/}
+        <Modal animationType="slide" transparent={true} visible={modalVisible} >
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
-            <Text style={styles.modalText}>{dispositivo.nome}</Text>
-
-            <TouchableHighlight
-              style={{ ...styles.openButton, backgroundColor: "#2196F3" }}
-              onPress={() => {
-                setModalVisible(!modalVisible);
-              }}
-            >
-              <Text style={styles.textStyle}>Hide Modal</Text>
-            </TouchableHighlight>
+            <Text style={styles.controleTitulo}>Controle Remoto</Text>
+            <TouchableWithoutFeedback onPress={() => { setModalVisible(!modalVisible);}}>
+              <Image style={styles.closeButton} source={require('../images/controle/fecharControle.png')}/> 
+            </TouchableWithoutFeedback> 
+            <Text style={styles.controleNome}>{dispositivo.nome}</Text>
+            <Text style={styles.controleModelo}>{dispositivo.modelo}</Text>
+            <Image source={require('../images/controle/ligaDesliga.png')} style={{position:"relative",top:"15%"}}/> 
+            <View style={{top:"20%",left:16, flex: 1,flexDirection:"row",flexWrap:"wrap",}}>
+             <View style={styles.controleTemperatura}>
+              <Text style={{color:" rgba(255, 255, 255, 0.5)",fontSize:13}}>Temperatura</Text>
+              <View style={styles.visorTemperatura}>
+               <Text style={styles.valorTemperatura}>{dispositivo.temperatura}ºC</Text>
+              </View>           
+            </View>
+            <Image style={{top:0,right:"18%"}} source={require('../images/controle/divisorControle.png')}/> 
+            <View>
+              <Text style={{color:" rgba(255, 255, 255, 0.5)",fontSize:13}} >Velocidade do Vento</Text>
+              <View style={styles.visorVelocidade}>
+                <Image style={{top:"20%",marginEnd:"8%"}} source={require('../images/controle/ventoVelocidade.png')}/> 
+                <Image style={{top:"20%",marginEnd:"8%"}} source={require('../images/controle/ventoVelocidade.png')}/> 
+                <Image style={{top:"20%"}} source={require('../images/controle/ventoVelocidade.png')}/> 
+              </View> 
+            </View>
+          </View>
           </View>
         </View>
       </Modal>
 
-            {/* Fim teste */}
         </View>
       )
     })
     return item;
         }
-        // }
 
 // Componente referente à página Ambiente (que utiliza os componentes criados anteriormente) /////////////////////////////////////////////////
 const Ambiente = ({route,navigation}) => {  
@@ -110,7 +113,6 @@ const Ambiente = ({route,navigation}) => {
          <Text style={styles.editar}> Editar </Text>
         </TouchableWithoutFeedback> 
      </View> 
-      {/* Fim do header */}
       <Text style={styles.titulo}>
            {ambiente.nome}
       </Text>  
@@ -308,18 +310,21 @@ const styles = StyleSheet.create({
     fontStyle:"normal",
     fontWeight: "normal",
     },
-    // Teste modal
+
+// Estilo Controle 
     centeredView: {
       flex: 1,
-      justifyContent: "center",
+      justifyContent:"flex-end",
       alignItems: "center",
-      marginTop: 22
     },
     modalView: {
+      height:"55%",
+      width:"100%",
       margin: 20,
-      backgroundColor: "white",
-      borderRadius: 20,
-      padding: 35,
+      backgroundColor:  "#2c2c2c",
+      borderTopStartRadius:12,
+      borderTopEndRadius:12,
+      padding: "9%",
       alignItems: "center",
       shadowColor: "#000",
       shadowOffset: {
@@ -330,21 +335,76 @@ const styles = StyleSheet.create({
       shadowRadius: 3.84,
       elevation: 5
     },
-    openButton: {
-      backgroundColor: "#F194FF",
-      borderRadius: 20,
-      padding: 10,
-      elevation: 2
+    closeButton: {
+      position:"absolute",
+      right: 14,
+      top: 22,
     },
-    textStyle: {
-      color: "white",
+    controleTitulo:{
+      position: "absolute",
+      height: 34,
+      left: 16,
+      top: 22,// 5+17 = 22
+      fontStyle: "normal",
       fontWeight: "bold",
-      textAlign: "center"
+      fontSize: 28,
+      lineHeight: 34,
+      letterSpacing: 0.364,
+      color: "#FFFFFF",
     },
-    modalText: {
-      marginBottom: 15,
-      textAlign: "center"
-    }
+    controleNome:{
+      position:"relative",
+      color: "#FFFFFF",
+      fontSize: 20,
+      fontStyle:"normal",
+      fontWeight: "600", 
+      right:"6%", 
+      top: 29,
+      lineHeight: 25,
+      height: 50,
+      letterSpacing: 0.38
+    },
+    controleModelo: {
+      height: 13,
+      right: "45%",
+      top: "10%",
+      color: "rgba(255, 255, 255, 0.5)",
+      fontSize: 11,
+      lineHeight:13,
+      fontStyle:"normal",
+      fontWeight: "normal",
+      },
+    controleTemperatura: {
+      width:"50%",
+    },
+    visorTemperatura:{
+      height:45,
+      width:127,
+      paddingHorizontal:22,
+      paddingVertical:3,
+      backgroundColor:"rgba(241, 137, 41, 0.15)",
+      borderRadius:16,
+      top:"10%",
+      right:"15%",   
+    },
+    valorTemperatura:{
+      fontSize: 34,
+      lineHeight: 41,
+      letterSpacing: 0.374,
+      color: "#F18929",
+    },
+    visorVelocidade:{
+      height:45,
+      width:127,
+      paddingHorizontal:22,
+      paddingVertical:10,
+      backgroundColor:"rgba(241, 137, 41, 0.15)",
+      borderRadius:16,
+      top:"10%",   
+      flexDirection:"row",
+      flexWrap:"wrap",
+    },
+
 
 })
 
