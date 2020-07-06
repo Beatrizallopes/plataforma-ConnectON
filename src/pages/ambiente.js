@@ -1,6 +1,6 @@
 // Lista de imports necessários ////////////////////////////////////////////////////////////////////////////////////////////////////////////
-import React from 'react';
-import { StyleSheet, View, Text, ScrollView, TextInput, Image, Button,  FlatList, SafeAreaView,TouchableWithoutFeedback} from 'react-native';
+import React,{useState} from 'react';
+import { StyleSheet, View, Text, ScrollView, TextInput, Image,Modal, Button,  FlatList, SafeAreaView,TouchableWithoutFeedback,TouchableHighlight,} from 'react-native';
 import listaAmbientes from "../dados";
 import { ReloadInstructions } from 'react-native/Libraries/NewAppScreen';
 import grupos from "../funcoes/separarGruposAlfa";
@@ -36,8 +36,10 @@ class ListaAuto extends React.Component {
         }
         }
 // Componente Lista de Dispositivos
-class ListaDispo extends React.Component {
-  render() {
+// class ListaDispo extends React.Component {
+  const ListaDispo = ()=> {
+  const [modalVisible, setModalVisible] = useState(false);
+  // render() {
     const item = listaDispositivos.map((dispositivo)=>{
       var marca = dispositivo.marca.toLowerCase();
       // var src = '../images/logomarcasDispositivos/'+ marca + '.png';
@@ -49,17 +51,47 @@ class ListaDispo extends React.Component {
       return(
         <View style={styles.dispositivo} key={dispositivo.cod}>
           <Image  source={buscaImagem} style={{left: "5%",top:"9%"}}/>
+        <TouchableWithoutFeedback  onPress={() => {setModalVisible(true);}}>
         <Text style={styles.dispositivoNome}>{dispositivo.nome} </Text>
-        <Text style={styles.dispositivoModelo}>{dispositivo.modelo}</Text>      
+        </TouchableWithoutFeedback>
+        
+        <Text style={styles.dispositivoModelo}>{dispositivo.modelo}</Text>  
+            {/* Teste Modal*/}
+            <Modal
+        animationType="slide"
+        transparent={true}
+        visible={modalVisible}
+        onRequestClose={() => {
+          Alert.alert("Modal has been closed.");
+        }}
+      >
+        <View style={styles.centeredView}>
+          <View style={styles.modalView}>
+            <Text style={styles.modalText}>{dispositivo.nome}</Text>
+
+            <TouchableHighlight
+              style={{ ...styles.openButton, backgroundColor: "#2196F3" }}
+              onPress={() => {
+                setModalVisible(!modalVisible);
+              }}
+            >
+              <Text style={styles.textStyle}>Hide Modal</Text>
+            </TouchableHighlight>
+          </View>
+        </View>
+      </Modal>
+
+            {/* Fim teste */}
         </View>
       )
     })
     return item;
         }
-        }
+        // }
 
 // Componente referente à página Ambiente (que utiliza os componentes criados anteriormente) /////////////////////////////////////////////////
 const Ambiente = ({route,navigation}) => {  
+ 
   const {ambienteSelecionado} = route.params;
   const {grupoSelecionado} = route.params;
   const {codAmbiente}=route.params;
@@ -275,6 +307,43 @@ const styles = StyleSheet.create({
     lineHeight:13,
     fontStyle:"normal",
     fontWeight: "normal",
+    },
+    // Teste modal
+    centeredView: {
+      flex: 1,
+      justifyContent: "center",
+      alignItems: "center",
+      marginTop: 22
+    },
+    modalView: {
+      margin: 20,
+      backgroundColor: "white",
+      borderRadius: 20,
+      padding: 35,
+      alignItems: "center",
+      shadowColor: "#000",
+      shadowOffset: {
+        width: 0,
+        height: 2
+      },
+      shadowOpacity: 0.25,
+      shadowRadius: 3.84,
+      elevation: 5
+    },
+    openButton: {
+      backgroundColor: "#F194FF",
+      borderRadius: 20,
+      padding: 10,
+      elevation: 2
+    },
+    textStyle: {
+      color: "white",
+      fontWeight: "bold",
+      textAlign: "center"
+    },
+    modalText: {
+      marginBottom: 15,
+      textAlign: "center"
     }
 
 })
