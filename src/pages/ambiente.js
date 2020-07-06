@@ -4,6 +4,7 @@ import { StyleSheet, View, Text, ScrollView, TextInput, Image,Modal, Button,  Fl
 import listaAmbientes from "../dados";
 import { ReloadInstructions } from 'react-native/Libraries/NewAppScreen';
 import grupos from "../funcoes/separarGruposAlfa";
+
 // Alguns dados utilizados para "simular" o banco de dados ///////////////////////////////////////////////////////////////////////////////////
 
 var listaAutomacoes = [
@@ -12,8 +13,8 @@ var listaAutomacoes = [
   {nome:"Intervalo",horario:"12:00 as 14:00 ",proxEvento:"Segunda, 12:00 as 14:00",mensagem:"Daqui a 5 dias",cod:"3"},
 ]
 var listaDispositivos = [
-  {nome:"Ar-Condicionado Digital Inverter 17,000 Btu/h Frio 8-Polo", marca:"Sansung", modelo:"AR18NVFPCWKNAZ", cod:"1", temperatura: "24", velocidade:3},
-  {nome:"Ar-Condicionado Split Hi Wall LG Dual Inverter Voice 12000 ", marca:"Sansung", modelo:"S4-W12JA31A", cod:"2", temperatura:"17",velocidade:2},
+  {nome:"Ar-Condicionado Digital Inverter 17,000 Btu/h Frio 8-Polo", marca:"Sansung", modelo:"AR18NVFPCWKNAZ", cod:"1", temperatura: 24, velocidade:3},
+  {nome:"Ar-Condicionado Split Hi Wall LG Dual Inverter Voice 12000 ", marca:"Sansung", modelo:"S4-W12JA31A", cod:"2", temperatura:17,velocidade:2},
 ]
 var ambiente = listaAmbientes[0];
 
@@ -39,6 +40,8 @@ class ListaAuto extends React.Component {
   const ListaDispo = ()=> {
   const item = listaDispositivos.map((dispositivo)=>{
   const [modalVisible, setModalVisible] = useState(false);
+  const [temperatura, setTemperatura] = useState(dispositivo.temperatura);
+
   var marca = dispositivo.marca.toLowerCase();
       // var src = '../images/logomarcasDispositivos/'+ marca + '.png';
       // var srcLogo = src.toString();
@@ -54,25 +57,44 @@ class ListaAuto extends React.Component {
         </TouchableWithoutFeedback>
         
         <Text style={styles.dispositivoModelo}>{dispositivo.modelo}</Text>  
-      {/* Controle*/}
+    
         <Modal animationType="slide" transparent={true} visible={modalVisible} >
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
+
             <Text style={styles.controleTitulo}>Controle Remoto</Text>
+
             <TouchableWithoutFeedback onPress={() => { setModalVisible(!modalVisible);}}>
               <Image style={styles.closeButton} source={require('../images/controle/fecharControle.png')}/> 
             </TouchableWithoutFeedback> 
+
             <Text style={styles.controleNome}>{dispositivo.nome}</Text>
+
             <Text style={styles.controleModelo}>{dispositivo.modelo}</Text>
+
             <Image source={require('../images/controle/ligaDesliga.png')} style={{position:"relative",top:"15%"}}/> 
+           
             <View style={{top:"20%",left:16, flex: 1,flexDirection:"row",flexWrap:"wrap",}}>
              <View style={styles.controleTemperatura}>
               <Text style={{color:" rgba(255, 255, 255, 0.5)",fontSize:13}}>Temperatura</Text>
               <View style={styles.visorTemperatura}>
-               <Text style={styles.valorTemperatura}>{dispositivo.temperatura}ºC</Text>
-              </View>           
+               <Text style={styles.valorTemperatura}>{temperatura}ºC</Text>
+              </View>   
+
+              <View style={styles.botoesTemperatura}>
+                <TouchableWithoutFeedback onPress={() => { setTemperatura(temperatura + 1);} }>
+                   <Image source={require('../images/controle/aumentaTemp.png')}/>
+                </TouchableWithoutFeedback>               
+                <Image style={{marginHorizontal:5}} source={require('../images/controle/divisorBotoes.png')}/>
+                <TouchableWithoutFeedback onPress={() => { setTemperatura(temperatura - 1);} }>
+                  <Image source={require('../images/controle/diminuiTemp.png')}/>
+                </TouchableWithoutFeedback>
+              </View>   
+
             </View>
+
             <Image style={{top:0,right:"18%"}} source={require('../images/controle/divisorControle.png')}/> 
+            
             <View>
               <Text style={{color:" rgba(255, 255, 255, 0.5)",fontSize:13}} >Velocidade do Vento</Text>
               <View style={styles.visorVelocidade}>
@@ -80,6 +102,11 @@ class ListaAuto extends React.Component {
                 <Image style={{top:"20%",marginEnd:"8%"}} source={require('../images/controle/ventoVelocidade.png')}/> 
                 <Image style={{top:"20%"}} source={require('../images/controle/ventoVelocidade.png')}/> 
               </View> 
+              <View style={styles.botoesVelocidade}>
+              <Image source={require('../images/controle/aumentaVelocidade.png')}/>
+                <Image style={{marginHorizontal:5}} source={require('../images/controle/divisorBotoes.png')}/>
+                <Image source={require('../images/controle/diminuiVelocidade.png')}/>
+              </View>
             </View>
           </View>
           </View>
@@ -99,9 +126,6 @@ const Ambiente = ({route,navigation}) => {
   const {grupoSelecionado} = route.params;
   const {codAmbiente}=route.params;
   ambiente = grupos[grupoSelecionado][ambienteSelecionado]; 
-  //  ambiente = grupos[0][0];
-   // ambiente = listaAmbientes[ambienteSelecionado]; 
-  // const Ambiente = ({navigation}) => {
   return (
    <ScrollView style={styles.body}>
      <View style={styles.header}>
@@ -366,8 +390,8 @@ const styles = StyleSheet.create({
     },
     controleModelo: {
       height: 13,
-      right: "45%",
-      top: "10%",
+      right: "42%",
+      top: "12%",
       color: "rgba(255, 255, 255, 0.5)",
       fontSize: 11,
       lineHeight:13,
@@ -393,6 +417,17 @@ const styles = StyleSheet.create({
       letterSpacing: 0.374,
       color: "#F18929",
     },
+    botoesTemperatura:{
+      height:40,
+      width:137,
+      padding:4,
+      backgroundColor:"rgba(255, 255, 255, 0.1)",
+      borderRadius:100,
+      top:"12%",
+      right:"22%", 
+      flexDirection:"row",
+      flexWrap:"wrap",
+    },
     visorVelocidade:{
       height:45,
       width:127,
@@ -404,9 +439,36 @@ const styles = StyleSheet.create({
       flexDirection:"row",
       flexWrap:"wrap",
     },
+    botoesVelocidade:{
+      height:40,
+      width:137,
+      padding:4,
+      backgroundColor:"rgba(255, 255, 255, 0.1)",
+      borderRadius:100,
+      top:"18%",
+      right:"2%",
+      flexDirection:"row",
+      flexWrap:"wrap",
+    },
 
 
 })
+
+// var statusModal = function (status){
+//   if(status){
+//     return {
+      
+//       flex:1,
+//       backgroundColor: "#000000",
+//     }
+//   }
+//   else{
+//     return  {
+//       flex:1,
+//       backgroundColor: "#000000",
+//     }
+//   }
+// }
 
 // Exportando a página ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 export default Ambiente
