@@ -6,6 +6,7 @@ import gruposFav from '../funcoes/filtrarFavoritos';
 import { useNavigation } from '@react-navigation/native';
 import Input from '../components/input';
 import Header from '../components/header';
+import listaAmbientes from '../dados';
 
 // Componentes que farão parte da Página /////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Criando o componente Lista de Ambientes
@@ -21,33 +22,19 @@ import Header from '../components/header';
       i = i+1; // Identificar qual o grupo
       const item = grupo.map((ambiente) => {
         const [favorito, setfavorito] = useState(ambiente.ehFavorito);
-        if(ambiente.id <qtdAmb){
-          if(ambiente.id==="0"){
-            posicao = "inicial";
-          } else{
-            posicao = "meio";
-          }
-        } else {
-          if(qtdAmb===0){
-            posicao = "unico"
-          } else{
-            posicao = "final"
-          }
-        }
+        posicao = posicaoAmbiente(ambiente.id,qtdAmb);
+        // Identificando se é favorito ou não
         var urlIconeFav =  require('./../images/icons/naoFavorito.png');      
         if (favorito){ 
           urlIconeFav = require('./../images/icons/favorito.png');
         }
-        
         return (
-          <View style={indicador(ambiente.cor,posicao)} key={ambiente.id}>
+          <View style={[indicador(ambiente.cor,posicao),styles.listaAmb]} key={ambiente.id}>
             <TouchableWithoutFeedback   onPress={() => {setfavorito(!favorito);}}>
               <Image source={urlIconeFav} style={{left: 30}, {top: 12}} ></Image>
              </TouchableWithoutFeedback>
             <Text style={styles.text}>{ambiente.ehFavorito}{ambiente.nome}</Text>  
-            {/* <TouchableWithoutFeedback onPress={() => alert("Ir p/ ambiente")}>      */}
            <TouchableWithoutFeedback onPress={() => navigation.navigate('Ambiente',{grupoSelecionado:numGrupo,ambienteSelecionado:ambiente.id,codAmbiente:ambiente.cod})}>             
-           {/* <TouchableWithoutFeedback onPress={() => navigation.navigate('Ambiente')}>  */}
              <Text style={styles.infoQuantidade}>{ambiente.qtdMod}
                <Image style={{borderWidth:10,borderColor:"red"}}source={require('./../images/icons/setaDireita.png')}/>         
              </Text>
@@ -73,9 +60,7 @@ const Ambientes = ({ navigation}) => {
   // const [ambientesExibidos, setambientesExibidos] = useState(grupos);
   return (
    <ScrollView style={styles.body}>
-
      <Header titulo ="Ambientes "></Header>
- 
       <Input label="" placeholder="Buscar Ambiente..." />
       <View style={styles.switchFav}>
         <Text style={styles.switchFavSel}>Todos</Text>
@@ -84,12 +69,65 @@ const Ambientes = ({ navigation}) => {
         </TouchableWithoutFeedback>
       </View>       
           <GrupoAmbientes></GrupoAmbientes>
-          <View style={{height:20}}></View>
-          
+          <View style={{height:20}}></View>         
    </ScrollView>
   );
 };
 
+// Funções ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  // Identificando a posição do ambiente na lista:
+const posicaoAmbiente = function(id,qtdTotal){
+  var posicao;
+  if(id <qtdTotal){
+    if(id==="0"){
+      posicao = "inicial";
+    } else{
+      posicao = "meio";
+    }
+  } else {
+    if(qtdTotal===0){
+      posicao = "unico"
+    } else{
+      posicao = "final"
+    }
+  }
+  return posicao
+}
+// Estilos Dinâmicos
+var indicador = function(myColor, tipo) {
+  if(tipo=='inicial'){
+    return {
+      borderBottomColor: "rgba(255, 255, 255, 0.12)",
+      borderBottomWidth: 1,
+      borderLeftWidth:8,
+      borderLeftColor: myColor,
+      borderTopStartRadius:12,
+    }
+  };
+  if(tipo=='meio'){
+    return {
+      borderBottomColor: "rgba(255, 255, 255, 0.12)",
+      borderBottomWidth: 1,
+      borderLeftWidth:8,
+      borderLeftColor: myColor,
+    }
+  };
+  if(tipo=='final'){
+    return {
+      borderLeftWidth:8,
+      borderLeftColor: myColor,
+      borderBottomStartRadius:12,
+    }
+  }
+  if(tipo=='unico'){
+    return {
+      borderLeftWidth:8,
+      borderLeftColor: myColor,
+      borderBottomStartRadius:12,
+      borderTopStartRadius:12,
+    }
+  }  
+}
 // Estilização dos componentes ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 const styles = StyleSheet.create({
  body: {
@@ -170,52 +208,13 @@ switchFavNotSel:{
   // textAlignVertical:"center",
   color: "#FFFFFF",
   top:"-75%",
+},
+listaAmb:{
+  height: 48,
+  paddingLeft:15,
 }
 });
-// Estilos Dinâmicos
-var indicador = function(myColor, tipo) {
-  if(tipo=='inicial'){
-    return {
-      height: 48,
-      borderBottomColor: "rgba(255, 255, 255, 0.12)",
-      borderBottomWidth: 1,
-      borderLeftWidth:8,
-      borderLeftColor: myColor,
-      borderTopStartRadius:12,
-      paddingLeft:15,
-    }
-  };
-  if(tipo=='meio'){
-    return {
-      height: 48,
-      borderBottomColor: "rgba(255, 255, 255, 0.12)",
-      borderBottomWidth: 1,
-      borderLeftWidth:8,
-      borderLeftColor: myColor,
-      paddingLeft:15,
-    }
-  };
-  if(tipo=='final'){
-    return {
-      height: 48,
-      borderLeftWidth:8,
-      borderLeftColor: myColor,
-      borderBottomStartRadius:12,
-      paddingLeft:15,
-    }
-  }
-  if(tipo=='unico'){
-    return {
-      height: 48,
-      borderLeftWidth:8,
-      borderLeftColor: myColor,
-      borderBottomStartRadius:12,
-      borderTopStartRadius:12,
-      paddingLeft:15,
-    }
-  }
-  
-}
+
 // Exportando a página ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 export default Ambientes
 
