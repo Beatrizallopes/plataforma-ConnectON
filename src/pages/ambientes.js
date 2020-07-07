@@ -4,6 +4,8 @@ import { StyleSheet, View, Text, ScrollView, TextInput, Image, Button,  FlatList
 import grupos from '../funcoes/separarGruposAlfa';
 import gruposFav from '../funcoes/filtrarFavoritos';
 import { useNavigation } from '@react-navigation/native';
+import Input from '../components/input';
+import Header from '../components/header';
 
 // Componentes que farão parte da Página /////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Criando o componente Lista de Ambientes
@@ -71,23 +73,10 @@ const Ambientes = ({ navigation}) => {
   // const [ambientesExibidos, setambientesExibidos] = useState(grupos);
   return (
    <ScrollView style={styles.body}>
-     {/* Início do header */}
-     <View style={styles.header}>
-     <TouchableWithoutFeedback onPress={() => alert("Adicionar ambiente")}>
-       <Image  style={{position: "absolute", right: 22,top: 54}} source={require('./../images/icons/adicionar.png')}/>
-      </TouchableWithoutFeedback>
-      <TouchableWithoutFeedback onPress={() => alert("Mais Informações")}>
-       <Image  style={{position: "absolute", right: 66,top: 54}} source={require('./../images/icons/more.png')}/>
-      </TouchableWithoutFeedback>
-     </View> 
-     {/* Fim do header */}
-      <Text style={styles.titulo}>
-           Ambientes 
-      </Text>
-      <TextInput style={styles.campoPesquisa}>
-          <Image style={styles.icone} source={require('./../images/icons/buscar.png')}/>
-           Buscar Ambiente... 
-      </TextInput>
+
+     <Header titulo ="Ambientes "></Header>
+ 
+      <Input label="" placeholder="Buscar Ambiente..." />
       <View style={styles.switchFav}>
         <Text style={styles.switchFavSel}>Todos</Text>
         <TouchableWithoutFeedback onPress={() => navigation.navigate('Ambientes Favoritos')}> 
@@ -103,40 +92,9 @@ const Ambientes = ({ navigation}) => {
 
 // Estilização dos componentes ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 const styles = StyleSheet.create({
- titulo:{
-   color:"white",
-   fontSize: 34,
-   fontFamily: "Barlow",
-   fontStyle: "normal",
-   fontWeight: "bold",
-   lineHeight: 41,
-   letterSpacing: 0.374,
-   left: 16,
-   right: 16,
-   top:10,
-   marginBottom:18,
- },
  body: {
    flex:1,
    backgroundColor: "#000000",
- },
- campoPesquisa:{
-  height:44,
-  padding: 12,
-  width:"90%",
-  left: 16,
-  backgroundColor: "rgba(255, 255, 255,0.13)",
-  borderRadius: 10,
-  fontSize: 17,
-  letterSpacing: -0.408,
-  color: "rgba(255, 255, 255, 0.3)",
- },
- icone:{
-  width: 24,
-  height: 24,
- },
- header:{
-  height: 54,// 54 + 24 = 78
  },
  Addbutton:{
    backgroundColor:"red",

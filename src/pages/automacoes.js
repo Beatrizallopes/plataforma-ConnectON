@@ -1,38 +1,22 @@
+// Importações necessárias
 import React,{useState}   from 'react';
-import {
-  StyleSheet,
-  View,
-  Text,
-  ScrollView,
-  TextInput,
-  Button,
-  Image,
-  TouchableWithoutFeedback,
-} from 'react-native';
+import { StyleSheet, ScrollView,} from 'react-native';
+import Header from '../components/header'
 
+
+// Página Automações
 const Automacoes = () => {
-  const [favorito, setfavorito] = useState(false);
-  var urlIconeFav =  require('./../images/icons/naoFavorito.png');      
-  if (favorito){ 
-   urlIconeFav = require('./../images/icons/favorito.png');
-    }
   return (
-    <View style={styles.container}>
-      <Text>{favorito}</Text>
-      <TouchableWithoutFeedback onPress={() => {
-          setfavorito(!favorito);
-        }}>
-      <Image source={urlIconeFav}></Image>
-      </TouchableWithoutFeedback>
-    </View>
+    <ScrollView style={styles.body}>
+    <Header titulo="Automações"></Header>
+    </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+  body: {
+    flex:1,
+    backgroundColor: "#000000",
   },
 });
 

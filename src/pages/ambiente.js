@@ -4,6 +4,7 @@ import { StyleSheet, View, Text, ScrollView, TextInput, Image,Modal, Button,  Fl
 import listaAmbientes from "../dados";
 import { ReloadInstructions } from 'react-native/Libraries/NewAppScreen';
 import grupos from "../funcoes/separarGruposAlfa";
+import Input from '../components/input';
 
 // Alguns dados utilizados para "simular" o banco de dados ///////////////////////////////////////////////////////////////////////////////////
 

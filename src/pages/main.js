@@ -1,7 +1,7 @@
 import React  from 'react';
 import { NavigationContainer, useIsFocused } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { StyleSheet, Image } from 'react-native'; // Importando os componentes que vão ser usados
+import { Image } from 'react-native'; // Importando os componentes que vão ser usados
 import { createStackNavigator } from '@react-navigation/stack';
 import Ambientes from "./ambientes"; // Importando a página Ambientes
 import AmbientesFav from "./ambientesFav"; // Importando a página Ambientes
