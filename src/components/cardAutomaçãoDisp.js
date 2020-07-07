@@ -3,25 +3,24 @@ import React from 'react';
 import { StyleSheet, View, Text} from 'react-native';
 
 // Componente Input
-const AutomacaoCard = function({tipo,nome,horario,proxEvento,mensagem}){
+const CardAuto = function({nome,horario,proxEvento,mensagem}){
     return(
         <View style={styles.automação}>
-          <Text style={styles.automaçãoMensagem}>{mensagem}</Text>
-          <Text style={styles.automaçãoProxEv}>{proxEvento}</Text>
-          <Text style={styles.automaçãoNome}>{nome}</Text>
-          <Text style={styles.automaçãoHorario}>{horario}</Text>         
+        <Text style={styles.automaçãoNome}>{nome}</Text>
+        <Text style={styles.automaçãoHorario}>{horario}</Text>
+        <Text style={styles.automaçãoProxEv}>{proxEvento}</Text>
+        <Text style={styles.automaçãoMensagem}>{mensagem}</Text>
        </View>
         )
 }
 // Estilo do componente
 const styles = StyleSheet.create({
     automação:{
-        width: "90%",
-        height: 154,
-        left: 16,
-        top: 8,
+        width: 248,
+        height: 126,
         backgroundColor: "rgba(255, 255, 255,0.13)",
         borderRadius: 12,
+        left: 4,
         marginEnd:8,
         marginTop:23,
       },
@@ -61,5 +60,5 @@ const styles = StyleSheet.create({
 })
 
 // Exportando o componente
-export default AutomacaoCard
+export default CardAuto
 

@@ -5,7 +5,7 @@ import listaAmbientes from "../dados";
 import { ReloadInstructions } from 'react-native/Libraries/NewAppScreen';
 import grupos from "../funcoes/separarGruposAlfa";
 import Input from '../components/input';
-import CardAuto from "../components/cardAutomação"
+import CardAuto from "../components/cardAutomaçãoDisp"
 import Controle from "../components/controle"
 
 // Alguns dados utilizados para "simular" o banco de dados ///////////////////////////////////////////////////////////////////////////////////
@@ -59,7 +59,62 @@ class ListaAuto extends React.Component {
           </TouchableWithoutFeedback>
         
           <Text style={styles.dispositivoModelo}>{dispositivo.modelo}</Text>  
-   
+
+ {/* Início de Controle */}
+ <Modal animationType="slide" transparent={true} visible={modalVisible} >
+        <View style={styles.centeredView}>
+          <View style={styles.modalView}>
+
+            <Text style={styles.controleTitulo}>Controle Remoto</Text>
+            {/* Botão de fechar o controle */}
+            <TouchableWithoutFeedback onPress={() => { setModalVisible(!modalVisible);}}>
+              <Image style={styles.closeButton} source={require('../images/controle/fecharControle.png')}/> 
+            </TouchableWithoutFeedback> 
+            {/* Info sobre o controle */}
+            <Text style={styles.controleNome}>{dispositivo.nome}</Text>
+            <Text style={styles.controleModelo}>{dispositivo.modelo}</Text>
+            {/* Botão de Ligar/Desligar o dispositivo */}
+            <Image source={require('../images/controle/ligaDesliga.png')} style={{position:"relative",top:"15%"}}/> 
+           {/* Outros botões: */}
+            <View style={{top:"20%",left:16, flex: 1,flexDirection:"row",flexWrap:"wrap",}}>
+             {/* Temperatura */}
+             <View style={styles.controleTemperatura}>
+              <Text style={{color:" rgba(255, 255, 255, 0.5)",fontSize:13}}>Temperatura</Text>
+              <View style={styles.visor}>
+               <Text style={styles.valorTemperatura}>{temperatura}ºC</Text>
+              </View>   
+              <View style={styles.botoes}>
+                <TouchableWithoutFeedback onPress={() => { setTemperatura(temperatura + 1);} }>
+                   <Image source={require('../images/controle/aumentaTemp.png')}/>
+                </TouchableWithoutFeedback>               
+                <Image style={{marginHorizontal:5}} source={require('../images/controle/divisorBotoes.png')}/>
+                <TouchableWithoutFeedback onPress={() => { setTemperatura(temperatura - 1);} }>
+                  <Image source={require('../images/controle/diminuiTemp.png')}/>
+                </TouchableWithoutFeedback>
+              </View>   
+            </View>
+
+            <Image style={{top:0,right:"18%"}} source={require('../images/controle/divisorControle.png')}/> 
+            {/* Velocidade do Vento */}
+            <View>
+              <Text style={{color:" rgba(255, 255, 255, 0.5)",fontSize:13}} >Velocidade do Vento</Text>
+              <View style={[styles.visor,{paddingVertical:10,flexDirection:"row", right:"0%"}]}>
+               <Image style={{marginEnd:"8%"}} source={require('../images/controle/ventoVelocidade.png')}/>
+               <Image style={{marginEnd:"8%"}} source={require('../images/controle/ventoVelocidade.png')}/>
+               <Image style={{marginEnd:"8%"}} source={require('../images/controle/ventoVelocidade.png')}/>
+             </View>
+                {/* <Visor velocidade={dispositivo.velocidade}></Visor>  */}
+              
+              <View style={[styles.botoes,{top:"18%",right:"2%",}]}>
+              <Image source={require('../images/controle/aumentaVelocidade.png')}/>
+                <Image style={{marginHorizontal:5}} source={require('../images/controle/divisorBotoes.png')}/>
+                <Image source={require('../images/controle/diminuiVelocidade.png')}/>
+              </View>
+            </View>
+          </View>
+          </View>
+        </View>
+      </Modal>
       {/* Fim do controle */}
         </View>
       )
