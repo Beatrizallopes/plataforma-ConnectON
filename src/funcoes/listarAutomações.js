@@ -1,15 +1,15 @@
 // O que irei receber do servidor
 var listaAutomacoes = [
     {tipo: "Automação",nome:"Expediente", dias:["SEG","TER","QUA"], horario:"08:00/18:00",cod:"1"},
-    {tipo: "Gatilho",nome:"Hora Extra",dias:"09/07/2020", horario:"13:00",cod:"2"},
+    {tipo: "Gatilho",nome:"Hora Extra",dias:"07/09/2020", horario:"13:00",cod:"2"},
     {tipo: "Automação",nome:"Intervalo", dias:["SEG","TER","QUA","QUI","SEX"], horario:"14:00",cod:"3"},
-    {tipo: "Gatilho",nome:"Teste",dias:"09/07/2020", horario:"15:00",cod:"4"},
+    {tipo: "Gatilho",nome:"Teste",dias:"07/09/2020", horario:"15:00",cod:"4"},
     {tipo: "Automação",nome:"Automação 2", dias:["SEG","QUA","QUI","SEX"], horario:"01:00",cod:"5"},
 
   ]
-  var data = "07/07/2020";
-  var hora = "13:30";
-  var diaSemana = "TER";
+  var data = "07/08/2020"; // Por enquanto a data está no formato MM/DD/AA
+  var hora = "11:00";
+  var diaSemana = "QUA";
 
 // Código
 var j=0;
@@ -32,16 +32,30 @@ for (var i=0;i<listaAutomacoes.length;i++){
         }
     } 
     else {
-       // console.log("Gatilho")
+       // Se for Gatilho
        dataAtual = Date.parse(data)
        dataEvento = Date.parse(listaAutomacoes[i].dias)
        diferencaMinutos = parseInt((dataEvento - dataAtual)/60000)
-       console.log(diferencaMinutos)
+       diferencaMinutos = diferencaMinutos + parseInt((transformaHora(listaAutomacoes[i].horario)-transformaHora(hora)))
+       listaAutomacoes[i].tempoRestante = diferencaMinutos;
+
     }
     }
    console.log(listaAutomacoes);
+   var listaAutomacoesOrd = listaAutomacoes.sort(
+    function (a, b) {
+        if (a.tempoRestante > b.tempoRestante) {
+        return 1;
+        }
+        if (a.tempoRestante < b.tempoRestante) {
+        return -1;
+        }
+        return 0;
+        }
+        )
+  console.log(listaAutomacoesOrd)
 
-// Funções usadas:
+// Funções usadas://///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 function HojeTem (automacao){
     var sim = false;
@@ -106,5 +120,6 @@ function AnalisaDia (diasAuto){
     }
     return faltam;
 }
+
 
 
