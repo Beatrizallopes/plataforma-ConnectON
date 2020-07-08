@@ -21,21 +21,22 @@ for (var i=0;i<listaAutomacoes.length;i++){
            j = j +1;
         } else {
             faltamDias = AnalisaDia(listaAutomacoes[i].dias);
-            console.log("Dias")
-            console.log(faltamDias)
             faltamMinutos = AnalisaHorario(listaAutomacoes[i].horario);
-            console.log("Minutos")
-            console.log(faltamMinutos)
             if(faltamDias == -1){
               // Nesse caso, se faltamDias e -1, significa que a próxima ocorrência é no dia seguinte. Ai ele soma a quantidade de minutos que faltam para acabar o dia com a qtd de minutos do inicio do evento no próx dia
               faltam = (1440 - transformaHora(hora)) + transformaHora(listaAutomacoes[i].horario.split("/")[0])
-            }
+            } else {
             faltam = parseInt(faltamDias) + parseInt(faltamMinutos);
+            }
             listaAutomacoes[i].tempoRestante = faltam;
         }
     } 
     else {
        // console.log("Gatilho")
+       dataAtual = Date.parse(data)
+       dataEvento = Date.parse(listaAutomacoes[i].dias)
+       diferencaMinutos = parseInt((dataEvento - dataAtual)/60000)
+       console.log(diferencaMinutos)
     }
     }
    console.log(listaAutomacoes);
@@ -69,7 +70,6 @@ function AnalisaHorario (horario){
             var faltam = qtdMinutos - qtdMinutosAtual;
         } else {
             var faltam = -1;
-            // console.log("Já passou")
         }
     ;}
     else {
@@ -77,39 +77,24 @@ function AnalisaHorario (horario){
         qtdMinutosFim = transformaHora(ehPersistente[1]);
     if (qtdMinutosAtual>qtdMinutosFim){
         var faltam = -1;
-        // console.log("Já passou")
     }
     if(qtdMinutosAtual<qtdMinutosInicio){
         var faltam = qtdMinutosInicio - qtdMinutosAtual;
-        // console.log("Faltam " + faltam + "minutos para começar")
     }
     if(qtdMinutosAtual>qtdMinutosInicio && qtdMinutosAtual<qtdMinutosFim){
         var faltam = qtdMinutosFim - qtdMinutosAtual;
-        // Para exibição
-        // if(faltam>60){
-        //     var horasFaltam = parseInt(faltam/60);
-        //     var minutosFaltam = faltam - (horasFaltam*60);
-        //     console.log("Faltam " + horasFaltam + " horas e " + minutosFaltam + " minutos para acabar")
-        // }
-        // else{
-        //     console.log("Faltam " + faltam + "minutos para acabar")
-        // }
-        //
     }
  }
-    //console.log(faltam)
     return faltam   
 }
 
 function AnalisaDia (diasAuto){
     semana = ["DOM","SEG","TER","QUA","QUI","SEX","SAB"]
     diaHoje = semana.indexOf(diaSemana);
-    console.log("O dia de hoje é: " + diaHoje)
     var diasFaltam = 0;
     for(var i =0; i<diasAuto.length; i++){
         diaAuto = semana.indexOf(diasAuto[i]);
         if(diaAuto>diaHoje){
-            console.log("O dia da auto é " + diaAuto)
             diasFaltam = diaAuto - diaHoje;
             if(diasFaltam==1){
              var faltam = -1
