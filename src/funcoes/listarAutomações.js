@@ -53,7 +53,15 @@ for (var i=0;i<listaAutomacoes.length;i++){
         return 0;
         }
         )
-  console.log(listaAutomacoesOrd)
+    console.log(listaAutomacoesOrd)
+// Agora vamos tirar os eventos que já passaram da lista
+    for(var i=0;i<listaAutomacoesOrd.length;i++){
+        if(listaAutomacoesOrd[i].tempoRestante == -1){
+            listaAutomacoesOrd.splice(i,1)
+        }
+    }
+    console.log(listaAutomacoesOrd)
+
 
 // Funções usadas://///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -120,6 +128,8 @@ function AnalisaDia (diasAuto){
     }
     return faltam;
 }
+
+
 
 
 
