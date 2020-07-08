@@ -5,7 +5,6 @@ var listaAutomacoes = [
     {tipo: "Automação",nome:"Intervalo", dias:["SEG","TER","QUA","QUI","SEX"], horario:"14:00",ehPersistente:false,cod:"3"},
      {tipo: "Gatilho",nome:"Teste",dias:"07/12/2020", horario:"15:00",ehPersistente:false,cod:"4"},
     {tipo: "Automação",nome:"Automação 2", dias:["SEG","QUA","QUI","SEX"], horario:"01:00", ehPersistente:false,cod:"5"},
-
   ]
   var data = "07/09/2020"; // Por enquanto a data está no formato MM/DD/AA
   var hora = "20:00";
@@ -22,8 +21,10 @@ for (var i=0;i<listaAutomacoes.length;i++){
            j = j +1;
         } else {  // Ou n é hoje ou é hoje e já passou
           horaExecução = listaAutomacoes[i].horario.split("/")[0];
-          if(listaAutomacoes[i].horario.split("/")[0]<hora && listaAutomacoes[i].ehPersistente){
+          if(listaAutomacoes[i].horario.split("/")[0]<hora && listaAutomacoes[i].ehPersistente && listaAutomacoes[i].horario.split("/")[1]>hora ){
             horaExecução = listaAutomacoes[i].horario.split("/")[1];
+
+            console.log("oi " + listaAutomacoes[i].nome + " " + horaExecução)
           }
             faltamDias = parseInt(AnalisaDia(listaAutomacoes[i]));
             faltamMinutos = transformaHora(horaExecução) - transformaHora(hora);
@@ -32,7 +33,11 @@ for (var i=0;i<listaAutomacoes.length;i++){
               faltam = (1440 - transformaHora(hora)) + transformaHora(listaAutomacoes[i].horario.split("/")[0])
              // faltam = faltamMinutos
             } else {
+            console.log(listaAutomacoes[i].nome)
+            console.log(faltamMinutos)
+            console.log(faltamDias)
             faltam = parseInt(faltamDias) + parseInt(faltamMinutos);
+            console.log(faltam)
             }
             listaAutomacoes[i].tempoRestante = faltam;
             listaAutomacoes[i].mensagem = "Executa em";
@@ -151,8 +156,6 @@ function AnalisaDia (automacao){
         } else { // Se o dia da semana já passou
         if(i== diasAuto.length-1){
          diaAuto = semana.indexOf(diasAuto[0])
-        console.log(automacao.nome)
-        console.log(diaAuto)
         }
         diasFaltam = 7 - diaHoje + diaAuto;
         var faltam = parseInt(diasFaltam*60*24)
