@@ -1,10 +1,10 @@
 // O que irei receber do servidor
 var listaAutomacoes = [
-    {tipo: "Automação",nome:"Expediente", dias:["SEG","TER","QUA"], horario:"08:00/18:00",cod:"1"},
-    {tipo: "Gatilho",nome:"Hora Extra",dias:"07/09/2020", horario:"13:00",cod:"2"},
-    {tipo: "Automação",nome:"Intervalo", dias:["SEG","TER","QUA","QUI","SEX"], horario:"14:00",cod:"3"},
-    {tipo: "Gatilho",nome:"Teste",dias:"07/09/2020", horario:"15:00",cod:"4"},
-    {tipo: "Automação",nome:"Automação 2", dias:["SEG","QUA","QUI","SEX"], horario:"01:00",cod:"5"},
+    {tipo: "Automação",nome:"Expediente", dias:["SEG","TER","QUA"], horario:"08:00/18:00",ehPersistente:true,cod:"1"},
+    {tipo: "Gatilho",nome:"Hora Extra",dias:"07/09/2020", horario:"13:00",ehPersistente:false,cod:"2"},
+    {tipo: "Automação",nome:"Intervalo", dias:["SEG","TER","QUA","QUI","SEX"], horario:"14:00",ehPersistente:false,cod:"3"},
+    {tipo: "Gatilho",nome:"Teste",dias:"07/09/2020", horario:"15:00",ehPersistente:false,cod:"4"},
+    {tipo: "Automação",nome:"Automação 2", dias:["SEG","QUA","QUI","SEX"], horario:"01:00", ehPersistente:false,cod:"5"},
 
   ]
   var data = "07/08/2020"; // Por enquanto a data está no formato MM/DD/AA
@@ -18,6 +18,11 @@ for (var i=0;i<listaAutomacoes.length;i++){
         var ehHoje = HojeTem(listaAutomacoes[i]);
         if(ehHoje){
            listaAutomacoes[i].tempoRestante = AnalisaHorario(listaAutomacoes[i].horario);
+           if(listaAutomacoes[i].ehPersistente && transformaHora(listaAutomacoes[i].horario.split("/")[1])>transformaHora(hora)){
+            listaAutomacoes[i].mensagem = "Encerra em";
+           } else {
+              listaAutomacoes[i].mensagem = "Executa em";
+           }
            j = j +1;
         } else {
             faltamDias = AnalisaDia(listaAutomacoes[i].dias);
@@ -29,6 +34,7 @@ for (var i=0;i<listaAutomacoes.length;i++){
             faltam = parseInt(faltamDias) + parseInt(faltamMinutos);
             }
             listaAutomacoes[i].tempoRestante = faltam;
+            listaAutomacoes[i].mensagem = "Executa em";
         }
     } 
     else {
@@ -38,6 +44,7 @@ for (var i=0;i<listaAutomacoes.length;i++){
        diferencaMinutos = parseInt((dataEvento - dataAtual)/60000)
        diferencaMinutos = diferencaMinutos + parseInt((transformaHora(listaAutomacoes[i].horario)-transformaHora(hora)))
        listaAutomacoes[i].tempoRestante = diferencaMinutos;
+       listaAutomacoes[i].mensagem = "Executa em"
 
     }
     }
