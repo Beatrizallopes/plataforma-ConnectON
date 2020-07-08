@@ -149,7 +149,11 @@ function AnalisaDia (automacao){
             }
             i = diasAuto.length;
         } else { // Se o dia da semana já passou
+        if(i== diasAuto.length-1){
+         diaAuto = semana.indexOf(diasAuto[0])
         console.log(automacao.nome)
+        console.log(diaAuto)
+        }
         diasFaltam = 7 - diaHoje + diaAuto;
         var faltam = parseInt(diasFaltam*60*24)
         // i = diasAuto.length;
