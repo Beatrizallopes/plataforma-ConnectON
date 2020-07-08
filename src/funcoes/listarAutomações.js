@@ -3,13 +3,13 @@ var listaAutomacoes = [
     {tipo: "Automação",nome:"Expediente", dias:["SEG","TER","QUA"], horario:"08:00/18:00",ehPersistente:true,cod:"1"},
     {tipo: "Gatilho",nome:"Hora Extra",dias:"07/13/2020", horario:"13:00",ehPersistente:false,cod:"2"},
     {tipo: "Automação",nome:"Intervalo", dias:["SEG","TER","QUA","QUI","SEX"], horario:"14:00",ehPersistente:false,cod:"3"},
-    // {tipo: "Gatilho",nome:"Teste",dias:"07/12/2020", horario:"15:00",ehPersistente:false,cod:"4"},
+     {tipo: "Gatilho",nome:"Teste",dias:"07/12/2020", horario:"15:00",ehPersistente:false,cod:"4"},
     {tipo: "Automação",nome:"Automação 2", dias:["SEG","QUA","QUI","SEX"], horario:"01:00", ehPersistente:false,cod:"5"},
 
   ]
-  var data = "07/13/2020"; // Por enquanto a data está no formato MM/DD/AA
-  var hora = "12:00";
-  var diaSemana = "SEG";
+  var data = "07/09/2020"; // Por enquanto a data está no formato MM/DD/AA
+  var hora = "20:00";
+  var diaSemana = "QUI";
 
 // Código
 var j=0;
@@ -18,30 +18,30 @@ for (var i=0;i<listaAutomacoes.length;i++){
         var ehHoje = HojeTem(listaAutomacoes[i]);
         var jaPassou = JaPassou(listaAutomacoes[i].horario);
         if(ehHoje && !jaPassou){
-           // console.log(listaAutomacoes[i].nome)
            listaAutomacoes[i].tempoRestante = AnalisaHorario(listaAutomacoes[i].horario);
-           if(listaAutomacoes[i].ehPersistente && transformaHora(listaAutomacoes[i].horario.split("/")[1])>transformaHora(hora)){
-            listaAutomacoes[i].mensagem = "Encerra em";
-           } else {
-              listaAutomacoes[i].mensagem = "Executa em";
-           }
            j = j +1;
-        } else { 
-            // Agora vamos comparar a hora de execução com a hora atual
-            horaExecução = listaAutomacoes[i].horario.split("/")[0];
-            faltamDias = parseInt(AnalisaDia(listaAutomacoes[i].dias));
+        } else {  // Ou n é hoje ou é hoje e já passou
+          horaExecução = listaAutomacoes[i].horario.split("/")[0];
+          if(listaAutomacoes[i].horario.split("/")[0]<hora && listaAutomacoes[i].ehPersistente){
+            horaExecução = listaAutomacoes[i].horario.split("/")[1];
+          }
+            faltamDias = parseInt(AnalisaDia(listaAutomacoes[i]));
             faltamMinutos = transformaHora(horaExecução) - transformaHora(hora);
-           // faltamDias = AnalisaDia(listaAutomacoes[i].dias);
-           // faltamMinutos = AnalisaHorario(listaAutomacoes[i].horario);
             if(faltamDias == -1){
               // Nesse caso, se faltamDias e -1, significa que a próxima ocorrência é no dia seguinte. Ai ele soma a quantidade de minutos que faltam para acabar o dia com a qtd de minutos do inicio do evento no próx dia
               faltam = (1440 - transformaHora(hora)) + transformaHora(listaAutomacoes[i].horario.split("/")[0])
+             // faltam = faltamMinutos
             } else {
             faltam = parseInt(faltamDias) + parseInt(faltamMinutos);
             }
             listaAutomacoes[i].tempoRestante = faltam;
             listaAutomacoes[i].mensagem = "Executa em";
         }
+         if(listaAutomacoes[i].ehPersistente && transformaHora(listaAutomacoes[i].horario.split("/")[1])>transformaHora(hora)){
+            listaAutomacoes[i].mensagem = "Encerra em";
+           } else {
+              listaAutomacoes[i].mensagem = "Executa em";
+           }
     } 
     else {
        // Se for Gatilho
@@ -68,11 +68,11 @@ for (var i=0;i<listaAutomacoes.length;i++){
         )
    // console.log(listaAutomacoesOrd)
 // Agora vamos tirar os eventos que já passaram da lista
-    // for(var i=0;i<listaAutomacoesOrd.length;i++){
-    //     if(listaAutomacoesOrd[i].tempoRestante == -1){
-    //         listaAutomacoesOrd.splice(i,1)
-    //     }
-    // }
+     for(var i=0;i<listaAutomacoesOrd.length;i++){
+         if(listaAutomacoesOrd[i].tempoRestante == -1){
+             listaAutomacoesOrd.splice(i,1)
+         }
+     }
     console.log(listaAutomacoesOrd)
 
 
@@ -93,7 +93,6 @@ function JaPassou (horario){
    horas = horario.split("/");
    if(transformaHora(horas[0])<transformaHora(hora)){
        sim = true;
-       console.log(horas[0])
    }
    return sim;
 }
@@ -133,7 +132,8 @@ function AnalisaHorario (horario){
     return faltam   
 }
 // Função que calcula a quantidade de dias inteiros para a próxima execução
-function AnalisaDia (diasAuto){
+function AnalisaDia (automacao){
+    diasAuto = automacao.dias;
     semana = ["DOM","SEG","TER","QUA","QUI","SEX","SAB"] // Tenho q ver a questão de transição do SÁB pro DOM
     diaHoje = semana.indexOf(diaSemana);
     var diasFaltam = 0;
@@ -149,9 +149,10 @@ function AnalisaDia (diasAuto){
             }
             i = diasAuto.length;
         } else { // Se o dia da semana já passou
+        console.log(automacao.nome)
         diasFaltam = 7 - diaHoje + diaAuto;
         var faltam = parseInt(diasFaltam*60*24)
-         i = diasAuto.length;
+        // i = diasAuto.length;
         }
     }
     return faltam; // retorna a quantidade de dias inteiros (em minutos) que faltam para ser executado
