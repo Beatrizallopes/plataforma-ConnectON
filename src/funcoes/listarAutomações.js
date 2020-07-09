@@ -180,7 +180,7 @@ function alteraFormatoHora(automação){
    if(horas<10){
      horas = "0" + horas
    }
-   var novoTempo = horas + ":" + minutos;
+   var novoTempo = horas + ":" + minutos + ":00"; // Esse + ":00" é uma gambiarra enquanto não considero segundos
     return novoTempo;
   }
   function alteraFormatoAmbientes(automação){
@@ -199,7 +199,8 @@ function alteraFormatoHora(automação){
           if(i!=3){
               ambientes = ambientes + automação.ambientes[i] + ", "
           } else {
-              ambientes = ambientes + automação.ambientes[i] + "..."
+              var ambFaltaram = automação.ambientes.length - 4;
+              ambientes = ambientes + automação.ambientes[i] + " +" + ambFaltaram
           }   
         } 
       }
