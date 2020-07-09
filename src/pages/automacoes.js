@@ -28,17 +28,21 @@ const TipoCriacao = () => {
     <View style={styles.caixa}>
       <Image style={styles.iconeImagem} source={require('./../images/automacoes.png')}></Image>
       <Text style={styles.explicativo}>Crie uma automação que é executada durante um período com início e fim determinado. </Text>
+      <TouchableWithoutFeedback onPress={() => alert("Criar Automação")}>
       <View style={styles.botaoCriação}>
         <Text style={styles.textoBotao}> Criar Automação</Text>
       </View> 
+      </TouchableWithoutFeedback>
     </View>
 
     <View style={styles.caixa}>
     <Image style={styles.iconeImagem} source={require('./../images/gatilhos.png')}></Image>
     <Text style={styles.explicativo}>Crie um gatilho para executar uma tarefa uma única vez quando chegar o momento </Text>
+    <TouchableWithoutFeedback onPress={() => alert("Criar Gatilho")}>
     <View style={[styles.botaoCriação,{backgroundColor:"rgba(214, 96, 117, 0.3)",}]}>
       <Text style={[styles.textoBotao,{color:"#D66075"}]}> Criar Gatilho</Text>
-    </View> 
+    </View>
+    </TouchableWithoutFeedback>
   </View>
   </View>
   )
@@ -135,7 +139,6 @@ titulo:{
     position:"relative",
     width:370,
     height:225,
-    right:"0%",
     top:"10%",
     backgroundColor: "linear-gradient(0deg, rgba(255, 255, 255, 0.11), rgba(255, 255, 255, 0.11)), #000000",
     borderRadius:18,

@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
     automação:{
         width: "90%",
         height: 154,
-        left: 16,
+        left: "5%",
         top: 8,
         backgroundColor: "rgba(255, 255, 255,0.13)",
         borderRadius: 12,
