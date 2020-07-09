@@ -3,13 +3,15 @@ import React from 'react';
 import { StyleSheet, View, Text} from 'react-native';
 
 // Componente Input
-const AutomacaoCard = function({tipo,nome,proxEvento,mensagem}){
+const AutomacaoCard = function({tipo,nome,proxEvento,mensagem,ambientes}){
 
   return(
         <View style={[styles.automação,tipoAuto(tipo)]}>
           <Text style={styles.automaçãoMensagem}>{mensagem}:</Text>
           <Text style={styles.automaçãoProxEv}>{proxEvento}</Text>
           <Text style={styles.automaçãoNome}>{nome}</Text>
+          <Text style={styles.automaçãoAmbientes}>{ambientes}</Text>
+
        </View>
         )
 
@@ -68,6 +70,18 @@ const styles = StyleSheet.create({
         fontWeight: "normal", 
         lineHeight: 22,
         alignSelf:"flex-start"
+      },
+      automaçãoAmbientes:{
+        position:"relative",
+        height:14,
+        left:"4%",
+        top:"28%",
+        color: "rgba(255, 255, 255, 0.6)",
+        fontSize: 12,
+        fontStyle:"normal",
+        fontWeight: "normal", 
+        lineHeight: 16,
+        overflow:"visible"
       },
 
 })

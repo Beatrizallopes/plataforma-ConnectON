@@ -12,7 +12,7 @@ class ListaAuto extends React.Component {
     const itemD = listaAutomacoesOrd.map((automacao)=>{
       return(
         <View key={automacao.cod}>
-        <AutomacaoCard tipo={automacao.tipo} nome={automacao.nome} proxEvento={automacao.tempoRestante} mensagem={automacao.mensagem}></AutomacaoCard>
+        <AutomacaoCard tipo={automacao.tipo} nome={automacao.nome} proxEvento={automacao.tempoRestante} mensagem={automacao.mensagem} ambientes={automacao.ambientes}></AutomacaoCard>
         </View>
       )
     })
