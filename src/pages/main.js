@@ -7,6 +7,8 @@ import Ambientes from "./ambientes"; // Importando a página Ambientes
 import AmbientesFav from "./ambientesFav"; // Importando a página Ambientes
 import Ambiente from "./ambiente" // Importando a página de Ambiente
 import Automacoes from "./automacoes"; // Importando a página Automações
+import TcriarGatilho from "./criarGatilho";
+import criarGatilho from './criarGatilho';
 
 const Stack = createStackNavigator()
 function AmbientesStack() {
@@ -47,12 +49,21 @@ function AutomacoesStack() {
         name="Automações"
         component={Automacoes}
         options={{
+          headerShown: false, 
+        }}
+       
+      />
+        <Stack.Screen
+        name="Criar Gatilho"
+        component={criarGatilho}
+        options={{
           headerShown: false,
         }}
       />
     </Stack.Navigator>
   );
 }
+
 
 const Tab = createBottomTabNavigator(); // Criando o menu inferior
 const App = () => {
@@ -112,7 +123,7 @@ const App = () => {
           <Tab.Screen name="Ambientes" component={AmbientesStack} />
           <Tab.Screen name="Automações" component={AutomacoesStack} />
           <Tab.Screen name="Consumo" component={Automacoes} />
-          <Tab.Screen name="Configurações" component={Automacoes} />
+          <Tab.Screen name="Configurações" component={criarGatilho} />
         </Tab.Navigator>
  </NavigationContainer>
   );
