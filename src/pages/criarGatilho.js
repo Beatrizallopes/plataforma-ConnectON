@@ -1,12 +1,29 @@
 // Importações necessárias
 import React,{useState}   from 'react';
-import { StyleSheet, ScrollView,View, Modal,TouchableWithoutFeedback,Image,Text,TextInput} from 'react-native';
+import { StyleSheet, ScrollView,View, Modal,TouchableWithoutFeedback,Image,Text,TextInput,Button} from 'react-native';
 import Header from '../components/header'
+import DateTimePicker from '@react-native-community/datetimepicker';
 
 // Simulando os dados
 
 // Componente lista de Automações
 const criarGatilho = ({navigation}) => {
+  const [date, setDate] = useState(new Date(1598051730000));
+  const [mode, setMode] = useState('date');
+  const [show, setShow] = useState(false);
+  const onChange = (event, selectedDate) => {
+    const currentDate = selectedDate || date;
+    setShow(Platform.OS === 'ios');
+    setDate(currentDate);
+  };
+  const showMode = currentMode => {
+    setShow(true);
+    setMode(currentMode);
+  };
+  const showTimepicker = () => {
+    showMode('time');
+  };
+
   return(
     <ScrollView>
       <Modal animationType="slide" transparent={true} visible={true} >
@@ -26,6 +43,18 @@ const criarGatilho = ({navigation}) => {
               </Text>
 
               <Text style={styles.quando}>Quando</Text> 
+
+        <Button onPress={showTimepicker} title="Horário" />
+          {show && (
+            <DateTimePicker
+              testID="dateTimePicker"
+              value={date}
+              mode="time"
+              is24Hour={true}
+              display="default"
+              onChange={onChange}
+            />
+          )}
           </View>
     </View>
   </Modal> 
