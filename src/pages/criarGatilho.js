@@ -2,27 +2,14 @@
 import React,{useState}   from 'react';
 import { StyleSheet, ScrollView,View, Modal,TouchableWithoutFeedback,Image,Text,TextInput,Button} from 'react-native';
 import Header from '../components/header'
-import DateTimePicker from '@react-native-community/datetimepicker';
-
+// import DateTimePicker from '@react-native-community/datetimepicker';
+import TimePicker from 'react-native-simple-time-picker';
 // Simulando os dados
 
 // Componente lista de Automações
 const criarGatilho = ({navigation}) => {
-  const [date, setDate] = useState(new Date(1598051730000));
-  const [mode, setMode] = useState('date');
-  const [show, setShow] = useState(false);
-  const onChange = (event, selectedDate) => {
-    const currentDate = selectedDate || date;
-    setShow(Platform.OS === 'ios');
-    setDate(currentDate);
-  };
-  const showMode = currentMode => {
-    setShow(true);
-    setMode(currentMode);
-  };
-  const showTimepicker = () => {
-    showMode('time');
-  };
+const [selectedHours, setselectedHours] = useState(0);
+const [selectedMinutes, setselectedMinutes] = useState(0);
 
   return(
     <ScrollView>
@@ -41,20 +28,17 @@ const criarGatilho = ({navigation}) => {
               <Text style={styles.titulo}>
                 Novo Gatilho
               </Text>
-
               <Text style={styles.quando}>Quando</Text> 
-
-        <Button onPress={showTimepicker} title="Horário" />
-          {show && (
-            <DateTimePicker
-              testID="dateTimePicker"
-              value={date}
-              mode="time"
-              is24Hour={true}
-              display="default"
-              onChange={onChange}
-            />
-          )}
+              <View style={styles.container}>
+                <Text>{selectedHours}hr:{selectedMinutes}min</Text>
+                <TimePicker
+                  selectedHours={selectedHours}
+                  //initial Hourse value
+                  selectedMinutes={selectedMinutes}
+                  //initial Minutes value
+                  onChange={(hours, minutes) => {setselectedHours(hours);setselectedMinutes(minutes);}}
+                />
+            </View>
           </View>
     </View>
   </Modal> 
@@ -120,7 +104,18 @@ const styles = StyleSheet.create({
     position:"absolute",
     top:"15%",
     left:"10%"
-  }
+  },
+  container: {
+    position:"absolute",
+    top:"50%",
+    // flex: 1,
+    width:"100%",
+    backgroundColor: '#fff',
+    marginLeft:50,
+    marginRight:50,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
 })
 
   export default criarGatilho;
