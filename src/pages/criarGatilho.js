@@ -2,25 +2,22 @@
 import React,{useState}   from 'react';
 import { StyleSheet, ScrollView,View, Modal,TouchableWithoutFeedback,Image,Text,TextInput,Button} from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
-// Simulando os dados
 import DateTimePickerModal from "react-native-modal-datetime-picker";
-// Componente lista de Automações
-const criarGatilho = ({navigation}) => {
-//  const dataInicial = new Date(Date.UTC(2019, 2, 2));
-//  const [data, onChange] = useState(dataInicial); 
-const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
 
-const showDatePicker = () => {
+const criarGatilho = ({navigation}) => {
+const [isPickerVisible, setDatePickerVisibility] = useState(false);
+
+const showPicker = () => {
   setDatePickerVisibility(true);
 };
 
-const hideDatePicker = () => {
+const hidePicker = () => {
   setDatePickerVisibility(false);
 };
 
 const handleConfirm = (date) => {
   console.warn("A date has been picked: ", date);
-  hideDatePicker();
+  hidePicker();
 };
 
 return(
@@ -39,16 +36,17 @@ return(
                 Novo Gatilho
               </Text>
               <Text style={styles.quando}>Quando</Text>
-              <View style={styles.horarioButton} >
-                <TouchableWithoutFeedback onPress={showDatePicker}>
-                    <Text style={styles.textoHorario}> Horário </Text>
-                </TouchableWithoutFeedback> 
+              <View style={styles.horarioButton} >               
+                <Text style={styles.textoHorario}> Horário </Text>
+                <TouchableWithoutFeedback onPress={showPicker}>
+                <Image style={styles.iconeHorario} source={require('./../images/icons/setaAbaixoTransp.png')}></Image>
+              </TouchableWithoutFeedback>
               </View>
               <DateTimePickerModal
-                isVisible={isDatePickerVisible}
+                isVisible={isPickerVisible}
                  mode="time"
                  onConfirm={handleConfirm}
-                 onCancel={hideDatePicker}
+                 onCancel={hidePicker}
                  display="spinner"
                  is24Hour={true}
       />
@@ -58,8 +56,6 @@ return(
     </ScrollView>
   )
 }
-
-
 const styles = StyleSheet.create({
   body: {
     flex:1,
@@ -124,6 +120,7 @@ const styles = StyleSheet.create({
     height:49,
     backgroundColor: "linear-gradient(0deg, rgba(255, 255, 255, 0.11), rgba(255, 255, 255, 0.11))",
     borderRadius:12,
+
   },
   textoHorario:{
     position:"relative",
@@ -136,6 +133,12 @@ const styles = StyleSheet.create({
     lineHeight: 22,
     letterSpacing: -0.408,
     color: "#FFFFFF",
+    flexDirection:"column",
+  },
+  iconeHorario:{
+     position:"relative",
+     left:"90%",
+     bottom:"20%"
   }
 })
 
