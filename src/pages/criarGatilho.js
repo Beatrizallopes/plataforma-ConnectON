@@ -1,10 +1,10 @@
 // Importações necessárias
 import React,{useState}   from 'react';
 import { StyleSheet, ScrollView,View, Modal,TouchableWithoutFeedback,Image,Text,TextInput,Button} from 'react-native';
-import DateTimePicker from '@react-native-community/datetimepicker';
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 
 const criarGatilho = ({navigation}) => {
+  // Variáveis para o Horário Picker
 const [isPickerVisible, setDatePickerVisibility] = useState(false);
 const [hora,escolheuHora] = useState("00:00")
 
@@ -21,6 +21,8 @@ const handleConfirm = (date) => {
   escolheuHora(date.toLocaleTimeString().slice(0, -3));
   
 };
+// Variável para o Dayweek Picker
+const diasSemana = [0,0,0,0,0,0,0]
 
 return(
     <ScrollView>
@@ -38,6 +40,7 @@ return(
                 Novo Gatilho
               </Text>
               <Text style={styles.quando}>Quando</Text>
+              {/* Picker de horário */}
               <View style={styles.horarioButton} >               
                 <Text style={[styles.textoHorario,{position:"relative",top:"25%",left:"5%",}]}> Horário </Text>
                 <Text style={[styles.textoHorario,{bottom:"20%",left:"75%",}]}>{hora}</Text>
@@ -52,7 +55,9 @@ return(
                  onCancel={hidePicker}
                  display="spinner"
                  is24Hour={true}
-      />
+               />
+               {/* Picker de dias*/}
+               <Text style={styles.repete}>Repete</Text> 
           </View>
         </View>
       </Modal> 
@@ -138,6 +143,19 @@ const styles = StyleSheet.create({
      position:"relative",
      left:"90%",
      bottom:"60%"
+  },
+  repete:{
+    position:"absolute",
+    top:"35%",
+    left:"10%",
+    fontFamily: "Barlow",
+    fontStyle: "normal",
+    fontWeight: "normal",
+    fontSize: 13,
+    lineHeight: 18,
+    letterSpacing: -0.078,
+    textTransform: "uppercase",
+    color: "rgba(255, 255, 255, 0.5)",
   }
 })
 
