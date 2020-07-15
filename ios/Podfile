@@ -80,6 +80,8 @@ target 'projeto' do
 
   pod 'RNGestureHandler', :path => '../node_modules/react-native-gesture-handler'
 
+  pod 'RNDateTimePicker', :path => '../node_modules/@react-native-community/datetimepicker'
+
   target 'projetoTests' do
     inherit! :complete
     # Pods for testing

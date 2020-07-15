@@ -1,17 +1,29 @@
 // Importações necessárias
 import React,{useState}   from 'react';
 import { StyleSheet, ScrollView,View, Modal,TouchableWithoutFeedback,Image,Text,TextInput,Button} from 'react-native';
-import Header from '../components/header'
-//import DateTimePicker from '@react-native-community/datetimepicker';
-import TimePicker from 'react-native-simple-time-picker';
-//import TimePicker from 'react-time-picker';
+import DateTimePicker from '@react-native-community/datetimepicker';
 // Simulando os dados
-
+import DateTimePickerModal from "react-native-modal-datetime-picker";
 // Componente lista de Automações
 const criarGatilho = ({navigation}) => {
-const [selectedHours, setselectedHours] = useState(0);
-const [selectedMinutes, setselectedMinutes] = useState(0);
-  return(
+//  const dataInicial = new Date(Date.UTC(2019, 2, 2));
+//  const [data, onChange] = useState(dataInicial); 
+const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
+
+const showDatePicker = () => {
+  setDatePickerVisibility(true);
+};
+
+const hideDatePicker = () => {
+  setDatePickerVisibility(false);
+};
+
+const handleConfirm = (date) => {
+  console.warn("A date has been picked: ", date);
+  hideDatePicker();
+};
+
+return(
     <ScrollView>
       <Modal animationType="slide" transparent={true} visible={true} >
         <View style={styles.centeredView}>
@@ -19,29 +31,30 @@ const [selectedMinutes, setselectedMinutes] = useState(0);
               <TouchableWithoutFeedback onPress={() => navigation.navigate("Automações") }>
                 <Image  style={styles.iconeVoltar} source={require('./../images/icons/voltarGatilho.png')}/>
               </TouchableWithoutFeedback>
-              <TouchableWithoutFeedback onPress={() => alert("Voltar")}>
                  <Text style={styles.voltar}> Voltar  </Text>
-              </TouchableWithoutFeedback>
               <TouchableWithoutFeedback onPress={() => alert("Seguinte")}>
                   <Text style={styles.seguinte}> Seguinte </Text>
               </TouchableWithoutFeedback> 
               <Text style={styles.titulo}>
                 Novo Gatilho
               </Text>
-              <Text style={styles.quando}>Quando</Text> 
-              <View style={styles.container}>
-                <Text style={styles.textoTimePicker}>{selectedHours} : {selectedMinutes}</Text>
-                <TimePicker
-                  selectedHours={selectedHours}
-                  selectedMinutes={selectedMinutes}
-                  onChange={(hours, minutes) => {
-                    setselectedHours(hours);
-                    setselectedMinutes(minutes);}}
-                />
-            </View>
+              <Text style={styles.quando}>Quando</Text>
+              <View style={styles.horarioButton} >
+                <TouchableWithoutFeedback onPress={showDatePicker}>
+                    <Text style={styles.textoHorario}> Horário </Text>
+                </TouchableWithoutFeedback> 
+              </View>
+              <DateTimePickerModal
+                isVisible={isDatePickerVisible}
+                 mode="time"
+                 onConfirm={handleConfirm}
+                 onCancel={hideDatePicker}
+                 display="spinner"
+                 is24Hour={true}
+      />
           </View>
-    </View>
-  </Modal> 
+        </View>
+      </Modal> 
     </ScrollView>
   )
 }
@@ -105,25 +118,24 @@ const styles = StyleSheet.create({
     top:"15%",
     left:"10%"
   },
-  container: {
-    position:"absolute",
-    top:"22%",
-    width:343,
-    height:"20%",
-    backgroundColor: '#111111',
-    borderRadius:20,
-    alignItems: 'center',
-    paddingHorizontal:"15%",
+  horarioButton:{  
+    top:"25%",   
+    width: 343,
+    height:49,
+    backgroundColor: "linear-gradient(0deg, rgba(255, 255, 255, 0.11), rgba(255, 255, 255, 0.11))",
+    borderRadius:12,
   },
-  textoTimePicker:{
-    top:"10%",
-    color:"white",
+  textoHorario:{
+    position:"relative",
+    top:"25%",
+    left:"5%",
     fontFamily: "Barlow",
     fontStyle: "normal",
     fontWeight: "normal",
-    fontSize: 34,
-    lineHeight: 41,
-    marginBottom:"10%",
+    fontSize: 17,
+    lineHeight: 22,
+    letterSpacing: -0.408,
+    color: "#FFFFFF",
   }
 })
 
