@@ -2,15 +2,15 @@
 import React,{useState}   from 'react';
 import { StyleSheet, ScrollView,View, Modal,TouchableWithoutFeedback,Image,Text,TextInput,Button} from 'react-native';
 import Header from '../components/header'
-// import DateTimePicker from '@react-native-community/datetimepicker';
+//import DateTimePicker from '@react-native-community/datetimepicker';
 import TimePicker from 'react-native-simple-time-picker';
+//import TimePicker from 'react-time-picker';
 // Simulando os dados
 
 // Componente lista de Automações
 const criarGatilho = ({navigation}) => {
 const [selectedHours, setselectedHours] = useState(0);
 const [selectedMinutes, setselectedMinutes] = useState(0);
-
   return(
     <ScrollView>
       <Modal animationType="slide" transparent={true} visible={true} >
@@ -30,13 +30,13 @@ const [selectedMinutes, setselectedMinutes] = useState(0);
               </Text>
               <Text style={styles.quando}>Quando</Text> 
               <View style={styles.container}>
-                <Text>{selectedHours}hr:{selectedMinutes}min</Text>
+                <Text style={styles.textoTimePicker}>{selectedHours} : {selectedMinutes}</Text>
                 <TimePicker
                   selectedHours={selectedHours}
-                  //initial Hourse value
                   selectedMinutes={selectedMinutes}
-                  //initial Minutes value
-                  onChange={(hours, minutes) => {setselectedHours(hours);setselectedMinutes(minutes);}}
+                  onChange={(hours, minutes) => {
+                    setselectedHours(hours);
+                    setselectedMinutes(minutes);}}
                 />
             </View>
           </View>
@@ -107,15 +107,24 @@ const styles = StyleSheet.create({
   },
   container: {
     position:"absolute",
-    top:"50%",
-    // flex: 1,
-    width:"100%",
-    backgroundColor: '#fff',
-    marginLeft:50,
-    marginRight:50,
+    top:"22%",
+    width:343,
+    height:"20%",
+    backgroundColor: '#111111',
+    borderRadius:20,
     alignItems: 'center',
-    justifyContent: 'center',
+    paddingHorizontal:"15%",
   },
+  textoTimePicker:{
+    top:"10%",
+    color:"white",
+    fontFamily: "Barlow",
+    fontStyle: "normal",
+    fontWeight: "normal",
+    fontSize: 34,
+    lineHeight: 41,
+    marginBottom:"10%",
+  }
 })
 
   export default criarGatilho;
