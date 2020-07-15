@@ -6,6 +6,7 @@ import DateTimePickerModal from "react-native-modal-datetime-picker";
 
 const criarGatilho = ({navigation}) => {
 const [isPickerVisible, setDatePickerVisibility] = useState(false);
+const [hora,escolheuHora] = useState("00:00")
 
 const showPicker = () => {
   setDatePickerVisibility(true);
@@ -16,8 +17,9 @@ const hidePicker = () => {
 };
 
 const handleConfirm = (date) => {
-  console.warn("A date has been picked: ", date);
   hidePicker();
+  escolheuHora(date.toLocaleTimeString().slice(0, -3));
+  
 };
 
 return(
@@ -37,7 +39,8 @@ return(
               </Text>
               <Text style={styles.quando}>Quando</Text>
               <View style={styles.horarioButton} >               
-                <Text style={styles.textoHorario}> Horário </Text>
+                <Text style={[styles.textoHorario,{position:"relative",top:"25%",left:"5%",}]}> Horário </Text>
+                <Text style={[styles.textoHorario,{bottom:"20%",left:"75%",}]}>{hora}</Text>
                 <TouchableWithoutFeedback onPress={showPicker}>
                 <Image style={styles.iconeHorario} source={require('./../images/icons/setaAbaixoTransp.png')}></Image>
               </TouchableWithoutFeedback>
@@ -120,12 +123,8 @@ const styles = StyleSheet.create({
     height:49,
     backgroundColor: "linear-gradient(0deg, rgba(255, 255, 255, 0.11), rgba(255, 255, 255, 0.11))",
     borderRadius:12,
-
   },
   textoHorario:{
-    position:"relative",
-    top:"25%",
-    left:"5%",
     fontFamily: "Barlow",
     fontStyle: "normal",
     fontWeight: "normal",
@@ -133,12 +132,12 @@ const styles = StyleSheet.create({
     lineHeight: 22,
     letterSpacing: -0.408,
     color: "#FFFFFF",
-    flexDirection:"column",
+   
   },
   iconeHorario:{
      position:"relative",
      left:"90%",
-     bottom:"20%"
+     bottom:"60%"
   }
 })
 
