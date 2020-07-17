@@ -21,8 +21,17 @@ const handleConfirm = (date) => {
   escolheuHora(date.toLocaleTimeString().slice(0, -3));
   
 };
-// Variável para o Dayweek Picker
+// Variáveis para o Dayweek Picker
 const diasSemana = [0,0,0,0,0,0,0]
+const [domingo, clicouDomingo] = useState(false);
+const [segunda, clicouSegunda] = useState(false);
+const [terca, clicouTerca] = useState(false);
+const [quarta, clicouQuarta] = useState(false);
+const [quinta, clicouQuinta] = useState(false);
+const [sexta, clicouSexta] = useState(false);
+const [sabado, clicouSabado] = useState(false);
+
+var urlSegunda = trocar(1,segunda);
 
 return(
     <ScrollView>
@@ -45,7 +54,7 @@ return(
                 <Text style={[styles.textoHorario,{position:"relative",top:"25%",left:"5%",}]}> Horário </Text>
                 <Text style={[styles.textoHorario,{bottom:"20%",left:"75%",}]}>{hora}</Text>
                 <TouchableWithoutFeedback onPress={showPicker}>
-                <Image style={styles.iconeHorario} source={require('./../images/icons/setaAbaixoTransp.png')}></Image>
+                <Image style={styles.iconeHorario} source={require('../images/icons/setaAbaixoTransp.png')}></Image>
               </TouchableWithoutFeedback>
               </View>
               <DateTimePickerModal
@@ -58,6 +67,18 @@ return(
                />
                {/* Picker de dias*/}
                <Text style={styles.repete}>Repete</Text> 
+               <View style={styles.dayPicker}>             
+               <Image style={styles.diaSemana} source={require('./../images/dayWeekPicker/d.png')}></Image>
+               <TouchableWithoutFeedback  onPress={() => {clicouSegunda(!segunda);}}>
+               {/* <TouchableWithoutFeedback  onPress={() => {alert("oi")}}> */}
+               <Image style={styles.diaSemana} source={urlSegunda}></Image>
+               </TouchableWithoutFeedback> 
+               <Image style={styles.diaSemana} source={require('./../images/dayWeekPicker/t.png')}></Image> 
+               <Image style={styles.diaSemana} source={require('./../images/dayWeekPicker/q.png')}></Image> 
+               <Image style={styles.diaSemana} source={require('./../images/dayWeekPicker/q.png')}></Image> 
+               <Image style={styles.diaSemana} source={require('./../images/dayWeekPicker/s.png')}></Image> 
+               <Image style={styles.diaSemana} source={require('./../images/dayWeekPicker/s.png')}></Image> 
+               </View>
           </View>
         </View>
       </Modal> 
@@ -156,7 +177,44 @@ const styles = StyleSheet.create({
     letterSpacing: -0.078,
     textTransform: "uppercase",
     color: "rgba(255, 255, 255, 0.5)",
+  },
+  dayPicker:{
+    position:"relative",
+    top:"30%",
+    left:"2%",
+    height:45,
+    width: "80%",
+    flexDirection:"row",
+    // flexWrap:"wrap",
+    flex: 1,
+  },
+  diaSemana:{
+    position:"relative",
+    top:"30%",
+    marginEnd:40
   }
 })
+// Funções
+const trocar = function(dia,status){
+  if(dia == 1 || dia == 5 || dia == 6){
+    var imagemDia =  require('./../images/dayWeekPicker/s.png');
+    if(status){
+       imagemDia =  require('./../images/dayWeekPicker/sSel.png');
+    }
+  }
+  if(dia == 2){
+    var imagemDia =  require('./../images/dayWeekPicker/t.png');
+    if(status){
+       imagemDia =  require('./../images/dayWeekPicker/tSel.png');
+    }
+  }
+  if(dia == 3 || dia == 4){
+    var imagemDia =  require('./../images/dayWeekPicker/q.png');
+    if(status){
+       imagemDia =  require('./../images/dayWeekPicker/qSel.png');
+    }
+  }
+  return imagemDia;
+}
 
   export default criarGatilho;
