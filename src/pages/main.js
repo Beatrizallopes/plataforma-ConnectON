@@ -7,8 +7,8 @@ import Ambientes from "./ambientes"; // Importando a página Ambientes
 import AmbientesFav from "./ambientesFav"; // Importando a página Ambientes
 import Ambiente from "./ambiente" // Importando a página de Ambiente
 import Automacoes from "./automacoes"; // Importando a página Automações
-import TcriarGatilho from "./criarGatilho";
-import criarGatilho from './criarGatilho';
+import criarGatilho from './criarGatilho1';
+import criarGatilho2 from './criarGatilho2';
 
 const Stack = createStackNavigator()
 function AmbientesStack() {
@@ -56,6 +56,13 @@ function AutomacoesStack() {
         <Stack.Screen
         name="Criar Gatilho"
         component={criarGatilho}
+        options={{
+          headerShown: false,
+        }}
+      />
+        <Stack.Screen
+        name="Criar Gatilho 2"
+        component={criarGatilho2}
         options={{
           headerShown: false,
         }}
@@ -123,7 +130,7 @@ const App = () => {
           <Tab.Screen name="Ambientes" component={AmbientesStack} />
           <Tab.Screen name="Automações" component={AutomacoesStack} />
           <Tab.Screen name="Consumo" component={Automacoes} />
-          <Tab.Screen name="Configurações" component={criarGatilho} />
+          <Tab.Screen name="Configurações" component={Automacoes} />
         </Tab.Navigator>
  </NavigationContainer>
   );

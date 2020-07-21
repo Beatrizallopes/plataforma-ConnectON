@@ -4,6 +4,8 @@ import { StyleSheet, ScrollView,View, Modal,TouchableWithoutFeedback,Image,Text,
 import Header from '../components/header'
 import AutomacaoCard from '../components/cardAutomação'
 import listaAutomacoesOrd from '../funcoes/listarAutomações';
+import { useNavigation } from '@react-navigation/native';
+
 // Simulando os dados
 
 // Componente lista de Automações
@@ -23,6 +25,7 @@ class ListaAuto extends React.Component {
 // Componente tipoCriação dentro do Modal de criação
 
 const TipoCriacao = () => {
+  const navigation = useNavigation();
   return (
     <View>
     <View style={styles.caixa}>
@@ -38,7 +41,7 @@ const TipoCriacao = () => {
     <View style={styles.caixa}>
     <Image style={styles.iconeImagem} source={require('./../images/gatilhos.png')}></Image>
     <Text style={styles.explicativo}>Crie um gatilho para executar uma tarefa uma única vez quando chegar o momento </Text>
-    <TouchableWithoutFeedback onPress={() => alert("Criar Gatilho")}>
+    <TouchableWithoutFeedback onPress={() => navigation.navigate("Criar Gatilho")}>
     <View style={[styles.botaoCriação,{backgroundColor:"rgba(214, 96, 117, 0.3)",}]}>
       <Text style={[styles.textoBotao,{color:"#D66075"}]}> Criar Gatilho</Text>
     </View>

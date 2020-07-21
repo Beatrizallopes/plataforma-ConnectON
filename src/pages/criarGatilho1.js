@@ -21,6 +21,7 @@ const handleConfirm = (date) => {
   escolheuHora(date.toLocaleTimeString().slice(0, -3));
   
 };
+
 // Variáveis para o Dayweek Picker
 
 const [domingo, clicouDomingo] = useState(false);
@@ -42,7 +43,7 @@ return(
                 <Image  style={styles.iconeVoltar} source={require('./../images/icons/voltarGatilho.png')}/>
               </TouchableWithoutFeedback>
                  <Text style={styles.voltar}> Voltar  </Text>
-              <TouchableWithoutFeedback onPress={() => alert("Seguinte")}>
+              <TouchableWithoutFeedback onPress={() => navigation.navigate("Criar Gatilho 2",{horario:hora,diasSemana:diasSemana})}>
                   <Text style={styles.seguinte}> Seguinte </Text>
               </TouchableWithoutFeedback> 
               <Text style={styles.titulo}>
@@ -68,42 +69,41 @@ return(
                {/* Picker de dias*/}
                <Text style={styles.repete}>Repete</Text> 
                <View style={styles.dayPicker}> 
-               
-               <TouchableWithoutFeedback  onPress={() => {clicouDomingo(!domingo);}}>            
-                  <View style={trocarEstilo(domingo)}>
-                    <Image  source={require('./../images/dayWeekPicker/d.png')}></Image>
-                  </View>
-               </TouchableWithoutFeedback>
-               <TouchableWithoutFeedback  onPress={() => {clicouSegunda(!segunda);}}>
-               <View style={trocarEstilo(segunda)}>
-                  <Image  source={require('./../images/dayWeekPicker/s.png')}></Image>
-               </View>
-               </TouchableWithoutFeedback>
-               <TouchableWithoutFeedback  onPress={() => {clicouTerca(!terca);}}>
-                  <View style={trocarEstilo(terca)}> 
-                    <Image source={require('./../images/dayWeekPicker/t.png')}></Image> 
-                  </View>
-               </TouchableWithoutFeedback>
-               <TouchableWithoutFeedback  onPress={() => {clicouQuarta(!quarta);}}>
-                  <View style={trocarEstilo(quarta)}>
-                    <Image source={require('./../images/dayWeekPicker/q.png')}></Image> 
-                  </View>
-               </TouchableWithoutFeedback>
-               <TouchableWithoutFeedback  onPress={() => {clicouQuinta(!quinta);}}>
-                  <View style={trocarEstilo(quinta)}>
-                    <Image source={require('./../images/dayWeekPicker/q.png')}></Image>
-                  </View> 
-               </TouchableWithoutFeedback>
-               <TouchableWithoutFeedback  onPress={() => {clicouSexta(!sexta);}}>
-                  <View style={trocarEstilo(sexta)}>
-                    <Image  source={require('./../images/dayWeekPicker/s.png')}></Image> 
-                  </View>
-              </TouchableWithoutFeedback>
-              <TouchableWithoutFeedback  onPress={() => {clicouSabado(!sabado);}}>
-                  <View style={trocarEstilo(sabado)}>
-                    <Image source={require('./../images/dayWeekPicker/s.png')}></Image> 
-                  </View>
-              </TouchableWithoutFeedback>
+                <TouchableWithoutFeedback  onPress={() => {clicouDomingo(!domingo);}}>            
+                    <View style={trocarEstilo(domingo)}>
+                      <Image  source={require('./../images/dayWeekPicker/d.png')}></Image>
+                    </View>
+                </TouchableWithoutFeedback>
+                <TouchableWithoutFeedback  onPress={() => {clicouSegunda(!segunda);}}>
+                <View style={trocarEstilo(segunda)}>
+                    <Image  source={require('./../images/dayWeekPicker/s.png')}></Image>
+                </View>
+                </TouchableWithoutFeedback>
+                <TouchableWithoutFeedback  onPress={() => {clicouTerca(!terca);}}>
+                    <View style={trocarEstilo(terca)}> 
+                      <Image source={require('./../images/dayWeekPicker/t.png')}></Image> 
+                    </View>
+                </TouchableWithoutFeedback>
+                <TouchableWithoutFeedback  onPress={() => {clicouQuarta(!quarta);}}>
+                    <View style={trocarEstilo(quarta)}>
+                      <Image source={require('./../images/dayWeekPicker/q.png')}></Image> 
+                    </View>
+                </TouchableWithoutFeedback>
+                <TouchableWithoutFeedback  onPress={() => {clicouQuinta(!quinta);}}>
+                    <View style={trocarEstilo(quinta)}>
+                      <Image source={require('./../images/dayWeekPicker/q.png')}></Image>
+                    </View> 
+                </TouchableWithoutFeedback>
+                <TouchableWithoutFeedback  onPress={() => {clicouSexta(!sexta);}}>
+                    <View style={trocarEstilo(sexta)}>
+                      <Image  source={require('./../images/dayWeekPicker/s.png')}></Image> 
+                    </View>
+                </TouchableWithoutFeedback>
+                <TouchableWithoutFeedback  onPress={() => {clicouSabado(!sabado);}}>
+                    <View style={trocarEstilo(sabado)}>
+                      <Image source={require('./../images/dayWeekPicker/s.png')}></Image> 
+                    </View>
+                </TouchableWithoutFeedback>
                </View>
           </View>
         </View>
@@ -111,6 +111,7 @@ return(
     </ScrollView>
   )
 }
+//
 const styles = StyleSheet.create({
   body: {
     flex:1,
