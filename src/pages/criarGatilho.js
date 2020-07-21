@@ -31,8 +31,6 @@ const [quinta, clicouQuinta] = useState(false);
 const [sexta, clicouSexta] = useState(false);
 const [sabado, clicouSabado] = useState(false);
 
-var urlSegunda = trocar(1,segunda);
-
 return(
     <ScrollView>
       <Modal animationType="slide" transparent={true} visible={true} >
@@ -67,17 +65,43 @@ return(
                />
                {/* Picker de dias*/}
                <Text style={styles.repete}>Repete</Text> 
-               <View style={styles.dayPicker}>             
-               <Image style={styles.diaSemana} source={require('./../images/dayWeekPicker/d.png')}></Image>
+               <View style={styles.dayPicker}> 
+               
+               <TouchableWithoutFeedback  onPress={() => {clicouDomingo(!domingo);}}>            
+                  <View style={trocarEstilo(domingo)}>
+                    <Image  source={require('./../images/dayWeekPicker/d.png')}></Image>
+                  </View>
+               </TouchableWithoutFeedback>
                <TouchableWithoutFeedback  onPress={() => {clicouSegunda(!segunda);}}>
-               {/* <TouchableWithoutFeedback  onPress={() => {alert("oi")}}> */}
-               <Image style={styles.diaSemana} source={urlSegunda}></Image>
-               </TouchableWithoutFeedback> 
-               <Image style={styles.diaSemana} source={require('./../images/dayWeekPicker/t.png')}></Image> 
-               <Image style={styles.diaSemana} source={require('./../images/dayWeekPicker/q.png')}></Image> 
-               <Image style={styles.diaSemana} source={require('./../images/dayWeekPicker/q.png')}></Image> 
-               <Image style={styles.diaSemana} source={require('./../images/dayWeekPicker/s.png')}></Image> 
-               <Image style={styles.diaSemana} source={require('./../images/dayWeekPicker/s.png')}></Image> 
+               <View style={trocarEstilo(segunda)}>
+                  <Image  source={require('./../images/dayWeekPicker/s.png')}></Image>
+               </View>
+               </TouchableWithoutFeedback>
+               <TouchableWithoutFeedback  onPress={() => {clicouTerca(!terca);}}>
+                  <View style={trocarEstilo(terca)}> 
+                    <Image source={require('./../images/dayWeekPicker/t.png')}></Image> 
+                  </View>
+               </TouchableWithoutFeedback>
+               <TouchableWithoutFeedback  onPress={() => {clicouQuarta(!quarta);}}>
+                  <View style={trocarEstilo(quarta)}>
+                    <Image source={require('./../images/dayWeekPicker/q.png')}></Image> 
+                  </View>
+               </TouchableWithoutFeedback>
+               <TouchableWithoutFeedback  onPress={() => {clicouQuinta(!quinta);}}>
+                  <View style={trocarEstilo(quinta)}>
+                    <Image source={require('./../images/dayWeekPicker/q.png')}></Image>
+                  </View> 
+               </TouchableWithoutFeedback>
+               <TouchableWithoutFeedback  onPress={() => {clicouSexta(!sexta);}}>
+                  <View style={trocarEstilo(sexta)}>
+                    <Image  source={require('./../images/dayWeekPicker/s.png')}></Image> 
+                  </View>
+              </TouchableWithoutFeedback>
+              <TouchableWithoutFeedback  onPress={() => {clicouSabado(!sabado);}}>
+                  <View style={trocarEstilo(sabado)}>
+                    <Image source={require('./../images/dayWeekPicker/s.png')}></Image> 
+                  </View>
+              </TouchableWithoutFeedback>
                </View>
           </View>
         </View>
@@ -188,33 +212,30 @@ const styles = StyleSheet.create({
     // flexWrap:"wrap",
     flex: 1,
   },
-  diaSemana:{
-    position:"relative",
-    top:"30%",
-    marginEnd:40
-  }
 })
 // Funções
-const trocar = function(dia,status){
-  if(dia == 1 || dia == 5 || dia == 6){
-    var imagemDia =  require('./../images/dayWeekPicker/s.png');
-    if(status){
-       imagemDia =  require('./../images/dayWeekPicker/sSel.png');
-    }
-  }
-  if(dia == 2){
-    var imagemDia =  require('./../images/dayWeekPicker/t.png');
-    if(status){
-       imagemDia =  require('./../images/dayWeekPicker/tSel.png');
-    }
-  }
-  if(dia == 3 || dia == 4){
-    var imagemDia =  require('./../images/dayWeekPicker/q.png');
-    if(status){
-       imagemDia =  require('./../images/dayWeekPicker/qSel.png');
-    }
-  }
-  return imagemDia;
-}
 
+const trocarEstilo = function(status){
+  if(status){
+    return{
+      position:"relative",
+      top:"25%",
+      right:"4%",
+      width: 40,
+      height: 40,
+      backgroundColor: "#D66075",
+      borderRadius: 100,
+      alignContent:"center",
+      alignItems:"center",
+      justifyContent:"center",
+      marginHorizontal:5,
+      }
+  } else {
+    return {
+      position:"relative",
+      top:"30%",
+      marginEnd:40, 
+    }
+  }
+}
   export default criarGatilho;
