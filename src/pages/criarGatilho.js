@@ -22,7 +22,7 @@ const handleConfirm = (date) => {
   
 };
 // Variáveis para o Dayweek Picker
-const diasSemana = [0,0,0,0,0,0,0]
+
 const [domingo, clicouDomingo] = useState(false);
 const [segunda, clicouSegunda] = useState(false);
 const [terca, clicouTerca] = useState(false);
@@ -30,6 +30,8 @@ const [quarta, clicouQuarta] = useState(false);
 const [quinta, clicouQuinta] = useState(false);
 const [sexta, clicouSexta] = useState(false);
 const [sabado, clicouSabado] = useState(false);
+
+const diasSemana = [domingo,segunda,terca,quarta,quinta,sexta,sabado]
 
 return(
     <ScrollView>
