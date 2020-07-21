@@ -2,11 +2,9 @@
 import React,{useState}  from 'react';
 import { StyleSheet, View, Text, ScrollView, TextInput, Image, Button,  FlatList, SafeAreaView,TouchableWithoutFeedback} from 'react-native';
 import grupos from '../funcoes/separarGruposAlfa';
-import gruposFav from '../funcoes/filtrarFavoritos';
 import { useNavigation } from '@react-navigation/native';
 import Input from '../components/input';
 import Header from '../components/header';
-import listaAmbientes from '../dados';
 
 // Componentes que farão parte da Página /////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Criando o componente Lista de Ambientes
