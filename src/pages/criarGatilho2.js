@@ -58,8 +58,8 @@ return(
 const GrupoAmbientes = () => {
     var tamanho = grupos.length;
     var i = 0; // variável de controle de grupo (grupo i)
-    var k = 0; // variável de controle dos ambientes selecionados
     var ambientesSel = []; // Armazena os dados (grupo e ambiente) dos ambientes selecionados
+    const [selecionado, setSelecionado] = useState(false);
     const itemLista = grupos.map((grupo) => {
       var j =0; // variável de controle do ambiente dentro de um grupo (ambiente j do grupo i)
       var letra = grupo[0].nome.substring(0,1); 
@@ -67,12 +67,24 @@ const GrupoAmbientes = () => {
       var posicao;
       const item = grupo.map((ambiente) => {
         const [selecionado, setSelecionado] = useState(false);
+        // Verifica se já 
+        if(selecionado){
+          var urlSelecionado = require('./../images/icons/ambSel.png');
+        } else {
+          var urlSelecionado = require('./../images/icons/ambNaoSel.png');
+        }
         if(selecionado){
           var elemento = {grupo:0,ambiente:0}
           elemento.grupo= i;
           elemento.ambiente = j;
           ambientesSel.push(elemento);
-        }
+          // Teste para debugar
+          var info = "";
+          for(var m=0;m<ambientesSel.length;m++){
+              info = info + "/ grupo: " + ambientesSel[m].grupo + " amb: " + ambientesSel[m].ambiente;
+          }
+          //
+          alert(info);       }
         else{
           for(var z=0;z<ambientesSel.length;z++){
             if(ambientesSel[z].grupo == i && ambientesSel[z].grupo == j){
@@ -84,25 +96,24 @@ const GrupoAmbientes = () => {
         posicao = posicaoAmbiente(ambiente.id,qtdAmb);
         return (
           <View style={[indicador(ambiente.cor,posicao),styles.listaAmb]} key={ambiente.id}>
-            <TouchableWithoutFeedback   onPress={() => {setSelecionado(!selecionado)}}>
-              <Image source={require('./../images/icons/ambNaoSel.png')} style={{left: 30}, {top: 12}} ></Image>
+            <TouchableWithoutFeedback   onPress={() => {setSelecionado(!selecionado);}}>
+              <Image source={urlSelecionado} style={{left: 30}, {top: 12}} ></Image>
              </TouchableWithoutFeedback>
-            <Text style={styles.text}>{ambiente.ehFavorito}{ambiente.nome} tamanho: {ambientesSel.length} </Text>  
+            <Text style={styles.text}>{ambiente.ehFavorito}{ambiente.nome} </Text>  
           </View>
               )
       }) // Terminou o primeiro map
       i = i+1; 
       return(
         <SafeAreaView key={letra} >
-          <Text style={styles.letra}>{ambientesSel.length}</Text>
-          {/* <Text style={styles.letra}>{letra}</Text> */}
+          {/* <Text style={styles.letra}>{ambientesSel.length}</Text> */}
+          <Text style={styles.letra}>{letra}</Text>
           <View style={styles.linha}>
             {item}                 
           </View>
         </SafeAreaView>
-       
             ) 
-          }) // Terminou o segundo map         
+          }) // Terminou o segundo map     
        return itemLista
           }
 
