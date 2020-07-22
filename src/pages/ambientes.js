@@ -33,7 +33,7 @@ import Header from '../components/header';
              </TouchableWithoutFeedback>
             <Text style={styles.text}>{ambiente.ehFavorito}{ambiente.nome}</Text>  
            <TouchableWithoutFeedback onPress={() => navigation.navigate('Ambiente',{grupoSelecionado:numGrupo,ambienteSelecionado:ambiente.id,codAmbiente:ambiente.cod})}>             
-             <Text style={styles.infoQuantidade}>{ambiente.qtdMod}
+             <Text style={styles.infoQuantidade}>{ambiente.qtdMod} 
                <Image style={{borderWidth:10,borderColor:"red"}}source={require('./../images/icons/setaDireita.png')}/>         
              </Text>
              </TouchableWithoutFeedback>                  
@@ -158,7 +158,8 @@ infoQuantidade: {
   textAlign: "right",
   color: "rgba(235, 235, 245, 0.6)",
   marginHorizontal:10,
-  bottom:"40%"
+  bottom:"40%",
+  padding:0,
 },
 iconeFavorito:{
 position: "absolute",

@@ -57,31 +57,50 @@ return(
 // Componente grupos de ambientes
 const GrupoAmbientes = () => {
     var tamanho = grupos.length;
-    var i = 0;
+    var i = 0; // variável de controle de grupo (grupo i)
+    var k = 0; // variável de controle dos ambientes selecionados
+    var ambientesSel = []; // Armazena os dados (grupo e ambiente) dos ambientes selecionados
     const itemLista = grupos.map((grupo) => {
+      var j =0; // variável de controle do ambiente dentro de um grupo (ambiente j do grupo i)
       var letra = grupo[0].nome.substring(0,1); 
       var qtdAmb = grupo.length - 1;
       var posicao;
-      var numGrupo = i;
-      i = i+1; // Identificar qual o grupo
       const item = grupo.map((ambiente) => {
+        const [selecionado, setSelecionado] = useState(false);
+        if(selecionado){
+          var elemento = {grupo:0,ambiente:0}
+          elemento.grupo= i;
+          elemento.ambiente = j;
+          ambientesSel.push(elemento);
+        }
+        else{
+          for(var z=0;z<ambientesSel.length;z++){
+            if(ambientesSel[z].grupo == i && ambientesSel[z].grupo == j){
+              ambientesSel.splice(z,1);
+            }
+          }
+        }
+        j = j + 1; // Para saber qual posição dentro do grupo
         posicao = posicaoAmbiente(ambiente.id,qtdAmb);
         return (
           <View style={[indicador(ambiente.cor,posicao),styles.listaAmb]} key={ambiente.id}>
-            <TouchableWithoutFeedback   onPress={() => {alert("Selecionou")}}>
+            <TouchableWithoutFeedback   onPress={() => {setSelecionado(!selecionado)}}>
               <Image source={require('./../images/icons/ambNaoSel.png')} style={{left: 30}, {top: 12}} ></Image>
              </TouchableWithoutFeedback>
-            <Text style={styles.text}>{ambiente.ehFavorito}{ambiente.nome}</Text>  
+            <Text style={styles.text}>{ambiente.ehFavorito}{ambiente.nome} tamanho: {ambientesSel.length} </Text>  
           </View>
               )
       }) // Terminou o primeiro map
+      i = i+1; 
       return(
         <SafeAreaView key={letra} >
-          <Text style={styles.letra}>{letra}</Text>
+          <Text style={styles.letra}>{ambientesSel.length}</Text>
+          {/* <Text style={styles.letra}>{letra}</Text> */}
           <View style={styles.linha}>
             {item}                 
           </View>
         </SafeAreaView>
+       
             ) 
           }) // Terminou o segundo map         
        return itemLista
