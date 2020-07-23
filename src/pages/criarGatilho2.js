@@ -1,5 +1,5 @@
 // Importações necessárias
-import React,{useState}   from 'react';
+import React,{useState, useEffect}   from 'react';
 import { StyleSheet, View, Text, ScrollView, TextInput, Image, Button, Modal, SafeAreaView,TouchableWithoutFeedback} from 'react-native';
 import Input from '../components/input';
 import grupos from '../funcoes/separarGruposAlfa';
@@ -7,7 +7,16 @@ import grupos from '../funcoes/separarGruposAlfa';
 const criarGatilho2 = ({route,navigation}) => {
   const {diasSemana} = route.params;
   const {horario}= route.params;
+  const{ambientesSel} = route.params;
   const [modalSelecionarAmb, setmodalSelecionarAmb] = useState(false);
+  // const [ambientesGat, setambientesGat] = useState([0]);
+  
+  // const updateLista = (ambientes) =>{
+  //   x = ambientes
+  // }
+  useEffect(
+    () => { },[modalSelecionarAmb]
+  )
 return(
     <ScrollView>
       <Modal animationType="slide" transparent={true} visible={true} >
@@ -23,9 +32,10 @@ return(
               <Text style={styles.titulo}>
                 Novo Gatilho
               </Text>
-              <Text style={styles.quando}>Selecione os ambientes</Text>
+              <Text style={styles.quando}>Selecione os ambientes </Text>
               <Text style={styles.explicação}>Selecione os ambientes que sua automação irá controlar.</Text>
-              <TouchableWithoutFeedback onPress={() => {setmodalSelecionarAmb(true);}}>
+              {/* <TouchableWithoutFeedback onPress={() => {setmodalSelecionarAmb(true);}}> */}
+              <TouchableWithoutFeedback onPress={() => navigation.navigate("Selecionar Ambientes",{horario:horario,diasSemana:diasSemana})}>
                 <View style={[styles.botaoCriação,{backgroundColor:"rgba(214, 96, 117, 0.3)",}]}>
                   <Text style={[styles.textoBotao,{color:"#D66075"}]}>  <Image source={require('./../images/icons/selecionarAmbientes.png')}></Image>  Selecionar ambientes</Text>
                 </View>
@@ -44,8 +54,10 @@ return(
                   <Text style={styles.ambientes}> Ambientes</Text>
                 </View>
                 {/* <Input label="" placeholder="Buscar Ambiente..." /> */}
+              {/* <GrupoAmbientes update={updateLista} ></GrupoAmbientes> */}
               <GrupoAmbientes></GrupoAmbientes>
             </View>
+            
         </View>
         </ScrollView>
       </Modal> 
@@ -55,11 +67,9 @@ return(
 }
 
 // Componente grupos de ambientes
-const GrupoAmbientes = () => {
-    var tamanho = grupos.length;
+const GrupoAmbientes = ({update}) => {
     var i = 0; // variável de controle de grupo (grupo i)
     var ambientesSel = []; // Armazena os dados (grupo e ambiente) dos ambientes selecionados
-    const [selecionado, setSelecionado] = useState(false);
     const itemLista = grupos.map((grupo) => {
       var j =0; // variável de controle do ambiente dentro de um grupo (ambiente j do grupo i)
       var letra = grupo[0].nome.substring(0,1); 
@@ -67,7 +77,6 @@ const GrupoAmbientes = () => {
       var posicao;
       const item = grupo.map((ambiente) => {
         const [selecionado, setSelecionado] = useState(false);
-        // Verifica se já 
         if(selecionado){
           var urlSelecionado = require('./../images/icons/ambSel.png');
         } else {
@@ -78,17 +87,13 @@ const GrupoAmbientes = () => {
           elemento.grupo= i;
           elemento.ambiente = j;
           ambientesSel.push(elemento);
-          // Teste para debugar
-          var info = "";
-          for(var m=0;m<ambientesSel.length;m++){
-              info = info + "/ grupo: " + ambientesSel[m].grupo + " amb: " + ambientesSel[m].ambiente;
-          }
-          //
-          alert(info);       }
+          // update(ambientesSel);
+             }
         else{
           for(var z=0;z<ambientesSel.length;z++){
             if(ambientesSel[z].grupo == i && ambientesSel[z].grupo == j){
               ambientesSel.splice(z,1);
+              // update(ambientesSel);
             }
           }
         }
@@ -113,7 +118,8 @@ const GrupoAmbientes = () => {
           </View>
         </SafeAreaView>
             ) 
-          }) // Terminou o segundo map     
+          }) // Terminou o segundo map  
+      //  var pacote = [itemLista,ambientesSel]   
        return itemLista
           }
 
