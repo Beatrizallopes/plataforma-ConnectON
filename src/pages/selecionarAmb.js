@@ -7,27 +7,42 @@ import grupos from '../funcoes/separarGruposAlfa';
 const selecionarAmbientes = ({route,navigation}) => {
   // Pegando os dados de navegação
   const {diasSemana} = route.params;
-  const {horario}= route.params
+  const {horario}= route.params;
+  const {ambientesSel} = route.params;
   var i = 0; // variável de controle de grupo (grupo i)
-  var ambientesSel = []; // Armazena os dados (grupo e ambiente) dos ambientes selecionados
   const itemLista = grupos.map((grupo) => {
       var j =0; // variável de controle do ambiente dentro de um grupo (ambiente j do grupo i)
       var letra = grupo[0].nome.substring(0,1); 
       var qtdAmb = grupo.length - 1;
       var posicao;
       const item = grupo.map((ambiente) => {
-        const [selecionado, setSelecionado] = useState(false);
-        if(selecionado){
+        var jaSel = false;
+        // Verificando se o ambiente já está na lista
+        for(var m=0;m<ambientesSel.length;m++){
+          if(ambientesSel[m].grupo == i && ambientesSel[m].ambiente == j){
+              jaSel = true
+          }   
+        }
+        const [selecionado, setSelecionado] = useState(jaSel);
+        // Se o ambiente está selecionado ou já está na lista
+        if(selecionado || jaSel){
           var urlSelecionado = require('./../images/icons/ambSel.png');
-          var elemento = {grupo:0,ambiente:0}
-          elemento.grupo= i;
-          elemento.ambiente = j;
-          ambientesSel.push(elemento);
+          if(!selecionado){
+            var urlSelecionado = require('./../images/icons/ambNaoSel.png');
+          }
+          if(!jaSel){
+            var elemento = {grupo:0,ambiente:0}
+            elemento.grupo= i;
+            elemento.ambiente = j;
+            ambientesSel.push(elemento);
+          }        
         } else {
           var urlSelecionado = require('./../images/icons/ambNaoSel.png');
-          for(var z=0;z<ambientesSel.length;z++){
-            if(ambientesSel[z].grupo == i && ambientesSel[z].grupo == j){
-              ambientesSel.splice(z,1);
+          if(jaSel){
+            for(var z=0;z<ambientesSel.length;z++){
+              if(ambientesSel[z].grupo == i && ambientesSel[z].grupo == j){
+                ambientesSel.splice(z,1);
+              }
             }
           }
         }
@@ -45,7 +60,6 @@ const selecionarAmbientes = ({route,navigation}) => {
       i = i+1; 
       return(
         <SafeAreaView key={letra} >
-          {/* <Text style={styles.letra}>{ambientesSel.length}</Text> */}
           <Text style={styles.letra}>{letra}</Text>
           <View style={styles.linha}>
             {item}                 
@@ -62,10 +76,11 @@ const selecionarAmbientes = ({route,navigation}) => {
            <Image style={styles.fecharModal} source={require("./../images/icons/fecharModal.png")}></Image>
             </TouchableWithoutFeedback>
             <View style={{marginBottom:30}}> 
-              <Text style={styles.ambientes}> Ambientes</Text>
+              <Text style={styles.ambientes}> Ambientes {ambientesSel.length}</Text>
             </View>
-            {/* <Input label="" placeholder="Buscar Ambiente..." /> */}
-          {/* <GrupoAmbientes update={updateLista} ></GrupoAmbientes> */}
+            <View style={{width:"110%"}}>
+            <Input label="" placeholder="Buscar Ambiente..." /> 
+            </View>
           {itemLista}
         </View>   
     </View>
@@ -138,11 +153,8 @@ listaAmb:{
   height: 48,
   paddingLeft:15,
   width:343,
-}
-
-  
+}  
 })
-
 
 // Estilos Dinâmicos
   // Identificando a posição do ambiente na lista:

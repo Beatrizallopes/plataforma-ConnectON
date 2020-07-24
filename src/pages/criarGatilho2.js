@@ -35,94 +35,19 @@ return(
               <Text style={styles.quando}>Selecione os ambientes {ambientesSel.length} </Text>
               <Text style={styles.explicação}>Selecione os ambientes que sua automação irá controlar.</Text>
               {/* <TouchableWithoutFeedback onPress={() => {setmodalSelecionarAmb(true);}}> */}
-              <TouchableWithoutFeedback onPress={() => navigation.navigate("Selecionar Ambientes",{horario:horario,diasSemana:diasSemana})}>
+              <TouchableWithoutFeedback onPress={() => navigation.navigate("Selecionar Ambientes",{horario:horario,diasSemana:diasSemana,ambientesSel:ambientesSel})}>
                 <View style={[styles.botaoCriação,{backgroundColor:"rgba(214, 96, 117, 0.3)",}]}>
                   <Text style={[styles.textoBotao,{color:"#D66075"}]}>  <Image source={require('./../images/icons/selecionarAmbientes.png')}></Image>  Selecionar ambientes</Text>
                 </View>
               </TouchableWithoutFeedback>
           </View>
-        </View>
-          {/* Modal de criação de ambiente */}
-        <Modal animationType="slide" transparent={true} visible={modalSelecionarAmb} >
-            <ScrollView>
-            <View style={styles.centeredView}>
-              <View style={styles.modalSelecionarAmb}>
-                <TouchableWithoutFeedback onPress={() => {setmodalSelecionarAmb(!modalSelecionarAmb);}}>
-               <Image style={styles.fecharModal} source={require("./../images/icons/fecharModal.png")}></Image>
-                </TouchableWithoutFeedback>
-                <View style={{marginBottom:30}}> 
-                  <Text style={styles.ambientes}> Ambientes</Text>
-                </View>
-                {/* <Input label="" placeholder="Buscar Ambiente..." /> */}
-              {/* <GrupoAmbientes update={updateLista} ></GrupoAmbientes> */}
-              <GrupoAmbientes></GrupoAmbientes>
-            </View>
-            
-        </View>
-        </ScrollView>
-      </Modal> 
+        </View> 
       </Modal> 
     </ScrollView>
   )
 }
 
 // Componente grupos de ambientes
-const GrupoAmbientes = ({update}) => {
-    var i = 0; // variável de controle de grupo (grupo i)
-    var ambientesSel = []; // Armazena os dados (grupo e ambiente) dos ambientes selecionados
-    const itemLista = grupos.map((grupo) => {
-      var j =0; // variável de controle do ambiente dentro de um grupo (ambiente j do grupo i)
-      var letra = grupo[0].nome.substring(0,1); 
-      var qtdAmb = grupo.length - 1;
-      var posicao;
-      const item = grupo.map((ambiente) => {
-        const [selecionado, setSelecionado] = useState(false);
-        if(selecionado){
-          var urlSelecionado = require('./../images/icons/ambSel.png');
-        } else {
-          var urlSelecionado = require('./../images/icons/ambNaoSel.png');
-        }
-        if(selecionado){
-          var elemento = {grupo:0,ambiente:0}
-          elemento.grupo= i;
-          elemento.ambiente = j;
-          ambientesSel.push(elemento);
-          // update(ambientesSel);
-             }
-        else{
-          for(var z=0;z<ambientesSel.length;z++){
-            if(ambientesSel[z].grupo == i && ambientesSel[z].grupo == j){
-              ambientesSel.splice(z,1);
-              // update(ambientesSel);
-            }
-          }
-        }
-        j = j + 1; // Para saber qual posição dentro do grupo
-        posicao = posicaoAmbiente(ambiente.id,qtdAmb);
-        return (
-          <View style={[indicador(ambiente.cor,posicao),styles.listaAmb]} key={ambiente.id}>
-            <TouchableWithoutFeedback   onPress={() => {setSelecionado(!selecionado);}}>
-              <Image source={urlSelecionado} style={{left: 30}, {top: 12}} ></Image>
-             </TouchableWithoutFeedback>
-            <Text style={styles.text}>{ambiente.ehFavorito}{ambiente.nome} </Text>  
-          </View>
-              )
-      }) // Terminou o primeiro map
-      i = i+1; 
-      return(
-        <SafeAreaView key={letra} >
-          {/* <Text style={styles.letra}>{ambientesSel.length}</Text> */}
-          <Text style={styles.letra}>{letra}</Text>
-          <View style={styles.linha}>
-            {item}                 
-          </View>
-        </SafeAreaView>
-            ) 
-          }) // Terminou o segundo map  
-      //  var pacote = [itemLista,ambientesSel]   
-       return itemLista
-          }
-
 const styles = StyleSheet.create({
   body: {
     flex:1,
@@ -213,20 +138,6 @@ const styles = StyleSheet.create({
       lineHeight:22,
       letterSpacing: -0.408,
       color:"#568AEA", 
-    },
-    modalSelecionarAmb: {
-      height:"100%",
-      width:"100%",
-      backgroundColor: "rgb(44,44,44)",
-      padding: "9%",
-      alignItems: "center", 
-    },
-    fecharModal:{
-      position:"absolute",
-      top:"4%",
-      right:"6%",
-      backgroundColor:"rgba(255, 255, 255, 0.13);",
-      borderRadius:20
     },
     ambientes:{
       position:"absolute",
