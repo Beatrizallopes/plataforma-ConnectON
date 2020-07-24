@@ -74,7 +74,7 @@ const selecionarAmbientes = ({route,navigation}) => {
            <Image style={styles.fecharModal} source={require("./../images/icons/fecharModal.png")}></Image>
             </TouchableWithoutFeedback>
             <View style={{marginBottom:30}}> 
-              <Text style={styles.ambientes}> Ambientes {ambientesSel.length}</Text>
+              <Text style={styles.ambientes}> Ambientes</Text>
             </View>
             <View style={{width:"110%"}}>
             <Input label="" placeholder="Buscar Ambiente..." /> 

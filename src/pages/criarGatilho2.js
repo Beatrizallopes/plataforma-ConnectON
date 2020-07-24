@@ -1,22 +1,12 @@
 // Importações necessárias
 import React,{useState, useEffect}   from 'react';
-import { StyleSheet, View, Text, ScrollView, TextInput, Image, Button, Modal, SafeAreaView,TouchableWithoutFeedback} from 'react-native';
-import Input from '../components/input';
+import { StyleSheet, View, Text, ScrollView, Image,  Modal, SafeAreaView,TouchableWithoutFeedback} from 'react-native';
 import grupos from '../funcoes/separarGruposAlfa';
 
 const criarGatilho2 = ({route,navigation}) => {
   const {diasSemana} = route.params;
   const {horario}= route.params;
   const{ambientesSel} = route.params;
-  const [modalSelecionarAmb, setmodalSelecionarAmb] = useState(false);
-  // const [ambientesGat, setambientesGat] = useState([0]);
-  
-  // const updateLista = (ambientes) =>{
-  //   x = ambientes
-  // }
-  useEffect(
-    () => { },[modalSelecionarAmb]
-  )
 return(
     <ScrollView>
       <Modal animationType="slide" transparent={true} visible={true} >
@@ -40,11 +30,32 @@ return(
                   <Text style={[styles.textoBotao,{color:"#D66075"}]}>  <Image source={require('./../images/icons/selecionarAmbientes.png')}></Image>  Selecionar ambientes</Text>
                 </View>
               </TouchableWithoutFeedback>
+              <ListaAmbSel lista={ambientesSel}></ListaAmbSel>
           </View>
         </View> 
       </Modal> 
     </ScrollView>
   )
+}
+const ListaAmbSel = ({lista}) =>{
+  if(lista.length>0){
+    var ambienteSelecionado = lista.map((ambiente) => { 
+      var nomeAmb = grupos[ambiente.grupo][ambiente.ambiente].nome;
+      return(
+        <View>
+          <Text style={{color:"white",fontSize:17}}>{nomeAmb}</Text>
+        </View>
+      )
+    })
+  } else{
+    var ambienteSelecionado = (
+      <View>
+          
+      </View>
+    )
+  }
+ 
+  return ambienteSelecionado;
 }
 
 // Componente grupos de ambientes
