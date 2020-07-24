@@ -17,15 +17,17 @@ const selecionarAmbientes = ({route,navigation}) => {
       var posicao;
       const item = grupo.map((ambiente) => {
         var jaSel = false;
+        var z = 0; // variável para identificar em que posição de ambientesSel o ambiente está
         // Verificando se o ambiente já está na lista
         for(var m=0;m<ambientesSel.length;m++){
           if(ambientesSel[m].grupo == i && ambientesSel[m].ambiente == j){
-              jaSel = true
+              jaSel = true;
+              z = m;
           }   
         }
         const [selecionado, setSelecionado] = useState(jaSel);
         // Se o ambiente está selecionado ou já está na lista
-        if(selecionado || jaSel){
+        if(selecionado){
           var urlSelecionado = require('./../images/icons/ambSel.png');
           if(!selecionado){
             var urlSelecionado = require('./../images/icons/ambNaoSel.png');
@@ -39,11 +41,7 @@ const selecionarAmbientes = ({route,navigation}) => {
         } else {
           var urlSelecionado = require('./../images/icons/ambNaoSel.png');
           if(jaSel){
-            for(var z=0;z<ambientesSel.length;z++){
-              if(ambientesSel[z].grupo == i && ambientesSel[z].grupo == j){
-                ambientesSel.splice(z,1);
-              }
-            }
+            ambientesSel.splice(z,1);
           }
         }
         j = j + 1; // Para saber qual posição dentro do grupo
