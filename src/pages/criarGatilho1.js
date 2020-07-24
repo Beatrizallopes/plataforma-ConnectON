@@ -43,7 +43,7 @@ return(
                 <Image  style={styles.iconeVoltar} source={require('./../images/icons/voltarGatilho.png')}/>
               </TouchableWithoutFeedback>
                  <Text style={styles.voltar}> Voltar  </Text>
-              <TouchableWithoutFeedback onPress={() => navigation.navigate("Criar Gatilho 2",{horario:hora,diasSemana:diasSemana})}>
+              <TouchableWithoutFeedback onPress={() => navigation.navigate("Criar Gatilho 2",{horario:hora,diasSemana:diasSemana,ambientesSel:[]})}>
                   <Text style={styles.seguinte}> Seguinte </Text>
               </TouchableWithoutFeedback> 
               <Text style={styles.titulo}>

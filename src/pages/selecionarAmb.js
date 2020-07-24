@@ -7,8 +7,7 @@ import grupos from '../funcoes/separarGruposAlfa';
 const selecionarAmbientes = ({route,navigation}) => {
   // Pegando os dados de navegação
   const {diasSemana} = route.params;
-  const {horario}= route.params;
-
+  const {horario}= route.params
   var i = 0; // variável de controle de grupo (grupo i)
   var ambientesSel = []; // Armazena os dados (grupo e ambiente) dos ambientes selecionados
   const itemLista = grupos.map((grupo) => {
@@ -53,12 +52,13 @@ const selecionarAmbientes = ({route,navigation}) => {
           </View>
         </SafeAreaView>
             ) 
-          }) // Terminou o segundo map     
+          }) // Terminou o segundo map   
        return(
         <ScrollView>
+       <Modal animationType="slide" transparent={true} visible={true} >
         <View style={styles.centeredView}>
           <View style={styles.modalSelecionarAmb}>
-            <TouchableWithoutFeedback onPress={() => {}}>
+            <TouchableWithoutFeedback onPress={() => navigation.navigate("Criar Gatilho 2",{horario:horario,diasSemana:diasSemana,ambientesSel:ambientesSel})}>
            <Image style={styles.fecharModal} source={require("./../images/icons/fecharModal.png")}></Image>
             </TouchableWithoutFeedback>
             <View style={{marginBottom:30}}> 
@@ -69,6 +69,7 @@ const selecionarAmbientes = ({route,navigation}) => {
           {itemLista}
         </View>   
     </View>
+    </Modal>
     </ScrollView>
        )
           }

@@ -32,7 +32,7 @@ return(
               <Text style={styles.titulo}>
                 Novo Gatilho
               </Text>
-              <Text style={styles.quando}>Selecione os ambientes </Text>
+              <Text style={styles.quando}>Selecione os ambientes {ambientesSel.length} </Text>
               <Text style={styles.explicação}>Selecione os ambientes que sua automação irá controlar.</Text>
               {/* <TouchableWithoutFeedback onPress={() => {setmodalSelecionarAmb(true);}}> */}
               <TouchableWithoutFeedback onPress={() => navigation.navigate("Selecionar Ambientes",{horario:horario,diasSemana:diasSemana})}>
