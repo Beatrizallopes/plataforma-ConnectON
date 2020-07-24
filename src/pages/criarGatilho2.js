@@ -22,15 +22,16 @@ return(
               <Text style={styles.titulo}>
                 Novo Gatilho
               </Text>
-              <Text style={styles.quando}>Selecione os ambientes {ambientesSel.length} </Text>
+              <Text style={styles.quando}>Selecione os ambientes </Text>
               <Text style={styles.explicação}>Selecione os ambientes que sua automação irá controlar.</Text>
-              {/* <TouchableWithoutFeedback onPress={() => {setmodalSelecionarAmb(true);}}> */}
+              <View style={{position:"absolute",top:"45%"}}>
+              <ListaAmbSel lista={ambientesSel}></ListaAmbSel>
+              </View>
               <TouchableWithoutFeedback onPress={() => navigation.navigate("Selecionar Ambientes",{horario:horario,diasSemana:diasSemana,ambientesSel:ambientesSel})}>
                 <View style={[styles.botaoCriação,{backgroundColor:"rgba(214, 96, 117, 0.3)",}]}>
                   <Text style={[styles.textoBotao,{color:"#D66075"}]}>  <Image source={require('./../images/icons/selecionarAmbientes.png')}></Image>  Selecionar ambientes</Text>
                 </View>
               </TouchableWithoutFeedback>
-              <ListaAmbSel lista={ambientesSel}></ListaAmbSel>
           </View>
         </View> 
       </Modal> 
@@ -39,25 +40,27 @@ return(
 }
 const ListaAmbSel = ({lista}) =>{
   if(lista.length>0){
+    var x = 0;
     var ambienteSelecionado = lista.map((ambiente) => { 
       var nomeAmb = grupos[ambiente.grupo][ambiente.ambiente].nome;
+      var cor =  grupos[ambiente.grupo][ambiente.ambiente].cor;
+      var posicao = posicaoAmbiente(x,lista.length-1);
+      x = x +1;
       return(
-        <View>
-          <Text style={{color:"white",fontSize:17}}>{nomeAmb}</Text>
+        <View key={ambiente.id} style={[indicador(cor,posicao),styles.listaAmb]}>
+          <Text style={styles.text}>{nomeAmb}</Text>
         </View>
       )
     })
   } else{
     var ambienteSelecionado = (
-      <View>
-          
+      <View>       
       </View>
     )
   }
- 
   return ambienteSelecionado;
 }
-
+ 
 // Componente grupos de ambientes
 const styles = StyleSheet.create({
   body: {
@@ -129,13 +132,13 @@ const styles = StyleSheet.create({
   },
   botaoCriação: {
     position:"relative",
+    top:"32%",
     width: 343,
     height:56,
-    display:"flex",
-    flexDirection:"column",
+    // display:"flex",
+    // flexDirection:"column",
     paddingVertical:8,
     paddingHorizontal:32,
-    top:"32%",
     backgroundColor:"rgba(86, 138, 234, 0.3)",
     borderRadius:12,
     alignItems:"center",
@@ -191,6 +194,7 @@ letra:{
   marginTop:18,
 },
 listaAmb:{
+  backgroundColor: "rgb(44,44,44)",
   height: 48,
   paddingLeft:15,
   width:343,
@@ -205,7 +209,7 @@ listaAmb:{
   const posicaoAmbiente = function(id,qtdTotal){
     var posicao;
     if(id <qtdTotal){
-      if(id==="0"){
+      if(id===0){
         posicao = "inicial";
       } else{
         posicao = "meio";
@@ -228,6 +232,7 @@ var indicador = function(myColor, tipo) {
       borderLeftWidth:8,
       borderLeftColor: myColor,
       borderTopStartRadius:12,
+      borderTopEndRadius:12,
     }
   };
   if(tipo=='meio'){
@@ -243,6 +248,7 @@ var indicador = function(myColor, tipo) {
       borderLeftWidth:8,
       borderLeftColor: myColor,
       borderBottomStartRadius:12,
+      borderBottomEndRadius:12,
     }
   }
   if(tipo=='unico'){
@@ -250,7 +256,10 @@ var indicador = function(myColor, tipo) {
       borderLeftWidth:8,
       borderLeftColor: myColor,
       borderBottomStartRadius:12,
+      borderBottomEndRadius:12,
+      borderTopEndRadius:12,
       borderTopStartRadius:12,
+      
     }
   }  
 }

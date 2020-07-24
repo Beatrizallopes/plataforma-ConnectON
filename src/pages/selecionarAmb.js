@@ -36,6 +36,7 @@ const selecionarAmbientes = ({route,navigation}) => {
             var elemento = {grupo:0,ambiente:0}
             elemento.grupo= i;
             elemento.ambiente = j;
+            elemento.id = ("g"+i+"a"+j).toString();
             ambientesSel.push(elemento);
           }        
         } else {
