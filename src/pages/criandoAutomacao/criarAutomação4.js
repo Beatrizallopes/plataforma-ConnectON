@@ -1,15 +1,18 @@
 // Importações necessárias
 import React,{useState, useEffect}   from 'react';
-import { StyleSheet, View, Text, ScrollView, Image,  Modal,TouchableWithoutFeedback,TextInput,KeyboardAvoidingView} from 'react-native';
+import { StyleSheet, View, Text, ScrollView, Image,  Modal,TouchableWithoutFeedback,TextInput,Switch} from 'react-native';
 
 const criarAutomação4 = ({route,navigation}) => {
   const {automação} = route.params;
   const [value, onChangeText] = React.useState(automação.nome);
+  const [isEnabled, setIsEnabled] = useState(false);
   automação.nome = value;
+  const toggleSwitch = () => setIsEnabled(previousState => !previousState);
+  automação.funcionamentoForçado = isEnabled;
   // Código apenas para debugar
   var ambientes = "";
   for(var i=0;i<automação.ambientesSel.length;i++){
-    ambientes = ambientes + "/G: " + automação.ambientesSel[i].grupo + " A: " + automação.ambientesSel[i].ambiente;
+    ambientes = ambientes + "/G: " + automação.ambientesSel[i].grupo + " A: " + automação.ambientesSel[i].ambiente + "/ Funcionamento Forçado:" + automação.funcionamentoForçado;
   }
   var texto = "Nome: " + automação.nome + "/HorárioInicio: " + automação.horarioInicio + "/HorárioFim: " + automação.horarioFim + "/Dias: " + automação.diasSemana + "/Ambientes: " + ambientes;
   //
@@ -38,7 +41,14 @@ return(
               <Text style={[styles.textSeg,styles.inputLabel]}>SEGURANÇA</Text>
               <View style={styles.selectFunc}>
                 <Image style={{top:"20%",left:"5%"}} source={require('./../../images/icons/funcionamentoForçado.png')}></Image>
-                <Text style={{top:"-25%",left:"15%",color:"white",fontSize:17}}> Funcionamento Forçado</Text>
+                <Text style={{bottom:"25%",left:"15%",color:"white",fontSize:17}}> Funcionamento Forçado</Text>
+                <Switch style = {{bottom:"75%",right:"10%"}}
+                  trackColor={{ false: "#767577", true: "#568AEA" }}
+                  thumbColor={isEnabled ? "#f4f3f4" : "#f4f3f4"}
+                  // ios_backgroundColor="#3e3e3e"
+                  onValueChange={toggleSwitch}
+                  value={isEnabled}
+               />
               </View>
               <Text style={styles.explicação}>Se um usuário desligar um equipamento, ele será ligado novamente.
                <TouchableWithoutFeedback onPress={() => {alert("Saiba mais")}}><Text style={{color: "#568AEA",fontWeight:"bold"}}>Saiba mais.</Text></TouchableWithoutFeedback>
