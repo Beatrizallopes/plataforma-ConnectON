@@ -35,6 +35,14 @@ return(
                 value={value}
                 ></TextInput>
               </View>
+              <Text style={[styles.textSeg,styles.inputLabel]}>SEGURANÇA</Text>
+              <View style={styles.selectFunc}>
+                <Image style={{top:"20%",left:"5%"}} source={require('./../../images/icons/funcionamentoForçado.png')}></Image>
+                <Text style={{top:"-25%",left:"15%",color:"white",fontSize:17}}> Funcionamento Forçado</Text>
+              </View>
+              <Text style={styles.explicação}>Se um usuário desligar um equipamento, ele será ligado novamente.
+               <TouchableWithoutFeedback onPress={() => {alert("Saiba mais")}}><Text style={{color: "#568AEA",fontWeight:"bold"}}>Saiba mais.</Text></TouchableWithoutFeedback>
+              </Text>
           </View>
         </View> 
       </Modal> 
@@ -91,8 +99,8 @@ const styles = StyleSheet.create({
   input:{
     position:'absolute',
     top:"12%",
-    left:"10%",
-    width:"82%"
+    left:"8%",
+    width:"88%"
   },
   campoPesquisa:{
     height:44,
@@ -108,6 +116,33 @@ inputLabel:{
     fontSize: 13,
     color:"rgba(255, 255, 255, 0.5)",
 },
+  textSeg:{
+    position:"absolute",
+    top:"25%",
+    left:"10%",
+  },
+  selectFunc:{
+    width:"88%",
+    height:48,
+    top:"30%",
+    left:"2%",
+    backgroundColor: "linear-gradient(0deg, rgba(255, 255, 255, 0.11), rgba(255, 255, 255, 0.11)), #000000",
+    borderRadius: 8,
+  },
+  explicação:{
+    width: 343,
+    height: 40,
+    left: "2%",
+    top: "33%",
+    fontFamily: "Barlow",
+    fontStyle: "normal",
+    fontWeight: "normal",
+    fontSize: 15,
+    lineHeight: 20,
+    letterSpacing: -0.24,
+    color: "rgba(255, 255, 255, 0.55)"
+  }
+
   })
 
   export default criarAutomação4;
