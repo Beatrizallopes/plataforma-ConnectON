@@ -56,7 +56,7 @@ return(
         <View style={styles.centeredView}>
           <View style={styles.modalCriar}>
               <TouchableWithoutFeedback onPress={() => navigation.navigate("Automações") }>
-                <Image  style={styles.iconeVoltar} source={require('./../../images/icons/voltarGatilho.png')}/>
+                <Image  style={styles.iconeVoltar} source={require('./../../images/icons/voltarAutomação.png')}/>
               </TouchableWithoutFeedback>
                  <Text style={styles.voltar}> Voltar  </Text>
               <TouchableWithoutFeedback onPress={() => navigation.navigate("Criar Automação 2",{automação:automação})}>
@@ -149,7 +149,6 @@ const styles = StyleSheet.create({
   body: {
     flex:1,
     backgroundColor: "#000000",
-    // alignItens:"center",
   },
   modalCriar: {
     height:"100%",
@@ -168,13 +167,11 @@ const styles = StyleSheet.create({
     letterSpacing: 0.374,
     top:"5%",
     marginHorizontal:15,
-    // marginBottom:18,
-    // left:"38%"
   },
   seguinte:{
     position:"absolute",
     top:"5%",
-    color: "#D66075",
+    color: "#568AEA",
     fontWeight: "600",
     fontSize: 17,
     right:"5%",
@@ -182,7 +179,7 @@ const styles = StyleSheet.create({
   voltar:{
     position:"absolute",
     top:"5%",
-    color: "#D66075",
+    color: "#568AEA",
     fontWeight: "600",
     fontSize: 17,
     left:"10%",
@@ -259,7 +256,7 @@ const trocarEstilo = function(status){
       right:"4%",
       width: 40,
       height: 40,
-      backgroundColor: "#D66075",
+      backgroundColor: "#568AEA",
       borderRadius: 100,
       alignContent:"center",
       alignItems:"center",

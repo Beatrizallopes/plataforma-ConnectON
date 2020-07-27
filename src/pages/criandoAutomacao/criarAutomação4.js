@@ -19,7 +19,7 @@ return(
         <View style={styles.centeredView}>
           <View style={styles.modalSelecionarAmb}>
               <TouchableWithoutFeedback onPress={() => navigation.navigate("Criar Automação 3",{automação:automação})}>
-                <Image  style={styles.iconeVoltar} source={require('./../../images/icons/voltarGatilho.png')}/>
+                <Image  style={styles.iconeVoltar} source={require('./../../images/icons/voltarAutomação.png')}/>
               </TouchableWithoutFeedback>
               <Text style={styles.voltar}> Voltar  </Text>
               <TouchableWithoutFeedback onPress={() => {alert(texto);navigation.navigate("Automações")}} >
@@ -69,7 +69,7 @@ const styles = StyleSheet.create({
   seguinte:{
     position:"absolute",
     top:"5%",
-    color: "#D66075",
+    color: "#568AEA",
     fontWeight: "600",
     fontSize: 17,
     right:"5%",
@@ -77,7 +77,7 @@ const styles = StyleSheet.create({
   voltar:{
     position:"absolute",
     top:"5%",
-    color: "#D66075",
+    color: "#568AEA",
     fontWeight: "600",
     fontSize: 17,
     left:"10%",

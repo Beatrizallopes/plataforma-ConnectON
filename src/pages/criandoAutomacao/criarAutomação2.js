@@ -11,7 +11,7 @@ const criarAutomação2 = ({route,navigation}) => {
           <View style={styles.centeredView}>
             <View style={styles.modalSelecionarAmb}>
                 <TouchableWithoutFeedback onPress={() => navigation.navigate("Criar Automação",{automação:automação})}>
-                  <Image  style={styles.iconeVoltar} source={require('./../../images/icons/voltarGatilho.png')}/>
+                  <Image  style={styles.iconeVoltar} source={require('./../../images/icons/voltarAutomação.png')}/>
                 </TouchableWithoutFeedback>
                 <Text style={styles.voltar}> Voltar  </Text>
                 <TouchableWithoutFeedback onPress={() => navigation.navigate("Criar Automação 3",{automação:automação})}>
@@ -26,8 +26,8 @@ const criarAutomação2 = ({route,navigation}) => {
                   <ListaAmbSel lista={automação.ambientesSel}></ListaAmbSel>
                 </View>
                 <TouchableWithoutFeedback onPress={() => navigation.navigate("Selecionar Ambientes Automação",{automação:automação})}>
-                  <View style={[posicaoBotao(automação.ambientesSel),styles.botaoCriação,{backgroundColor:"rgba(214, 96, 117, 0.3)",}]}>
-                    <Text style={[styles.textoBotao,{color:"#D66075"}]}>  <Image source={require('./../../images/icons/selecionarAmbientes.png')}></Image>  Selecionar ambientes</Text>
+                  <View style={[posicaoBotao(automação.ambientesSel),styles.botaoCriação]}>
+                    <Text style={[styles.textoBotao,{color:"#568AEA"}]}>  <Image source={require('./../../images/icons/selecionarAmbientesAuto.png')}></Image>  Selecionar ambientes</Text>
                   </View>
                 </TouchableWithoutFeedback>
             </View>
@@ -87,7 +87,7 @@ const styles = StyleSheet.create({
   seguinte:{
     position:"absolute",
     top:"5%",
-    color: "#D66075",
+    color: "#568AEA",
     fontWeight: "600",
     fontSize: 17,
     right:"5%",
@@ -95,7 +95,7 @@ const styles = StyleSheet.create({
   voltar:{
     position:"absolute",
     top:"5%",
-    color: "#D66075",
+    color: "#568AEA",
     fontWeight: "600",
     fontSize: 17,
     left:"10%",
@@ -134,7 +134,7 @@ const styles = StyleSheet.create({
     height:56,
     paddingVertical:8,
     paddingHorizontal:32,
-    backgroundColor:"rgba(86, 138, 234, 0.3)",
+    backgroundColor:"rgba(26, 41, 70, 1)",
     borderRadius:12,
     alignItems:"center",
     justifyContent:"center"
