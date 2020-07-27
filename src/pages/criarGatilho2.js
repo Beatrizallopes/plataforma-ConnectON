@@ -16,19 +16,19 @@ return(
                 <Image  style={styles.iconeVoltar} source={require('./../images/icons/voltarGatilho.png')}/>
               </TouchableWithoutFeedback>
                  <Text style={styles.voltar}> Voltar  </Text>
-              <TouchableWithoutFeedback onPress={() => alert(diasSemana)}>
+              <TouchableWithoutFeedback onPress={() => navigation.navigate("Criar Gatilho 3",{horario:horario,diasSemana:diasSemana,ambientesSel:ambientesSel})}>
                   <Text style={styles.seguinte}> Seguinte </Text>
               </TouchableWithoutFeedback> 
               <Text style={styles.titulo}>
                 Novo Gatilho
               </Text>
               <Text style={styles.quando}>Selecione os ambientes </Text>
-              <Text style={styles.explicação}>Selecione os ambientes que sua automação irá controlar.</Text>
-              <View style={{position:"absolute",top:"45%"}}>
+              <Text style={[showText(ambientesSel),styles.explicação]}>Selecione os ambientes que sua automação irá controlar.</Text>
+              <View style={{position:"absolute",top:"35%"}}>
               <ListaAmbSel lista={ambientesSel}></ListaAmbSel>
               </View>
-              <TouchableWithoutFeedback onPress={() => navigation.navigate("Selecionar Ambientes",{horario:horario,diasSemana:diasSemana,ambientesSel:ambientesSel})}>
-                <View style={[styles.botaoCriação,{backgroundColor:"rgba(214, 96, 117, 0.3)",}]}>
+              <TouchableWithoutFeedback onPress={() => navigation.navigate("Selecionar Ambientes",{horario:horario,diasSemana:diasSemana,ambientesSel:ambientesSel,acoesSel:[]})}>
+                <View style={[posicaoBotao(ambientesSel),styles.botaoCriação,{backgroundColor:"rgba(214, 96, 117, 0.3)",}]}>
                   <Text style={[styles.textoBotao,{color:"#D66075"}]}>  <Image source={require('./../images/icons/selecionarAmbientes.png')}></Image>  Selecionar ambientes</Text>
                 </View>
               </TouchableWithoutFeedback>
@@ -131,8 +131,8 @@ const styles = StyleSheet.create({
     color: "rgba(255, 255, 255, 0.55)",
   },
   botaoCriação: {
-    position:"relative",
-    top:"32%",
+    // position:"relative",
+    // top:"32%",
     width: 343,
     height:56,
     // display:"flex",
@@ -152,6 +152,7 @@ const styles = StyleSheet.create({
       lineHeight:22,
       letterSpacing: -0.408,
       color:"#568AEA", 
+      
     },
     ambientes:{
       position:"absolute",
@@ -263,5 +264,31 @@ var indicador = function(myColor, tipo) {
     }
   }  
 }
+
+var showText = function(lista){
+  if(lista.length>0){
+    return {
+      opacity:0,
+      height:0,
+    }}
+    else{
+      return{
+        opacity:100,
+      }      
+    }
+}
+ var posicaoBotao = function(lista){
+  if(lista.length>0){
+    return {
+      position:"relative",
+      top:"22%",
+    }}
+    else{
+      return{
+        position:"relative",
+        top:"32%",
+      }      
+    }
+ }
 
   export default criarGatilho2;
