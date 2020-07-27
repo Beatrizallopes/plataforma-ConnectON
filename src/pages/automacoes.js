@@ -26,7 +26,7 @@ class ListaAuto extends React.Component {
 
 const TipoCriacao = () => {
   const navigation = useNavigation();
-  const gatilho = {nome:"",horario:"", diasSemana:[], ambientesSel:[],acoesSel:[]}
+  const gatilho = {nome:"Gatilho",horario:"", diasSemana:[], ambientesSel:[],acoesSel:[]}
   return (
     <View>
     <View style={styles.caixa}>

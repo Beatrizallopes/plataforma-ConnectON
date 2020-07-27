@@ -1,7 +1,6 @@
 // Importações necessárias
 import React,{useState, useEffect}   from 'react';
 import { StyleSheet, View, Text, ScrollView, Image,  Modal, SafeAreaView,TouchableWithoutFeedback} from 'react-native';
-import grupos from '../funcoes/separarGruposAlfa';
 
 const criarGatilho3 = ({route,navigation}) => {
   const {gatilho} = route.params;
@@ -15,7 +14,7 @@ return(
                 <Image  style={styles.iconeVoltar} source={require('./../images/icons/voltarGatilho.png')}/>
               </TouchableWithoutFeedback>
                  <Text style={styles.voltar}> Voltar  </Text>
-              <TouchableWithoutFeedback >
+              <TouchableWithoutFeedback onPress={() => navigation.navigate("Criar Gatilho 4",{gatilho:gatilho})}>
                   <Text style={styles.seguinte}> Seguinte </Text>
               </TouchableWithoutFeedback> 
               <Text style={styles.titulo}>
@@ -111,8 +110,6 @@ const styles = StyleSheet.create({
     top:"32%",
     width: 343,
     height:56,
-    // display:"flex",
-    // flexDirection:"column",
     paddingVertical:8,
     paddingHorizontal:32,
     backgroundColor:"rgba(86, 138, 234, 0.3)",
