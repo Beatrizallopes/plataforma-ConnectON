@@ -3,7 +3,8 @@ import React,{useState}   from 'react';
 import { StyleSheet, ScrollView,View, Modal,TouchableWithoutFeedback,Image,Text,TextInput,Button} from 'react-native';
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 
-const criarGatilho = ({navigation}) => {
+const criarGatilho = ({route,navigation}) => {
+const {gatilho} = route.params;
   // Variáveis para o Horário Picker
 const [isPickerVisible, setDatePickerVisibility] = useState(false);
 const [hora,escolheuHora] = useState("00:00")
@@ -32,8 +33,9 @@ const [quinta, clicouQuinta] = useState(false);
 const [sexta, clicouSexta] = useState(false);
 const [sabado, clicouSabado] = useState(false);
 
-const diasSemana = [domingo,segunda,terca,quarta,quinta,sexta,sabado]
-
+// const diasSemana = [domingo,segunda,terca,quarta,quinta,sexta,sabado]
+gatilho.diasSemana = [domingo,segunda,terca,quarta,quinta,sexta,sabado];
+gatilho.horario = hora;
 return(
     <ScrollView>
       <Modal animationType="slide" transparent={true} visible={true} >
@@ -43,7 +45,7 @@ return(
                 <Image  style={styles.iconeVoltar} source={require('./../images/icons/voltarGatilho.png')}/>
               </TouchableWithoutFeedback>
                  <Text style={styles.voltar}> Voltar  </Text>
-              <TouchableWithoutFeedback onPress={() => navigation.navigate("Criar Gatilho 2",{horario:hora,diasSemana:diasSemana,ambientesSel:[]})}>
+              <TouchableWithoutFeedback onPress={() => navigation.navigate("Criar Gatilho 2",{gatilho:gatilho})}>
                   <Text style={styles.seguinte}> Seguinte </Text>
               </TouchableWithoutFeedback> 
               <Text style={styles.titulo}>

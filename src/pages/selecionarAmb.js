@@ -6,9 +6,8 @@ import grupos from '../funcoes/separarGruposAlfa';
 
 const selecionarAmbientes = ({route,navigation}) => {
   // Pegando os dados de navegação
-  const {diasSemana} = route.params;
-  const {horario}= route.params;
-  const {ambientesSel} = route.params;
+  const {gatilho} = route.params;
+
   var i = 0; // variável de controle de grupo (grupo i)
   const itemLista = grupos.map((grupo) => {
       var j =0; // variável de controle do ambiente dentro de um grupo (ambiente j do grupo i)
@@ -19,8 +18,8 @@ const selecionarAmbientes = ({route,navigation}) => {
         var jaSel = false;
         var z = 0; // variável para identificar em que posição de ambientesSel o ambiente está
         // Verificando se o ambiente já está na lista
-        for(var m=0;m<ambientesSel.length;m++){
-          if(ambientesSel[m].grupo == i && ambientesSel[m].ambiente == j){
+        for(var m=0;m<gatilho.ambientesSel.length;m++){
+          if(gatilho.ambientesSel[m].grupo == i && gatilho.ambientesSel[m].ambiente == j){
               jaSel = true;
               z = m;
           }   
@@ -37,12 +36,12 @@ const selecionarAmbientes = ({route,navigation}) => {
             elemento.grupo= i;
             elemento.ambiente = j;
             elemento.id = ("g"+i+"a"+j).toString();
-            ambientesSel.push(elemento);
+            gatilho.ambientesSel.push(elemento);
           }        
         } else {
           var urlSelecionado = require('./../images/icons/ambNaoSel.png');
           if(jaSel){
-            ambientesSel.splice(z,1);
+            gatilho.ambientesSel.splice(z,1);
           }
         }
         j = j + 1; // Para saber qual posição dentro do grupo
@@ -71,7 +70,7 @@ const selecionarAmbientes = ({route,navigation}) => {
        <Modal animationType="slide" transparent={true} visible={true} >
         <View style={styles.centeredView}>
           <View style={styles.modalSelecionarAmb}>
-            <TouchableWithoutFeedback onPress={() => navigation.navigate("Criar Gatilho 2",{horario:horario,diasSemana:diasSemana,ambientesSel:ambientesSel})}>
+            <TouchableWithoutFeedback onPress={() => navigation.navigate("Criar Gatilho 2",{gatilho:gatilho})}>
            <Image style={styles.fecharModal} source={require("./../images/icons/fecharModal.png")}></Image>
             </TouchableWithoutFeedback>
             <View style={{marginBottom:30}}> 

@@ -4,31 +4,30 @@ import { StyleSheet, View, Text, ScrollView, Image,  Modal, SafeAreaView,Touchab
 import grupos from '../funcoes/separarGruposAlfa';
 
 const criarGatilho2 = ({route,navigation}) => {
-  const {diasSemana} = route.params;
-  const {horario}= route.params;
-  const{ambientesSel} = route.params;
+  const {gatilho} = route.params;
+
 return(
     <ScrollView>
       <Modal animationType="slide" transparent={true} visible={true} >
         <View style={styles.centeredView}>
           <View style={styles.modalSelecionarAmb}>
-              <TouchableWithoutFeedback onPress={() => navigation.navigate("Automações") }>
+              <TouchableWithoutFeedback onPress={() => navigation.navigate("Criar Gatilho",{gatilho:gatilho})}>
                 <Image  style={styles.iconeVoltar} source={require('./../images/icons/voltarGatilho.png')}/>
               </TouchableWithoutFeedback>
                  <Text style={styles.voltar}> Voltar  </Text>
-              <TouchableWithoutFeedback onPress={() => navigation.navigate("Criar Gatilho 3",{horario:horario,diasSemana:diasSemana,ambientesSel:ambientesSel})}>
+              <TouchableWithoutFeedback onPress={() => navigation.navigate("Criar Gatilho 3",{gatilho:gatilho})}>
                   <Text style={styles.seguinte}> Seguinte </Text>
               </TouchableWithoutFeedback> 
               <Text style={styles.titulo}>
                 Novo Gatilho
               </Text>
               <Text style={styles.quando}>Selecione os ambientes </Text>
-              <Text style={[showText(ambientesSel),styles.explicação]}>Selecione os ambientes que sua automação irá controlar.</Text>
+              <Text style={[showText(gatilho.ambientesSel),styles.explicação]}>Selecione os ambientes que sua automação irá controlar.</Text>
               <View style={{position:"absolute",top:"35%"}}>
-              <ListaAmbSel lista={ambientesSel}></ListaAmbSel>
+              <ListaAmbSel lista={gatilho.ambientesSel}></ListaAmbSel>
               </View>
-              <TouchableWithoutFeedback onPress={() => navigation.navigate("Selecionar Ambientes",{horario:horario,diasSemana:diasSemana,ambientesSel:ambientesSel,acoesSel:[]})}>
-                <View style={[posicaoBotao(ambientesSel),styles.botaoCriação,{backgroundColor:"rgba(214, 96, 117, 0.3)",}]}>
+              <TouchableWithoutFeedback onPress={() => navigation.navigate("Selecionar Ambientes",{gatilho:gatilho})}>
+                <View style={[posicaoBotao(gatilho.ambientesSel),styles.botaoCriação,{backgroundColor:"rgba(214, 96, 117, 0.3)",}]}>
                   <Text style={[styles.textoBotao,{color:"#D66075"}]}>  <Image source={require('./../images/icons/selecionarAmbientes.png')}></Image>  Selecionar ambientes</Text>
                 </View>
               </TouchableWithoutFeedback>
