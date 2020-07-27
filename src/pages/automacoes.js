@@ -27,12 +27,13 @@ class ListaAuto extends React.Component {
 const TipoCriacao = () => {
   const navigation = useNavigation();
   const gatilho = {nome:"Gatilho",horario:"", diasSemana:[], ambientesSel:[],acoesSel:[]}
+  const automação = {nome:"Automação",horarioInicio:"", horarioFim:"", diasSemana:[], ambientesSel:[],acoesSel:[]}
   return (
     <View>
     <View style={styles.caixa}>
       <Image style={styles.iconeImagem} source={require('./../images/automacoes.png')}></Image>
       <Text style={styles.explicativo}>Crie uma automação que é executada durante um período com início e fim determinado. </Text>
-      <TouchableWithoutFeedback onPress={() => alert("Criar Automação")}>
+      <TouchableWithoutFeedback onPress={() => navigation.navigate("Criar Automação",{automação:automação})}>
       <View style={styles.botaoCriação}>
         <Text style={styles.textoBotao}> Criar Automação</Text>
       </View> 

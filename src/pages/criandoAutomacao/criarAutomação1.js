@@ -3,23 +3,36 @@ import React,{useState}   from 'react';
 import { StyleSheet, ScrollView,View, Modal,TouchableWithoutFeedback,Image,Text,TextInput,Button} from 'react-native';
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 
-const criarGatilho = ({route,navigation}) => {
-const {gatilho} = route.params;
+const criarAutomação = ({route,navigation}) => {
+const {automação} = route.params;
   // Variáveis para o Horário Picker
-const [isPickerVisible, setDatePickerVisibility] = useState(false);
-const [hora,escolheuHora] = useState("00:00")
+const [isPickerVisible1, setDatePickerVisibility1] = useState(false);
+const [isPickerVisible2, setDatePickerVisibility2] = useState(false);
+const [hora1,escolheuHora1] = useState("00:00");
+const [hora2,escolheuHora2] = useState("00:00");
 
-const showPicker = () => {
-  setDatePickerVisibility(true);
+const showPicker1 = () => {
+  setDatePickerVisibility1(true);
+};
+const showPicker2 = () => {
+  setDatePickerVisibility2(true);
 };
 
-const hidePicker = () => {
-  setDatePickerVisibility(false);
+const hidePicker1 = () => {
+  setDatePickerVisibility1(false);
+};
+const hidePicker2 = () => {
+  setDatePickerVisibility2(false);
 };
 
-const handleConfirm = (date) => {
-  hidePicker();
-  escolheuHora(date.toLocaleTimeString().slice(0, -3));
+const handleConfirm1 = (date) => {
+  hidePicker1();
+  escolheuHora1(date.toLocaleTimeString().slice(0, -3));
+  
+};
+const handleConfirm2 = (date) => {
+  hidePicker2();
+  escolheuHora2(date.toLocaleTimeString().slice(0, -3));
   
 };
 
@@ -33,9 +46,10 @@ const [quinta, clicouQuinta] = useState(false);
 const [sexta, clicouSexta] = useState(false);
 const [sabado, clicouSabado] = useState(false);
 
-// const diasSemana = [domingo,segunda,terca,quarta,quinta,sexta,sabado]
-gatilho.diasSemana = [domingo,segunda,terca,quarta,quinta,sexta,sabado];
-gatilho.horario = hora;
+automação.diasSemana = [domingo,segunda,terca,quarta,quinta,sexta,sabado];
+automação.horarioInicio = hora1;
+automação.horarioFim = hora2;
+
 return(
     <ScrollView>
       <Modal animationType="slide" transparent={true} visible={true} >
@@ -45,26 +59,43 @@ return(
                 <Image  style={styles.iconeVoltar} source={require('./../../images/icons/voltarGatilho.png')}/>
               </TouchableWithoutFeedback>
                  <Text style={styles.voltar}> Voltar  </Text>
-              <TouchableWithoutFeedback onPress={() => navigation.navigate("Criar Gatilho 2",{gatilho:gatilho})}>
+              <TouchableWithoutFeedback onPress={() => navigation.navigate("Criar Automação 2",{automação:automação})}>
                   <Text style={styles.seguinte}> Seguinte </Text>
               </TouchableWithoutFeedback> 
               <Text style={styles.titulo}>
-                Novo Gatilho
+                Nova Automação
               </Text>
               <Text style={styles.quando}>Quando</Text>
               {/* Picker de horário */}
+              {/* Horário de Início */}
               <View style={styles.horarioButton} >               
-                <Text style={[styles.textoHorario,{position:"relative",top:"25%",left:"5%",}]}> Horário </Text>
-                <Text style={[styles.textoHorario,{bottom:"20%",left:"75%",}]}>{hora}</Text>
-                <TouchableWithoutFeedback onPress={showPicker}>
+                <Text style={[styles.textoHorario,{position:"relative",top:"25%",left:"5%",}]}> Horário de início </Text>
+                <Text style={[styles.textoHorario,{bottom:"20%",left:"75%",}]}>{hora1}</Text>
+                <TouchableWithoutFeedback onPress={showPicker1}>
                 <Image style={styles.iconeHorario} source={require('./../../images/icons/setaAbaixoTransp.png')}></Image>
               </TouchableWithoutFeedback>
               </View>
               <DateTimePickerModal
-                isVisible={isPickerVisible}
+                isVisible={isPickerVisible1}
                  mode="time"
-                 onConfirm={handleConfirm}
-                 onCancel={hidePicker}
+                 onConfirm={handleConfirm1}
+                 onCancel={hidePicker1}
+                 display="spinner"
+                 is24Hour={true}
+               />
+               {/* Hotário de fim */}
+               <View style={styles.horarioButton} >               
+                <Text style={[styles.textoHorario,{position:"relative",top:"25%",left:"5%",}]}> Horário de Fim </Text>
+                <Text style={[styles.textoHorario,{bottom:"20%",left:"75%",}]}>{hora2}</Text>
+                <TouchableWithoutFeedback onPress={showPicker2}>
+                <Image style={styles.iconeHorario} source={require('./../../images/icons/setaAbaixoTransp.png')}></Image>
+              </TouchableWithoutFeedback>
+              </View>
+              <DateTimePickerModal
+                isVisible={isPickerVisible2}
+                 mode="time"
+                 onConfirm={handleConfirm2}
+                 onCancel={hidePicker2}
                  display="spinner"
                  is24Hour={true}
                />
@@ -178,6 +209,7 @@ const styles = StyleSheet.create({
     height:49,
     backgroundColor: "linear-gradient(0deg, rgba(255, 255, 255, 0.11), rgba(255, 255, 255, 0.11))",
     borderRadius:12,
+    marginBottom:10,
   },
   textoHorario:{
     fontFamily: "Barlow",
@@ -196,7 +228,7 @@ const styles = StyleSheet.create({
   },
   repete:{
     position:"absolute",
-    top:"35%",
+    top:"48%",
     left:"10%",
     fontFamily: "Barlow",
     fontStyle: "normal",
@@ -209,7 +241,7 @@ const styles = StyleSheet.create({
   },
   dayPicker:{
     position:"relative",
-    top:"30%",
+    top:"35%",
     left:"2%",
     height:45,
     width: "80%",
@@ -243,4 +275,4 @@ const trocarEstilo = function(status){
     }
   }
 }
-  export default criarGatilho;
+  export default criarAutomação;

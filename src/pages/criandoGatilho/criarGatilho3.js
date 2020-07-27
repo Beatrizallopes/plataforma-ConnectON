@@ -10,7 +10,7 @@ const criarGatilho3 = ({route,navigation}) => {
           <View style={styles.centeredView}>
             <View style={styles.modalSelecionarAmb}>
                 <TouchableWithoutFeedback onPress={() => navigation.navigate("Criar Gatilho 2",{gatilho:gatilho})}>
-                  <Image  style={styles.iconeVoltar} source={require('./../images/icons/voltarGatilho.png')}/>
+                  <Image  style={styles.iconeVoltar} source={require('./../../images/icons/voltarGatilho.png')}/>
                 </TouchableWithoutFeedback>
                 <Text style={styles.voltar}> Voltar  </Text>
                 <TouchableWithoutFeedback onPress={() => navigation.navigate("Criar Gatilho 4",{gatilho:gatilho})}>
@@ -23,7 +23,7 @@ const criarGatilho3 = ({route,navigation}) => {
                 <Text style={styles.explicação}>Crie ações a serem executadas</Text>
                 <TouchableWithoutFeedback onPress={() => navigation.navigate("Escolher Ações",{gatilho:gatilho})}>
                   <View style={[styles.botaoCriação,{backgroundColor:"rgba(214, 96, 117, 0.3)",}]}>
-                    <Text style={[styles.textoBotao,{color:"#D66075"}]}>  <Image source={require('./../images/icons/escolherAções.png')}></Image>  Escolher ações</Text>
+                    <Text style={[styles.textoBotao,{color:"#D66075"}]}>  <Image source={require('./../../images/icons/escolherAções.png')}></Image>  Escolher ações</Text>
                   </View>
                 </TouchableWithoutFeedback>
             </View>

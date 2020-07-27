@@ -1,7 +1,7 @@
 // Importações necessárias
 import React  from 'react';
 import { StyleSheet, View, Text, ScrollView, Image, Modal,TouchableWithoutFeedback} from 'react-native';
-import Input from '../../components/input';
+import Input from './../../components/input';
 
 const escolherAções = ({route,navigation}) => {
 
@@ -13,7 +13,7 @@ const escolherAções = ({route,navigation}) => {
       <View style={styles.centeredView}>
           <View style={styles.modalSelecionarAmb}>
             <TouchableWithoutFeedback onPress={() => navigation.navigate("Criar Gatilho 3",{gatilho:gatilho})}>
-                <Image style={styles.fecharModal} source={require("./../images/icons/fecharModal.png")}></Image>
+                <Image style={styles.fecharModal} source={require("./../../images/icons/fecharModal.png")}></Image>
             </TouchableWithoutFeedback>
             <View style={{marginBottom:30}}> 
                 <Text style={styles.ambientes}> Ações</Text>

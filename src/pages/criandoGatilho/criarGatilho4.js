@@ -19,7 +19,7 @@ return(
         <View style={styles.centeredView}>
           <View style={styles.modalSelecionarAmb}>
               <TouchableWithoutFeedback onPress={() => navigation.navigate("Criar Gatilho 3",{gatilho:gatilho})}>
-                <Image  style={styles.iconeVoltar} source={require('./../images/icons/voltarGatilho.png')}/>
+                <Image  style={styles.iconeVoltar} source={require('./../../images/icons/voltarGatilho.png')}/>
               </TouchableWithoutFeedback>
               <Text style={styles.voltar}> Voltar  </Text>
               <TouchableWithoutFeedback onPress={() => {alert(texto);navigation.navigate("Automações")}} >

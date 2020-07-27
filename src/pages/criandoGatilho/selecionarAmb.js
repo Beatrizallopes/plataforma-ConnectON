@@ -1,8 +1,8 @@
 // Importações necessárias
 import React,{useState, useEffect}   from 'react';
 import { StyleSheet, View, Text, ScrollView, TextInput, Image, Button, Modal, SafeAreaView,TouchableWithoutFeedback} from 'react-native';
-import Input from '../components/input';
-import grupos from '../funcoes/separarGruposAlfa';
+import Input from './../../components/input';
+import grupos from './../../funcoes/separarGruposAlfa';
 
 const selecionarAmbientes = ({route,navigation}) => {
   // Pegando os dados de navegação
@@ -27,9 +27,9 @@ const selecionarAmbientes = ({route,navigation}) => {
         const [selecionado, setSelecionado] = useState(jaSel);
         // Se o ambiente está selecionado ou já está na lista
         if(selecionado){
-          var urlSelecionado = require('./../images/icons/ambSel.png');
+          var urlSelecionado = require('./../../images/icons/ambSel.png');
           if(!selecionado){
-            var urlSelecionado = require('./../images/icons/ambNaoSel.png');
+            var urlSelecionado = require('./../../images/icons/ambNaoSel.png');
           }
           if(!jaSel){
             var elemento = {grupo:0,ambiente:0}
@@ -39,7 +39,7 @@ const selecionarAmbientes = ({route,navigation}) => {
             gatilho.ambientesSel.push(elemento);
           }        
         } else {
-          var urlSelecionado = require('./../images/icons/ambNaoSel.png');
+          var urlSelecionado = require('./../../images/icons/ambNaoSel.png');
           if(jaSel){
             gatilho.ambientesSel.splice(z,1);
           }
@@ -71,7 +71,7 @@ const selecionarAmbientes = ({route,navigation}) => {
         <View style={styles.centeredView}>
           <View style={styles.modalSelecionarAmb}>
             <TouchableWithoutFeedback onPress={() => navigation.navigate("Criar Gatilho 2",{gatilho:gatilho})}>
-           <Image style={styles.fecharModal} source={require("./../images/icons/fecharModal.png")}></Image>
+           <Image style={styles.fecharModal} source={require("./../../images/icons/fecharModal.png")}></Image>
             </TouchableWithoutFeedback>
             <View style={{marginBottom:30}}> 
               <Text style={styles.ambientes}> Ambientes</Text>

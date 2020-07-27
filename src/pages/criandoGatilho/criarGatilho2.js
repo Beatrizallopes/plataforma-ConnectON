@@ -11,7 +11,7 @@ const criarGatilho2 = ({route,navigation}) => {
           <View style={styles.centeredView}>
             <View style={styles.modalSelecionarAmb}>
                 <TouchableWithoutFeedback onPress={() => navigation.navigate("Criar Gatilho",{gatilho:gatilho})}>
-                  <Image  style={styles.iconeVoltar} source={require('./../images/icons/voltarGatilho.png')}/>
+                  <Image  style={styles.iconeVoltar} source={require('./../../images/icons/voltarGatilho.png')}/>
                 </TouchableWithoutFeedback>
                 <Text style={styles.voltar}> Voltar  </Text>
                 <TouchableWithoutFeedback onPress={() => navigation.navigate("Criar Gatilho 3",{gatilho:gatilho})}>
@@ -27,7 +27,7 @@ const criarGatilho2 = ({route,navigation}) => {
                 </View>
                 <TouchableWithoutFeedback onPress={() => navigation.navigate("Selecionar Ambientes",{gatilho:gatilho})}>
                   <View style={[posicaoBotao(gatilho.ambientesSel),styles.botaoCriação,{backgroundColor:"rgba(214, 96, 117, 0.3)",}]}>
-                    <Text style={[styles.textoBotao,{color:"#D66075"}]}>  <Image source={require('./../images/icons/selecionarAmbientes.png')}></Image>  Selecionar ambientes</Text>
+                    <Text style={[styles.textoBotao,{color:"#D66075"}]}>  <Image source={require('./../../images/icons/selecionarAmbientes.png')}></Image>  Selecionar ambientes</Text>
                   </View>
                 </TouchableWithoutFeedback>
             </View>

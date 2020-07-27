@@ -10,10 +10,12 @@ import Automacoes from "./automacoes"; // Importando a página Automações
 // Páginas relacionadas à criação de gatilhos
 import criarGatilho from './criandoGatilho/criarGatilho1';
 import criarGatilho2 from './criandoGatilho/criarGatilho2';
-import selecionarAmbientes from './selecionarAmb';
+import selecionarAmbientes from './criandoGatilho/selecionarAmb';
 import criarGatilho3 from './criandoGatilho/criarGatilho3';
 import escolherAções from './criandoGatilho/escolherAções';
 import criarGatilho4 from './criandoGatilho/criarGatilho4';
+// Páginas relacionadas à criação de automação
+import criarAutomação from './criandoAutomacao/criarAutomação1';
 
 const Stack = createStackNavigator()
 function AmbientesStack() {
@@ -58,6 +60,7 @@ function AutomacoesStack() {
         }}
        
       />
+      {/* Páginas referentes à criação de gatilhos */}
         <Stack.Screen
         name="Criar Gatilho"
         component={criarGatilho}
@@ -96,6 +99,14 @@ function AutomacoesStack() {
       <Stack.Screen
         name="Criar Gatilho 4"
         component={criarGatilho4}
+        options={{
+          headerShown: false,
+        }}
+      />
+      {/* Páginas referentes à criação de automações */}
+      <Stack.Screen
+        name="Criar Automação"
+        component={criarAutomação}
         options={{
           headerShown: false,
         }}
