@@ -21,7 +21,7 @@ import criarAutomação2 from './criandoAutomacao/criarAutomação2';
 import selecionarAmbientesAuto from './criandoAutomacao/selecionarAmbAuto';
 import criarAutomação3 from './criandoAutomacao/criarAutomação3';
 import escolherAçõesAuto from './criandoAutomacao/escolherAçõesAuto';
-
+import criarAutomação4 from './criandoAutomacao/criarAutomação4';
 
 const Stack = createStackNavigator()
 function AmbientesStack() {
@@ -144,7 +144,15 @@ function AutomacoesStack() {
         options={{
           headerShown: false,
         }}
-      />     
+      />
+      <Stack.Screen
+        name="Criar Automação 4"
+        component={criarAutomação4}
+        options={{
+          headerShown: false,
+        }}
+      />   
+         
     </Stack.Navigator>
     
   );
