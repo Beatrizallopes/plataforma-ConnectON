@@ -13,7 +13,6 @@ const criarGatilho4 = ({route,navigation}) => {
   }
   var texto = "Nome: " + gatilho.nome + "/Horário: " + gatilho.horario + "/Dias: " + gatilho.diasSemana + "/Ambientes: " + ambientes;
   //
-
 return(
     <ScrollView>
       <Modal animationType="slide" transparent={true} visible={true} >
@@ -22,29 +21,26 @@ return(
               <TouchableWithoutFeedback onPress={() => navigation.navigate("Criar Gatilho 3",{gatilho:gatilho})}>
                 <Image  style={styles.iconeVoltar} source={require('./../images/icons/voltarGatilho.png')}/>
               </TouchableWithoutFeedback>
-                 <Text style={styles.voltar}> Voltar  </Text>
-              <TouchableWithoutFeedback onPress={() => alert(texto)} >
+              <Text style={styles.voltar}> Voltar  </Text>
+              <TouchableWithoutFeedback onPress={() => {alert(texto);navigation.navigate("Automações")}} >
                   <Text style={styles.seguinte}> Concluir </Text>
               </TouchableWithoutFeedback> 
               <Text style={styles.titulo}>
                 Novo Gatilho
               </Text>
               <View style={styles.input}>
-              <Text style={styles.inputLabel}>NOME DO GATILHO </Text>
-              <TextInput style={styles.campoPesquisa}
-              onChangeText={text => onChangeText(text)}
-              value={value}
-              >
-              </TextInput>
-          </View>
-
+                <Text style={styles.inputLabel}>NOME DO GATILHO </Text>
+                <TextInput style={styles.campoPesquisa}
+                onChangeText={text => onChangeText(text)}
+                value={value}
+                ></TextInput>
+              </View>
           </View>
         </View> 
       </Modal> 
     </ScrollView>
   )
 }
- 
 // Componente grupos de ambientes
 const styles = StyleSheet.create({
 

@@ -4,37 +4,34 @@ import { StyleSheet, View, Text, ScrollView, Image,  Modal, SafeAreaView,Touchab
 
 const criarGatilho3 = ({route,navigation}) => {
   const {gatilho} = route.params;
-
-return(
-    <ScrollView>
-      <Modal animationType="slide" transparent={true} visible={true} >
-        <View style={styles.centeredView}>
-          <View style={styles.modalSelecionarAmb}>
-              <TouchableWithoutFeedback onPress={() => navigation.navigate("Criar Gatilho 2",{gatilho:gatilho})}>
-                <Image  style={styles.iconeVoltar} source={require('./../images/icons/voltarGatilho.png')}/>
-              </TouchableWithoutFeedback>
-                 <Text style={styles.voltar}> Voltar  </Text>
-              <TouchableWithoutFeedback onPress={() => navigation.navigate("Criar Gatilho 4",{gatilho:gatilho})}>
-                  <Text style={styles.seguinte}> Seguinte </Text>
-              </TouchableWithoutFeedback> 
-              <Text style={styles.titulo}>
-                Novo Gatilho
-              </Text>
-              <Text style={styles.quando}>Ações </Text>
-              <Text style={styles.explicação}>Crie ações a serem executadas</Text>
-              <View style={{position:"absolute",top:"45%"}}>
-              </View>
-              <TouchableWithoutFeedback onPress={() => navigation.navigate("Escolher Ações",{gatilho:gatilho})}>
-                <View style={[styles.botaoCriação,{backgroundColor:"rgba(214, 96, 117, 0.3)",}]}>
-                  <Text style={[styles.textoBotao,{color:"#D66075"}]}>  <Image source={require('./../images/icons/escolherAções.png')}></Image>  Escolher ações</Text>
-                </View>
-              </TouchableWithoutFeedback>
-          </View>
-        </View> 
-      </Modal> 
-    </ScrollView>
-  )
-}
+  return(
+      <ScrollView>
+        <Modal animationType="slide" transparent={true} visible={true} >
+          <View style={styles.centeredView}>
+            <View style={styles.modalSelecionarAmb}>
+                <TouchableWithoutFeedback onPress={() => navigation.navigate("Criar Gatilho 2",{gatilho:gatilho})}>
+                  <Image  style={styles.iconeVoltar} source={require('./../images/icons/voltarGatilho.png')}/>
+                </TouchableWithoutFeedback>
+                <Text style={styles.voltar}> Voltar  </Text>
+                <TouchableWithoutFeedback onPress={() => navigation.navigate("Criar Gatilho 4",{gatilho:gatilho})}>
+                    <Text style={styles.seguinte}> Seguinte </Text>
+                </TouchableWithoutFeedback> 
+                <Text style={styles.titulo}>
+                  Novo Gatilho
+                </Text>
+                <Text style={styles.quando}>Ações </Text>
+                <Text style={styles.explicação}>Crie ações a serem executadas</Text>
+                <TouchableWithoutFeedback onPress={() => navigation.navigate("Escolher Ações",{gatilho:gatilho})}>
+                  <View style={[styles.botaoCriação,{backgroundColor:"rgba(214, 96, 117, 0.3)",}]}>
+                    <Text style={[styles.textoBotao,{color:"#D66075"}]}>  <Image source={require('./../images/icons/escolherAções.png')}></Image>  Escolher ações</Text>
+                  </View>
+                </TouchableWithoutFeedback>
+            </View>
+          </View> 
+        </Modal> 
+      </ScrollView>
+    )
+  }
  
 // Componente grupos de ambientes
 const styles = StyleSheet.create({

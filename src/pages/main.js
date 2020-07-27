@@ -7,12 +7,13 @@ import Ambientes from "./ambientes"; // Importando a página Ambientes
 import AmbientesFav from "./ambientesFav"; // Importando a página Ambientes
 import Ambiente from "./ambiente" // Importando a página de Ambiente
 import Automacoes from "./automacoes"; // Importando a página Automações
-import criarGatilho from './criarGatilho1';
-import criarGatilho2 from './criarGatilho2';
+// Páginas relacionadas à criação de gatilhos
+import criarGatilho from './criandoGatilho/criarGatilho1';
+import criarGatilho2 from './criandoGatilho/criarGatilho2';
 import selecionarAmbientes from './selecionarAmb';
-import criarGatilho3 from './criarGatilho3';
-import escolherAções from './escolherAções';
-import criarGatilho4 from './criarGatilho4';
+import criarGatilho3 from './criandoGatilho/criarGatilho3';
+import escolherAções from './criandoGatilho/escolherAções';
+import criarGatilho4 from './criandoGatilho/criarGatilho4';
 
 const Stack = createStackNavigator()
 function AmbientesStack() {

@@ -1,42 +1,42 @@
 // Importações necessárias
-import React,{useState, useEffect}   from 'react';
-import { StyleSheet, View, Text, ScrollView, Image,  Modal, SafeAreaView,TouchableWithoutFeedback} from 'react-native';
-import grupos from '../funcoes/separarGruposAlfa';
+import React from 'react';
+import { StyleSheet, View, Text, ScrollView, Image,  Modal,TouchableWithoutFeedback} from 'react-native';
+import grupos from '../../funcoes/separarGruposAlfa';
 
 const criarGatilho2 = ({route,navigation}) => {
   const {gatilho} = route.params;
-
-return(
-    <ScrollView>
-      <Modal animationType="slide" transparent={true} visible={true} >
-        <View style={styles.centeredView}>
-          <View style={styles.modalSelecionarAmb}>
-              <TouchableWithoutFeedback onPress={() => navigation.navigate("Criar Gatilho",{gatilho:gatilho})}>
-                <Image  style={styles.iconeVoltar} source={require('./../images/icons/voltarGatilho.png')}/>
-              </TouchableWithoutFeedback>
-                 <Text style={styles.voltar}> Voltar  </Text>
-              <TouchableWithoutFeedback onPress={() => navigation.navigate("Criar Gatilho 3",{gatilho:gatilho})}>
-                  <Text style={styles.seguinte}> Seguinte </Text>
-              </TouchableWithoutFeedback> 
-              <Text style={styles.titulo}>
-                Novo Gatilho
-              </Text>
-              <Text style={styles.quando}>Selecione os ambientes </Text>
-              <Text style={[showText(gatilho.ambientesSel),styles.explicação]}>Selecione os ambientes que sua automação irá controlar.</Text>
-              <View style={{position:"absolute",top:"35%"}}>
-              <ListaAmbSel lista={gatilho.ambientesSel}></ListaAmbSel>
-              </View>
-              <TouchableWithoutFeedback onPress={() => navigation.navigate("Selecionar Ambientes",{gatilho:gatilho})}>
-                <View style={[posicaoBotao(gatilho.ambientesSel),styles.botaoCriação,{backgroundColor:"rgba(214, 96, 117, 0.3)",}]}>
-                  <Text style={[styles.textoBotao,{color:"#D66075"}]}>  <Image source={require('./../images/icons/selecionarAmbientes.png')}></Image>  Selecionar ambientes</Text>
+  return(
+      <ScrollView>
+        <Modal animationType="slide" transparent={true} visible={true} >
+          <View style={styles.centeredView}>
+            <View style={styles.modalSelecionarAmb}>
+                <TouchableWithoutFeedback onPress={() => navigation.navigate("Criar Gatilho",{gatilho:gatilho})}>
+                  <Image  style={styles.iconeVoltar} source={require('./../images/icons/voltarGatilho.png')}/>
+                </TouchableWithoutFeedback>
+                <Text style={styles.voltar}> Voltar  </Text>
+                <TouchableWithoutFeedback onPress={() => navigation.navigate("Criar Gatilho 3",{gatilho:gatilho})}>
+                    <Text style={styles.seguinte}> Seguinte </Text>
+                </TouchableWithoutFeedback> 
+                <Text style={styles.titulo}>
+                  Novo Gatilho
+                </Text>
+                <Text style={styles.quando}>Selecione os ambientes </Text>
+                <Text style={[showText(gatilho.ambientesSel),styles.explicação]}>Selecione os ambientes que sua automação irá controlar.</Text>
+                <View style={{position:"absolute",top:"35%"}}>
+                  <ListaAmbSel lista={gatilho.ambientesSel}></ListaAmbSel>
                 </View>
-              </TouchableWithoutFeedback>
-          </View>
-        </View> 
-      </Modal> 
-    </ScrollView>
-  )
-}
+                <TouchableWithoutFeedback onPress={() => navigation.navigate("Selecionar Ambientes",{gatilho:gatilho})}>
+                  <View style={[posicaoBotao(gatilho.ambientesSel),styles.botaoCriação,{backgroundColor:"rgba(214, 96, 117, 0.3)",}]}>
+                    <Text style={[styles.textoBotao,{color:"#D66075"}]}>  <Image source={require('./../images/icons/selecionarAmbientes.png')}></Image>  Selecionar ambientes</Text>
+                  </View>
+                </TouchableWithoutFeedback>
+            </View>
+          </View> 
+        </Modal> 
+      </ScrollView>
+    )
+  }
+// Componente correspondente à lista de ambientes
 const ListaAmbSel = ({lista}) =>{
   if(lista.length>0){
     var x = 0;
@@ -60,7 +60,7 @@ const ListaAmbSel = ({lista}) =>{
   return ambienteSelecionado;
 }
  
-// Componente grupos de ambientes
+// Estilização
 const styles = StyleSheet.create({
   body: {
     flex:1,
@@ -130,12 +130,8 @@ const styles = StyleSheet.create({
     color: "rgba(255, 255, 255, 0.55)",
   },
   botaoCriação: {
-    // position:"relative",
-    // top:"32%",
     width: 343,
     height:56,
-    // display:"flex",
-    // flexDirection:"column",
     paddingVertical:8,
     paddingHorizontal:32,
     backgroundColor:"rgba(86, 138, 234, 0.3)",
@@ -150,8 +146,7 @@ const styles = StyleSheet.create({
       fontWeight:"600",
       lineHeight:22,
       letterSpacing: -0.408,
-      color:"#568AEA", 
-      
+      color:"#568AEA",       
     },
     ambientes:{
       position:"absolute",
@@ -164,48 +159,44 @@ const styles = StyleSheet.create({
       color: "#FFFFFF",
     },
      // Estilização da Lista:
- linha:{
-  backgroundColor: "linear-gradient(0deg, rgba(255, 255, 255, 0.11), rgba(255, 255, 255, 0.11))",
-  borderRadius: 12,
-  width:"90%",
-  alignSelf:"center",
-  marginTop:52,
- },
-text: {
-  color: "#FFFFFF",
-  fontSize: 17,
-  position: "absolute",
-  height: 24,
-  left: 8,
-  top: 12,
-  marginLeft:48,// 56 - 8 = 48
-  lineHeight: 22,
-  letterSpacing: -0.408, 
-},
-letra:{
-  color:"#FFFFFF",
-  fontWeight: "600",
-  fontSize: 17,
-  lineHeight: 22,
-  position: "absolute",
-  width: 10,
-  height: 24,
-  left: "5%",
-  marginTop:18,
-},
-listaAmb:{
-  backgroundColor: "rgb(44,44,44)",
-  height: 48,
-  paddingLeft:15,
-  width:343,
-}
-
-  
+    linha:{
+      backgroundColor: "linear-gradient(0deg, rgba(255, 255, 255, 0.11), rgba(255, 255, 255, 0.11))",
+      borderRadius: 12,
+      width:"90%",
+      alignSelf:"center",
+      marginTop:52,
+    },
+    text: {
+      color: "#FFFFFF",
+      fontSize: 17,
+      position: "absolute",
+      height: 24,
+      left: 8,
+      top: 12,
+      marginLeft:48,// 56 - 8 = 48
+      lineHeight: 22,
+      letterSpacing: -0.408, 
+    },
+    letra:{
+      color:"#FFFFFF",
+      fontWeight: "600",
+      fontSize: 17,
+      lineHeight: 22,
+      position: "absolute",
+      width: 10,
+      height: 24,
+      left: "5%",
+      marginTop:18,
+    },
+    listaAmb:{
+      backgroundColor: "rgb(44,44,44)",
+      height: 48,
+      paddingLeft:15,
+      width:343,
+    } 
 })
-
-
 // Estilos Dinâmicos
-  // Identificando a posição do ambiente na lista:
+// Identificando a posição do ambiente na lista:
   const posicaoAmbiente = function(id,qtdTotal){
     var posicao;
     if(id <qtdTotal){
