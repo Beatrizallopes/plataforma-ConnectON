@@ -19,6 +19,8 @@ import criarGatilho4 from './criandoGatilho/criarGatilho4';
 import criarAutomação from './criandoAutomacao/criarAutomação1';
 import criarAutomação2 from './criandoAutomacao/criarAutomação2';
 import selecionarAmbientesAuto from './criandoAutomacao/selecionarAmbAuto';
+import criarAutomação3 from './criandoAutomacao/criarAutomação3';
+import escolherAçõesAuto from './criandoAutomacao/escolherAçõesAuto';
 
 
 const Stack = createStackNavigator()
@@ -125,6 +127,20 @@ function AutomacoesStack() {
       <Stack.Screen
         name="Selecionar Ambientes Automação"
         component={selecionarAmbientesAuto}
+        options={{
+          headerShown: false,
+        }}
+      />  
+      <Stack.Screen
+        name="Criar Automação 3"
+        component={criarAutomação3}
+        options={{
+          headerShown: false,
+        }}
+      /> 
+      <Stack.Screen
+        name="Escolher Ações Automação"
+        component={escolherAçõesAuto}
         options={{
           headerShown: false,
         }}

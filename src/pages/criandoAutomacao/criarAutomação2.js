@@ -18,7 +18,7 @@ const criarAutomação2 = ({route,navigation}) => {
                     <Text style={styles.seguinte}> Seguinte </Text>
                 </TouchableWithoutFeedback> 
                 <Text style={styles.titulo}>
-                  Novo Automação
+                  Nova Automação
                 </Text>
                 <Text style={styles.quando}>Selecione os ambientes </Text>
                 <Text style={[showText(automação.ambientesSel),styles.explicação]}>Selecione os ambientes que sua automação irá controlar.</Text>
