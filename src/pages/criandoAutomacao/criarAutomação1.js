@@ -246,7 +246,6 @@ const styles = StyleSheet.create({
     height:45,
     width: "80%",
     flexDirection:"row",
-    // flexWrap:"wrap",
     flex: 1,
   },
 })

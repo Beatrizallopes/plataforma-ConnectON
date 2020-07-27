@@ -14,8 +14,12 @@ import selecionarAmbientes from './criandoGatilho/selecionarAmb';
 import criarGatilho3 from './criandoGatilho/criarGatilho3';
 import escolherAções from './criandoGatilho/escolherAções';
 import criarGatilho4 from './criandoGatilho/criarGatilho4';
+
 // Páginas relacionadas à criação de automação
 import criarAutomação from './criandoAutomacao/criarAutomação1';
+import criarAutomação2 from './criandoAutomacao/criarAutomação2';
+import selecionarAmbientesAuto from './criandoAutomacao/selecionarAmbAuto';
+
 
 const Stack = createStackNavigator()
 function AmbientesStack() {
@@ -111,7 +115,22 @@ function AutomacoesStack() {
           headerShown: false,
         }}
       />
+       <Stack.Screen
+        name="Criar Automação 2"
+        component={criarAutomação2}
+        options={{
+          headerShown: false,
+        }}
+      />  
+      <Stack.Screen
+        name="Selecionar Ambientes Automação"
+        component={selecionarAmbientesAuto}
+        options={{
+          headerShown: false,
+        }}
+      />     
     </Stack.Navigator>
+    
   );
 }
 
