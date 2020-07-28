@@ -2,7 +2,9 @@
 import React,{useState} from 'react';
 import { StyleSheet, View, Text, ScrollView, Image,TouchableWithoutFeedback} from 'react-native';
 import listaAmbientes from '../dados';
-import Week from '../components/week'
+import Week from '../components/week';
+import ListaAmb from '../components/listaAmbientes';
+
 
 // Alguns dados utilizados para "simular" o banco de dados ///////////////////////////////////////////////////////////////////////////////////
 
@@ -10,7 +12,13 @@ import Week from '../components/week'
 // Componente referente à página Ambiente (que utiliza os componentes criados anteriormente) /////////////////////////////////////////////////
 const Automação = ({route,navigation}) => {  
   const {automação} = route.params;
-  var horario = automação.horario.split("/");
+  var texto = automação.horario;
+  var ambientesAuto = automação.ambientes.split(",");
+  var ambientes = identificaAmbientes(ambientesAuto)
+  if(automação.tipo == "Automação"){
+    var horario = automação.horario.split("/");
+    texto = horario[0] + " às " + horario[1]
+  }
   return (
    <View style={styles.body}>
      <View style={styles.header}>
@@ -28,15 +36,16 @@ const Automação = ({route,navigation}) => {
       <View style={styles.detalhes}>
       <Text style={styles.automaçãoProxEv}>{automação.tempoRestante}</Text>
       <Text style={styles.automaçãoMensagem}>{automação.mensagem}:</Text>
-  <Text style={styles.automaçãoHorário}>{horario[0]} às {horario[1]}</Text>
+  <Text style={styles.automaçãoHorário}>{texto}</Text>
       <Week daysAuto={automação.dias}></Week>
       </View>
        <Text style={styles.ambientes}> Ambientes</Text>
+       <View style={{top:"10%",left:"6%"}}>
+       <ListaAmb lista={ambientes}></ListaAmb>
+       </View>
    </View>
   );
 };
-
-// Componente de exibição de dias da semana
 
 // Estilização dos componentes ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 const styles = StyleSheet.create({
@@ -130,7 +139,19 @@ const styles = StyleSheet.create({
     color: "#FFFFFF",
   },
 })
-
+// Função para pegar info sobre os ambientes
+const identificaAmbientes = function(lista){
+var ambientes = [];
+for(var i=0;i<listaAmbientes.length;i++){
+  for(var j=0;j<lista.length;j++){
+    if(listaAmbientes[i].nome == lista[j]){
+      ambientes.push(listaAmbientes[i])
+      // alert(lista[j]+ "!")
+    } 
+  }
+}
+return ambientes;
+}
 // Exportando a página ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 export default Automação;
 
