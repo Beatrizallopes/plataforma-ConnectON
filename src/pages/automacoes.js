@@ -9,19 +9,19 @@ import { useNavigation } from '@react-navigation/native';
 // Simulando os dados
 
 // Componente lista de Automações
-class ListaAuto extends React.Component {
-  render() {
-    const itemA = listaAutomacoesOrd.map((automacao)=>{
-      return(
-        <View key={automacao.cod}>
-        <AutomacaoCard tipo={automacao.tipo} nome={automacao.nome} proxEvento={automacao.tempoRestante} mensagem={automacao.mensagem} ambientes={automacao.ambientes}></AutomacaoCard>
-        </View>
-      )
-    })
-    return itemA;
-        }
-        }
-
+const ListaAuto = () => {
+  const navigation = useNavigation();
+  const itemA = listaAutomacoesOrd.map((automacao)=>{
+    return(
+      <TouchableWithoutFeedback onPress={() => navigation.navigate("Automação",{automação:automacao})} key={automacao.cod}>
+      <View>
+      <AutomacaoCard tipo={automacao.tipo} nome={automacao.nome} proxEvento={automacao.tempoRestante} mensagem={automacao.mensagem} ambientes={automacao.ambientes}></AutomacaoCard>
+      </View>
+      </TouchableWithoutFeedback>
+    )
+  });
+  return itemA;
+}
 // Componente tipoCriação dentro do Modal de criação
 
 const TipoCriacao = () => {
@@ -39,16 +39,16 @@ const TipoCriacao = () => {
       </View> 
       </TouchableWithoutFeedback>
     </View>
-
     <View style={styles.caixa}>
-    <Image style={styles.iconeImagem} source={require('./../images/gatilhos.png')}></Image>
-    <Text style={styles.explicativo}>Crie um gatilho para executar uma tarefa uma única vez quando chegar o momento </Text>
-    <TouchableWithoutFeedback onPress={() => navigation.navigate("Criar Gatilho",{gatilho:gatilho})}>
-    <View style={[styles.botaoCriação,{backgroundColor:"rgba(214, 96, 117, 0.3)",}]}>
-      <Text style={[styles.textoBotao,{color:"#D66075"}]}> Criar Gatilho</Text>
+      <Image style={styles.iconeImagem} source={require('./../images/gatilhos.png')}></Image>
+      <Text style={styles.explicativo}>Crie um gatilho para executar uma tarefa uma única vez quando chegar o momento </Text>
+      <TouchableWithoutFeedback onPress={() => navigation.navigate("Criar Gatilho",{gatilho:gatilho})}>
+      <View style={[styles.botaoCriação,{backgroundColor:"rgba(214, 96, 117, 0.3)",}]}>
+        <Text style={[styles.textoBotao,{color:"#D66075"}]}> Criar Gatilho</Text>
+      </View>
+      </TouchableWithoutFeedback>
     </View>
-    </TouchableWithoutFeedback>
-  </View>
+
   </View>
   )
 }
@@ -71,7 +71,7 @@ const Automacoes = () => {
             </Text>
     <ListaAuto></ListaAuto>
     <View style={{height:20}}></View>
-    {/* Modal de criação de ambiente */}
+    {/* Modal de criação de automação/gatilho */}
     <Modal animationType="slide" transparent={true} visible={modalCriar} >
         <View style={styles.centeredView}>
           <View style={styles.modalCriar}>

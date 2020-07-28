@@ -4,9 +4,11 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Image } from 'react-native'; // Importando os componentes que vão ser usados
 import { createStackNavigator } from '@react-navigation/stack';
 import Ambientes from "./ambientes"; // Importando a página Ambientes
-import AmbientesFav from "./ambientesFav"; // Importando a página Ambientes
+import AmbientesFav from "./ambientesFavoritos"; // Importando a página Ambientes
 import Ambiente from "./ambiente" // Importando a página de Ambiente
 import Automacoes from "./automacoes"; // Importando a página Automações
+import Automação from "./automação";
+
 // Páginas relacionadas à criação de gatilhos
 import criarGatilho from './criandoGatilho/criarGatilho1';
 import criarGatilho2 from './criandoGatilho/criarGatilho2';
@@ -64,7 +66,13 @@ function AutomacoesStack() {
         options={{
           headerShown: false, 
         }}
-       
+      />
+      <Stack.Screen
+        name="Automação"
+        component={Automação}
+        options={{
+          headerShown: false, 
+        }}
       />
       {/* Páginas referentes à criação de gatilhos */}
         <Stack.Screen

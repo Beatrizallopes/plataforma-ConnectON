@@ -1,7 +1,8 @@
 // Lista de imports necessários ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 import React,{useState}  from 'react';
 import { StyleSheet, View, Text, ScrollView, TextInput, Image, Button,  FlatList, SafeAreaView,TouchableWithoutFeedback} from 'react-native';
-import grupos from '../funcoes/separarGruposAlfa';
+//import grupos from '../funcoes/separarGruposAlfa';
+import gruposFav from '../funcoes/filtrarFavoritos';
 import { useNavigation } from '@react-navigation/native';
 import Input from '../components/input';
 import Header from '../components/header';
@@ -10,9 +11,9 @@ import Header from '../components/header';
 // Criando o componente Lista de Ambientes
  const GrupoAmbientes = () => {
   const navigation = useNavigation();
-    var tamanho = grupos.length;
+    var tamanho = gruposFav.length;
     var i = 0;
-    const itemLista = grupos.map((grupo) => {
+    const itemLista = gruposFav.map((grupo) => {
       var letra = grupo[0].nome.substring(0,1); 
       var qtdAmb = grupo.length - 1;
       var posicao;
@@ -54,17 +55,17 @@ import Header from '../components/header';
         // }
         
 // Componente referente à página Ambientes (que utiliza o componente criado anteriormente) /////////////////////////////////////////////////
-const Ambientes = ({ navigation}) => {
+const AmbientesFav = ({ navigation}) => {
   // const [ambientesExibidos, setambientesExibidos] = useState(grupos);
   return (
    <ScrollView style={styles.body}>
      <Header titulo ="Ambientes "></Header>
       <Input label="" placeholder="Buscar Ambiente..." />
       <View style={styles.switchFav}>
+      <TouchableWithoutFeedback onPress={() => navigation.navigate('Ambientes')}> 
         <Text style={styles.switchTodos}>Todos</Text>
-        <TouchableWithoutFeedback onPress={() => navigation.navigate('Ambientes Favoritos')}> 
-        <Text style={styles.switchFavoritos}>Favoritos</Text>
         </TouchableWithoutFeedback>
+        <Text style={styles.switchFavoritos}>Favoritos</Text>
       </View>       
           <GrupoAmbientes></GrupoAmbientes>
           <View style={{height:20}}></View>         
@@ -189,7 +190,6 @@ switchFav:{
 switchTodos:{
   height: 32,
   width: "50%",
-  backgroundColor:"rgba(255, 255, 255, 0.1)",
   borderRadius: 8,
   fontSize: 12,
   lineHeight: 16,
@@ -204,9 +204,13 @@ switchFavoritos:{
   fontSize: 12,
   lineHeight: 16,
   textAlign: "center",
-  // textAlignVertical:"center",
+  textAlignVertical:"center",
   color: "#FFFFFF",
-  top:"-75%",
+  top:"-95%",
+  backgroundColor:"rgba(255, 255, 255, 0.1)",
+  height: 32,
+  borderRadius: 8,
+
 },
 listaAmb:{
   height: 48,
@@ -215,5 +219,5 @@ listaAmb:{
 });
 
 // Exportando a página ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-export default Ambientes
+export default AmbientesFav
 
