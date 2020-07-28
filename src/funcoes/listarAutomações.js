@@ -49,7 +49,7 @@ for (var i=0;i<listaAutomacoes.length;i++){
        diferencaMinutos = parseInt((dataEvento - dataAtual)/60000)
        diferencaMinutos = diferencaMinutos + parseInt((transformaHora(listaAutomacoes[i].horario)-transformaHora(hora)))
        listaAutomacoes[i].tempoRestante = diferencaMinutos;
-       listaAutomacoes[i].mensagem = "Executa em"
+       listaAutomacoes[i].mensagem = "Executa em";
 
     }
     }

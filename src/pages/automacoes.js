@@ -59,13 +59,13 @@ const Automacoes = () => {
     <ScrollView style={styles.body}>
     {/* <Header titulo="Automações"></Header> */}
     <View style={styles.header}>
-                <TouchableWithoutFeedback onPress={() => {setmodalCriar(true);}}>
-                    <Image  style={styles.iconeEsq} source={require('./../images/icons/adicionar.png')}/>
-                </TouchableWithoutFeedback>
-                <TouchableWithoutFeedback onPress={() => alert("Mais Informações")}>
-                    <Image  style={{position: "absolute", right: 66,top: 54}} source={require('./../images/icons/more.png')}/>
-                </TouchableWithoutFeedback>
-            </View> 
+      <TouchableWithoutFeedback onPress={() => {setmodalCriar(true);}}>
+          <Image  style={styles.iconeEsq} source={require('./../images/icons/adicionar.png')}/>
+      </TouchableWithoutFeedback>
+      <TouchableWithoutFeedback onPress={() => alert("Mais Informações")}>
+          <Image  style={{position: "absolute", right: 66,top: 54}} source={require('./../images/icons/more.png')}/>
+      </TouchableWithoutFeedback>
+    </View> 
             <Text style={styles.titulo}>
             Automações
             </Text>
