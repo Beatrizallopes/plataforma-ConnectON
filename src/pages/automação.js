@@ -14,6 +14,11 @@ const Automação = ({route,navigation}) => {
   const {automação} = route.params;
   var texto = automação.horario;
   var ambientesAuto = automação.ambientes.split(",");
+  for(var i=0;i<ambientesAuto.length;i++){
+    if(ambientesAuto[i][0] == " "){
+      ambientesAuto[i] = ambientesAuto[i].substring(1,ambientesAuto[i].length)
+    }
+  }
   var ambientes = identificaAmbientes(ambientesAuto)
   if(automação.tipo == "Automação"){
     var horario = automação.horario.split("/");
@@ -146,7 +151,6 @@ for(var i=0;i<listaAmbientes.length;i++){
   for(var j=0;j<lista.length;j++){
     if(listaAmbientes[i].nome == lista[j]){
       ambientes.push(listaAmbientes[i])
-      // alert(lista[j]+ "!")
     } 
   }
 }

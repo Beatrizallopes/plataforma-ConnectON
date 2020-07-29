@@ -12,6 +12,7 @@ const ListaAmb = ({lista}) =>{
       var cor =  ambiente.cor;
       var posicao = posicaoAmbiente(x,lista.length-1);
       x = x +1;
+      ambiente.id = ambiente.id + Math.random()
       return(
         <View key={ambiente.id} style={[indicador(cor,posicao),styles.listaAmb]}>
           <Text style={styles.text}>{nomeAmb}</Text>
