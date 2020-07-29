@@ -7,6 +7,8 @@ var listaAmbientes = [
     { nome: "RH", qtdMod:2, cor:"#6888CF",ehFavorito:true,cod:"1E"},
     { nome: "Estacionamento", qtdMod:0, cor:"#CD9C44",ehFavorito:true,cod:"1F"},
     { nome: "Copa", qtdMod:3, cor:"#CD9C44",ehFavorito:true,cod:"1G"},
+    { nome: "Brahma", qtdMod:1, cor:"#CD9C44",ehFavorito:false,cod:"1H"},
+
 ];
 var listaAutomacoes = [
     {nome:"Expediente",horario:"08:00 as 18:00",proxEvento:"00:17:34",mensagem:"Encerrará em breve"},

@@ -15,8 +15,9 @@ const Automação = ({route,navigation}) => {
   }
   return (
     
-  <ScrollView contentContainerStyle={{flexGrow:1}} style={styles.body} horizontal={false}>
-   {/* <View style={styles.body}> */}
+  // <ScrollView contentContainerStyle={{flexGrow:1}} style={styles.body} horizontal={false}>
+  <ScrollView  style={{flex:1,backgroundColor: "#000000"}} >
+  <View style={{ paddingBottom: 100 }}>
      <View style={styles.header}>
         <TouchableWithoutFeedback onPress={() => navigation.navigate("Automações") }>
           <Image  style={{position: "absolute", top: "55%"}} source={require('./../images/icons/setaLaranjaEsq.png')}/>
@@ -26,20 +27,19 @@ const Automação = ({route,navigation}) => {
           <Text style={styles.desabilitar}> Desabilitar </Text>
         </TouchableWithoutFeedback> 
      </View>  
-      <Text style={styles.titulo}>
-           {automação.nome}
-      </Text>  
+      <Text style={styles.titulo}>{automação.nome}</Text>  
       <View style={styles.detalhes}>
-      <Text style={styles.automaçãoProxEv}>{automação.tempoRestante}</Text>
-      <Text style={styles.automaçãoMensagem}>{automação.mensagem}:</Text>
-  <Text style={styles.automaçãoHorário}>{texto}</Text>
-      <Week daysAuto={automação.dias}></Week>
+          <Text style={styles.automaçãoProxEv}>{automação.tempoRestante}</Text>
+          <Text style={styles.automaçãoMensagem}>{automação.mensagem}:</Text>
+          <Text style={styles.automaçãoHorário}>{texto}</Text>
+          <Week daysAuto={automação.dias}></Week>
       </View>
-       <Text style={styles.ambientes}> Ambientes</Text>
-       <View style={{top:"10%",left:"6%"}}>
-       <ListaAmb lista={ambientes}></ListaAmb>
-       </View>
-   {/* </View> */}
+      <Text style={styles.ambientes}> Ambientes</Text>
+      <View style={{top:"10%",left:"6%"}}>
+          <ListaAmb lista={ambientes}></ListaAmb>
+      </View>
+   </View>
+   {/* <View style={{height:20}}></View> */}
    </ScrollView>
 
   );
