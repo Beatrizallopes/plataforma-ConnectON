@@ -1,13 +1,13 @@
 // Lista de imports necessários ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 import React,{useState} from 'react';
-import { StyleSheet, View, Text, ScrollView, Image,TouchableWithoutFeedback,SafeAreaView,useWindowDimensions } from 'react-native';
+import { StyleSheet, View, Text, ScrollView, Image,TouchableWithoutFeedback,Modal,TextInput } from 'react-native';
 import listaAmbientes from '../dados';
 import Week from '../components/week'
 import ListaAmb from '../components/listaAmbientes';
 
 const Automação = ({route,navigation}) => { 
-  const windowHeight = useWindowDimensions().height; 
   const {automação} = route.params;
+  const [modalDesabilitar,setmodalDesabilitar] = useState(false);
   var texto = automação.horario;
   var ambientes = identificaAmbientes(automação.ambientes)
   if(automação.tipo == "Automação"){
@@ -17,11 +17,10 @@ const Automação = ({route,navigation}) => {
   // Gambiarra para o problema do ScrollView, para visualizar o problema basta tirar o View logo depois do ScrollView
   var qtdAmbientes = automação.ambientes.length;
   var padding = 50;
-  if(qtdAmbientes>5){
-    padding = (qtdAmbientes-5)*50;
+  if(qtdAmbientes>4){
+    padding = (qtdAmbientes-4)*50;
   }
-  return (
-    
+  return (   
   <ScrollView  style={styles.body}  >
   <View style={{ paddingBottom: padding}}>
      <View style={styles.header}>
@@ -29,7 +28,7 @@ const Automação = ({route,navigation}) => {
           <Image  style={{position: "absolute", top: "55%"}} source={require('./../images/icons/setaLaranjaEsq.png')}/>
         </TouchableWithoutFeedback>
         <Text style={styles.automações}> Automações  </Text>
-        <TouchableWithoutFeedback>
+        <TouchableWithoutFeedback onPress={() => setmodalDesabilitar(!modalDesabilitar)}>
           <Text style={styles.desabilitar}> Desabilitar </Text>
         </TouchableWithoutFeedback> 
      </View>  
@@ -50,6 +49,25 @@ const Automação = ({route,navigation}) => {
       <View style={{top:"10%",left:"6%"}}>
           <ListaAmb lista={ambientes}></ListaAmb>
       </View>
+      {/*  Modal de desabilitar*/}
+      <Modal animationType="slide" transparent={true} visible={modalDesabilitar} >
+        <View style={styles.centeredView}>
+          <View style={styles.modalView}>
+            <Text style={styles.controleTitulo}>Desabilitar</Text>
+            {/* Botão de fechar o controle */}
+            <TouchableWithoutFeedback onPress={() => { setmodalDesabilitar(!modalDesabilitar);}}>
+              <Image style={styles.closeButton} source={require('../images/icons/fecharModal1.png')}/> 
+            </TouchableWithoutFeedback> 
+            <Text style={styles.perguntaModal} >Por quanto tempo você quer desabilitar <Text style={{fontWeight:"bold"}}>{automação.nome}</Text>?</Text>
+            <Text style={styles.opçõesModal}>Desativar por tempo indeterminado</Text>
+            <Text style={styles.opçõesModal}>Ativar novamente após 8 horas</Text>
+            <Text style={[styles.opçõesModal,{borderBottomColor: "rgba(255, 255, 255, 0.12)",borderBottomWidth: 1,}]}>Ativar novamente após 24 horas</Text>
+            <Text style={styles.confirmeSenha}>CONFIRME SUA SENHA</Text>
+            <TextInput style={styles.inputSenha}>  <Image source={require('../images/icons/chaveSenha.png')}></Image>  Sua senha</TextInput>
+          </View>
+        </View>
+      </Modal>
+      {/*  Fim do Modal de desabilitar*/}
    </View>
    </ScrollView>
 
@@ -148,19 +166,19 @@ const styles = StyleSheet.create({
     color: "#FFFFFF",
   },
   botãoAddAmb:{
-    width:"80%",
-    height:"7%",
+    width:323,
+    height:50,
     display: "flex",
     flexDirection: "row",
     paddingVertical: 8,
     paddingHorizontal: 32,
     position:"relative",
     top: "12%",
-    right:"1%",
+    right:"2%",
     backgroundColor: "rgba(241, 137, 41, 0.3)",
     borderRadius: 12,
     alignSelf: "center",
-    marginTop: 16,
+    marginVertical: 16,
     textAlign:"center",
   },
   textoBotãoAmb:{
@@ -172,6 +190,91 @@ const styles = StyleSheet.create({
     alignSelf:"center",
     marginLeft:10,
     left:"70%"
+  },
+  // Estilo do modal
+  centeredView: {
+    flex: 1,
+    justifyContent:"flex-end",
+    alignItems: "center",
+  },
+  modalView: {
+    height:"60%",
+    width:"100%",
+    margin: 20,
+    backgroundColor:  "rgba(70, 70, 70, 0.95)",
+    borderTopStartRadius:12,
+    borderTopEndRadius:12,
+    padding: "9%",
+    alignItems: "center",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
+  },
+  closeButton: {
+    position:"absolute",
+    right: 14,
+    top: 22,
+  },
+  controleTitulo:{
+    position: "absolute",
+    height: 34,
+    left: 16,
+    top: 22,// 5+17 = 22
+    fontStyle: "normal",
+    fontWeight: "bold",
+    fontSize: 28,
+    lineHeight: 34,
+    letterSpacing: 0.364,
+    color: "#FFFFFF",
+  },
+  perguntaModal:{
+    top:"15%",
+    right:"8%",
+    width:323,
+    fontSize: 17,
+    lineHeight: 22, 
+    letterSpacing: -0.408,
+    color: "#FFFFFF",
+    paddingBottom:20,
+    borderBottomColor: "rgba(255, 255, 255, 0.12)",
+    borderBottomWidth: 1,
+  },
+  opçõesModal:{
+    top:"20%",
+    right:"8%",
+    width:323,
+    fontSize: 17,
+    lineHeight: 22, 
+    letterSpacing: -0.408,
+    color: "rgba(255, 255, 255, 0.6)",
+    paddingBottom:20,
+  },
+  confirmeSenha:{
+    color: "rgba(255, 255, 255, 0.5)",
+    fontSize:13,
+    top:"23%",
+    right:"35%"
+  },
+  inputSenha:{
+    top:"25%",
+    right:"6%",
+    flexDirection: "row",
+    paddingHorizontal: 10,
+    paddingVertical:12,
+    width: 343,
+    height: 44,
+    backgroundColor: "rgba(255, 255, 255, 0.13)",
+    borderRadius: 10,
+    fontSize: 17,
+    lineHeight: 22,
+    letterSpacing: -0.408,
+    color: "rgba(255, 255, 255, 0.3)"
+    
   }
 })
 // Função para pegar info sobre os ambientes
