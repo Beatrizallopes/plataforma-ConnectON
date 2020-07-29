@@ -13,13 +13,14 @@ import ListaAmb from '../components/listaAmbientes';
 const Automação = ({route,navigation}) => {  
   const {automação} = route.params;
   var texto = automação.horario;
-  var ambientesAuto = automação.ambientes.split(",");
-  for(var i=0;i<ambientesAuto.length;i++){
-    if(ambientesAuto[i][0] == " "){
-      ambientesAuto[i] = ambientesAuto[i].substring(1,ambientesAuto[i].length)
-    }
-  }
-  var ambientes = identificaAmbientes(ambientesAuto)
+  // alert(automação.ambientes.length)
+  // var ambientesAuto = automação.ambientes.split(",");
+  // for(var i=0;i<ambientesAuto.length;i++){
+  //   if(ambientesAuto[i][0] == " "){
+  //     ambientesAuto[i] = ambientesAuto[i].substring(1,ambientesAuto[i].length)
+  //   }
+  // }
+  var ambientes = identificaAmbientes(automação.ambientes)
   if(automação.tipo == "Automação"){
     var horario = automação.horario.split("/");
     texto = horario[0] + " às " + horario[1]

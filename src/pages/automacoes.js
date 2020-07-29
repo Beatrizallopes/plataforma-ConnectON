@@ -15,7 +15,7 @@ const ListaAuto = () => {
     return(
       <TouchableWithoutFeedback onPress={() => navigation.navigate("Automação",{automação:automacao})} key={automacao.cod}>
       <View>
-      <AutomacaoCard tipo={automacao.tipo} nome={automacao.nome} proxEvento={automacao.tempoRestante} mensagem={automacao.mensagem} ambientes={automacao.ambientes}></AutomacaoCard>
+      <AutomacaoCard tipo={automacao.tipo} nome={automacao.nome} proxEvento={automacao.tempoRestante} mensagem={automacao.mensagem} ambientes={automacao.ambientes} ambientesInfo = {automacao.ambientesInfo}></AutomacaoCard>
       </View>
       </TouchableWithoutFeedback>
     )

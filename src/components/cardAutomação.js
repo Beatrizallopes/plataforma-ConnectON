@@ -3,14 +3,14 @@ import React from 'react';
 import { StyleSheet, View, Text} from 'react-native';
 
 // Componente Input
-const AutomacaoCard = function({tipo,nome,proxEvento,mensagem,ambientes}){
+const AutomacaoCard = function({tipo,nome,proxEvento,mensagem,ambientes,ambientesInfo}){
 
   return(
         <View style={[styles.automação,tipoAuto(tipo)]}>
           <Text style={styles.automaçãoMensagem}>{mensagem}:</Text>
           <Text style={styles.automaçãoProxEv}>{proxEvento}</Text>
           <Text style={styles.automaçãoNome}>{nome}</Text>
-          <Text style={styles.automaçãoAmbientes}>{ambientes}</Text>
+          <Text style={styles.automaçãoAmbientes}>{ambientesInfo}</Text>
 
        </View>
         )

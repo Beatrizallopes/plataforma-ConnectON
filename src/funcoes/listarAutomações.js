@@ -76,7 +76,7 @@ for (var i=0;i<listaAutomacoes.length;i++){
 // Agora vamos alterar o formato de tempo restante
      for(var i =0;i<listaAutomacoesOrd.length;i++){
          listaAutomacoesOrd[i].tempoRestante = alteraFormatoHora(listaAutomacoesOrd[i])
-         listaAutomacoesOrd[i].ambientes = alteraFormatoAmbientes(listaAutomacoesOrd[i])
+         listaAutomacoesOrd[i].ambientesInfo = alteraFormatoAmbientes(listaAutomacoesOrd[i])
         }
     console.log(listaAutomacoesOrd)
 
