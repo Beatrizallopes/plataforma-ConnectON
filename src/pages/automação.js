@@ -41,6 +41,12 @@ const Automação = ({route,navigation}) => {
           <Week daysAuto={automação.dias}></Week>
       </View>
       <Text style={styles.ambientes}> Ambientes</Text>
+      <TouchableWithoutFeedback>
+        <View style={styles.botãoAddAmb}>
+          <Image style={{alignSelf:"center",left:"60%"}} source={require('../images/icons/addAmbiente.png')}></Image>
+          <Text style={styles.textoBotãoAmb}>Adicionar ambientes</Text>
+        </View>
+      </TouchableWithoutFeedback>
       <View style={{top:"10%",left:"6%"}}>
           <ListaAmb lista={ambientes}></ListaAmb>
       </View>
@@ -141,6 +147,32 @@ const styles = StyleSheet.create({
     letterSpacing: -0.24,
     color: "#FFFFFF",
   },
+  botãoAddAmb:{
+    width:"80%",
+    height:"7%",
+    display: "flex",
+    flexDirection: "row",
+    paddingVertical: 8,
+    paddingHorizontal: 32,
+    position:"relative",
+    top: "12%",
+    right:"1%",
+    backgroundColor: "rgba(241, 137, 41, 0.3)",
+    borderRadius: 12,
+    alignSelf: "center",
+    marginTop: 16,
+    textAlign:"center",
+  },
+  textoBotãoAmb:{
+    fontWeight: "600",
+    fontSize: 17,
+    lineHeight: 22,
+    letterSpacing: -0.408,
+    color: "#F18929",
+    alignSelf:"center",
+    marginLeft:10,
+    left:"70%"
+  }
 })
 // Função para pegar info sobre os ambientes
 const identificaAmbientes = function(lista){
