@@ -1,11 +1,12 @@
 // Lista de imports necessários ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 import React,{useState} from 'react';
-import { StyleSheet, View, Text, ScrollView, Image,TouchableWithoutFeedback,SafeAreaView} from 'react-native';
+import { StyleSheet, View, Text, ScrollView, Image,TouchableWithoutFeedback,SafeAreaView,useWindowDimensions } from 'react-native';
 import listaAmbientes from '../dados';
 import Week from '../components/week'
 import ListaAmb from '../components/listaAmbientes';
 
-const Automação = ({route,navigation}) => {  
+const Automação = ({route,navigation}) => { 
+  const windowHeight = useWindowDimensions().height; 
   const {automação} = route.params;
   var texto = automação.horario;
   var ambientes = identificaAmbientes(automação.ambientes)
@@ -13,11 +14,16 @@ const Automação = ({route,navigation}) => {
     var horario = automação.horario.split("/");
     texto = horario[0] + " às " + horario[1]
   }
+  // Gambiarra para o problema do ScrollView, para visualizar o problema basta tirar o View logo depois do ScrollView
+  var qtdAmbientes = automação.ambientes.length;
+  var padding = 50;
+  if(qtdAmbientes>5){
+    padding = (qtdAmbientes-5)*50;
+  }
   return (
     
-  // <ScrollView contentContainerStyle={{flexGrow:1}} style={styles.body} horizontal={false}>
-  <ScrollView  style={{flex:1,backgroundColor: "#000000"}} >
-  <View style={{ paddingBottom: 100 }}>
+  <ScrollView  style={styles.body}  >
+  <View style={{ paddingBottom: padding}}>
      <View style={styles.header}>
         <TouchableWithoutFeedback onPress={() => navigation.navigate("Automações") }>
           <Image  style={{position: "absolute", top: "55%"}} source={require('./../images/icons/setaLaranjaEsq.png')}/>
@@ -39,7 +45,6 @@ const Automação = ({route,navigation}) => {
           <ListaAmb lista={ambientes}></ListaAmb>
       </View>
    </View>
-   {/* <View style={{height:20}}></View> */}
    </ScrollView>
 
   );
