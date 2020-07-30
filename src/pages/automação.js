@@ -101,7 +101,7 @@ const BotãoHab = function({habilitou}){
               <ListaAmb lista={ambientes}></ListaAmb>
           </View>
               {/* Botão Adicionar Ambientes */}
-            <TouchableWithoutFeedback>
+            <TouchableWithoutFeedback onPress={() => navigation.navigate("Adicionar Ambientes",{automação:automação})}>
               <View style={[styles.botãoAddAmb,sumirBotão(automação.habilitado)]}>
                 <Image style={{alignSelf:"center",left:"60%"}} source={require('../images/icons/addAmbiente.png')}></Image>
                 <Text style={styles.textoBotãoAmb}>Adicionar ambientes</Text>

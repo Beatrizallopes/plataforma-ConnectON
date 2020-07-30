@@ -7,7 +7,8 @@ import Ambientes from "./ambientes"; // Importando a página Ambientes
 import AmbientesFav from "./ambientesFavoritos"; // Importando a página Ambientes
 import Ambiente from "./ambiente" // Importando a página de Ambiente
 import Automacoes from "./automacoes"; // Importando a página Automações
-import Automação from "./automação";
+import Automação from "./automação"; // Importando a página Automação
+import addAmbientes from "./addAmbientes"// Importando a página de adicionar ambientes 
 
 // Páginas relacionadas à criação de gatilhos
 import criarGatilho from './criandoGatilho/criarGatilho1';
@@ -70,6 +71,13 @@ function AutomacoesStack() {
       <Stack.Screen
         name="Automação"
         component={Automação}
+        options={{
+          headerShown: false, 
+        }}
+      />
+      <Stack.Screen
+        name="Adicionar Ambientes"
+        component={addAmbientes}
         options={{
           headerShown: false, 
         }}
