@@ -1,16 +1,23 @@
 // Lista de imports necessários ////////////////////////////////////////////////////////////////////////////////////////////////////////////
-import React,{useState} from 'react';
+import React,{useState,useEffect} from 'react';
 import { StyleSheet, View, Text, ScrollView, Image,TouchableWithoutFeedback,Modal,TextInput } from 'react-native';
 import listaAmbientes from '../dados';
 import Week from '../components/week'
 import ListaAmb from '../components/listaAmbientes';
 
+// Simulando a senha do usuário
+const senha = "1234";
+
+// Componente referente à página Automação
 const Automação = ({route,navigation}) => { 
   const {automação} = route.params;
   const [modalDesabilitar,setmodalDesabilitar] = useState(false);
+  var modal = false;
   const [habilitado,sethabilitado] = useState(automação.habilitado);
   automação.habilitado = habilitado;
+  const [value, onChangeText] = React.useState("Sua senha");
   const [opção,setopção] = useState("0");
+  var teste = automação.habilitado.toString()
   // Opções de desabilitar
   var opção1 = false// Desativar por tempo indeterminado
   var opção2 = false // Ativar novamente após 8 horas
@@ -30,7 +37,6 @@ const Automação = ({route,navigation}) => {
     opção2 = false;
     opção3 = true;
   }
-
   var texto = automação.horario;
   var ambientes = identificaAmbientes(automação.ambientes)
   if(automação.tipo == "Automação"){
@@ -43,6 +49,34 @@ const Automação = ({route,navigation}) => {
   if(qtdAmbientes>4){
     padding = (qtdAmbientes-4)*50;
   }
+// Função de desabilitar automação
+const desabilitar = function(opção,senhaInput){
+  var desabilitou = true;
+  if(senhaInput == senha){
+    desabilitou = false
+  } else {
+    alert("A senha está incorreta!")
+  }
+  sethabilitado(desabilitou);
+}
+// Componente do botão Habilitar/Desabilitar
+const BotãoHab = function({habilitou}){
+  if(habilitou){
+    return(
+      <TouchableWithoutFeedback onPress={() => setmodalDesabilitar(true)}>
+          <Text style={styles.desabilitar}> Desabilitar </Text>
+        </TouchableWithoutFeedback> 
+    )
+  }
+  else{
+    return(
+      <TouchableWithoutFeedback onPress={() => sethabilitado(true)}>
+          <Text style={styles.desabilitar}> Habilitar </Text>
+      </TouchableWithoutFeedback> 
+    )
+  }
+}
+//
   return (   
   <ScrollView  style={styles.body}  >
   <View style={{ paddingBottom: padding}}>
@@ -50,65 +84,69 @@ const Automação = ({route,navigation}) => {
         <TouchableWithoutFeedback onPress={() => navigation.navigate("Automações") }>
           <Image  style={{position: "absolute", top: "55%"}} source={require('./../images/icons/setaLaranjaEsq.png')}/>
         </TouchableWithoutFeedback>
-        <Text style={styles.automações}> Automações  </Text>
-        <TouchableWithoutFeedback onPress={() => setmodalDesabilitar(!modalDesabilitar)}>
-          <Text style={styles.desabilitar}> Desabilitar </Text>
-        </TouchableWithoutFeedback> 
+        <Text style={styles.automações}> Automações </Text>
+        <BotãoHab habilitou={habilitado}></BotãoHab>
      </View>  
       <Text style={styles.titulo}>{automação.nome}</Text>  
-      <View style={styles.detalhes}>
-          <Text style={styles.automaçãoProxEv}>{automação.tempoRestante}</Text>
-          <Text style={styles.automaçãoMensagem}>{automação.mensagem}:</Text>
-          <Text style={styles.automaçãoHorário}>{texto}</Text>
-          <Week daysAuto={automação.dias}></Week>
-      </View>
-      <Text style={styles.ambientes}> Ambientes</Text>
-      <TouchableWithoutFeedback>
-        <View style={styles.botãoAddAmb}>
-          <Image style={{alignSelf:"center",left:"60%"}} source={require('../images/icons/addAmbiente.png')}></Image>
-          <Text style={styles.textoBotãoAmb}>Adicionar ambientes</Text>
-        </View>
-      </TouchableWithoutFeedback>
-      <View style={{top:"10%",left:"6%"}}>
-          <ListaAmb lista={ambientes}></ListaAmb>
-      </View>
-      {/*  Modal de desabilitar*/}
-      <Modal animationType="slide" transparent={true} visible={modalDesabilitar} >
-        <View style={styles.centeredView}>
-          <View style={styles.modalView}>
-            <Text style={styles.controleTitulo}>Desabilitar</Text>
-            {/* Botão de fechar o controle */}
-            <TouchableWithoutFeedback onPress={() => { setmodalDesabilitar(!modalDesabilitar);}}>
-              <Image style={styles.closeButton} source={require('../images/icons/fecharModal1.png')}/> 
-            </TouchableWithoutFeedback> 
-            <Text style={styles.perguntaModal} >Por quanto tempo você quer desabilitar <Text style={{fontWeight:"bold"}}>{automação.nome}</Text>?</Text>
-            <TouchableWithoutFeedback onPress={()=> setopção("1")}>
-                <Text style={[styles.opçõesModal,opçãoEscolhida(opção1)]}>Desativar por tempo indeterminado</Text>
-            </TouchableWithoutFeedback>
-            <TouchableWithoutFeedback onPress={()=> setopção("2")}>
-              <Text style={[styles.opçõesModal,opçãoEscolhida(opção2)]}>Ativar novamente após 8 horas</Text>
-            </TouchableWithoutFeedback>
-            <TouchableWithoutFeedback onPress={()=> setopção("3")}>
-                <Text style={[styles.opçõesModal,{borderBottomColor: "rgba(255, 255, 255, 0.12)"},opçãoEscolhida(opção3)]}>Ativar novamente após 24 horas</Text>
-            </TouchableWithoutFeedback>
-            <Text style={styles.confirmeSenha}>CONFIRME SUA SENHA</Text>
-            <TextInput style={styles.inputSenha}>  <Image source={require('../images/icons/chaveSenha.png')}></Image>  Sua senha</TextInput>
-            <View style={{flexDirection:"row",left:"20%"}}>
-              <TouchableWithoutFeedback onPress={()=> setmodalDesabilitar(false)}> 
-                <Text style={[styles.opçãoInf,{borderRightWidth:1,borderRightColor:"rgba(255, 255, 255, 0.12)",paddingRight:"7%"}]}>Cancelar</Text>
-              </TouchableWithoutFeedback>
-              <TouchableWithoutFeedback onPress={()=> sethabilitado(false)}>
-                <Text style={styles.opçãoInf}>Desabilitar</Text>
-              </TouchableWithoutFeedback>
-            </View>
+      <View style={escurecer(automação.habilitado)}>
+          <View style={styles.detalhes}>
+              <Text style={styles.automaçãoProxEv}>{automação.tempoRestante}</Text>
+              <Text style={styles.automaçãoMensagem}>{automação.mensagem}:</Text>
+              <Text style={styles.automaçãoHorário}>{texto}</Text>
+              <Week daysAuto={automação.dias}></Week>
           </View>
-        </View>
-      </Modal>
-      {/*  Fim do Modal de desabilitar*/}
-   </View>
+          <Text style={styles.ambientes}> Ambientes</Text>
+          <TouchableWithoutFeedback>
+            <View style={[styles.botãoAddAmb,sumirBotão(automação.habilitado)]}>
+              <Image style={{alignSelf:"center",left:"60%"}} source={require('../images/icons/addAmbiente.png')}></Image>
+              <Text style={styles.textoBotãoAmb}>Adicionar ambientes</Text>
+            </View>
+          </TouchableWithoutFeedback>
+          <View style={{top:"10%",left:"6%"}}>
+              <ListaAmb lista={ambientes}></ListaAmb>
+          </View>
+          {/*  Modal de desabilitar*/}
+          <Modal animationType="slide" transparent={true} visible={modalDesabilitar} >
+            <View style={styles.centeredView}>
+              <View style={styles.modalView}>
+                <Text style={styles.controleTitulo}>Desabilitar</Text>
+                {/* Botão de fechar o controle */}
+                <TouchableWithoutFeedback onPress={() => { setmodalDesabilitar(!modalDesabilitar);}}>
+                  <Image style={styles.closeButton} source={require('../images/icons/fecharModal1.png')}/> 
+                </TouchableWithoutFeedback> 
+                <Text style={styles.perguntaModal} >Por quanto tempo você quer desabilitar <Text style={{fontWeight:"bold"}}>{automação.nome}</Text>?</Text>
+                <TouchableWithoutFeedback onPress={()=> setopção("1")}>
+                    <Text style={[styles.opçõesModal,opçãoEscolhida(opção1)]}>Desativar por tempo indeterminado</Text>
+                </TouchableWithoutFeedback>
+                <TouchableWithoutFeedback onPress={()=> setopção("2")}>
+                  <Text style={[styles.opçõesModal,opçãoEscolhida(opção2)]}>Ativar novamente após 8 horas</Text>
+                </TouchableWithoutFeedback>
+                <TouchableWithoutFeedback onPress={()=> setopção("3")}>
+                    <Text style={[styles.opçõesModal,{borderBottomColor: "rgba(255, 255, 255, 0.12)"},opçãoEscolhida(opção3)]}>Ativar novamente após 24 horas</Text>
+                </TouchableWithoutFeedback>
+                <Text style={styles.confirmeSenha}>CONFIRME SUA SENHA</Text>
+                <TextInput style={styles.inputSenha}
+                    onChangeText={text => onChangeText(text)}
+                    value={value}
+                    ></TextInput>
+                <View style={{flexDirection:"row",left:"20%"}}>
+                  <TouchableWithoutFeedback onPress={()=> setmodalDesabilitar(false)}> 
+                    <Text style={[styles.opçãoInf,{borderRightWidth:1,borderRightColor:"rgba(255, 255, 255, 0.12)",paddingRight:"7%"}]}>Cancelar</Text>
+                  </TouchableWithoutFeedback>
+                  <TouchableWithoutFeedback onPress={()=> desabilitar(opção,value)}>
+                    <Text style={styles.opçãoInf}>Desabilitar</Text>
+                  </TouchableWithoutFeedback>
+                </View>
+              </View>
+            </View>
+          </Modal>
+          {/*  Fim do Modal de desabilitar*/}
+      </View>
+      </View>
    </ScrollView>
 
   );
+
 };
 
 // Estilização dos componentes ////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -353,6 +391,31 @@ const opçãoEscolhida = function(status){
       }
     }
 }
+// Função que escurece a tela quando a automação/gatilho está desabilitado
+const escurecer = function(estaHabilitado){
+  if(estaHabilitado){
+    return {
+      opacity:1,
+    }
+  } else {
+    return{
+      opacity: 0.4,
+    }
+  }
+}
+// Função que faz o botão de adicionar ambientes sumir
+const sumirBotão = function(estaHabilitado){
+  if(!estaHabilitado){
+    return{
+      height:0,
+      width:0,
+      padding:0,
+      margin:0,
+      opacity:0,
+    }
+  }
+}
+
 
 // Exportando a página ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 export default Automação;
