@@ -7,53 +7,48 @@ const criarAmbiente = ({route,navigation}) => {
   return(
       <ScrollView>
         <Modal animationType="slide" transparent={true} visible={true} >
-          <View style={styles.centeredView}>
+          
             <View style={styles.modalSelecionarAmb}>
                 <TouchableWithoutFeedback onPress={() => navigation.navigate("Ambientes")}>
-                <Text style={styles.voltar}> Cancelar  </Text>               
+                <Text style={styles.cancelar}> Cancelar  </Text>               
                  </TouchableWithoutFeedback>
                 <TouchableWithoutFeedback onPress={() => navigation.navigate("Criar Ambiente 2",{ambiente:ambiente})}>
                     <Text style={styles.proximo}> Próximo </Text>
                 </TouchableWithoutFeedback> 
+                <View style={{flexDirection:"column",top:"12%",left:10}}>
                 <Text style={styles.quando}>Novo Ambiente  </Text>
-                <Text style={[showText(ambiente.dispositivos),styles.explicação]}>Adicione dispositivos para controlar ou executar tarefas automatizadas.</Text>
-                {/* <View style={{position:"absolute",top:"35%"}}>
-                  <ListaAmbSel lista={automação.ambientesSel}></ListaAmbSel>
-                </View> */}
+                <Text style={[showText(ambiente.dispositivos),styles.explicação]}>Adicione dispositivos para controlar ou executar tarefas automatizadas.</Text>  
+                <View style={styles.dispositivosView}>
+                  <ListaDispo listaDispositivos = {ambiente.dispositivos}></ListaDispo>
+                </View>
                 <TouchableWithoutFeedback onPress={() => navigation.navigate("Adicionar dispositivos",{ambiente:ambiente})}>
-                  <View style={[posicaoBotao(ambiente.dispositivos),styles.botaoCriação]}>
-                    <Text style={[styles.textoBotao,{color:"#F18929"}]}>  <Image source={require('./../../images/icons/addAmbiente.png')}></Image>  Adicionar dispositivos</Text>
+                  <View style={styles.botaoCriação}>
+                    <Text style={[styles.textoBotao,{color:"#F18929"}]}> <Image source={require('./../../images/icons/addAmbiente.png')}></Image>  Adicionar dispositivos</Text>
                   </View>
                 </TouchableWithoutFeedback>
+                </View>
             </View>
-          </View> 
         </Modal> 
       </ScrollView>
     )
   }
-// Componente correspondente à lista de ambientes
-const ListaAmbSel = ({lista}) =>{
-  if(lista.length>0){
-    var x = 0;
-    var ambienteSelecionado = lista.map((ambiente) => { 
-      var nomeAmb = grupos[ambiente.grupo][ambiente.ambiente].nome;
-      var cor =  grupos[ambiente.grupo][ambiente.ambiente].cor;
-      var posicao = posicaoAmbiente(x,lista.length-1);
-      x = x +1;
-      return(
-        <View key={ambiente.id} style={[indicador(cor,posicao),styles.listaAmb]}>
-          <Text style={styles.text}>{nomeAmb}</Text>
-        </View>
-      )
-    })
-  } else{
-    var ambienteSelecionado = (
-      <View>       
-      </View>
-    )
-  }
-  return ambienteSelecionado;
-}
+   // Componente Lista de Dispositivos
+   const ListaDispo = ({listaDispositivos})=> {
+    const item = listaDispositivos.map((dispositivo)=>{
+    var marca = dispositivo.marca.toLowerCase();
+         var buscaImagem = require('./../../images/logomarcasDispositivos/sansung.png');
+        return(
+          <View style={styles.dispositivo} key={dispositivo.cod}>
+            <View style={{flexDirection:"row", top:"8%",left:"8%"}}>
+            <Image  source={buscaImagem} style={{marginRight:"20%"}}/>
+            </View>
+              <Text style={styles.dispositivoNome}>{dispositivo.nome} </Text>
+            <Text style={styles.dispositivoModelo}>{dispositivo.modelo}</Text>  
+          </View>
+        )
+      })
+      return item;
+          }
  
 // Estilização 
 const styles = StyleSheet.create({
@@ -75,13 +70,13 @@ const styles = StyleSheet.create({
     fontSize: 17,
     right:"5%",
   },
-  voltar:{
+  cancelar:{
     position:"absolute",
     top:"5%",
     color: "#F18929",
     fontWeight: "600",
     fontSize: 17,
-    left:"10%",
+    left:"8%",
     lineHeight: 22,
   },
   iconeVoltar:{
@@ -96,14 +91,10 @@ const styles = StyleSheet.create({
     letterSpacing: 0.352,
     color: "#FFFFFF",
     position:"absolute",
-    top:"15%",
-    left:"10%"
   },
   explicação:{
-    position:"absolute",
+    marginTop:"10%",
     width: 343,
-    top:"22%",
-    left:"10%",
     fontFamily: "Barlow",
     fontStyle: "normal",
     fontWeight: "normal",
@@ -113,6 +104,7 @@ const styles = StyleSheet.create({
     color: "rgba(255, 255, 255, 0.55)",
   },
   botaoCriação: {
+    marginTop:"5%",
     width: 343,
     height:56,
     paddingVertical:8,
@@ -131,16 +123,42 @@ const styles = StyleSheet.create({
       letterSpacing: -0.408,
       color:"#F18929",       
     },
-    ambientes:{
-      position:"absolute",
-      top:"5%",
-      right:"8%",
-      fontWeight: "bold",
-      fontSize: 28,
-      lineHeight: 34,
-      letterSpacing: 0.364,
-      color: "#FFFFFF",
+    dispositivosView:{
+      flexDirection:"row",
+      flexWrap:"wrap",
     },
+    dispositivo:{
+      width:"45%",
+      height: 126,
+      backgroundColor: "rgba(255, 255, 255,0.13)",
+      borderRadius: 12,
+      left: 4,
+      marginEnd:8,
+      marginTop:8,
+      flexDirection:"column",
+      },
+    dispositivoNome:{
+      position:"relative",
+      color: "white",
+      fontSize: 13,
+      fontStyle:"normal",
+      fontWeight: "600",
+      left:"6%", 
+      top: "20%",
+      lineHeight: 18,
+      height: 54,
+      width:"90%", 
+      letterSpacing: -0.078
+    },
+    dispositivoModelo: {
+      top: "23%",
+      left: "6%",
+      color: "rgba(255, 255, 255, 0.5)",
+      fontSize: 11,
+      lineHeight:13,
+      fontStyle:"normal",
+      fontWeight: "normal",
+      },
     
 })
 // Estilos Dinâmicos
@@ -157,18 +175,5 @@ var showText = function(lista){
       }      
     }
 }
- var posicaoBotao = function(lista){
-  if(lista.length>0){
-    return {
-      position:"relative",
-      top:"22%",
-    }}
-    else{
-      return{
-        position:"relative",
-        top:"32%",
-      }      
-    }
- }
 
   export default criarAmbiente;

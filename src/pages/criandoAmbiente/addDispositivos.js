@@ -15,7 +15,7 @@ const addDispositivos = ({route,navigation}) => {
    // Componente Lista de Dispositivos
    const ListaDispo = ({listaDispositivos})=> {
     const item = listaDispositivos.map((dispositivo)=>{
-      const [selecionado,setSelecionado] = useState(false);
+      const [clicado,setClicado] = useState(false);
       var jaSel = false;
       var z = 0; // variável para identificar em que posição de ambiente.dispositivos o dispositivo está
       // Verificando se o ambiente já está na lista
@@ -25,19 +25,19 @@ const addDispositivos = ({route,navigation}) => {
             z = m;
         }   
       }
-      // Se o dispositivo está selecionado ou já está na lista
-      if(selecionado){
-        var urlSelecionado = require('./../../images/icons/ambSel.png');
-        if(!selecionado){
-          var urlSelecionado = require('./../../images/icons/ambNaoSel.png');
-        }
-        if(!jaSel){
-          ambiente.dispositivos.push(dispositivo);
-        }        
-      } else {
-        var urlSelecionado = require('./../../images/icons/ambNaoSel.png');
+      if(clicado){ // foi clicado
         if(jaSel){
           ambiente.dispositivos.splice(z,1);
+          var urlSelecionado = require('./../../images/icons/ambNaoSel.png');
+        } else {
+          ambiente.dispositivos.push(dispositivo); // está clicado mas não está na lista
+          var urlSelecionado = require('./../../images/icons/ambSel.png');
+        }        
+      } else { // não foi clicado
+        if(jaSel){
+          var urlSelecionado = require('./../../images/icons/ambSel.png');
+        } else {
+          var urlSelecionado = require('./../../images/icons/ambNaoSel.png');
         }
       }
     z = z + 1;
@@ -47,7 +47,7 @@ const addDispositivos = ({route,navigation}) => {
           <View style={styles.dispositivo} key={dispositivo.cod}>
             <View style={{flexDirection:"row", top:"8%",left:"8%"}}>
             <Image  source={buscaImagem} style={{marginRight:"20%"}}/>
-            <TouchableWithoutFeedback   onPress={() => {setSelecionado(!selecionado);}}>
+            <TouchableWithoutFeedback   onPress={() => {setClicado(!clicado);}}>
                 <Image source={urlSelecionado} style={{top:"-2%"}}></Image>
             </TouchableWithoutFeedback>
             </View>
@@ -67,7 +67,7 @@ const addDispositivos = ({route,navigation}) => {
                 <Image style={styles.fecharModal} source={require("./../../images/icons/fecharModal.png")}></Image>
               </TouchableWithoutFeedback>
               <View style={{marginVertical:25,flexDirection:"column",left:"5%",width:"70%"}}> 
-                <Text style={styles.titulo}> Dispositivos</Text>
+                <Text style={styles.titulo}> Dispositivos </Text>
                 <Text style={[styles.titulo,{fontSize:22,marginTop:"8%"}]}> Instalados Recentemente</Text>
               </View>
               <View style={styles.dispositivosView}>
