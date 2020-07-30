@@ -10,6 +10,9 @@ import Automacoes from "./automacoes"; // Importando a página Automações
 import Automação from "./automação"; // Importando a página Automação
 import addAmbientes from "./addAmbientes"// Importando a página de adicionar ambientes 
 
+// Páginas relacionadas à criação de ambientes
+import criarAmbiente from './criandoAmbiente/criarAmbiente'
+
 // Páginas relacionadas à criação de gatilhos
 import criarGatilho from './criandoGatilho/criarGatilho1';
 import criarGatilho2 from './criandoGatilho/criarGatilho2';
@@ -52,6 +55,14 @@ function AmbientesStack() {
         options={{
           headerShown: false,
           animationEnabled:false,
+        }}
+      />
+       <Stack.Screen
+        name="Criar Ambiente"
+        component={criarAmbiente}
+        options={{
+          headerShown: false,
+          // animationEnabled:false,
         }}
       />
     </Stack.Navigator>

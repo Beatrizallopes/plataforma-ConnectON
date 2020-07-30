@@ -64,14 +64,14 @@ const BotãoHab = function({habilitou}){
   if(habilitou){
     return(
       <TouchableWithoutFeedback onPress={() => setmodalDesabilitar(true)}>
-          <Text style={styles.desabilitar}> Desabilitar </Text>
+          <Text style={[styles.desabilitar,{color: "#FE453B",}]}> Desabilitar </Text>
         </TouchableWithoutFeedback> 
     )
   }
   else{
     return(
       <TouchableWithoutFeedback onPress={() => sethabilitado(true)}>
-          <Text style={styles.desabilitar}> Habilitar </Text>
+          <Text style={[styles.desabilitar,{color:"#F18929"}]}> Habilitar </Text>
       </TouchableWithoutFeedback> 
     )
   }
@@ -175,7 +175,6 @@ const styles = StyleSheet.create({
   position: "absolute",
   right: 24,
   top: "55%",
-  color: "#FE453B",
   fontWeight: "600",
   fontSize: 17,
  },
@@ -406,10 +405,6 @@ const escurecer = function(estaHabilitado){
 const sumirBotão = function(estaHabilitado){
   if(!estaHabilitado){
     return{
-      height:0,
-      width:0,
-      padding:0,
-      margin:0,
       opacity:0,
     }
   }

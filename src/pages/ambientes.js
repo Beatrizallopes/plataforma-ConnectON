@@ -58,7 +58,15 @@ const Ambientes = ({ navigation}) => {
   // const [ambientesExibidos, setambientesExibidos] = useState(grupos);
   return (
    <ScrollView style={styles.body}>
-     <Header titulo ="Ambientes "></Header>
+     <View style={styles.header}>
+                <TouchableWithoutFeedback onPress={() => navigation.navigate('Criar Ambiente')}>
+                    <Image  style={styles.iconeEsq} source={require('./../images/icons/adicionar.png')}/>
+                </TouchableWithoutFeedback>
+                <TouchableWithoutFeedback onPress={() => alert("Mais Informações")}>
+                    <Image  style={{position: "absolute", right: 66,top: 54}} source={require('./../images/icons/more.png')}/>
+                </TouchableWithoutFeedback>
+            </View> 
+            <Text style={styles.titulo}> Ambientes </Text>
       <Input label="" placeholder="Buscar Ambiente..." />
       <View style={styles.switchFav}>
         <Text style={styles.switchTodos}>Todos</Text>
@@ -132,9 +140,32 @@ const styles = StyleSheet.create({
    flex:1,
    backgroundColor: "#000000",
  },
- Addbutton:{
-   backgroundColor:"red",
+ header:{
+  height: 54,// 54 + 24 = 78
  },
+iconeEsq:{
+  position: "absolute",
+  right: 22,
+  top: 54
+},
+iconeDir:{
+  position: "absolute",
+  right: 66,
+  top: 54
+},
+titulo:{
+  color:"white",
+  fontSize: 34,
+  fontFamily: "Barlow",
+  fontStyle: "normal",
+  fontWeight: "bold",
+  lineHeight: 41,
+  letterSpacing: 0.374,
+  left: 16,
+  right: 16,
+  top:10,
+  marginBottom:18,
+},
  // Estilização da Lista:
  linha:{
   backgroundColor: "linear-gradient(0deg, rgba(255, 255, 255, 0.11), rgba(255, 255, 255, 0.11))",
