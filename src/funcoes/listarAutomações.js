@@ -1,10 +1,10 @@
 // O que irei receber do servidor
 var listaAutomacoes = [
-    {tipo: "Automação",nome:"Expediente", dias:["SEG","TER","QUA"], horario:"08:00/18:00",ehPersistente:true,ambientes:["Escritório 1","Escritório 2","Escritório 3"],cod:"1"},
-    {tipo: "Gatilho",nome:"Hora Extra",dias:"07/13/2020", horario:"13:00",ehPersistente:false,ambientes:["Escritório 1","Escritório 2","Brahma"],cod:"2"},
-    {tipo: "Automação",nome:"Intervalo", dias:["SEG","TER","QUA","QUI","SEX"], horario:"14:00",ehPersistente:false,ambientes:["Copa","Descompressão","Estacionamento"],cod:"3"},
-     {tipo: "Gatilho",nome:"Teste",dias:"07/08/2020", horario:"18:30",ehPersistente:false,ambientes:["Escritório 1","Escritório 2","Escritório 3", "Estacionamento","Copa","Descompressão","Brahma"],cod:"4"},
-    {tipo: "Automação",nome:"Automação 2", dias:["SEG","QUA","QUI","SEX"], horario:"01:00",ambientes:["RH"], ehPersistente:false,cod:"5"},
+    {tipo: "Automação",nome:"Expediente", dias:["SEG","TER","QUA"], horario:"08:00/18:00",ehPersistente:true,ambientes:["Escritório 1","Escritório 2","Escritório 3"],cod:"1",habilitado:true},
+    {tipo: "Gatilho",nome:"Hora Extra",dias:"07/13/2020", horario:"13:00",ehPersistente:false,ambientes:["Escritório 1","Escritório 2","Brahma"],cod:"2",habilitado:true},
+    {tipo: "Automação",nome:"Intervalo", dias:["SEG","TER","QUA","QUI","SEX"], horario:"14:00",ehPersistente:false,ambientes:["Copa","Descompressão","Estacionamento"],cod:"3",habilitado:true},
+     {tipo: "Gatilho",nome:"Teste",dias:"07/08/2020", horario:"18:30",ehPersistente:false,ambientes:["Escritório 1","Escritório 2","Escritório 3", "Estacionamento","Copa","Descompressão","Brahma"],cod:"4",habilitado:true},
+    {tipo: "Automação",nome:"Automação 2", dias:["SEG","QUA","QUI","SEX"], horario:"01:00",ambientes:["RH"], ehPersistente:false,cod:"5",habilitado:true},
   ]
   var data = "07/08/2020"; // Por enquanto a data está no formato MM/DD/AA
   var hora = "17:00";

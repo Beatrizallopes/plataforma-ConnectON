@@ -8,6 +8,29 @@ import ListaAmb from '../components/listaAmbientes';
 const Automação = ({route,navigation}) => { 
   const {automação} = route.params;
   const [modalDesabilitar,setmodalDesabilitar] = useState(false);
+  const [habilitado,sethabilitado] = useState(automação.habilitado);
+  automação.habilitado = habilitado;
+  const [opção,setopção] = useState("0");
+  // Opções de desabilitar
+  var opção1 = false// Desativar por tempo indeterminado
+  var opção2 = false // Ativar novamente após 8 horas
+  var opção3 = false // Ativar novamente após 24 horas
+  if(opção == "1"){
+    opção1 = true;
+    opção2 = false;
+    opção3 = false;
+  }
+  if(opção == "2"){
+    opção1 = false;
+    opção2 = true;
+    opção3 = false;
+  }
+  if(opção == "3"){
+    opção1 = false;
+    opção2 = false;
+    opção3 = true;
+  }
+
   var texto = automação.horario;
   var ambientes = identificaAmbientes(automação.ambientes)
   if(automação.tipo == "Automação"){
@@ -59,11 +82,25 @@ const Automação = ({route,navigation}) => {
               <Image style={styles.closeButton} source={require('../images/icons/fecharModal1.png')}/> 
             </TouchableWithoutFeedback> 
             <Text style={styles.perguntaModal} >Por quanto tempo você quer desabilitar <Text style={{fontWeight:"bold"}}>{automação.nome}</Text>?</Text>
-            <Text style={styles.opçõesModal}>Desativar por tempo indeterminado</Text>
-            <Text style={styles.opçõesModal}>Ativar novamente após 8 horas</Text>
-            <Text style={[styles.opçõesModal,{borderBottomColor: "rgba(255, 255, 255, 0.12)",borderBottomWidth: 1,}]}>Ativar novamente após 24 horas</Text>
+            <TouchableWithoutFeedback onPress={()=> setopção("1")}>
+                <Text style={[styles.opçõesModal,opçãoEscolhida(opção1)]}>Desativar por tempo indeterminado</Text>
+            </TouchableWithoutFeedback>
+            <TouchableWithoutFeedback onPress={()=> setopção("2")}>
+              <Text style={[styles.opçõesModal,opçãoEscolhida(opção2)]}>Ativar novamente após 8 horas</Text>
+            </TouchableWithoutFeedback>
+            <TouchableWithoutFeedback onPress={()=> setopção("3")}>
+                <Text style={[styles.opçõesModal,{borderBottomColor: "rgba(255, 255, 255, 0.12)"},opçãoEscolhida(opção3)]}>Ativar novamente após 24 horas</Text>
+            </TouchableWithoutFeedback>
             <Text style={styles.confirmeSenha}>CONFIRME SUA SENHA</Text>
             <TextInput style={styles.inputSenha}>  <Image source={require('../images/icons/chaveSenha.png')}></Image>  Sua senha</TextInput>
+            <View style={{flexDirection:"row",left:"20%"}}>
+              <TouchableWithoutFeedback onPress={()=> setmodalDesabilitar(false)}> 
+                <Text style={[styles.opçãoInf,{borderRightWidth:1,borderRightColor:"rgba(255, 255, 255, 0.12)",paddingRight:"7%"}]}>Cancelar</Text>
+              </TouchableWithoutFeedback>
+              <TouchableWithoutFeedback onPress={()=> sethabilitado(false)}>
+                <Text style={styles.opçãoInf}>Desabilitar</Text>
+              </TouchableWithoutFeedback>
+            </View>
           </View>
         </View>
       </Modal>
@@ -198,7 +235,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   modalView: {
-    height:"60%",
+    height:"68%",
     width:"100%",
     margin: 20,
     backgroundColor:  "rgba(70, 70, 70, 0.95)",
@@ -251,17 +288,21 @@ const styles = StyleSheet.create({
     fontSize: 17,
     lineHeight: 22, 
     letterSpacing: -0.408,
-    color: "rgba(255, 255, 255, 0.6)",
-    paddingBottom:20,
+    paddingHorizontal:12,
+    paddingVertical:4,
+    marginHorizontal:16,
+    marginBottom:10,
   },
   confirmeSenha:{
     color: "rgba(255, 255, 255, 0.5)",
     fontSize:13,
     top:"23%",
-    right:"35%"
+    right:"35%",
+    // borderTopWidth: 1,
+    // borderTopColor: "rgba(255, 255, 255, 0.12)"
   },
   inputSenha:{
-    top:"25%",
+    top:"30%",
     right:"6%",
     flexDirection: "row",
     paddingHorizontal: 10,
@@ -275,6 +316,15 @@ const styles = StyleSheet.create({
     letterSpacing: -0.408,
     color: "rgba(255, 255, 255, 0.3)"
     
+  },
+  opçãoInf:{
+    top:"35%",
+    marginRight:"7%",
+    fontWeight: "600",
+    fontSize: 17,
+    lineHeight: 22,
+    letterSpacing: -0.408,
+    color: "#F18929",
   }
 })
 // Função para pegar info sobre os ambientes
@@ -289,6 +339,21 @@ for(var i=0;i<listaAmbientes.length;i++){
 }
 return ambientes;
 }
+// Função para vizualização da opção de desabilitar escolhida
+const opçãoEscolhida = function(status){
+  if(status){
+    return{
+      color: "rgba(255, 255, 255, 0.6)",
+      backgroundColor: "rgba(255, 255, 255, 0.15)",
+      borderRadius: 8,
+    }
+   } else {
+      return{
+        color: "rgba(255, 255, 255, 0.6)",
+      }
+    }
+}
+
 // Exportando a página ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 export default Automação;
 
