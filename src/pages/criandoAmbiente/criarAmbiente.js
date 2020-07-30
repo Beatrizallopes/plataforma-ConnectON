@@ -2,8 +2,8 @@
 import React from 'react';
 import { StyleSheet, View, Text, ScrollView, Image,  Modal,TouchableWithoutFeedback} from 'react-native';
 
-const criarAmbiente = ({navigation}) => {
-  const ambiente = {nome:"",dispositivos:[],cor:""}
+const criarAmbiente = ({route,navigation}) => {
+  const {ambiente} = route.params;
   return(
       <ScrollView>
         <Modal animationType="slide" transparent={true} visible={true} >
@@ -13,16 +13,16 @@ const criarAmbiente = ({navigation}) => {
                 <Text style={styles.voltar}> Cancelar  </Text>               
                  </TouchableWithoutFeedback>
                 <TouchableWithoutFeedback onPress={() => navigation.navigate("Criar Ambiente 2",{ambiente:ambiente})}>
-                    <Text style={styles.seguinte}> Próximo </Text>
+                    <Text style={styles.proximo}> Próximo </Text>
                 </TouchableWithoutFeedback> 
-                <Text style={styles.quando}>Novo Ambiente </Text>
+                <Text style={styles.quando}>Novo Ambiente  </Text>
                 <Text style={[showText(ambiente.dispositivos),styles.explicação]}>Adicione dispositivos para controlar ou executar tarefas automatizadas.</Text>
                 {/* <View style={{position:"absolute",top:"35%"}}>
                   <ListaAmbSel lista={automação.ambientesSel}></ListaAmbSel>
                 </View> */}
-                <TouchableWithoutFeedback onPress={() => navigation.navigate("Selecionar Dispositivos",{ambiente:ambiente})}>
+                <TouchableWithoutFeedback onPress={() => navigation.navigate("Adicionar dispositivos",{ambiente:ambiente})}>
                   <View style={[posicaoBotao(ambiente.dispositivos),styles.botaoCriação]}>
-                    <Text style={[styles.textoBotao,{color:"#F18929"}]}>  <Image source={require('./../../images/icons/selecionarAmbientesAuto.png')}></Image>  Adicionar dispositivos</Text>
+                    <Text style={[styles.textoBotao,{color:"#F18929"}]}>  <Image source={require('./../../images/icons/addAmbiente.png')}></Image>  Adicionar dispositivos</Text>
                   </View>
                 </TouchableWithoutFeedback>
             </View>
@@ -67,10 +67,10 @@ const styles = StyleSheet.create({
     backgroundColor: "#000000",
     alignItems: "center", 
   },
-  seguinte:{
+  proximo:{
     position:"absolute",
     top:"5%",
-    color: "#F18929",
+    color: "rgba(255, 255, 255, 0.3)",
     fontWeight: "600",
     fontSize: 17,
     right:"5%",

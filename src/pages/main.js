@@ -12,6 +12,8 @@ import addAmbientes from "./addAmbientes"// Importando a página de adicionar am
 
 // Páginas relacionadas à criação de ambientes
 import criarAmbiente from './criandoAmbiente/criarAmbiente'
+import addDispositivos from './criandoAmbiente/addDispositivos'
+
 
 // Páginas relacionadas à criação de gatilhos
 import criarGatilho from './criandoGatilho/criarGatilho1';
@@ -62,7 +64,13 @@ function AmbientesStack() {
         component={criarAmbiente}
         options={{
           headerShown: false,
-          // animationEnabled:false,
+        }}
+      />
+        <Stack.Screen
+        name="Adicionar dispositivos"
+        component={addDispositivos}
+        options={{
+          headerShown: false,
         }}
       />
     </Stack.Navigator>

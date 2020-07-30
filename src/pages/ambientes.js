@@ -54,12 +54,12 @@ import Header from '../components/header';
         // }
         
 // Componente referente à página Ambientes (que utiliza o componente criado anteriormente) /////////////////////////////////////////////////
-const Ambientes = ({ navigation}) => {
-  // const [ambientesExibidos, setambientesExibidos] = useState(grupos);
+const Ambientes = ({navigation}) => {
+  const ambiente = {nome:"Ambiente",dispositivos:[],cor:""};
   return (
    <ScrollView style={styles.body}>
      <View style={styles.header}>
-                <TouchableWithoutFeedback onPress={() => navigation.navigate('Criar Ambiente')}>
+                <TouchableWithoutFeedback onPress={() => navigation.navigate("Criar Ambiente",{ambiente:ambiente})}>
                     <Image  style={styles.iconeEsq} source={require('./../images/icons/adicionar.png')}/>
                 </TouchableWithoutFeedback>
                 <TouchableWithoutFeedback onPress={() => alert("Mais Informações")}>

@@ -2,11 +2,9 @@
 import React,{useState} from 'react';
 import { StyleSheet, View, Text, ScrollView, TextInput, Image,Modal, Button,  FlatList, SafeAreaView,TouchableWithoutFeedback,TouchableHighlight,} from 'react-native';
 import listaAmbientes from "../dados";
-import { ReloadInstructions } from 'react-native/Libraries/NewAppScreen';
 import grupos from "../funcoes/separarGruposAlfa";
 import Input from '../components/input';
 import CardAuto from "../components/cardAutomaçãoDisp"
-import Controle from "../components/controle"
 
 // Alguns dados utilizados para "simular" o banco de dados ///////////////////////////////////////////////////////////////////////////////////
 
@@ -19,7 +17,6 @@ var listaDispositivos = [
   {nome:"Ar-Condicionado Digital Inverter 17,000 Btu/h Frio 8-Polo", marca:"Sansung", modelo:"AR18NVFPCWKNAZ", cod:"1", temperatura: 24, velocidade:3},
   {nome:"Ar-Condicionado Split Hi Wall LG Dual Inverter Voice 12000 ", marca:"Sansung", modelo:"S4-W12JA31A", cod:"2", temperatura:17,velocidade:2},
   {nome:"Ar-Condicionado Split Hi Wall LG  Inverter ", marca:"Sansung", modelo:"S4-W12JA31B", cod:"3", temperatura:18,velocidade:2},
-
 ]
 var ambiente = listaAmbientes[0];
 
