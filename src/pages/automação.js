@@ -79,7 +79,7 @@ const BotãoHab = function({habilitou}){
 //
   return (   
   <ScrollView  style={styles.body}  >
-  <View style={{ paddingBottom: padding}}>
+  <View style={{ paddingBottom: padding,flexDirection:"column"}}>
      <View style={styles.header}>
         <TouchableWithoutFeedback onPress={() => navigation.navigate("Automações") }>
           <Image  style={{position: "absolute", top: "55%"}} source={require('./../images/icons/setaLaranjaEsq.png')}/>
@@ -96,15 +96,17 @@ const BotãoHab = function({habilitou}){
               <Week daysAuto={automação.dias}></Week>
           </View>
           <Text style={styles.ambientes}> Ambientes</Text>
-          <TouchableWithoutFeedback>
-            <View style={[styles.botãoAddAmb,sumirBotão(automação.habilitado)]}>
-              <Image style={{alignSelf:"center",left:"60%"}} source={require('../images/icons/addAmbiente.png')}></Image>
-              <Text style={styles.textoBotãoAmb}>Adicionar ambientes</Text>
-            </View>
-          </TouchableWithoutFeedback>
-          <View style={{top:"10%",left:"6%"}}>
+          {/* Lista de Ambientes */}
+          <View style={{left:"6%"}}>
               <ListaAmb lista={ambientes}></ListaAmb>
           </View>
+              {/* Botão Adicionar Ambientes */}
+            <TouchableWithoutFeedback>
+              <View style={[styles.botãoAddAmb,sumirBotão(automação.habilitado)]}>
+                <Image style={{alignSelf:"center",left:"60%"}} source={require('../images/icons/addAmbiente.png')}></Image>
+                <Text style={styles.textoBotãoAmb}>Adicionar ambientes</Text>
+              </View>
+          </TouchableWithoutFeedback>
           {/*  Modal de desabilitar*/}
           <Modal animationType="slide" transparent={true} visible={modalDesabilitar} >
             <View style={styles.centeredView}>
@@ -187,7 +189,7 @@ const styles = StyleSheet.create({
  },
  detalhes:{
   position:"relative",
-  top:"4%",
+  marginTop:"4%",
   left: "6%",
   width: 343,
   height: 154,
@@ -195,17 +197,16 @@ const styles = StyleSheet.create({
   borderRadius:  14,
  },
  ambientes:{
-   top:"8%",
+   marginTop:"4%",
    left: "6%",
    color:"white",
    fontSize:17,
    fontWeight:"600",
    lineHeight:22,
-   
+   marginBottom:20,
  },
  automaçãoProxEv:{
   position:"relative",
-  // width:128,
   fontFamily: "Barlow",
   color: "#FFFFFF",
   fontSize: 11,
@@ -241,20 +242,18 @@ const styles = StyleSheet.create({
     color: "#FFFFFF",
   },
   botãoAddAmb:{
-    width:323,
     height:50,
-    display: "flex",
     flexDirection: "row",
     paddingVertical: 8,
     paddingHorizontal: 32,
     position:"relative",
-    top: "12%",
-    right:"2%",
+    left: "-2%",
+    width: 343,
     backgroundColor: "rgba(241, 137, 41, 0.3)",
     borderRadius: 12,
     alignSelf: "center",
-    marginVertical: 16,
     textAlign:"center",
+    marginTop:"5%",
   },
   textoBotãoAmb:{
     fontWeight: "600",
