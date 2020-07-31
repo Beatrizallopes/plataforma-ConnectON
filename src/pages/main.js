@@ -5,7 +5,7 @@ import { Image } from 'react-native'; // Importando os componentes que vão ser 
 import { createStackNavigator } from '@react-navigation/stack';
 import Rooms from "./rooms"; 
 import FavoriteRooms from "./favoriteRooms"; 
-import Ambiente from "./ambiente" // Importando a página de Ambiente
+import Room from "./room";
 import Automacoes from "./automacoes"; // Importando a página Automações
 import Automação from "./automação"; // Importando a página Automação
 import addAmbientes from "./addAmbientes"// Importando a página de adicionar ambientes 
@@ -52,8 +52,8 @@ function AmbientesStack() {
         }}
       />
       <Stack.Screen
-        name="Ambiente"
-        component={Ambiente}
+        name="Room"
+        component={Room}
         options={{
           headerShown: false,
           animationEnabled:false,

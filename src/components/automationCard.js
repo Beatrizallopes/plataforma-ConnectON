@@ -1,24 +1,36 @@
-// Importações necessárias
+// List of required imports 
 import React from 'react';
 import { StyleSheet, View, Text} from 'react-native';
 
-// Componente Input
-const AutomacaoCard = function({tipo,nome,proxEvento,mensagem,ambientes,ambientesInfo}){
-
+// MAIN COMPONENT - Component AutomationCard: used to display information about the automation/trigger
+const AutomationCard = function({type,name,nextEvent,message,roomsInfo}){
   return(
-        <View style={[styles.automação,tipoAuto(tipo)]}>
-          <Text style={styles.automaçãoMensagem}>{mensagem}:</Text>
-          <Text style={styles.automaçãoProxEv}>{proxEvento}</Text>
-          <Text style={styles.automaçãoNome}>{nome}</Text>
-          <Text style={styles.automaçãoAmbientes}>{ambientesInfo}</Text>
-
+        <View style={[styles.automation,typeAuto(type)]}>
+          <Text style={styles.automationMessage}>{message}:</Text>
+          <Text style={styles.automationNextEvent}>{nextEvent}</Text>
+          <Text style={styles.automationName}>{name}</Text>
+          <Text style={styles.automationRooms}>{roomsInfo}</Text>
        </View>
-        )
+        )}
 
+// Function typeAuto(type): function that identifies the type of the automation (if it is an automation or a trigger)
+var typeAuto = function typeAuto(type) {
+  if(type === 'Automação'){
+    return {
+      backgroundColor:"#568AEA",
+    }
+  };
+
+  if(type === 'Gatilho'){
+    return {
+      backgroundColor:"#D66075",
+    }
+  }
 }
-// Estilo do componente
+
+// Styling the component
 const styles = StyleSheet.create({
-    automação:{
+    automation:{
         width: "90%",
         height: 154,
         left: "5%",
@@ -28,7 +40,7 @@ const styles = StyleSheet.create({
         marginEnd:8,
         marginTop:8,
       },
-    automaçãoNome: {
+    automationName: {
         position:"relative",
         left: "4%",
         top: "28%",
@@ -39,15 +51,14 @@ const styles = StyleSheet.create({
         letterSpacing:-0.24,
         lineHeight: 20
     },
-    automaçãoHorario:{
+   automationSchedule:{
         color: "rgba(255, 255, 255, 0.6)",
         fontSize: 11,
         left: 8, 
         top: 8
     },
-    automaçãoProxEv:{
+    automationNextEvent:{
       position:"relative",
-      // width:128,
       fontFamily: "Barlow",
       color: "#FFFFFF",
       fontSize: 11,
@@ -59,7 +70,7 @@ const styles = StyleSheet.create({
       letterSpacing:0.374,
       alignSelf:"flex-start",
       },
-      automaçãoMensagem:{
+      automationMessage:{
         position:"relative",
         height:22,
         left:"4%",
@@ -71,7 +82,7 @@ const styles = StyleSheet.create({
         lineHeight: 22,
         alignSelf:"flex-start"
       },
-      automaçãoAmbientes:{
+      automationRooms:{
         position:"relative",
         height:14,
         left:"4%",
@@ -86,19 +97,6 @@ const styles = StyleSheet.create({
 
 })
 
-// Função que estabelece a cor de acordo com o tipo:
-var tipoAuto = function(tipo) {
-  if(tipo=='Automação'){
-    return {
-      backgroundColor:"#568AEA",
-    }
-  };
-  if(tipo=='Gatilho'){
-    return {
-      backgroundColor:"#D66075",
-    }
-  }
-}
-// Exportando o componente
-export default AutomacaoCard
+// Exporting the main component
+export default AutomationCard
 

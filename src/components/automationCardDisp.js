@@ -1,21 +1,21 @@
-// Importações necessárias
+// List of required imports 
 import React from 'react';
 import { StyleSheet, View, Text} from 'react-native';
 
-// Componente Input
-const CardAuto = function({nome,horario,proxEvento,mensagem}){
+// MAIN COMPONENT - Component AutomationCard: used to display information about the automation/trigger (this one is used inside the Room's page)
+const AutomationCard = function({name,schedule,nextEvent,message}){
     return(
-        <View style={styles.automação}>
-        <Text style={styles.automaçãoNome}>{nome}</Text>
-        <Text style={styles.automaçãoHorario}>{horario}</Text>
-        <Text style={styles.automaçãoProxEv}>{proxEvento}</Text>
-        <Text style={styles.automaçãoMensagem}>{mensagem}</Text>
+        <View style={styles.automation}>
+        <Text style={styles.automationName}>{name}</Text>
+        <Text style={styles.automationSchedule}>{schedule}</Text>
+        <Text style={styles.automationNextEvent}>{nextEvent}</Text>
+        <Text style={styles.automationMessage}>{message}</Text>
        </View>
         )
 }
 // Estilo do componente
 const styles = StyleSheet.create({
-    automação:{
+    automation:{
         width: 248,
         height: 126,
         backgroundColor: "rgba(255, 255, 255,0.13)",
@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
         marginEnd:8,
         marginTop:23,
       },
-    automaçãoNome: {
+    automationName: {
         color: "white",
         fontSize: 17,
         fontWeight: "600",
@@ -32,13 +32,13 @@ const styles = StyleSheet.create({
         top: 8,
         lineHeight: 22
     },
-    automaçãoHorario:{
+    automationSchedule:{
         color: "rgba(255, 255, 255, 0.6)",
         fontSize: 11,
         left: 8, 
         top: 8
     },
-    automaçãoProxEv:{
+    automationNextEvent:{
         color: "white",
         fontSize: 15,
         fontStyle:"normal",
@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
         letterSpacing: -0.24,
         lineHeight: 20
       },
-      automaçãoMensagem:{
+      automationMessage:{
         color: "rgba(255, 255, 255, 0.6)",
         fontSize: 11,fontStyle:"normal",
         fontWeight: "normal", 
@@ -60,5 +60,5 @@ const styles = StyleSheet.create({
 })
 
 // Exportando o componente
-export default CardAuto
+export default AutomationCard
 

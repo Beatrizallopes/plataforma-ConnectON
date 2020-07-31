@@ -2,7 +2,7 @@
 import React,{useState}   from 'react';
 import { StyleSheet, ScrollView,View, Modal,TouchableWithoutFeedback,Image,Text,TextInput} from 'react-native';
 import Header from '../components/header'
-import AutomacaoCard from '../components/cardAutomação'
+import AutomationCard from '../components/automationCard'
 import listaAutomacoesOrd from '../funcoes/listarAutomações';
 import { useNavigation } from '@react-navigation/native';
 
@@ -15,7 +15,7 @@ const ListaAuto = () => {
     return(
       <TouchableWithoutFeedback onPress={() => navigation.navigate("Automação",{automação:automacao})} key={automacao.cod}>
       <View>
-      <AutomacaoCard tipo={automacao.tipo} nome={automacao.nome} proxEvento={automacao.tempoRestante} mensagem={automacao.mensagem} ambientes={automacao.ambientes} ambientesInfo = {automacao.ambientesInfo}></AutomacaoCard>
+      <AutomationCard type={automacao.tipo} name={automacao.nome} nextEvent={automacao.tempoRestante} message={automacao.mensagem} rooms={automacao.ambientes} roomsInfo = {automacao.ambientesInfo}></AutomationCard>
       </View>
       </TouchableWithoutFeedback>
     )

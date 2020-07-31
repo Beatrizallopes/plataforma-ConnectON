@@ -33,7 +33,7 @@ import Input from '../components/input';
                   <Image source={iconFavoriteURL} style={{left: 30}, {top: 12}} ></Image>
               </TouchableWithoutFeedback>
               <Text style={styles.text}>{room.ehFavorito}{room.nome}</Text> 
-              <TouchableWithoutFeedback onPress={() => navigation.navigate('Ambiente',{grupoSelecionado:groupNumber,ambienteSelecionado:room.id,codAmbiente:room.cod})}>             
+              <TouchableWithoutFeedback onPress={() => navigation.navigate('Room',{selectedGroup:groupNumber,selectedRoom:room.id,roomCod:room.cod})}>             
                   <Text style={styles.infoQuantity}>{room.qtdMod} 
                       <Image style={{borderWidth:10,borderColor:"red"}} source={require('./../images/icons/setaDireita.png')}/>         
                   </Text>
