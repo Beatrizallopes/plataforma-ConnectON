@@ -3,8 +3,8 @@ import { NavigationContainer, useIsFocused } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Image } from 'react-native'; // Importando os componentes que vão ser usados
 import { createStackNavigator } from '@react-navigation/stack';
-import Ambientes from "./ambientes"; // Importando a página Ambientes
-import AmbientesFav from "./ambientesFavoritos"; // Importando a página Ambientes
+import Rooms from "./rooms"; 
+import FavoriteRooms from "./favoriteRooms"; 
 import Ambiente from "./ambiente" // Importando a página de Ambiente
 import Automacoes from "./automacoes"; // Importando a página Automações
 import Automação from "./automação"; // Importando a página Automação
@@ -36,16 +36,16 @@ function AmbientesStack() {
   return (
     <Stack.Navigator initialRouteName='Ambientes'  >
       <Stack.Screen
-        name="Ambientes"
-        component={Ambientes}
+        name="Rooms"
+        component={Rooms}
         options={{
           headerShown: false,
           animationEnabled:false,
         }}
       />
      <Stack.Screen
-        name="Ambientes Favoritos"
-        component={AmbientesFav}
+        name="Favorite Rooms"
+        component={FavoriteRooms}
         options={{
           headerShown: false,
           animationEnabled:false,
