@@ -20,7 +20,7 @@ const creatingTrigger3 = ({route,navigation}) => {
                 <Text style={styles.title}> Novo Gatilho </Text>
                 <Text style={styles.when}>Ações </Text>
                 <Text style={styles.instruction}>Crie ações a serem executadas</Text>
-                <TouchableWithoutFeedback onPress={() => navigation.navigate("Choose Actions Trigger",{trigger:trigger})}>
+                <TouchableWithoutFeedback onPress={() => navigation.navigate("Choose Trigger Actions",{trigger:trigger})}>
                   <View style={[styles.createButton]}>
                     <Text style={[styles.buttonText,{color:"#D66075"}]}> 
                     <Image source={require('./../../images/icons/escolherAções.png')}></Image>  Escolher ações</Text>

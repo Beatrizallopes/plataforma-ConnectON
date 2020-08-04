@@ -23,9 +23,8 @@ import creatingTrigger from './creatingTrigger/creatingTrigger1';
 import creatingTrigger2 from './creatingTrigger/creatingTrigger2';
 import selectRoomsTrig from './creatingTrigger/selectRooms';
 import creatingTrigger3 from './creatingTrigger/creatingTrigger3';
-import criarGatilho3 from './criandoGatilho/criarGatilho3';
-import escolherAções from './criandoGatilho/escolherAções';
-import criarGatilho4 from './criandoGatilho/criarGatilho4';
+import chooseActionsTrig from './creatingTrigger/chooseActions';
+import creatingTrigger4 from './creatingTrigger/creatingTrigger4';
 
 // Páginas relacionadas à criação de automação
 import creatingAutomation from './creatingAutomation/creatingAuto1';
@@ -34,7 +33,6 @@ import selectRoomsAuto from './creatingAutomation/selectRooms';
 import creatingAuto3 from './creatingAutomation/creatingAuto3';
 import chooseActionsAuto from './creatingAutomation/chooseActions';
 import creatingAuto4 from './creatingAutomation/creatingAuto4';
-import createAuto4 from './creatingAutomation/creatingAuto4';
 // import escolherAçõesAuto from './creatingAutomation/escolherAçõesAuto';
 // import criarAutomação4 from './creatingAutomation/criarAutomação4';
 
@@ -138,15 +136,15 @@ function AutomacoesStack() {
         }}
       />
       <Stack.Screen
-        name="Escolher Ações"
-        component={escolherAções}
+        name="Choose Trigger Actions"
+        component={chooseActionsTrig}
         options={{
           headerShown: false,
         }}
       />
       <Stack.Screen
-        name="Criar Gatilho 4"
-        component={criarGatilho4}
+        name="Create Trigger 4"
+        component={creatingTrigger4}
         options={{
           headerShown: false,
         }}
@@ -189,7 +187,7 @@ function AutomacoesStack() {
       />
       <Stack.Screen
         name="Create Automation 4"
-        component={createAuto4}
+        component={creatingAuto4}
         options={{
           headerShown: false,
         }}

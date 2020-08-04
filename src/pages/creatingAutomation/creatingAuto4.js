@@ -2,8 +2,8 @@
 import React,{useState, useEffect}   from 'react';
 import { StyleSheet, View, Text, ScrollView, Image,  Modal,TouchableWithoutFeedback,TextInput,Switch} from 'react-native';
 
-// MAIN COMPONENT: createAuto4
-const createAuto4= ({route,navigation}) => {
+// MAIN COMPONENT: creatingAuto4
+const creatingAuto4= ({route,navigation}) => {
   const {automation} = route.params;
   const [value, onChangeText] = React.useState(automation.name);
   const [isEnabled, setIsEnabled] = useState(false);
@@ -20,7 +20,7 @@ return(
                 <Image  style={styles.backIcon} source={require('./../../images/icons/voltarAutomação.png')}/>
               </TouchableWithoutFeedback>
               <Text style={styles.back}> Voltar  </Text>
-              <TouchableWithoutFeedback onPress={() => {alert(texto);navigation.navigate("Automations")}} >
+              <TouchableWithoutFeedback onPress={() => {navigation.navigate("Automations")}} >
                   <Text style={styles.next}> Concluir </Text>
               </TouchableWithoutFeedback> 
               <Text style={styles.title}> Nova Automação </Text>
@@ -147,4 +147,4 @@ inputLabel:{
 
   })
 
-  export default createAuto4;
+  export default creatingAuto4;

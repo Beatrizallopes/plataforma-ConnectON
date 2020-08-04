@@ -1,36 +1,29 @@
-// Importações necessárias
+// List of required imports
 import React,{useState, useEffect}   from 'react';
-import { StyleSheet, View, Text, ScrollView, Image,  Modal,TouchableWithoutFeedback,TextInput,KeyboardAvoidingView} from 'react-native';
+import { StyleSheet, View, Text, ScrollView, Image,  Modal,TouchableWithoutFeedback,TextInput,Switch} from 'react-native';
 
-const criarGatilho4 = ({route,navigation}) => {
-  const {gatilho} = route.params;
-  const [value, onChangeText] = React.useState(gatilho.nome);
-  gatilho.nome = value;
-  // Código apenas para debugar
-  var ambientes = "";
-  for(var i=0;i<gatilho.ambientesSel.length;i++){
-    ambientes = ambientes + "/G: " + gatilho.ambientesSel[i].grupo + " A: " + gatilho.ambientesSel[i].ambiente;
-  }
-  var texto = "Nome: " + gatilho.nome + "/Horário: " + gatilho.horario + "/Dias: " + gatilho.diasSemana + "/Ambientes: " + ambientes;
-  //
+// MAIN COMPONENT: creatingTrigger4
+const creatingTrigger4= ({route,navigation}) => {
+  const {trigger} = route.params;
+  const [value, onChangeText] = React.useState(trigger.name);
+  trigger.name = value;
+
 return(
     <ScrollView>
       <Modal animationType="slide" transparent={true} visible={true} >
         <View style={styles.centeredView}>
-          <View style={styles.modalSelecionarAmb}>
-              <TouchableWithoutFeedback onPress={() => navigation.navigate("Criar Gatilho 3",{gatilho:gatilho})}>
-                <Image  style={styles.iconeVoltar} source={require('./../../images/icons/voltarGatilho.png')}/>
+          <View style={styles.modal}>
+              <TouchableWithoutFeedback onPress={() => navigation.navigate("Create Trigger 3",{trigger:trigger})}>
+                <Image  style={styles.backIcon} source={require('./../../images/icons/voltarGatilho.png')}/>
               </TouchableWithoutFeedback>
-              <Text style={styles.voltar}> Voltar  </Text>
-              <TouchableWithoutFeedback onPress={() => {alert(texto);navigation.navigate("Automações")}} >
-                  <Text style={styles.seguinte}> Concluir </Text>
+              <Text style={styles.back}> Voltar  </Text>
+              <TouchableWithoutFeedback onPress={() => {navigation.navigate("Automations")}} >
+                  <Text style={styles.next}> Concluir </Text>
               </TouchableWithoutFeedback> 
-              <Text style={styles.titulo}>
-                Novo Gatilho
-              </Text>
+              <Text style={styles.title}> Novo Gatilho </Text>
               <View style={styles.input}>
                 <Text style={styles.inputLabel}>NOME DO GATILHO </Text>
-                <TextInput style={styles.campoPesquisa}
+                <TextInput style={styles.searchInput}
                 onChangeText={text => onChangeText(text)}
                 value={value}
                 ></TextInput>
@@ -41,20 +34,19 @@ return(
     </ScrollView>
   )
 }
-// Componente grupos de ambientes
+// Styling the components
 const styles = StyleSheet.create({
-
   body: {
     flex:1,
     backgroundColor: "#000000",
   },
-  modalSelecionarAmb: {
+  modal: {
     height:"100%",
     width:"100%",
     backgroundColor: "#000000",
     alignItems: "center", 
   },
-  titulo:{
+  title:{
     position:"absolute",
     color:"white",
     fontSize: 17,
@@ -66,7 +58,7 @@ const styles = StyleSheet.create({
     top:"5%",
     marginHorizontal:15,
   },
-  seguinte:{
+  next:{
     position:"absolute",
     top:"5%",
     color: "#D66075",
@@ -74,7 +66,7 @@ const styles = StyleSheet.create({
     fontSize: 17,
     right:"5%",
   },
-  voltar:{
+  back:{
     position:"absolute",
     top:"5%",
     color: "#D66075",
@@ -83,7 +75,7 @@ const styles = StyleSheet.create({
     left:"10%",
     lineHeight: 22,
   },
-  iconeVoltar:{
+  backIcon:{
     position: "absolute", 
     top: "5%",
     left:"5%"
@@ -91,10 +83,10 @@ const styles = StyleSheet.create({
   input:{
     position:'absolute',
     top:"12%",
-    left:"10%",
-    width:"82%"
+    left:"8%",
+    width:"88%"
   },
-  campoPesquisa:{
+  searchInput:{
     height:44,
     padding: 12,
     top:"20%",
@@ -108,6 +100,33 @@ inputLabel:{
     fontSize: 13,
     color:"rgba(255, 255, 255, 0.5)",
 },
+  textSeg:{
+    position:"absolute",
+    top:"25%",
+    left:"10%",
+  },
+  selectFunc:{
+    width:"88%",
+    height:48,
+    top:"30%",
+    left:"2%",
+    backgroundColor: "linear-gradient(0deg, rgba(255, 255, 255, 0.11), rgba(255, 255, 255, 0.11)), #000000",
+    borderRadius: 8,
+  },
+  instructions:{
+    width: 343,
+    height: 40,
+    left: "2%",
+    top: "33%",
+    fontFamily: "Barlow",
+    fontStyle: "normal",
+    fontWeight: "normal",
+    fontSize: 15,
+    lineHeight: 20,
+    letterSpacing: -0.24,
+    color: "rgba(255, 255, 255, 0.55)"
+  }
+
   })
 
-  export default criarGatilho4;
+  export default creatingTrigger4;
