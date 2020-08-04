@@ -43,8 +43,8 @@ const ListSelRooms = ({list}) =>{
   if(list.length>0){
     var x = 0;
     var selectedRoom = list.map((room) => { 
-      var roomName = grupos[room.grupo][room.ambiente].nome;
-      var color =  grupos[room.grupo][room.ambiente].color;
+      var roomName = grupos[room.group][room.room].nome;
+      var color =  grupos[room.group][room.room].cor;
       var position = roomPosition(x,list.length-1);
       x = x + 1;
       return(

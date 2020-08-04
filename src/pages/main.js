@@ -29,7 +29,8 @@ import criarGatilho4 from './criandoGatilho/criarGatilho4';
 import creatingAutomation from './creatingAutomation/creatingAuto1';
 import creatingAuto2 from './creatingAutomation/creatingAuto2';
 // import criarAutomação2 from './creatingAutomation/criarAutomação2';
-import selecionarAmbientesAuto from './creatingAutomation/selecionarAmbAuto';
+// import selecionarAmbientesAuto from './creatingAutomation/selecionarAmbAuto';
+import selectRoomsAuto from './creatingAutomation/selectRooms';
 import criarAutomação3 from './creatingAutomation/criarAutomação3';
 import escolherAçõesAuto from './creatingAutomation/escolherAçõesAuto';
 import criarAutomação4 from './creatingAutomation/criarAutomação4';
@@ -163,8 +164,8 @@ function AutomacoesStack() {
         }}
       />  
       <Stack.Screen
-        name="Selecionar Ambientes Automação"
-        component={selecionarAmbientesAuto}
+        name="Select Automation Rooms"
+        component={selectRoomsAuto}
         options={{
           headerShown: false,
         }}
