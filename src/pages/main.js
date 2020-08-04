@@ -13,8 +13,9 @@ import Automation from "./automation";
 import addRooms from './addRooms';
 
 // Páginas relacionadas à criação de ambientes
-import criarAmbiente from './criandoAmbiente/criarAmbiente'
-import addDispositivos from './criandoAmbiente/addDispositivos'
+import creatingRoom from './creatingRoom/creatingRoom';
+import addDevices from './creatingRoom/addDevices';
+
 
 // Páginas relacionadas à criação de gatilhos
 import creatingTrigger from './creatingTrigger/creatingTrigger1';
@@ -31,8 +32,7 @@ import selectRoomsAuto from './creatingAutomation/selectRooms';
 import creatingAuto3 from './creatingAutomation/creatingAuto3';
 import chooseActionsAuto from './creatingAutomation/chooseActions';
 import creatingAuto4 from './creatingAutomation/creatingAuto4';
-// import escolherAçõesAuto from './creatingAutomation/escolherAçõesAuto';
-// import criarAutomação4 from './creatingAutomation/criarAutomação4';
+
 
 const Stack = createStackNavigator()
 function AmbientesStack() {
@@ -63,15 +63,15 @@ function AmbientesStack() {
         }}
       />
        <Stack.Screen
-        name="Criar Ambiente"
-        component={criarAmbiente}
+        name="Create Room"
+        component={creatingRoom}
         options={{
           headerShown: false,
         }}
       />
         <Stack.Screen
-        name="Adicionar dispositivos"
-        component={addDispositivos}
+        name="Add Devices"
+        component={addDevices}
         options={{
           headerShown: false,
         }}

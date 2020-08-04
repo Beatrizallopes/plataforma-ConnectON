@@ -52,12 +52,12 @@ import Input from '../components/input';
           }     
 // MAIN COMPONENT: Rooms 
 const Rooms = ({navigation}) => {
-  const room = {nome:"Ambiente",dispositivos:[],cor:""};
+  const room = {name:"Ambiente",devices:[],color:""};
 // Rendering the Rooms's page:
   return (
    <ScrollView style={styles.body}>
       <View style={styles.header}>
-          <TouchableWithoutFeedback onPress={() => navigation.navigate("Criar Ambiente",{ambiente:room})}>
+          <TouchableWithoutFeedback onPress={() => navigation.navigate("Create Room",{room:room})}>
               <Image  style={styles.iconLeft} source={require('./../images/icons/adicionar.png')}/>
           </TouchableWithoutFeedback>
           <TouchableWithoutFeedback onPress={() => alert("Mais Informações")}>

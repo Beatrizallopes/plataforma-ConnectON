@@ -13,8 +13,9 @@ const RoomsList = ({list}) =>{
       var color =  room.cor;
       var position = roomPosition(x,list.length-1);
       x = x + 1;
+      var key = room.id + "/" +  Math.random();
       return(
-        <View key={room.id} style={[indicator(color,position),styles.roomsList]}>
+        <View key={key} style={[indicator(color,position),styles.roomsList]}>
           <Text style={styles.text}>{roomName}</Text>
         </View>
       )
