@@ -25,8 +25,8 @@ const AutomationList = () => {
 // Component CreationType: this component offers 2 options of creation = Automation or Trigger
 const CreationType = () => {
   const navigation = useNavigation();
-  const trigger = {nome:"Gatilho",horario:"", diasSemana:[], ambientesSel:[],acoesSel:[]}
-  const automation = {nome:"Automação",horarioInicio:"", horarioFim:"", diasSemana:[], ambientesSel:[],acoesSel:[],funcionamentoForcado: false}
+  const trigger = {name:"Gatilho",schedule:"", daysWeek:[], roomsSel:[],actionsSel:[]}
+  const automation = {name:"Automação",scheduleStart:"", scheduleEnd:"", daysWeek:[], roomsSel:[],actionsSel:[],persistent: false}
   
   return (
     <View>
@@ -34,7 +34,7 @@ const CreationType = () => {
         <View style={styles.box}>
             <Image style={styles.imageIcon} source={require('./../images/automacoes.png')}></Image>
             <Text style={styles.explanation}>Crie uma automação que é executada durante um período com início e fim determinado. </Text>
-            <TouchableWithoutFeedback onPress={() => navigation.navigate("Criar Automação",{automation:automation})}>
+            <TouchableWithoutFeedback onPress={() => navigation.navigate("Create Automation",{automation:automation})}>
                 <View style={styles.creationButton}>
                     <Text style={styles.buttonText}> Criar Automação</Text>
                 </View> 
