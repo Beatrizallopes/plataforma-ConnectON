@@ -30,10 +30,11 @@ import creatingAutomation from './creatingAutomation/creatingAuto1';
 import creatingAuto2 from './creatingAutomation/creatingAuto2';
 import selectRoomsAuto from './creatingAutomation/selectRooms';
 import creatingAuto3 from './creatingAutomation/creatingAuto3';
-import selectActionsAuto from './creatingAutomation/chooseActions';
-// import escolherAçõesAuto from './creatingAutomation/escolherAçõesAuto';
-import criarAutomação4 from './creatingAutomation/criarAutomação4';
 import chooseActionsAuto from './creatingAutomation/chooseActions';
+import creatingAuto4 from './creatingAutomation/creatingAuto4';
+import createAuto4 from './creatingAutomation/creatingAuto4';
+// import escolherAçõesAuto from './creatingAutomation/escolherAçõesAuto';
+// import criarAutomação4 from './creatingAutomation/criarAutomação4';
 
 const Stack = createStackNavigator()
 function AmbientesStack() {
@@ -185,8 +186,8 @@ function AutomacoesStack() {
         }}
       />
       <Stack.Screen
-        name="Criar Automação 4"
-        component={criarAutomação4}
+        name="Create Automation 4"
+        component={createAuto4}
         options={{
           headerShown: false,
         }}
