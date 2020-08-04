@@ -275,8 +275,7 @@ const styles = StyleSheet.create({
     fontStyle:"normal",
     fontWeight: "normal",
     },
-
-// Estilo Controle 
+// Control's style
   centeredView: {
     flex: 1,
     justifyContent:"flex-end",
@@ -404,8 +403,7 @@ inputName:{
   borderRadius: 10,
 },
 })
-
-// Exportando a página ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Exporting the main component
 export default Room
 
 
