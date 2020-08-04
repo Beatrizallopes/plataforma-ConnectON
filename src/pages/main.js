@@ -9,16 +9,15 @@ import Rooms from "./rooms";
 import FavoriteRooms from "./favoriteRooms"; 
 import Room from "./room";
 import Automations from "./automations"; 
-import Automação from "./automação"; // Importando a página Automação
+// import Automação from "./automação"; // Importando a página Automação
+import Automation from "./automation";
 import addAmbientes from "./addAmbientes"// Importando a página de adicionar ambientes 
 
 // Páginas relacionadas à criação de ambientes
 import criarAmbiente from './criandoAmbiente/criarAmbiente'
 import addDispositivos from './criandoAmbiente/addDispositivos'
 
-
 // Páginas relacionadas à criação de gatilhos
-// import criarGatilho from './criandoGatilho/criarGatilho1';
 import creatingTrigger from './creatingTrigger/creatingTrigger1';
 import creatingTrigger2 from './creatingTrigger/creatingTrigger2';
 import selectRoomsTrig from './creatingTrigger/selectRooms';
@@ -93,8 +92,8 @@ function AutomacoesStack() {
         }}
       />
       <Stack.Screen
-        name="Automação"
-        component={Automação}
+        name="Automation"
+        component={Automation}
         options={{
           headerShown: false, 
         }}

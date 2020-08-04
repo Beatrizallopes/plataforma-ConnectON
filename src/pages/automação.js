@@ -3,7 +3,7 @@ import React,{useState,useEffect} from 'react';
 import { StyleSheet, View, Text, ScrollView, Image,TouchableWithoutFeedback,Modal,TextInput } from 'react-native';
 import listaAmbientes from '../dados';
 import Week from '../components/week'
-import ListaAmb from '../components/listaAmbientes';
+import ListaAmb from '../components/roomsList';
 
 // Simulando a senha do usuário
 const senha = "1234";

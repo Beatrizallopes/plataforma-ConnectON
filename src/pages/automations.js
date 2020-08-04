@@ -2,7 +2,6 @@
 import React,{useState}   from 'react';
 import { StyleSheet, ScrollView,View, Modal,TouchableWithoutFeedback,Image,Text} from 'react-native';
 import AutomationCard from '../components/automationCard'
-// import listaAutomationsOrd from '../funcoes/listarAutomações';
 import automationsListOrd from '../funcoes/listingAutomations';
 import { useNavigation } from '@react-navigation/native';
 
@@ -12,7 +11,7 @@ const AutomationList = () => {
 // Mapping the list of automations/triggers registered in the system
   const AutomationItem = automationsListOrd.map((automation)=>{
     return(
-      <TouchableWithoutFeedback onPress={() => navigation.navigate("Automação",{automation:automation})} key={automation.cod}>
+      <TouchableWithoutFeedback onPress={() => navigation.navigate("Automation",{automation:automation})} key={automation.cod}>
           <View>
             <AutomationCard type={automation.type} name={automation.name} nextEvent={automation.timeLeft} message={automation.message} rooms={automation.rooms} roomsInfo = {automation.roomsInfo}></AutomationCard>
           </View>
