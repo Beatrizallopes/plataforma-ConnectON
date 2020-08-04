@@ -20,7 +20,7 @@ const creatingAuto2= ({route,navigation}) => {
                 </TouchableWithoutFeedback> 
                 <Text style={styles.title}> Nova Automação</Text>
                 <Text style={styles.when}>Selecione os ambientes </Text>
-                <Text style={[showText(automation.roomsSel),styles.instruction]}>Selecione os ambientes que sua automation irá controlar.</Text>
+                <Text style={[showText(automation.roomsSel),styles.instruction]}>Selecione os ambientes que sua automação irá controlar.</Text>
                 <View style={{position:"absolute",top:"35%"}}>
                   <ListSelRooms list={automation.roomsSel}></ListSelRooms>
                 </View>

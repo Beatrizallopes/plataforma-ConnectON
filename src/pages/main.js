@@ -29,10 +29,11 @@ import criarGatilho4 from './criandoGatilho/criarGatilho4';
 import creatingAutomation from './creatingAutomation/creatingAuto1';
 import creatingAuto2 from './creatingAutomation/creatingAuto2';
 import selectRoomsAuto from './creatingAutomation/selectRooms';
-// import criarAutomação3 from './creatingAutomation/criarAutomação3';
 import creatingAuto3 from './creatingAutomation/creatingAuto3';
-import escolherAçõesAuto from './creatingAutomation/escolherAçõesAuto';
+import selectActionsAuto from './creatingAutomation/chooseActions';
+// import escolherAçõesAuto from './creatingAutomation/escolherAçõesAuto';
 import criarAutomação4 from './creatingAutomation/criarAutomação4';
+import chooseActionsAuto from './creatingAutomation/chooseActions';
 
 const Stack = createStackNavigator()
 function AmbientesStack() {
@@ -177,8 +178,8 @@ function AutomacoesStack() {
         }}
       /> 
       <Stack.Screen
-        name="Escolher Ações Automação"
-        component={escolherAçõesAuto}
+        name="Choose Actions Automation"
+        component={chooseActionsAuto}
         options={{
           headerShown: false,
         }}
