@@ -22,6 +22,7 @@ import addDispositivos from './criandoAmbiente/addDispositivos'
 import creatingTrigger from './creatingTrigger/creatingTrigger1';
 import creatingTrigger2 from './creatingTrigger/creatingTrigger2';
 import selectRoomsTrig from './creatingTrigger/selectRooms';
+import creatingTrigger3 from './creatingTrigger/creatingTrigger3';
 import criarGatilho3 from './criandoGatilho/criarGatilho3';
 import escolherAções from './criandoGatilho/escolherAções';
 import criarGatilho4 from './criandoGatilho/criarGatilho4';
@@ -130,8 +131,8 @@ function AutomacoesStack() {
         }}
       />
        <Stack.Screen
-        name="Criar Gatilho 3"
-        component={criarGatilho3}
+        name="Create Trigger 3"
+        component={creatingTrigger3}
         options={{
           headerShown: false,
         }}
