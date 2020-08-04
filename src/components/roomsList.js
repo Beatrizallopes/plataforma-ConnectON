@@ -7,9 +7,10 @@ import grupos from '../funcoes/separarGruposAlfa';
 const RoomsList = ({list}) =>{
   if(list.length>0){
     var x = 0;
-    var selectedRoom = list.map((room) => { 
-      var roomName = grupos[room.group][room.room].nome;
-      var color =  grupos[room.group][room.room].cor;
+    var selectedRoom = list.map((room) => {
+      // var element = groupRoom(room); 
+      var roomName = room.nome;
+      var color =  room.cor;
       var position = roomPosition(x,list.length-1);
       x = x + 1;
       return(
@@ -26,6 +27,21 @@ const RoomsList = ({list}) =>{
     )
   }
   return selectedRoom;
+}
+// Functions:
+// Function groupRoom(room) = returns an object with the number of the group and room of the room
+const groupRoom = (room) => {
+  var g = 0;
+  var r = 0;
+  for (i = 0; i < grupos.length; i++){
+    for( j =0; j < grupos[i].length; j++){
+        if(grupos[i][j].nome == room.name){
+          g = i;
+          r = j;
+        }
+    }
+  }
+  return {group:g,room:r}
 }
 // Estilo do componente
 const styles = StyleSheet.create({

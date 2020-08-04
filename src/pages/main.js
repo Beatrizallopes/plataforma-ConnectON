@@ -9,9 +9,8 @@ import Rooms from "./rooms";
 import FavoriteRooms from "./favoriteRooms"; 
 import Room from "./room";
 import Automations from "./automations"; 
-// import Automação from "./automação"; // Importando a página Automação
 import Automation from "./automation";
-import addAmbientes from "./addAmbientes"// Importando a página de adicionar ambientes 
+import addRooms from './addRooms';
 
 // Páginas relacionadas à criação de ambientes
 import criarAmbiente from './criandoAmbiente/criarAmbiente'
@@ -99,8 +98,8 @@ function AutomacoesStack() {
         }}
       />
       <Stack.Screen
-        name="Adicionar Ambientes"
-        component={addAmbientes}
+        name="Add Rooms"
+        component={addRooms}
         options={{
           headerShown: false, 
         }}

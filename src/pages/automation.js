@@ -40,7 +40,7 @@ const Automation = ({route,navigation}) => {
     option3 = true;
   }
   var text = automation.schedule;
-  var rooms = identifyRooms(automation.rooms)
+  var rooms = identifyRooms(automation.rooms);
   if(automation.type === "Automação"){
     var schedule = automation.schedule.split("/");
     text = schedule[0] + " às " + schedule[1]
@@ -57,7 +57,7 @@ const deactivate = function(option,passwordInput){
   if(passwordInput === password){
     deactivated = false
   } else {
-    alert("A password está incorreta!")
+    alert("A senha está incorreta!")
   }
   setactive(deactivated);
 }
@@ -370,7 +370,7 @@ const identifyRooms = function(list){
 var rooms = [];
 for(var i=0;i<listaAmbientes.length;i++){
   for(var j=0;j<list.length;j++){
-    if(listaAmbientes[i].name == list[j]){
+    if(listaAmbientes[i].nome == list[j]){
       rooms.push(listaAmbientes[i])
     } 
   }
