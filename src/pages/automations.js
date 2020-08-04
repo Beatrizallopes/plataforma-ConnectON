@@ -44,7 +44,7 @@ const CreationType = () => {
         <View style={styles.box}>
             <Image style={styles.imageIcon} source={require('./../images/gatilhos.png')}></Image>
             <Text style={styles.explanation}>Crie um trigger para executar uma tarefa uma única vez quando chegar o momento </Text>
-            <TouchableWithoutFeedback onPress={() => navigation.navigate("Criar Gatilho",{trigger:trigger})}>
+            <TouchableWithoutFeedback onPress={() => navigation.navigate("Create Trigger",{trigger:trigger})}>
                 <View style={[styles.creationButton,{backgroundColor:"rgba(214, 96, 117, 0.3)",}]}>
                     <Text style={[styles.buttonText,{color:"#D66075"}]}> Criar Gatilho</Text>
                 </View>

@@ -18,7 +18,8 @@ import addDispositivos from './criandoAmbiente/addDispositivos'
 
 
 // Páginas relacionadas à criação de gatilhos
-import criarGatilho from './criandoGatilho/criarGatilho1';
+// import criarGatilho from './criandoGatilho/criarGatilho1';
+import creatingTrigger from './creatingTrigger/creatingTrigger1'
 import criarGatilho2 from './criandoGatilho/criarGatilho2';
 import selecionarAmbientes from './criandoGatilho/selecionarAmb';
 import criarGatilho3 from './criandoGatilho/criarGatilho3';
@@ -108,8 +109,8 @@ function AutomacoesStack() {
       />
       {/* Páginas referentes à criação de gatilhos */}
         <Stack.Screen
-        name="Criar Gatilho"
-        component={criarGatilho}
+        name="Create Trigger"
+        component={creatingTrigger}
         options={{
           headerShown: false,
         }}
