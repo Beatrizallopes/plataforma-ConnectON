@@ -21,7 +21,7 @@ const criarGatilho2 = ({route,navigation}) => {
                   Novo Gatilho
                 </Text>
                 <Text style={styles.quando}>Selecione os ambientes </Text>
-                <Text style={[showText(gatilho.ambientesSel),styles.explicação]}>Selecione os ambientes que sua automação irá controlar.</Text>
+                <Text style={[showText(gatilho.ambientesSel),styles.explicação]}>Selecione os ambientes que seu gatilho irá controlar.</Text>
                 <View style={{position:"absolute",top:"35%"}}>
                   <ListaAmbSel lista={gatilho.ambientesSel}></ListaAmbSel>
                 </View>

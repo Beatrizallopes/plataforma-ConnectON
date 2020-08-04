@@ -19,9 +19,9 @@ import addDispositivos from './criandoAmbiente/addDispositivos'
 
 // Páginas relacionadas à criação de gatilhos
 // import criarGatilho from './criandoGatilho/criarGatilho1';
-import creatingTrigger from './creatingTrigger/creatingTrigger1'
-import criarGatilho2 from './criandoGatilho/criarGatilho2';
-import selecionarAmbientes from './criandoGatilho/selecionarAmb';
+import creatingTrigger from './creatingTrigger/creatingTrigger1';
+import creatingTrigger2 from './creatingTrigger/creatingTrigger2';
+import selectRoomsTrig from './creatingTrigger/selectRooms';
 import criarGatilho3 from './criandoGatilho/criarGatilho3';
 import escolherAções from './criandoGatilho/escolherAções';
 import criarGatilho4 from './criandoGatilho/criarGatilho4';
@@ -116,15 +116,15 @@ function AutomacoesStack() {
         }}
       />
         <Stack.Screen
-        name="Criar Gatilho 2"
-        component={criarGatilho2}
+        name="Create Trigger 2"
+        component={creatingTrigger2}
         options={{
           headerShown: false,
         }}
       />
       <Stack.Screen
-        name="Selecionar Ambientes"
-        component={selecionarAmbientes}
+        name="Select Trigger Rooms"
+        component={selectRoomsTrig}
         options={{
           headerShown: false,
         }}
