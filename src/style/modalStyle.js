@@ -6,6 +6,15 @@ modalStyle = StyleSheet.create({
     colorTextTrigger:{
       color:"#D66075",
     },
+    colorTextAuto:{
+      color:"#568AEA",
+    },
+    colorButtonTrigger:{
+      backgroundColor:"rgba(214, 96, 117, 0.3)",
+    },
+    colorButtonAuto:{
+      backgroundColor:"rgba(26, 41, 70, 1)",
+    },
   // Modals that are used as creating pages:
     modal: {
         height:"100%",
@@ -73,7 +82,6 @@ modalStyle = StyleSheet.create({
         height:56,
         paddingVertical:8,
         paddingHorizontal:32,
-        backgroundColor:"rgba(214, 96, 117, 0.3)",
         borderRadius:12,
         alignItems:"center",
         justifyContent:"center"

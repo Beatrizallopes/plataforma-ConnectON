@@ -25,7 +25,7 @@ const creatingTrigger2= ({route,navigation}) => {
                   <ListSelRooms list={trigger.roomsSel}></ListSelRooms>
                 </View>
                 <TouchableWithoutFeedback onPress={() => navigation.navigate("Select Trigger Rooms",{trigger:trigger})}>
-                  <View style={[buttonPosition(trigger.roomsSel),modalStyle.button]}>
+                  <View style={[buttonPosition(trigger.roomsSel),modalStyle.button,modalStyle.colorButtonTrigger]}>
                     <Text style={[modalStyle.buttonText,modalStyle.colorTextTrigger]}>
                       <Image source={require('./../../images/icons/selecionarAmbientes.png')}></Image>  Selecionar ambientes </Text>
                   </View>

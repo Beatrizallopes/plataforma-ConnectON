@@ -30,7 +30,7 @@ const [saturday, clickedSaturday] = useState(false);
 trigger.daysWeek = [sunday,monday,tuesday,wednesday,thursday,friday,saturday];
 trigger.schedule = hour;
 
-return(
+return( 
     <ScrollView>
       <Modal animationType="slide" transparent={true} visible={true} >
           <View style={modalStyle.modal}>
