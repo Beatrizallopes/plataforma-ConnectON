@@ -1,9 +1,10 @@
 // List of required imports
-import React,{useState, useEffect}   from 'react';
+import React  from 'react';
 import { StyleSheet, View, Text, ScrollView, Image,  Modal,TouchableWithoutFeedback,TextInput,Switch} from 'react-native';
+import modalStyle from '../../style/modalStyle';
 
 // MAIN COMPONENT: creatingTrigger4
-const creatingTrigger4= ({route,navigation}) => {
+const creatingTrigger4 = ({route,navigation}) => {
   const {trigger} = route.params;
   const [value, onChangeText] = React.useState(trigger.name);
   trigger.name = value;
@@ -11,16 +12,15 @@ const creatingTrigger4= ({route,navigation}) => {
 return(
     <ScrollView>
       <Modal animationType="slide" transparent={true} visible={true} >
-        <View style={styles.centeredView}>
-          <View style={styles.modal}>
+          <View style={modalStyle.modal}>
               <TouchableWithoutFeedback onPress={() => navigation.navigate("Create Trigger 3",{trigger:trigger})}>
-                <Image  style={styles.backIcon} source={require('./../../images/icons/voltarGatilho.png')}/>
+                <Image  style={modalStyle.leftIcon} source={require('./../../images/icons/voltarGatilho.png')}/>
               </TouchableWithoutFeedback>
-              <Text style={styles.back}> Voltar  </Text>
+              <Text style={[modalStyle.textSupLeft,modalStyle.colorTextTrigger]}> Voltar  </Text>
               <TouchableWithoutFeedback onPress={() => {navigation.navigate("Automations")}} >
-                  <Text style={styles.next}> Concluir </Text>
+                  <Text style={[modalStyle.textSupRight,modalStyle.colorTextTrigger]}> Concluir </Text>
               </TouchableWithoutFeedback> 
-              <Text style={styles.title}> Novo Gatilho </Text>
+              <Text style={modalStyle.title}> Novo Gatilho </Text>
               <View style={styles.input}>
                 <Text style={styles.inputLabel}>NOME DO GATILHO </Text>
                 <TextInput style={styles.searchInput}
@@ -29,57 +29,12 @@ return(
                 ></TextInput>
               </View>
           </View>
-        </View> 
       </Modal> 
     </ScrollView>
   )
 }
 // Styling the components
 const styles = StyleSheet.create({
-  body: {
-    flex:1,
-    backgroundColor: "#000000",
-  },
-  modal: {
-    height:"100%",
-    width:"100%",
-    backgroundColor: "#000000",
-    alignItems: "center", 
-  },
-  title:{
-    position:"absolute",
-    color:"white",
-    fontSize: 17,
-    fontFamily: "Barlow",
-    fontStyle: "normal",
-    fontWeight: "600",
-    lineHeight: 22,
-    letterSpacing: 0.374,
-    top:"5%",
-    marginHorizontal:15,
-  },
-  next:{
-    position:"absolute",
-    top:"5%",
-    color: "#D66075",
-    fontWeight: "600",
-    fontSize: 17,
-    right:"5%",
-  },
-  back:{
-    position:"absolute",
-    top:"5%",
-    color: "#D66075",
-    fontWeight: "600",
-    fontSize: 17,
-    left:"10%",
-    lineHeight: 22,
-  },
-  backIcon:{
-    position: "absolute", 
-    top: "5%",
-    left:"5%"
-  },
   input:{
     position:'absolute',
     top:"12%",
@@ -100,33 +55,6 @@ inputLabel:{
     fontSize: 13,
     color:"rgba(255, 255, 255, 0.5)",
 },
-  textSeg:{
-    position:"absolute",
-    top:"25%",
-    left:"10%",
-  },
-  selectFunc:{
-    width:"88%",
-    height:48,
-    top:"30%",
-    left:"2%",
-    backgroundColor: "linear-gradient(0deg, rgba(255, 255, 255, 0.11), rgba(255, 255, 255, 0.11)), #000000",
-    borderRadius: 8,
-  },
-  instructions:{
-    width: 343,
-    height: 40,
-    left: "2%",
-    top: "33%",
-    fontFamily: "Barlow",
-    fontStyle: "normal",
-    fontWeight: "normal",
-    fontSize: 15,
-    lineHeight: 20,
-    letterSpacing: -0.24,
-    color: "rgba(255, 255, 255, 0.55)"
-  }
-
   })
 
   export default creatingTrigger4;

@@ -2,6 +2,11 @@ import { StyleSheet } from 'react-native';
 
 // Styling the modals
 modalStyle = StyleSheet.create({
+  // Colors used:
+    colorTextTrigger:{
+      color:"#D66075",
+    },
+  // Modals that are used as creating pages:
     modal: {
         height:"100%",
         width:"100%",
@@ -23,7 +28,6 @@ modalStyle = StyleSheet.create({
     textSupRight:{ // next
         position:"absolute",
         top:"5%",
-        color: "#D66075",
         fontWeight: "600",
         fontSize: 17,
         right:"5%",
@@ -31,7 +35,6 @@ modalStyle = StyleSheet.create({
     textSupLeft:{ // back
         position:"absolute",
         top:"5%",
-        color: "#D66075",
         fontWeight: "600",
         fontSize: 17,
         left:"10%",
@@ -65,6 +68,23 @@ modalStyle = StyleSheet.create({
         letterSpacing: -0.408,
         color: "rgba(255, 255, 255, 0.55)",
       },
-
+      button: {
+        width: 343,
+        height:56,
+        paddingVertical:8,
+        paddingHorizontal:32,
+        backgroundColor:"rgba(214, 96, 117, 0.3)",
+        borderRadius:12,
+        alignItems:"center",
+        justifyContent:"center"
+        },
+      buttonText: {
+        display:"flex",
+        flexDirection:"row",
+        fontSize:17,
+        fontWeight:"600",
+        lineHeight:22,
+        letterSpacing: -0.408,
+      },
 })
  export default modalStyle;

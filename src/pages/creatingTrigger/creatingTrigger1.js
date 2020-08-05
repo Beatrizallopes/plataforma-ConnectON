@@ -33,14 +33,13 @@ trigger.schedule = hour;
 return(
     <ScrollView>
       <Modal animationType="slide" transparent={true} visible={true} >
-        <View style={styles.centeredView}>
           <View style={modalStyle.modal}>
               <TouchableWithoutFeedback onPress={() => navigation.navigate("Automations") }>
                 <Image  style={modalStyle.leftIcon} source={require('./../../images/icons/voltarGatilho.png')}/>
               </TouchableWithoutFeedback>
-              <Text style={modalStyle.textSupLeft}> Voltar  </Text>
+              <Text style={[modalStyle.textSupLeft,modalStyle.colorTextTrigger]}> Voltar  </Text>
               <TouchableWithoutFeedback onPress={() => navigation.navigate("Create Trigger 2",{trigger:trigger})}>
-                  <Text style={modalStyle.textSupRight}> Seguinte </Text>
+                  <Text style={[modalStyle.textSupRight,modalStyle.colorTextTrigger]}> Seguinte </Text>
               </TouchableWithoutFeedback> 
               <Text style={modalStyle.title}> Novo Gatilho </Text>
               <Text style={modalStyle.subtitle}>Quando</Text>
@@ -94,12 +93,10 @@ return(
                 </TouchableWithoutFeedback>
                </View>
           </View>
-        </View>
       </Modal> 
     </ScrollView>
   )
 }
-
 // Functions:
 // Function changeStyle(status): change the style of the day in the picker based on if it is choosed or not
 const changeStyle = function(status){
