@@ -105,7 +105,7 @@ const ActivateButton = function({activated}){
               {/*Button to add rooms*/}
             <TouchableWithoutFeedback onPress={() => navigation.navigate("Add Rooms",{automation:automation})}>
               <View style={[styles.addRoomButton,buttonVisibility(automation.active)]}>
-                <Image style={{alignSelf:"center",left:"60%"}} source={require('../images/icons/addAmbiente.png')}></Image>
+                <Image style={{alignSelf:"center",left:"60%"}} source={require('../images/icons/add.png')}></Image>
                 <Text style={styles.textButtonAdd}>Adicionar ambientes</Text>
               </View>
           </TouchableWithoutFeedback>

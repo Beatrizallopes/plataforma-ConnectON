@@ -1,6 +1,7 @@
 // List of required imports
 import React,{useState, useEffect}   from 'react';
 import { StyleSheet, View, Text, ScrollView, Image,  Modal,TouchableWithoutFeedback,TextInput,Switch} from 'react-native';
+import modalStyle from './../../style/modalStyle'
 
 // MAIN COMPONENT: creatingAuto4
 const creatingAuto4= ({route,navigation}) => {
@@ -14,16 +15,15 @@ const creatingAuto4= ({route,navigation}) => {
 return(
     <ScrollView>
       <Modal animationType="slide" transparent={true} visible={true} >
-        <View style={styles.centeredView}>
-          <View style={styles.modal}>
+          <View style={modalStyle.modal}>
               <TouchableWithoutFeedback onPress={() => navigation.navigate("Create Automation 3",{automation:automation})}>
-                <Image  style={styles.backIcon} source={require('./../../images/icons/voltarAutomação.png')}/>
+                <Image  style={modalStyle.leftIcon} source={require('./../../images/icons/voltarAutomação.png')}/>
               </TouchableWithoutFeedback>
-              <Text style={styles.back}> Voltar  </Text>
+              <Text style={[modalStyle.textSupLeft,modalStyle.colorTextAuto]}> Voltar  </Text>
               <TouchableWithoutFeedback onPress={() => {navigation.navigate("Automations")}} >
-                  <Text style={styles.next}> Concluir </Text>
+                  <Text style={[modalStyle.textSupRight,modalStyle.colorTextAuto]}> Concluir </Text>
               </TouchableWithoutFeedback> 
-              <Text style={styles.title}> Nova Automação </Text>
+              <Text style={modalStyle.title}> Nova Automação </Text>
               <View style={styles.input}>
                 <Text style={styles.inputLabel}>NOME DO GATILHO </Text>
                 <TextInput style={styles.searchInput}
@@ -43,61 +43,16 @@ return(
                   value={isEnabled}
                />
               </View>
-              <Text style={styles.instructions}>Se um usuário desligar um equipamento, ele será ligado novamente.
+              <Text style={[modalStyle.instructions,styles.positionInstructions]}>Se um usuário desligar um equipamento, ele será ligado novamente.
                <TouchableWithoutFeedback onPress={() => {alert("Saiba mais")}}><Text style={{color: "#568AEA",fontWeight:"bold"}}>Saiba mais.</Text></TouchableWithoutFeedback>
               </Text>
           </View>
-        </View> 
       </Modal> 
     </ScrollView>
   )
 }
 // Styling the components
 const styles = StyleSheet.create({
-  body: {
-    flex:1,
-    backgroundColor: "#000000",
-  },
-  modal: {
-    height:"100%",
-    width:"100%",
-    backgroundColor: "#000000",
-    alignItems: "center", 
-  },
-  title:{
-    position:"absolute",
-    color:"white",
-    fontSize: 17,
-    fontFamily: "Barlow",
-    fontStyle: "normal",
-    fontWeight: "600",
-    lineHeight: 22,
-    letterSpacing: 0.374,
-    top:"5%",
-    marginHorizontal:15,
-  },
-  next:{
-    position:"absolute",
-    top:"5%",
-    color: "#568AEA",
-    fontWeight: "600",
-    fontSize: 17,
-    right:"5%",
-  },
-  back:{
-    position:"absolute",
-    top:"5%",
-    color: "#568AEA",
-    fontWeight: "600",
-    fontSize: 17,
-    left:"10%",
-    lineHeight: 22,
-  },
-  backIcon:{
-    position: "absolute", 
-    top: "5%",
-    left:"5%"
-  },
   input:{
     position:'absolute',
     top:"12%",
@@ -131,18 +86,10 @@ inputLabel:{
     backgroundColor: "linear-gradient(0deg, rgba(255, 255, 255, 0.11), rgba(255, 255, 255, 0.11)), #000000",
     borderRadius: 8,
   },
-  instructions:{
-    width: 343,
-    height: 40,
+  positionInstructions:{
+    position:"relative",
     left: "2%",
     top: "33%",
-    fontFamily: "Barlow",
-    fontStyle: "normal",
-    fontWeight: "normal",
-    fontSize: 15,
-    lineHeight: 20,
-    letterSpacing: -0.24,
-    color: "rgba(255, 255, 255, 0.55)"
   }
 
   })

@@ -3,11 +3,20 @@ import { StyleSheet } from 'react-native';
 // Styling the modals
 modalStyle = StyleSheet.create({
   // Colors used:
+    colorText:{
+      color:"#2EC754",
+    },
     colorTextTrigger:{
       color:"#D66075",
     },
     colorTextAuto:{
       color:"#568AEA",
+    },
+    colorTextDeactivated:{
+      color: "rgba(255, 255, 255, 0.3)",
+    },
+    colorButton:{
+      backgroundColor:"rgba(46, 199, 84, 0.3)",
     },
     colorButtonTrigger:{
       backgroundColor:"rgba(214, 96, 117, 0.3)",
