@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { StyleSheet, View, Text, ScrollView, TextInput, Image, Modal, TouchableWithoutFeedback} from 'react-native';
 import listaRooms from "../dados";
 import grupos from "../funcoes/separarGruposAlfa";
-import CardAuto from "../components/automationCardDisp"
+import CardAuto from "../components/automationCardDisp";
 
 // Simulating the data from a database
 var automationList = [
@@ -118,7 +118,7 @@ const Room = ({route,navigation}) => {
           <TouchableWithoutFeedback onPress={() => navigation.navigate("Rooms") }>
               <Image  style={{position: "absolute", top: "55%"}} source={require('./../images/icons/setaLaranjaEsq.png')}/>
           </TouchableWithoutFeedback>
-          <Text style={styles.rooms}> Rooms  </Text>
+          <Text style={styles.rooms}> Ambientes </Text>
           <TouchableWithoutFeedback onPress={() => {seteditModal(true);}}>
             <Text style={styles.edit}> Editar </Text>
           </TouchableWithoutFeedback> 
@@ -130,7 +130,7 @@ const Room = ({route,navigation}) => {
       </TouchableWithoutFeedback>
 {/* Automation/Triggers area */}
       <View style={styles.automationsView}>
-          <Text style={{color: "white",fontSize: 17,fontStyle:"normal",fontWeight: "600"}}> Automações</Text>
+          <Text style={{color: "#FFFFFF",fontSize: 17,fontStyle:"normal",fontWeight: "600"}}> Automações</Text>
           <ScrollView style={styles.automationsList} horizontal={true}>
               <AutomationList></AutomationList>
               <View style={{height:20}}></View>      
@@ -145,7 +145,7 @@ const Room = ({route,navigation}) => {
              <TouchableWithoutFeedback onPress={() => alert("Adicionar device!")}>
                  <Image  style={{position: "absolute", top:8, left:8}} source={require('./../images/icons/adicionarCirculo.png')}/>
              </TouchableWithoutFeedback>
-             <Text style={{position:"relative", color: "white",fontSize: 15, left: "4.76%", right:"4.76%", top: "77%", letterSpacing: -0.24}}>Adicionar dispositivo</Text>
+             <Text style={{position:"relative", color: "#FFFFFF",fontSize: 15, left: "4.76%", right:"4.76%", top: "77%", letterSpacing: -0.24}}>Adicionar dispositivo</Text>
           </View> 
       </View>
  {/* The code below is the modal that opens when the user wants to edit the room. It is the Edit Modal. */}
@@ -228,7 +228,7 @@ const styles = StyleSheet.create({
    height:149, 
   },
   devicesTitle:{
-    color: "white",
+    color: "#FFFFFF",
     fontSize: 17,
     fontStyle:"normal",
     fontWeight: "600",
@@ -254,7 +254,7 @@ const styles = StyleSheet.create({
     },
   deviceName:{
     position:"relative",
-    color: "white",
+    color: "#FFFFFF",
     fontSize: 13,
     fontStyle:"normal",
     fontWeight: "600",
@@ -285,7 +285,7 @@ const styles = StyleSheet.create({
     height:"55%",
     width:"100%",
     margin: 20,
-    backgroundColor:  "#2c2c2c",
+    backgroundColor:  "rgba(255, 255, 255,0.13)",
     borderTopStartRadius:12,
     borderTopEndRadius:12,
     padding: "9%",
@@ -373,7 +373,7 @@ editModal: {
   height:"100%",
   width:"100%",
   margin: 20,
-  backgroundColor:  "#1c1c1c",
+  backgroundColor:  "rgba(255, 255, 255,0.13)",
   padding: "9%",
   alignItems: "center",
   shadowColor: "#000",

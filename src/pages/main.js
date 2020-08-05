@@ -12,12 +12,12 @@ import Automations from "./automations";
 import Automation from "./automation";
 import addRooms from './addRooms';
 
-// Páginas relacionadas à criação de ambientes
+// Pages related to the creation of a new room
 import creatingRoom from './creatingRoom/creatingRoom';
 import addDevices from './creatingRoom/addDevices';
 
 
-// Páginas relacionadas à criação de gatilhos
+// Pages related to the creation of a new trigger
 import creatingTrigger from './creatingTrigger/creatingTrigger1';
 import creatingTrigger2 from './creatingTrigger/creatingTrigger2';
 import selectRoomsTrig from './creatingTrigger/selectRooms';
@@ -25,7 +25,7 @@ import creatingTrigger3 from './creatingTrigger/creatingTrigger3';
 import chooseActionsTrig from './creatingTrigger/chooseActions';
 import creatingTrigger4 from './creatingTrigger/creatingTrigger4';
 
-// Páginas relacionadas à criação de automação
+// Pages related to the creation of a new automation
 import creatingAutomation from './creatingAutomation/creatingAuto1';
 import creatingAuto2 from './creatingAutomation/creatingAuto2';
 import selectRoomsAuto from './creatingAutomation/selectRooms';

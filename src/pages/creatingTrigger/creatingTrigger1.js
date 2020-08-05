@@ -2,6 +2,7 @@
 import React,{useState}   from 'react';
 import { StyleSheet, ScrollView,View, Modal,TouchableWithoutFeedback,Image,Text} from 'react-native';
 import DateTimePickerModal from "react-native-modal-datetime-picker";
+import modalStyle from '../../style/modalStyle';
 
 // MAIN COMPONENT - creatingTrigger: in this first page, the user chooses the interval of the trigger
 const creatingTrigger = ({route,navigation}) => {
@@ -33,16 +34,16 @@ return(
     <ScrollView>
       <Modal animationType="slide" transparent={true} visible={true} >
         <View style={styles.centeredView}>
-          <View style={styles.modalCreate}>
+          <View style={modalStyle.modal}>
               <TouchableWithoutFeedback onPress={() => navigation.navigate("Automations") }>
-                <Image  style={styles.iconBack} source={require('./../../images/icons/voltarGatilho.png')}/>
+                <Image  style={modalStyle.leftIcon} source={require('./../../images/icons/voltarGatilho.png')}/>
               </TouchableWithoutFeedback>
-              <Text style={styles.back}> Voltar  </Text>
+              <Text style={modalStyle.textSupLeft}> Voltar  </Text>
               <TouchableWithoutFeedback onPress={() => navigation.navigate("Create Trigger 2",{trigger:trigger})}>
-                  <Text style={styles.next}> Seguinte </Text>
+                  <Text style={modalStyle.textSupRight}> Seguinte </Text>
               </TouchableWithoutFeedback> 
-              <Text style={styles.title}> Novo Gatilho </Text>
-              <Text style={styles.when}>Quando</Text>
+              <Text style={modalStyle.title}> Novo Gatilho </Text>
+              <Text style={modalStyle.subtitle}>Quando</Text>
               {/* Time Picker*/}
               <View style={styles.scheduleButton} >               
                 <Text style={[styles.scheduleText,{position:"relative",top:"25%",left:"5%",}]}> Horário</Text>
@@ -130,56 +131,6 @@ const styles = StyleSheet.create({
   body: {
     flex:1,
     backgroundColor: "#000000",
-  },
-  modalCreate: {
-    height:"100%",
-    width:"100%",
-    backgroundColor: "#000000",
-    alignItems: "center", 
-  },
-  title:{
-    position:"absolute",
-    color:"white",
-    fontSize: 17,
-    fontFamily: "Barlow",
-    fontStyle: "normal",
-    fontWeight: "600",
-    lineHeight: 22,
-    letterSpacing: 0.374,
-    top:"5%",
-    marginHorizontal:15,
-  },
-  next:{
-    position:"absolute",
-    top:"5%",
-    color: "#D66075",
-    fontWeight: "600",
-    fontSize: 17,
-    right:"5%",
-  },
-  back:{
-    position:"absolute",
-    top:"5%",
-    color: "#D66075",
-    fontWeight: "600",
-    fontSize: 17,
-    left:"10%",
-    lineHeight: 22,
-  },
-  iconBack:{
-    position: "absolute", 
-    top: "5%",
-    left:"5%"
-  },
-  when:{
-    fontWeight: "bold",
-    fontSize: 22,
-    lineHeight: 28,
-    letterSpacing: 0.352,
-    color: "#FFFFFF",
-    position:"absolute",
-    top:"15%",
-    left:"10%"
   },
   scheduleButton:{  
     top:"25%",   
