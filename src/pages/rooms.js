@@ -52,7 +52,7 @@ import Input from '../components/input';
           }     
 // MAIN COMPONENT: Rooms 
 const Rooms = ({navigation}) => {
-  const room = {name:"Ambiente",devices:[],color:""};
+  const room = {name:"Ambiente",devices:[],color:"#D36D4B"};
 // Rendering the Rooms's page:
   return (
    <ScrollView style={styles.body}>

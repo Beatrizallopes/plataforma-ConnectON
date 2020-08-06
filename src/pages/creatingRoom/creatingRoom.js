@@ -50,7 +50,6 @@ const creatingRoom = ({route,navigation}) => {
       })
       return item;
           }
- 
 // Styling the components 
 const styles = StyleSheet.create({
   buttonPosition:{
