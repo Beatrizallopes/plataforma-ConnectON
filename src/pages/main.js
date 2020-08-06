@@ -246,7 +246,7 @@ const App = () => {
   
      })}
      tabBarOptions={{ // Algumas configurações de estilo do menu inferior
-      activeTintColor:'rgb(241,104,37)', 
+      activeTintColor:"#2EC754", 
       inactiveTintColor:'rgb(101,101,101)',
       style: {                    
         backgroundColor: "#000000", 

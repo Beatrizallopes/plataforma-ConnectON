@@ -109,24 +109,23 @@ const Room = ({route,navigation}) => {
   const [editModal, seteditModal] = useState(false);
   const {selectedRoom} = route.params;
   const {selectedGroup} = route.params;
-  const {roomCod}=route.params;
   room = grupos[selectedGroup][selectedRoom]; 
 // Rendering the main component
   return (
    <ScrollView style={styles.body}>
       <View style={styles.header}>
           <TouchableWithoutFeedback onPress={() => navigation.navigate("Rooms") }>
-              <Image  style={{position: "absolute", top: "55%"}} source={require('./../images/icons/setaLaranjaEsq.png')}/>
+              <Image  style={{position: "absolute", top: "55%"}} source={require('./../images/icons/backIcon.png')}/>
           </TouchableWithoutFeedback>
           <Text style={styles.rooms}> Ambientes </Text>
           <TouchableWithoutFeedback onPress={() => {seteditModal(true);}}>
             <Text style={styles.edit}> Editar </Text>
           </TouchableWithoutFeedback> 
      </View> 
-      <Text style={styles.title}> {room.nome} </Text>  
+      <Text style={[styles.title,roomColor(room.cor)]}> {room.nome} </Text>  
       <Text style={styles.notifications}> Notificações </Text>
       <TouchableWithoutFeedback onPress={() => alert("Notificações")}>
-        <Image style={{position:"absolute",marginRight: 4,right:"8%",top:"22%"}} source={require('./../images/icons/setaDireitaTransp.png')}/>
+        <Image style={{position:"absolute",marginRight: 4,right:"8%",top:"20%"}} source={require('./../images/icons/setaDireitaTransp.png')}/>
       </TouchableWithoutFeedback>
 {/* Automation/Triggers area */}
       <View style={styles.automationsView}>
@@ -167,11 +166,15 @@ const Room = ({route,navigation}) => {
    </ScrollView>
   );
 };
-
+// Function: roomColor -> turns the color of the title of the page the same as the room's maker color.
+const roomColor = function(markerColor){
+  return{
+    color:markerColor,
+  }
+}
 // Styling the components:
 const styles = StyleSheet.create({
  title:{
-   color:room.cor,
    fontSize: 34,
    fontFamily: "Barlow",
    fontStyle: "normal",
@@ -194,7 +197,7 @@ const styles = StyleSheet.create({
   position: "absolute",
   right: 22,
   top: "20%",
-  color: "#F18929",
+  color: "#2EC754",
   width: 44,
   fontWeight: "600",
   fontSize: 17,
@@ -202,7 +205,7 @@ const styles = StyleSheet.create({
  rooms:{
   left: 24,
   top: "55%",
-  color: "#F18929",
+  color: "#2EC754",
   fontWeight: "600",
   fontSize: 17,
   lineHeight: 22,
@@ -217,7 +220,7 @@ const styles = StyleSheet.create({
   fontSize: 17,
   letterSpacing: -0.408,
   color: "#FFFFFF",
-  marginTop:"10%",
+  marginTop:"5%",
  },
  automationsView:{
    left:16,
@@ -355,7 +358,7 @@ const styles = StyleSheet.create({
     fontSize: 34,
     lineHeight: 41,
     letterSpacing: 0.374,
-    color: "#F18929",
+    color: "#2EC754",
   },
   buttons:{
     height:40,
@@ -382,7 +385,7 @@ superiorButtons:{
   position: "absolute",
   left:"5%",
   top: "8%",
-  color: "#F18929",
+  color: "#2EC754",
   fontWeight: "600",
   fontSize: 17,
   lineHeight: 22,
