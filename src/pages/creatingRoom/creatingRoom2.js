@@ -25,8 +25,8 @@ const ColorPick = () => {
       <ScrollView>
         <Modal animationType="slide" transparent={true} visible={true} > 
             <View style={modalStyle.modal}>
-                <TouchableWithoutFeedback onPress={() => navigation.navigate("Create Room 2")}>
-                  <Text style={[modalStyle.textSupLeft,modalStyle.colorText]}> Cancelar  </Text>               
+                <TouchableWithoutFeedback onPress={() => navigation.navigate("Create Room",{room:room})}>
+                  <Text style={[modalStyle.textSupLeft,modalStyle.colorText]}> Voltar  </Text>               
                  </TouchableWithoutFeedback>
                 <TouchableWithoutFeedback onPress={() => navigation.navigate("Rooms",{room:room})}>
                     <Text style={[modalStyle.textSupRight,modalStyle.colorText]}> Concluir </Text>
@@ -94,6 +94,7 @@ const styles = StyleSheet.create({
     flexDirection:"row",
     flexWrap:"wrap",
     marginTop:20,
+    left:"3%"
   },
   colorChoosed:{
     // position: "absolute",
