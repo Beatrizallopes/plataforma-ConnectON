@@ -4,6 +4,7 @@ import { StyleSheet, View, Text, ScrollView, TextInput, Image, SafeAreaView,Touc
 import { useNavigation } from '@react-navigation/native';
 import grupos from '../funcoes/separarGruposAlfa';
 import Input from '../components/input';
+import {listStyle,indicator,roomPosition} from './../style/listStyle'; 
 
 // Component GroupRooms: component that renders all of the groups of rooms that are registered in the database
  const GroupRooms = () => {
@@ -28,11 +29,11 @@ import Input from '../components/input';
         }
 // Now, rendering the each room:
         return (
-          <View style={[indicator(room.cor,position),styles.roomList]} key={room.id}>
+          <View style={[indicator(room.cor,position),listStyle.roomList]} key={room.id}>
               <TouchableWithoutFeedback onPress={() => {setfavorite(!favorite);}}>
                   <Image source={iconFavoriteURL} style={{left: 30}, {top: 12}} ></Image>
               </TouchableWithoutFeedback>
-              <Text style={styles.text}>{room.ehFavorito}{room.nome}</Text> 
+              <Text style={listStyle.name}>{room.ehFavorito}{room.nome}</Text> 
               <TouchableWithoutFeedback onPress={() => navigation.navigate('Room',{selectedGroup:groupNumber,selectedRoom:room.id,roomCod:room.cod})}>             
                   <Text style={styles.infoQuantity}>{room.qtdMod} 
                       <Image style={{borderWidth:10,borderColor:"red"}} source={require('./../images/icons/setaDireita.png')}/>         
@@ -43,8 +44,8 @@ import Input from '../components/input';
 // Now, rendering each group of rooms:
       return (
         <SafeAreaView key={letter} >
-            <Text style={styles.letter}>{letter}</Text>
-            <View style={styles.line}>{item}</View>
+            <Text style={listStyle.groupLetter}>{letter}</Text>
+            <View style={listStyle.room}>{item}</View>
         </SafeAreaView>
             )})
 // Now, rendering the entire list of groups:
@@ -77,65 +78,6 @@ const Rooms = ({navigation}) => {
    </ScrollView>
   );
 };
-// Functions used in this code:
-// Function roomPosition(room,qtyTotal): returns the type of position that the room is placed in the group
-var roomPosition = function roomPosition(room,qtyTotal) {
-  var position;
-  if(room < qtyTotal) {
-    if(room === "0") {
-      position = "first";
-    } else {
-      posicao = "inBetween";
-    }
-  } else {
-    if(qtyTotal === 0) {
-      position = "unique";
-    } else {
-      position = "last";
-    }
-  }
-  return position;
-}
-// Function indicator(myColor,position): returns the style of the component that represents the room, based on it's position and color
-var indicator = function(myColor, position) {
-  if(position ==='first'){
-    return {
-      borderBottomColor: "rgba(255, 255, 255, 0.12)",
-      borderBottomWidth: 1,
-      borderLeftWidth:8,
-      borderLeftColor: myColor,
-      borderTopStartRadius:12,
-    }
-  };
-
-  if(position ==='inBetween'){
-    return {
-      borderBottomColor: "rgba(255, 255, 255, 0.12)",
-      borderBottomWidth: 1,
-      borderLeftWidth:8,
-      borderLeftColor: myColor,
-    }
-  };
-
-  if(position ==='last'){
-    return {
-      borderLeftWidth:8,
-      borderLeftColor: myColor,
-      borderBottomStartRadius:12,
-    }
-  }
-
-  if(position=='unique'){
-    return {
-      borderLeftWidth:8,
-      borderLeftColor: myColor,
-      borderBottomStartRadius:12,
-      borderTopStartRadius:12,
-    }
-  } 
-
-}
-
 // Styling the components:
 const styles = StyleSheet.create({
  body: {
@@ -164,41 +106,11 @@ title:{
   marginBottom:18,
 },
 // Groups's style:
-line:{
-  backgroundColor: "linear-gradient(0deg, rgba(255, 255, 255, 0.11), rgba(255, 255, 255, 0.11))",
-  borderRadius: 12,
-  width:"90%",
-  alignSelf:"center",
-  marginTop:52,
-},
-text: {
-  color: "#FFFFFF",
-  fontSize: 17,
-  position: "absolute",
-  height: 24,
-  left: 8,
-  top: 12,
-  marginLeft:48,// 56 - 8 = 48
-  lineHeight: 22,
-  letterSpacing: -0.408, 
-},
 infoQuantity: {
   textAlign: "right",
   color: "rgba(235, 235, 245, 0.6)",
-  marginHorizontal:10,
   bottom:"40%",
   padding:0,
-},
-letter:{
-  color:"#FFFFFF",
-  fontWeight: "600",
-  fontSize: 17,
-  lineHeight: 22,
-  position: "absolute",
-  width: 10,
-  height: 24,
-  left: "5%",
-  marginTop:18,
 },
 // Switch's style:
 switchFav:{

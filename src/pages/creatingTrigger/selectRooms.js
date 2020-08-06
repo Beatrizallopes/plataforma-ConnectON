@@ -89,5 +89,4 @@ const selectRoomsTrig = ({route,navigation}) => {
        )
    }
 
-
   export default selectRoomsTrig;

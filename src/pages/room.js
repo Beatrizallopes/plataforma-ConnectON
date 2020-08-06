@@ -123,7 +123,7 @@ const Room = ({route,navigation}) => {
             <Text style={styles.edit}> Editar </Text>
           </TouchableWithoutFeedback> 
      </View> 
-      <Text style={styles.title}> {room.name} </Text>  
+      <Text style={styles.title}> {room.nome} </Text>  
       <Text style={styles.notifications}> Notificações </Text>
       <TouchableWithoutFeedback onPress={() => alert("Notificações")}>
         <Image style={{position:"absolute",marginRight: 4,right:"8%",top:"22%"}} source={require('./../images/icons/setaDireitaTransp.png')}/>
