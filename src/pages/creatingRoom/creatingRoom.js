@@ -23,7 +23,8 @@ const creatingRoom = ({route,navigation}) => {
                 </View>
                 <TouchableWithoutFeedback onPress={() => navigation.navigate("Add Devices",{room:room})}>
                     <View style={[modalStyle.button,modalStyle.colorButton,styles.buttonPosition]}>
-                      <Text style={modalStyle.buttonText,modalStyle.colorText}> <Image source={require('./../../images/icons/add.png')}></Image>  Adicionar dispositivos
+                      <Text style={modalStyle.buttonText,modalStyle.colorText}> 
+                      <Image source={require('./../../images/icons/add.png')}></Image>  Adicionar dispositivos
                       </Text>
                     </View>
                 </TouchableWithoutFeedback>

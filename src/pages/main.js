@@ -15,6 +15,7 @@ import addRooms from './addRooms';
 // Pages related to the creation of a new room
 import creatingRoom from './creatingRoom/creatingRoom';
 import addDevices from './creatingRoom/addDevices';
+import creatingRoom2 from './creatingRoom/creatingRoom2';
 
 
 // Pages related to the creation of a new trigger
@@ -72,6 +73,13 @@ function AmbientesStack() {
         <Stack.Screen
         name="Add Devices"
         component={addDevices}
+        options={{
+          headerShown: false,
+        }}
+      />
+        <Stack.Screen
+        name="Create Room 2"
+        component={creatingRoom2}
         options={{
           headerShown: false,
         }}

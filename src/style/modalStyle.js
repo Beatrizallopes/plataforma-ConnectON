@@ -103,5 +103,19 @@ modalStyle = StyleSheet.create({
         lineHeight:22,
         letterSpacing: -0.408,
       },
+      inputLabel:{
+        fontSize: 13,
+        color:"rgba(255, 255, 255, 0.5)",
+    },
+      inputBox:{
+      height:44,
+      padding: 12,
+      top:"20%",
+      backgroundColor: "rgba(255, 255, 255,0.13)",
+      borderRadius: 10,
+      fontSize: 17,
+      letterSpacing: -0.408,
+      color: "rgba(255, 255, 255, 0.3)",
+         },
 })
  export default modalStyle;
