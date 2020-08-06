@@ -31,7 +31,7 @@ modalStyle = StyleSheet.create({
         backgroundColor: "#000000",
         alignItems: "center", 
       },
-    title:{
+    title:{ 
         position:"absolute",
         color:"white",
         fontSize: 17,
@@ -108,14 +108,40 @@ modalStyle = StyleSheet.create({
         color:"rgba(255, 255, 255, 0.5)",
     },
       input:{
-      height:44,
-      padding: 12,
-      top:"20%",
-      backgroundColor: "rgba(255, 255, 255,0.13)",
-      borderRadius: 10,
-      fontSize: 17,
-      letterSpacing: -0.408,
-      color: "rgba(255, 255, 255, 0.3)",
+        height:44,
+        padding: 12,
+        top:"20%",
+        backgroundColor: "rgba(255, 255, 255,0.13)",
+        borderRadius: 10,
+        fontSize: 17,
+        letterSpacing: -0.408,
+        color: "rgba(255, 255, 255, 0.3)",
          },
+// Modals used to add rooms or devices:
+      selectModal: {
+        height:"100%",
+        width:"100%",
+        backgroundColor: "rgb(44,44,44)",
+        padding: "9%",
+        alignItems: "center", 
+      },
+      closeButton:{
+        position:"absolute",
+        top:"4%",
+        right:"6%",
+        backgroundColor:"rgba(255, 255, 255, 0.13);",
+        borderRadius:20
+      },
+      titleSelectModal:{
+        position:"absolute",
+        top:"5%",
+        right:"8%",
+        fontWeight: "bold",
+        fontSize: 28,
+        lineHeight: 34,
+        letterSpacing: 0.364,
+        color: "#FFFFFF",
+      },
+         
 })
  export default modalStyle;

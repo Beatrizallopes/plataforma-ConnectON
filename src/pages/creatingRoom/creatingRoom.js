@@ -11,7 +11,7 @@ const creatingRoom = ({route,navigation}) => {
         <Modal animationType="slide" transparent={true} visible={true} > 
             <View style={modalStyle.modal}>
                 <TouchableWithoutFeedback onPress={() => navigation.navigate("Rooms")}>
-                  <Text style={[modalStyle.textSupLeft,modalStyle.colorText]}> Cancelar  </Text>               
+                  <Text style={[modalStyle.textSupLeft,modalStyle.colorText,{left:"5%"}]}> Cancelar  </Text>               
                  </TouchableWithoutFeedback>
                 <Next list={room.devices}></Next>
                 <Text style={[modalStyle.subtitle,{fontSize:34,lineHeight:41,top:"12%"}]}>Novo Ambiente  </Text>
@@ -123,6 +123,7 @@ var buttonPosition = function(list){
     } else {
       return {
         top:"10%",
+        left:"4%",
       }
     }
    }

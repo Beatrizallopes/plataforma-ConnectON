@@ -3,6 +3,7 @@ import React from 'react';
 import { StyleSheet, View, Text, ScrollView, Image,  Modal,TouchableWithoutFeedback} from 'react-native';
 import grupos from '../../funcoes/separarGruposAlfa';
 import modalStyle from '../../style/modalStyle';
+import {listStyle,indicator,roomPosition} from './../../style/listStyle'; 
 
 // MAIN COMPONENT: creatingAuto2
 const creatingAuto2= ({route,navigation}) => {
@@ -45,8 +46,8 @@ const ListSelRooms = ({list}) =>{
       var position = roomPosition(x,list.length-1);
       x = x + 1;
       return(
-        <View key={room.id} style={[indicator(color,position),styles.roomsList]}>
-          <Text style={styles.text}>{roomName}</Text>
+        <View key={room.id} style={[indicator(color,position),listStyle.roomList,{backgroundColor: "rgb(44,44,44)"}]}>
+          <Text style={listStyle.name}>{roomName}</Text>
         </View>
       )
     })
@@ -60,86 +61,7 @@ const ListSelRooms = ({list}) =>{
   return selectedRoom;
 }
 
-// Styling the componentes
-const styles = StyleSheet.create({
-  // Rooms's list
-  text: {
-    color: "#FFFFFF",
-    fontSize: 17,
-    position: "absolute",
-    height: 24,
-    left: 8,
-    top: 12,
-    marginLeft:48,// 56 - 8 = 48
-    lineHeight: 22,
-    letterSpacing: -0.408, 
-  },
-  roomsList:{
-    backgroundColor: "rgb(44,44,44)",
-    height: 48,
-    paddingLeft:15,
-    width:343,
-  } 
-})
 // Dynamic Styles
-// Function: roomPosition(id, totalQty) = identifies the position of the room in the list
-  const roomPosition = function(id,totalQty){
-    var position;
-    if(id < totalQty){
-      if(id === 0){
-        position = "inicial";
-      } else{
-        position = "meio";
-      }
-    } else {
-      if(totalQty === 0){
-        position = "unico"
-      } else{
-        position = "final"
-      }
-    }
-    return position
-  }
-// Function: indicator(myColor, type): identifies the color of the room and use in the indicator
-var indicator = function(myColor, type) {
-  if(type=='inicial'){
-    return {
-      borderBottomColor: "rgba(255, 255, 255, 0.12)",
-      borderBottomWidth: 1,
-      borderLeftWidth:8,
-      borderLeftColor: myColor,
-      borderTopStartRadius:12,
-      borderTopEndRadius:12,
-    }
-  };
-  if(type=='meio'){
-    return {
-      borderBottomColor: "rgba(255, 255, 255, 0.12)",
-      borderBottomWidth: 1,
-      borderLeftWidth:8,
-      borderLeftColor: myColor,
-    }
-  };
-  if(type=='final'){
-    return {
-      borderLeftWidth:8,
-      borderLeftColor: myColor,
-      borderBottomStartRadius:12,
-      borderBottomEndRadius:12,
-    }
-  }
-  if(type=='unico'){
-    return {
-      borderLeftWidth:8,
-      borderLeftColor: myColor,
-      borderBottomStartRadius:12,
-      borderBottomEndRadius:12,
-      borderTopEndRadius:12,
-      borderTopStartRadius:12,
-      
-    }
-  }  
-}
 // Function showText(list): makes the instruction desappear when there is at least one room selected
 var showText = function(list){
   if(list.length>0){
