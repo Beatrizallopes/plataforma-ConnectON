@@ -125,7 +125,7 @@ const Room = ({route,navigation}) => {
      </View> 
       <Text style={[styles.title,roomColor(room.cor)]}> {room.nome} </Text>  
       <Text style={styles.notifications}> Notificações </Text>
-      <TouchableWithoutFeedback onPress={() => alert("Notificações")}>
+      <TouchableWithoutFeedback onPress={() => navigation.navigate("Notifications Room",{room:room})}>
         <Image style={{position:"absolute",marginRight: 4,right:"8%",top:"20%"}} source={require('./../images/icons/setaDireitaTransp.png')}/>
       </TouchableWithoutFeedback>
 {/* Automation/Triggers area */}
