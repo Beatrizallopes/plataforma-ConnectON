@@ -39,6 +39,48 @@ const listStyle = StyleSheet.create({
     left: "5%",
     marginTop:18,
   },
+    // Device's list:
+  devicesView:{
+    left:16, 
+    flex: 1,
+    flexDirection:"row",
+    flexWrap:"wrap",
+  },
+  device:{
+    width:"45%",
+    height: 126,
+    backgroundColor: "rgba(255, 255, 255,0.13)",
+    borderRadius: 12,
+    left: 4,
+    marginEnd:8,
+    marginTop:8,
+    flexDirection:"column",
+    },
+  deviceName:{
+    position:"relative",
+    color: "white",
+    fontSize: 13,
+    fontStyle:"normal",
+    fontWeight: "600",
+    left: "4.76%", 
+    left:"6%", 
+    top: "20%",
+    lineHeight: 18,
+    height: 54,
+    width:"90%", 
+    letterSpacing: -0.078
+  },
+  deviceModel: {
+    top: "23%",
+    left: "6%",
+    color: "rgba(255, 255, 255, 0.5)",
+    fontSize: 11,
+    lineHeight:13,
+    fontStyle:"normal",
+    fontWeight: "normal",
+    },
+
+
 });
 
 // Dynamic Styles
@@ -100,5 +142,6 @@ const roomPosition = function(id,totalQty){
   }
   return position
 }
+
 
  export {listStyle,indicator,roomPosition};
