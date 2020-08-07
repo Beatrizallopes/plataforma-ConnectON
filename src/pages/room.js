@@ -119,7 +119,7 @@ const Room = ({route,navigation}) => {
               <Image  style={{position: "absolute", top: "55%"}} source={require('./../images/icons/backIcon.png')}/>
           </TouchableWithoutFeedback>
           <Text style={styles.rooms}> Ambientes </Text>
-          <TouchableWithoutFeedback onPress={() => {seteditModal(true);}}>
+          <TouchableWithoutFeedback onPress={() => navigation.navigate("Edit Room",{room:room})}>
             <Text style={styles.edit}> Editar </Text>
           </TouchableWithoutFeedback> 
      </View> 
@@ -148,22 +148,6 @@ const Room = ({route,navigation}) => {
              <Text style={{position:"relative", color: "#FFFFFF",fontSize: 15, left: "4.76%", right:"4.76%", top: "77%", letterSpacing: -0.24}}>Adicionar dispositivo</Text>
           </View> 
       </View>
- {/* The code below is the modal that opens when the user wants to edit the room. It is the Edit Modal. */}
-      <Modal animationType="slide" transparent={true} visible={editModal} >
-          <View style={styles.centeredView}>
-              <View style={styles.editModal}>
-                  <TouchableWithoutFeedback onPress={() => { seteditModal(!editModal);}}>
-                      <Text style={styles.superiorButtons}> Cancelar  </Text>
-                  </TouchableWithoutFeedback>
-                  <TouchableWithoutFeedback onPress={() => alert("Salvar Alterações")}>
-                      <Text style={[styles.superiorButtons,{left:"90%"}]}> Confirmar </Text>
-                  </TouchableWithoutFeedback>
-                  <Text style={styles.inputLabel}>NOME DO AMBIENTE</Text>
-                  <TextInput style={styles.inputName}></TextInput>
-              </View>
-           </View>
-       </Modal>
-{/* Edit's modal ending */}
    </ScrollView>
   );
 };
@@ -372,40 +356,6 @@ const styles = StyleSheet.create({
     flexDirection:"row",
     flexWrap:"wrap",
   },
-// Edit's modal
-editModal: {
-  height:"100%",
-  width:"100%",
-  margin: 20,
-  backgroundColor:  "rgba(255, 255, 255,0.13)",
-  padding: "9%",
-  alignItems: "center",
-  shadowColor: "#000",
-},
-superiorButtons:{
-  position: "absolute",
-  left:"5%",
-  top: "8%",
-  color: "#2EC754",
-  fontWeight: "600",
-  fontSize: 17,
-  lineHeight: 22,
-},
-inputLabel:{
-  fontSize: 13,
-  color:"rgba(255, 255, 255, 0.5)",
-  top:"10%",
-  right:"35%"
-},
-inputName:{
-  position:"absolute",
-  width: "110%",
-  height: 42,
-  left: 16,
-  top: "21%", 
-  backgroundColor: "rgba(255, 255, 255, 0.13)",
-  borderRadius: 10,
-},
 })
 // Exporting the main component
 export default Room

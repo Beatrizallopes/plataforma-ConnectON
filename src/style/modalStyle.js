@@ -107,7 +107,7 @@ modalStyle = StyleSheet.create({
         fontSize: 13,
         color:"rgba(255, 255, 255, 0.5)",
     },
-      input:{
+      inputBox:{
         height:44,
         padding: 12,
         top:"20%",
