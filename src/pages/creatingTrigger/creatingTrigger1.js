@@ -28,7 +28,7 @@ const [friday, clickedFriday] = useState(false);
 const [saturday, clickedSaturday] = useState(false);
 
 trigger.daysWeek = [sunday,monday,tuesday,wednesday,thursday,friday,saturday];
-trigger.schedule = hour;
+trigger.schedule = hour; 
 
 return( 
     <ScrollView>

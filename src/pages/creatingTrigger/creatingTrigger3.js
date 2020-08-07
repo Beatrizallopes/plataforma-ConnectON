@@ -22,7 +22,7 @@ const creatingTrigger3 = ({route,navigation}) => {
                 <Text style={modalStyle.instructions}>Crie ações a serem executadas</Text>
                 <TouchableWithoutFeedback onPress={() => navigation.navigate("Choose Trigger Actions",{trigger:trigger})}>
                   <View style={[modalStyle.button,styles.positionButton,modalStyle.colorButtonTrigger]}>
-                    <Text style={modalStyle.buttonText,modalStyle.colorTextTrigger}> 
+                    <Text style={[modalStyle.buttonText,modalStyle.colorTextTrigger]}> 
                     <Image source={require('./../../images/icons/escolherAções.png')}></Image>  Escolher ações</Text>
                   </View>
                 </TouchableWithoutFeedback>

@@ -11,6 +11,7 @@ import Room from "./room";
 import Automations from "./automations"; 
 import Automation from "./automation";
 import addRooms from './addRooms';
+import addDevicesRoom from './addDevicesRoom'; // add devices into a existing room
 
 // Pages related to the creation of a new room
 import creatingRoom from './creatingRoom/creatingRoom';
@@ -58,6 +59,14 @@ function AmbientesStack() {
       <Stack.Screen
         name="Room"
         component={Room}
+        options={{
+          headerShown: false,
+          animationEnabled:false,
+        }}
+      />
+       <Stack.Screen
+        name="Add Devices Room"
+        component={addDevicesRoom}
         options={{
           headerShown: false,
           animationEnabled:false,

@@ -109,6 +109,7 @@ const Room = ({route,navigation}) => {
   const [editModal, seteditModal] = useState(false);
   const {selectedRoom} = route.params;
   const {selectedGroup} = route.params;
+  const {newDevices} = route.params;
   room = grupos[selectedGroup][selectedRoom]; 
 // Rendering the main component
   return (
@@ -141,7 +142,7 @@ const Room = ({route,navigation}) => {
           <DeviceList></DeviceList>
           {/*  Button add device: */}
           <View style={styles.device}>
-             <TouchableWithoutFeedback onPress={() => alert("Adicionar device!")}>
+             <TouchableWithoutFeedback onPress={() => navigation.navigate("Add Devices Room",{room:room})}>
                  <Image  style={{position: "absolute", top:8, left:8}} source={require('./../images/icons/adicionarCirculo.png')}/>
              </TouchableWithoutFeedback>
              <Text style={{position:"relative", color: "#FFFFFF",fontSize: 15, left: "4.76%", right:"4.76%", top: "77%", letterSpacing: -0.24}}>Adicionar dispositivo</Text>

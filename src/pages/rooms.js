@@ -16,6 +16,7 @@ import {listStyle,indicator,roomPosition} from './../style/listStyle';
       var letter = group[0].nome.substring(0,1); 
       var qtRooms = group.length - 1; // stores the quantity of rooms inside the group
       var groupNumber = countGroups; //  stores the position of the group in the groups array
+      var newDevices = [];
       var position; // stores the position of the room inside the group
       countGroups = countGroups + 1; 
 // Mapping the component group:
@@ -58,11 +59,11 @@ const Rooms = ({navigation}) => {
   return (
    <ScrollView style={styles.body}>
       <View style={styles.header}>
-          <TouchableWithoutFeedback onPress={() => navigation.navigate("Create Room",{room:room})}>
-              <Image  style={styles.iconLeft} source={require('./../images/icons/adicionar.png')}/>
+          <TouchableWithoutFeedback onPress={() => navigation.navigate("Create Room",{room:room})} width="24">
+              <Image  style={styles.iconLeft} source={require('./../images/icons/addRoom.png')}/>
           </TouchableWithoutFeedback>
           <TouchableWithoutFeedback onPress={() => alert("Mais Informações")}>
-              <Image  style={{position: "absolute", right: 66,top: 54}} source={require('./../images/icons/more.png')}/>
+              <Image  style={{position: "absolute", right: 66,top: 54}} source={require('./../images/icons/moreInfo.png')}/>
           </TouchableWithoutFeedback>
       </View> 
       <Text style={styles.title}> Ambientes </Text>
