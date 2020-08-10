@@ -12,7 +12,6 @@ const addDevicesRoom = ({route,navigation}) => {
   // Devices List component:
   const DeviceList = ({devicesList})=> {
     const item = devicesList.map((device)=>{
-      const [clicked,setClicked] = useState(false);
       var alreadySel = false;
       var z = 0; // variável para identificar em que posição de room.devices o device está
       // Verifiying if the room it's already selected
@@ -22,22 +21,39 @@ const addDevicesRoom = ({route,navigation}) => {
             z = m;
         }   
       }
-      if(clicked){ // it was clicked
-        if(alreadySel){
-          newDevices.splice(z,1);
-          var urlCheckBox = require('./../images/icons/ambNaoSel.png');
-        } else {
-          newDevices.push(device); // it was clicked but it isn't on the list
-          alreadySel = true;
-          var urlCheckBox = require('./../images/icons/ambSel.png');
-        }        
-      } else { // it was not clicked
-        if(alreadySel){
-          var urlCheckBox = require('./../images/icons/ambSel.png');
-        } else {
-          var urlCheckBox = require('./../images/icons/ambNaoSel.png');
+      const [clicked,setClicked] = useState(alreadySel);
+      // if(clicked){ // it was clicked
+      //   if(alreadySel){
+      //     newDevices.splice(z,1);
+      //     var urlCheckBox = require('./../images/icons/ambNaoSel.png');
+      //   } else {
+      //     newDevices.push(device); // it was clicked but it isn't on the list
+      //     alreadySel = true;
+      //     var urlCheckBox = require('./../images/icons/ambSel.png');
+      //   }        
+      // } else { // it was not clicked
+      //   if(alreadySel){
+      //     var urlCheckBox = require('./../images/icons/ambSel.png');
+      //   } else {
+      //     var urlCheckBox = require('./../images/icons/ambNaoSel.png');
+      //   }
+      // }
+      if(alreadySel){
+        var urlCheckBox = require('./../images/icons/ambSel.png');
+       } else {
+        var urlCheckBox = require('./../images/icons/ambNaoSel.png'); 
+       }
+       if(clicked){
+        if(!alreadySel){
+          newDevices.push(device);
+          urlCheckBox = require('./../images/icons/ambSel.png');
         }
-      }
+       } else {
+        if(alreadySel){     
+          newDevices.splice(z,1);
+          urlCheckBox = require('./../images/icons/ambNaoSel.png');
+        }
+       }
     z = z + 1;
     var brand = device.brand.toLowerCase();
          var logo = require('./../images/logomarcasDispositivos/sansung.png');

@@ -35,7 +35,7 @@ import Input from '../components/input';
               </TouchableWithoutFeedback>
               <Text style={styles.text}>{room.name}</Text> 
               <TouchableWithoutFeedback onPress={() => navigation.navigate('Ambiente',{grupoSelecionado:groupNumber,ambienteSelecionado:room.id,codAmbiente:room.cod})}>             
-                  <Text style={styles.infoQuantity}>{room.qtyMod} 
+                  <Text style={styles.infoQuantity}>{room.devices.length} 
                       <Image style={{borderWidth:10,borderColor:"red"}} source={require('./../images/icons/setaDireita.png')}/>         
                   </Text>
               </TouchableWithoutFeedback> 

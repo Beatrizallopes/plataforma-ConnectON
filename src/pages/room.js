@@ -4,7 +4,7 @@ import { StyleSheet, View, Text, ScrollView, TextInput, Image, Modal, TouchableW
 // import groups from "../funcoes/separarGruposAlfa";
 import CardAuto from "../components/automationCardDisp";
 import groups from '../funcoes/splitingGroups';
-import {automationsList,devicesList} from './../data';
+import {automationsList} from './../data';
 
 // Component AutomationList: renders the list of automations/triggers registered in the room
 const AutomationList = () => {
@@ -19,7 +19,7 @@ const AutomationList = () => {
     return autoItem
 }
 // Component DeviceList: renders the list of devices registered in the room 
-  const DeviceList = ()=> {
+  const DeviceList = ({devicesList})=> {
 // Mapping the devices in the room
     const item = devicesList.map((device)=>{
       const [modalVisible, setModalVisible] = useState(false);
@@ -127,7 +127,7 @@ const Room = ({route,navigation}) => {
 {/* Devices area*/}
       <Text style={styles.devicesTitle}> Dispositivos </Text>
       <View style={styles.devicesView}>
-          <DeviceList></DeviceList>
+          <DeviceList devicesList = {room.devices}></DeviceList>
           {/*  Button add device: */}
           <View style={styles.device}>
              <TouchableWithoutFeedback onPress={() => navigation.navigate("Add Devices Room",{room:room})}>

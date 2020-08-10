@@ -11,7 +11,6 @@ const addDevices = ({route,navigation}) => {
 
 // DeviceList component:
   const DeviceList = ({devicesList})=> {
-    // const devices = filterDevices(room.devices);
     const item = devicesList.map((device)=>{
       var alreadySel = false;
       var z = 0; // variable to indetify the position of the device on room.devices
@@ -78,23 +77,6 @@ const addDevices = ({route,navigation}) => {
        </ScrollView>
        )
   }
-
-// Function filterDevices(devices): filter the devices list and returns a array with only the devices that are not already in the room
-// const filterDevices = function (devices){
-//   var list = [];
-//   var alreadyHave = false;
-//   for(var i = 0; i < devices.length; i++){
-//     for(var j = 0; j < devicesList; j++){
-//       if(devices[i].name == devicesList[j].name){
-//         alreadyHave = true;
-//       }
-//     }
-//     if(!alreadyHave){
-//       list.push(devices[i]);
-//     }
-//   }
-//   return list;
-// }
 // Styling the components
 const styles = StyleSheet.create({
     title:{

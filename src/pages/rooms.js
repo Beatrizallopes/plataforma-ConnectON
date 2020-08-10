@@ -36,7 +36,7 @@ import groups from '../funcoes/splitingGroups';
               </TouchableWithoutFeedback>
               <Text style={listStyle.name}>{room.isFavorite}{room.name}</Text> 
               <TouchableWithoutFeedback onPress={() => navigation.navigate('Room',{selectedGroup:groupNumber,selectedRoom:room.id,roomCod:room.cod})}>             
-                  <Text style={styles.infoQuantity}>{room.qtyMod} 
+                  <Text style={styles.infoQuantity}>{room.devices.length} 
                       <Image style={{borderWidth:10,borderColor:"red"}} source={require('./../images/icons/setaDireita.png')}/>         
                   </Text>
               </TouchableWithoutFeedback> 
