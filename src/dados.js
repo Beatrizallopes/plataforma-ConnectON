@@ -10,7 +10,6 @@ var listaAmbientes = [
     { nome: "Brahma", qtdMod:1, cor:"#CD9C44",ehFavorito:false,cod:"1H"},
 
 ];
-// Simulating the database
 // var devicesList = [
 //     {name:"Ar-Condicionado Digital Inverter 17,000 Btu/h Frio 8-Polo", brand:"Sansung", model:"AR18NVFPCWKNAZ", cod:"1", temperature: 24, speed:3},
 //     {name:"Ar-Condicionado Split Hi Wall LG Dual Inverter Voice 12000 ", brand:"Sansung", model:"S4-W12JA31A", cod:"2", temperature:17,speed:2},
