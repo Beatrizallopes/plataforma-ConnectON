@@ -59,10 +59,10 @@ const FavoriteRooms = ({navigation}) => {
    <ScrollView style={styles.body}>
       <View style={styles.header}>
           <TouchableWithoutFeedback onPress={() => navigation.navigate("Criar Ambiente",{ambiente:room})}>
-              <Image  style={styles.iconLeft} source={require('./../images/icons/adicionar.png')}/>
+              <Image  style={styles.iconLeft} source={require('./../images/icons/addRoom.png')}/>
           </TouchableWithoutFeedback>
           <TouchableWithoutFeedback onPress={() => alert("Mais Informações")}>
-              <Image  style={{position: "absolute", right: 66,top: 54}} source={require('./../images/icons/more.png')}/>
+              <Image  style={{position: "absolute", right: 66,top: 54}} source={require('./../images/icons/moreInfo.png')}/>
           </TouchableWithoutFeedback>
       </View> 
       <Text style={styles.title}> Ambientes </Text>

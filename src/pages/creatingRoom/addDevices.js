@@ -11,35 +11,37 @@ const addDevices = ({route,navigation}) => {
 
 // DeviceList component:
   const DeviceList = ({devicesList})=> {
+    // const devices = filterDevices(room.devices);
     const item = devicesList.map((device)=>{
-      const [clicked,setClicked] = useState(false);
       var alreadySel = false;
-      var z = 0; // variável para identificar em que posição de room.devices o device está
+      var z = 0; // variable to indetify the position of the device on room.devices
       // Verifiying if the room it's already selected
-      for(var m=0 ; m < room.devices.length; m++){
+      for(var m=0; m < room.devices.length; m++){
         if(room.devices[m].name == device.name){
             alreadySel = true;
             z = m;
         }   
       }
-      if(clicked){ // it was clicked
-        if(alreadySel){
-          room.devices.splice(z,1);
-          var urlCheckBox = require('./../../images/icons/ambNaoSel.png');
-        } else {
-          room.devices.push(device); // it was clicked but it isn't on the list
-          var urlCheckBox = require('./../../images/icons/ambSel.png');
-        }        
-      } else { // it was not clicked
-        if(alreadySel){
-          var urlCheckBox = require('./../../images/icons/ambSel.png');
-        } else {
-          var urlCheckBox = require('./../../images/icons/ambNaoSel.png');
-        }
+      const [clicked,setClicked] = useState(alreadySel);
+     if(alreadySel){
+      var urlCheckBox = require('./../../images/icons/ambSel.png');
+     } else {
+      var urlCheckBox = require('./../../images/icons/ambNaoSel.png'); 
+     }
+     if(clicked){
+      if(!alreadySel){
+        room.devices.push(device);
+        urlCheckBox = require('./../../images/icons/ambSel.png');
       }
-    z = z + 1;
+     } else {
+      if(alreadySel){     
+        room.devices.splice(z,1);
+        urlCheckBox = require('./../../images/icons/ambNaoSel.png');
+      }
+     }
+     z = z + 1;
     var brand = device.brand.toLowerCase();
-         var logo = require('./../../images/logomarcasDispositivos/sansung.png');
+    var logo = require('./../../images/logomarcasDispositivos/sansung.png');
 // Rendering each device
         return(
           <View style={listStyle.device} key={device.cod}>
@@ -49,7 +51,7 @@ const addDevices = ({route,navigation}) => {
                     <Image source={urlCheckBox} style={{top:"-2%"}}></Image>
                 </TouchableWithoutFeedback>
             </View>
-            <Text style={listStyle.deviceName}>{device.name} </Text>
+            <Text style={listStyle.deviceName}>{device.name}</Text>
             <Text style={listStyle.deviceModel}>{device.model}</Text>  
           </View>
         )
@@ -76,7 +78,23 @@ const addDevices = ({route,navigation}) => {
        </ScrollView>
        )
   }
- 
+
+// Function filterDevices(devices): filter the devices list and returns a array with only the devices that are not already in the room
+// const filterDevices = function (devices){
+//   var list = [];
+//   var alreadyHave = false;
+//   for(var i = 0; i < devices.length; i++){
+//     for(var j = 0; j < devicesList; j++){
+//       if(devices[i].name == devicesList[j].name){
+//         alreadyHave = true;
+//       }
+//     }
+//     if(!alreadyHave){
+//       list.push(devices[i]);
+//     }
+//   }
+//   return list;
+// }
 // Styling the components
 const styles = StyleSheet.create({
     title:{
