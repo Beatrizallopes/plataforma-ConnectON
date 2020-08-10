@@ -6,10 +6,10 @@ import modalStyle from './../style/modalStyle'
 // MAIN CONPONENT: editRoom()
 const editRoom = ({route,navigation}) => {
   const {room} = route.params;
-  const [value, onChangeText] = React.useState(room.nome);
-  const [choosedColor, setColor] = React.useState(room.cor);
-  room.cor = choosedColor;
-  room.nome = value;
+  const [value, onChangeText] = React.useState(room.name);
+  const [choosedColor, setColor] = React.useState(room.color);
+  room.color = choosedColor;
+  room.name = value;
   // Component colorPick: this component is inside the main component because it needs to acess and change the value of a variable inside it
 const ColorPick = () => {
   const colors = ["#D36D4B","#A6845F","#CD9C44","#B0862C","#6A9640","#529C78","#80908A","#5694A5","#568AEA","#6888CF","#A271D6","#A57FA8","#C16AB5","#D66075","#A58183"];

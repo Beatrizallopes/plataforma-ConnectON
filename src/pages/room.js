@@ -1,16 +1,15 @@
 // List of required imports 
 import React, { useState } from 'react';
 import { StyleSheet, View, Text, ScrollView, TextInput, Image, Modal, TouchableWithoutFeedback} from 'react-native';
-import listaRooms from "../dados";
 // import groups from "../funcoes/separarGruposAlfa";
 import CardAuto from "../components/automationCardDisp";
 import groups from '../funcoes/splitingGroups';
-import {automationList,devicesList} from '../data';
+import {automationsList,devicesList} from './../data';
 
 // Component AutomationList: renders the list of automations/triggers registered in the room
 const AutomationList = () => {
 // Mapping the automations inside the room's automation list 
-  const autoItem = automationList.map((automation)=>{
+  const autoItem = automationsList.map((automation)=>{
     return(
       <View key={automation.cod}>
       <CardAuto name={automation.name} schedule={automation.schedule} nextEvent={automation.nextEvent} message={automation.message}></CardAuto>

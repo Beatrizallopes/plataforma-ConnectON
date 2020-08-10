@@ -21,7 +21,7 @@ return(
               <TouchableWithoutFeedback onPress={() => navigation.navigate("Room",{room:room})}>
                 <Image  style={modalStyle.leftIcon} source={require('./../images/icons/backIcon.png')}/>
               </TouchableWithoutFeedback>
-              <Text style={[modalStyle.textSupLeft,modalStyle.colorText]}> {room.nome} </Text>
+              <Text style={[modalStyle.textSupLeft,modalStyle.colorText]}> {room.name} </Text>
               <Text style={[modalStyle.titleSelectModal, {left:"10%", top:"10%"}]}>Notificações</Text>
               <View style={styles.selectFunc}>
                   <Text style={{color:"white",fontSize:17,top:"18%",left:"5%"}}> Automações</Text>
