@@ -6,6 +6,22 @@ import modalStyle from './../../style/modalStyle'
 // MAIN CONPONENT: creatingRoom()
 const creatingRoom = ({route,navigation}) => {
   const {room} = route.params;
+// Fuction: Next(list): if there is more than one device selected, activate the "next" button
+  const Next = function({list}){
+    if(list.length>0){
+      return (
+        <TouchableWithoutFeedback onPress={() => navigation.navigate("Create Room 2",{room:room})}>
+          <Text style={[modalStyle.textSupRight,modalStyle.colorText]}> Próximo </Text>
+        </TouchableWithoutFeedback> 
+      )
+    }
+      else{
+      return (
+            <Text style={[modalStyle.textSupRight,modalStyle.colorTextDeactivated]}> Próximo </Text>
+        )     
+      }
+  }
+// Now rendering the main component
   return(
       <ScrollView>
         <Modal animationType="slide" transparent={true} visible={true} > 
@@ -135,21 +151,7 @@ var buttonPosition = function(list){
     }
  }
 
-  // Fuction: Next(list): if there is more than one device selected, activate the "next" button
-  const Next = function({list}){
-    if(list.length>0){
-      return (
-        <TouchableWithoutFeedback onPress={() => navigation.navigate("Create Room 2",{room:room})}>
-          <Text style={[modalStyle.textSupRight,modalStyle.colorText]}> Próximo </Text>
-        </TouchableWithoutFeedback> 
-      )
-    }
-      else{
-       return (
-            <Text style={[modalStyle.textSupRight,modalStyle.colorTextDeactivated]}> Próximo </Text>
-        )     
-      }
-   }
+
 
 // Exporting the main component
   export default creatingRoom;
