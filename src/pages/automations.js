@@ -4,6 +4,7 @@ import { StyleSheet, ScrollView,View, Modal,TouchableWithoutFeedback,Image,Text}
 import AutomationCard from '../components/automationCard'
 import automationsListOrd from '../funcoes/listingAutomations';
 import { useNavigation } from '@react-navigation/native';
+import modalStyle from './../style/modalStyle';
 
 // Component Automation List
 const AutomationList = () => {
@@ -60,10 +61,10 @@ const Automations = () => {
     <ScrollView style={styles.body}>
         <View style={styles.header}>
             <TouchableWithoutFeedback onPress={() => {setcreateModal(true);}}>
-                <Image  style={styles.iconLeft} source={require('./../images/icons/adicionar.png')}/>
+                <Image  style={styles.iconLeft} source={require('./../images/icons/addRoom.png')}/>
             </TouchableWithoutFeedback>
             <TouchableWithoutFeedback onPress={() => alert("Mais Informações")}>
-              <Image  style={{position: "absolute", right: 66,top: 54}} source={require('./../images/icons/more.png')}/>
+              <Image  style={{position: "absolute", right: 66,top: 54}} source={require('./../images/icons/moreInfo.png')}/>
             </TouchableWithoutFeedback>
         </View> 
         <Text style={styles.title}> Automações</Text>
@@ -74,7 +75,7 @@ const Automations = () => {
             <View style={styles.centeredView}>
                 <View style={styles.createModal}>
                     <TouchableWithoutFeedback onPress={() => {setcreateModal(!createModal);}}>
-                        <Text style={styles.superiorButtons}> Cancelar  </Text>
+                        <Text style={[modalStyle.textSupLeft,modalStyle.colorText]}> Cancelar  </Text>
                     </TouchableWithoutFeedback>
                     <CreationType></CreationType>
                 </View>

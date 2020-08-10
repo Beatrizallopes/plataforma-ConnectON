@@ -2,7 +2,8 @@
 import React, { useState }  from 'react';
 import { StyleSheet, View, Text, ScrollView, TextInput, Image, SafeAreaView,TouchableWithoutFeedback } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import gruposFav from '../funcoes/filtrarFavoritos';
+// import groupsFav from '../funcoes/filtrarFavoritos';
+import groupsFav from '../funcoes/showFavorites';
 import Input from '../components/input';
 
 // Component GroupRooms: component that renders all of the groups of rooms that are registered in the database
@@ -10,9 +11,9 @@ import Input from '../components/input';
 // List of variables used in GroupRooms
   const navigation = useNavigation();
   var countGroups = 0;
-// Mapping the component grupos (simulating the database) that stores all the rooms into groups divided by it's first letter
-  const listItem = gruposFav.map((group) => {
-      var letter = group[0].nome.substring(0,1); 
+// Mapping the component groups (simulating the database) that stores all the rooms into groups divided by it's first letter
+  const listItem = groupsFav.map((group) => {
+      var letter = group[0].name.substring(0,1); 
       var qtRooms = group.length - 1; // stores the quantity of rooms inside the group
       var groupNumber = countGroups; //  stores the position of the group in the groups array
       var position; // stores the position of the room inside the group
@@ -28,13 +29,13 @@ import Input from '../components/input';
         }
 // Now, rendering the each room:
         return (
-          <View style={[indicator(room.cor,position),styles.roomList]} key={room.id}>
+          <View style={[indicator(room.color,position),styles.roomList]} key={room.id}>
               <TouchableWithoutFeedback onPress={() => {setfavorite(!favorite);}}>
                   <Image source={iconFavoriteURL} style={{left: 30}, {top: 12}} ></Image>
               </TouchableWithoutFeedback>
-              <Text style={styles.text}>{room.ehFavorito}{room.nome}</Text> 
+              <Text style={styles.text}>{room.name}</Text> 
               <TouchableWithoutFeedback onPress={() => navigation.navigate('Ambiente',{grupoSelecionado:groupNumber,ambienteSelecionado:room.id,codAmbiente:room.cod})}>             
-                  <Text style={styles.infoQuantity}>{room.qtdMod} 
+                  <Text style={styles.infoQuantity}>{room.qtyMod} 
                       <Image style={{borderWidth:10,borderColor:"red"}} source={require('./../images/icons/setaDireita.png')}/>         
                   </Text>
               </TouchableWithoutFeedback> 
@@ -52,7 +53,7 @@ import Input from '../components/input';
           }     
 // MAIN COMPONENT: Rooms 
 const FavoriteRooms = ({navigation}) => {
-  const room = {nome:"Ambiente",dispositivos:[],cor:""};
+  const room = {name:"Ambiente",dispositivos:[],color:""};
 // Rendering the Rooms's page:
   return (
    <ScrollView style={styles.body}>
@@ -82,13 +83,13 @@ const FavoriteRooms = ({navigation}) => {
 var roomPosition = function roomPosition(room,qtyTotal) {
   var position;
   if(room < qtyTotal) {
-    if(room === "0") {
+    if(room == "0") {
       position = "first";
     } else {
-      posicao = "inBetween";
+      position = "inBetween";
     }
   } else {
-    if(qtyTotal === 0) {
+    if(qtyTotal == 0) {
       position = "unique";
     } else {
       position = "last";
