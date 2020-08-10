@@ -29,4 +29,4 @@ const automationsList = [
     {type: "Gatilho",name:"Automação 2", days:"08/08/2020", schedule:"01:00",rooms:["RH"], isPersistent:false,cod:"5",active:true},
 ];
 
-export {roomsList,devicesList,automationsList};
+export {roomsList,devicesList,automationsList,user};

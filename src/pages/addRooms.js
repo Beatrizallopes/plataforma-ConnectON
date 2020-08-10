@@ -2,22 +2,21 @@
 import React,{useState}   from 'react';
 import { StyleSheet, View, Text, ScrollView, TextInput, Image, Button, Modal, SafeAreaView,TouchableWithoutFeedback} from 'react-native';
 import Input from '../components/input';
-import grupos from '../funcoes/separarGruposAlfa';
-
+import groups from '../funcoes/splitingGroups'
 // MAIN COMPONENT: addRooms
 const addRooms= ({route,navigation}) => {
   const {automation} = route.params;
   var i = 0; 
-  const itemLista = grupos.map((group) => {
+  const itemLista = groups.map((group) => {
       var j =0; 
-      var letter = group[0].nome.substring(0,1); 
+      var letter = group[0].name.substring(0,1); 
       var qtyRooms = group.length - 1;
       var position;
       const item = group.map((room) => {
         var alreadySel = false;
         var z = 0; 
         for(var m=0; m < automation.rooms.length;m++){
-          if(automation.rooms[m] == room.nome){
+          if(automation.rooms[m] == room.name){
               alreadySel = true;
               z = m;
           }   
@@ -33,7 +32,7 @@ const addRooms= ({route,navigation}) => {
             element.group= i;
             element.room = j;
             element.id = ("g"+i+"a"+j).toString();
-            automation.rooms.push(grupos[i][j].nome);
+            automation.rooms.push(groups[i][j].name);
           }        
         } else {
           var urlCheckBox = require('./../images/icons/ambNaoSel.png');
@@ -44,11 +43,11 @@ const addRooms= ({route,navigation}) => {
         j = j + 1; 
         position = roomPosition(room.id,qtyRooms);
         return (
-          <View style={[indicator(room.cor,position),styles.roomList]} key={room.id}>
+          <View style={[indicator(room.color,position),styles.roomList]} key={room.id}>
             <TouchableWithoutFeedback   onPress={() => {setSelected(!selected);}}>
               <Image source={urlCheckBox} style={{left: 30}, {top: 12}} ></Image>
              </TouchableWithoutFeedback>
-            <Text style={styles.text}>{room.nome} </Text>  
+            <Text style={styles.text}>{room.name} </Text>  
           </View>
               )
       }) 

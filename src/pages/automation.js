@@ -1,12 +1,13 @@
 // List of required imports 
 import React,{useState} from 'react';
 import { StyleSheet, View, Text, ScrollView, Image,TouchableWithoutFeedback,Modal,TextInput } from 'react-native';
-import listaAmbientes from '../dados';
+import {roomsList,user} from '../data';
 import Week from '../components/week'
 import RoomsList from '../components/roomsList';
+import modalStyle from '../style/modalStyle'
 
 // Simulating the user password
-const password = "1234";
+const password = user.password;
 
 // MAIN COMPONENT: Automation
 const Automation = ({route,navigation}) => { 
@@ -78,15 +79,15 @@ const ActivateButton = function({activated}){
     )
   }
 }
-// Rendering the main component:
+// Rendering the main component: 
   return (   
   <ScrollView  style={styles.body}  >
   <View style={{ paddingBottom: padding,flexDirection:"column"}}>
      <View style={styles.header}>
         <TouchableWithoutFeedback onPress={() => navigation.navigate("Automations") }>
-          <Image  style={{position: "absolute", top: "55%"}} source={require('./../images/icons/setaLaranjaEsq.png')}/>
+          <Image  style={{position: "absolute", top: "55%"}} source={require('./../images/icons/backIcon.png')}/>
         </TouchableWithoutFeedback>
-        <Text style={styles.automations}> Automações </Text>
+        <Text style={[modalStyle.textSupLeft,modalStyle.colorText,{top:"55%"}]}> Automações </Text>
         <ActivateButton activated={active}></ActivateButton>
      </View>  
       <Text style={styles.title}>{automation.name}</Text>  
@@ -180,14 +181,6 @@ const styles = StyleSheet.create({
   fontWeight: "600",
   fontSize: 17,
  },
- automations:{
-  left: 24,
-  top: "55%",
-  color: "#F18929",
-  fontWeight: "600",
-  fontSize: 17,
-  lineHeight: 22,
- },
  details:{
   position:"relative",
   marginTop:"4%",
@@ -250,7 +243,7 @@ const styles = StyleSheet.create({
     position:"relative",
     left: "-2%",
     width: 343,
-    backgroundColor: "rgba(241, 137, 41, 0.3)",
+    backgroundColor:"rgba(46, 199, 84, 0.3)",
     borderRadius: 12,
     alignSelf: "center",
     textAlign:"center",
@@ -261,17 +254,13 @@ const styles = StyleSheet.create({
     fontSize: 17,
     lineHeight: 22,
     letterSpacing: -0.408,
-    color: "#F18929",
+    color:"#2EC754",
     alignSelf:"center",
     marginLeft:10,
     left:"70%"
   },
   //Modal's Style:
-  centeredView: {
-    flex: 1,
-    justifyContent:"flex-end",
-    alignItems: "center",
-  },
+ 
   modalView: {
     height:"68%",
     width:"100%",
@@ -368,10 +357,10 @@ const styles = StyleSheet.create({
 // Function indentifyRooms(list) = identify the rooms in the string
 const identifyRooms = function(list){
 var rooms = [];
-for(var i=0;i<listaAmbientes.length;i++){
+for(var i=0;i<roomsList.length;i++){
   for(var j=0;j<list.length;j++){
-    if(listaAmbientes[i].nome == list[j]){
-      rooms.push(listaAmbientes[i])
+    if(roomsList[i].name == list[j]){
+      rooms.push(roomsList[i])
     } 
   }
 }

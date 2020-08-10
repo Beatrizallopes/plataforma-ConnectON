@@ -1,7 +1,7 @@
 // Importações necessárias
 import React from 'react';
 import { StyleSheet, View, Text} from 'react-native';
-import grupos from '../funcoes/separarGruposAlfa';
+import groups from '../funcoes/splitingGroups';
 
 // Componente Input
 const RoomsList = ({list}) =>{
@@ -9,8 +9,8 @@ const RoomsList = ({list}) =>{
     var x = 0;
     var selectedRoom = list.map((room) => {
       // var element = groupRoom(room); 
-      var roomName = room.nome;
-      var color =  room.cor;
+      var roomName = room.name;
+      var color =  room.color;
       var position = roomPosition(x,list.length-1);
       x = x + 1;
       var key = room.id + "/" +  Math.random();
@@ -34,9 +34,9 @@ const RoomsList = ({list}) =>{
 const groupRoom = (room) => {
   var g = 0;
   var r = 0;
-  for (i = 0; i < grupos.length; i++){
-    for( j =0; j < grupos[i].length; j++){
-        if(grupos[i][j].nome == room.name){
+  for (i = 0; i < groups.length; i++){
+    for( j =0; j < groups[i].length; j++){
+        if(groups[i][j].name == room.name){
           g = i;
           r = j;
         }
