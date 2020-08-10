@@ -1,7 +1,7 @@
 // List of required imports import React,{useState}   from 'react';
 import React from 'react';
 import { StyleSheet, View, Text, ScrollView, Image,  Modal,TouchableWithoutFeedback} from 'react-native';
-import grupos from '../../funcoes/separarGruposAlfa';
+import groups from '../../funcoes/splitingGroups';
 import modalStyle from '../../style/modalStyle';
 import {listStyle,indicator,roomPosition} from './../../style/listStyle'; 
 
@@ -41,8 +41,8 @@ const ListSelRooms = ({list}) =>{
   if(list.length>0){
     var x = 0;
     var selectedRoom = list.map((room) => { 
-      var roomName = grupos[room.group][room.room].nome;
-      var color =  grupos[room.group][room.room].cor;
+      var roomName = groups[room.group][room.room].name;
+      var color =  groups[room.group][room.room].color;
       var position = roomPosition(x,list.length-1);
       x = x + 1;
       return(

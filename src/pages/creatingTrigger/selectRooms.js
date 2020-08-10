@@ -2,7 +2,7 @@
 import React,{useState}   from 'react';
 import { StyleSheet, View, Text, ScrollView, TextInput, Image, Modal, SafeAreaView,TouchableWithoutFeedback} from 'react-native';
 import Input from '../../components/input';
-import grupos from '../../funcoes/separarGruposAlfa';
+import groups from '../../funcoes/splitingGroups';
 import modalStyle from './../../style/modalStyle';
 import {listStyle,indicator,roomPosition} from './../../style/listStyle'; 
 
@@ -10,9 +10,9 @@ import {listStyle,indicator,roomPosition} from './../../style/listStyle';
 const selectRoomsTrig = ({route,navigation}) => {
   const {trigger} = route.params;
   var i = 0; // variable of group control
-  const itemGroups = grupos.map((group) => { // Mapping the groups inside the array
+  const itemGroups = groups.map((group) => { // Mapping the groups inside the array
       var j =0; // variable to store de number of the room inside the group (room j of the room i)
-      var letter = group[0].nome.substring(0,1); 
+      var letter = group[0].name.substring(0,1); 
       var qtyRoom = group.length - 1;
       var position;
       const item = group.map((room) => { // Mapping the rooms inside the group
@@ -49,11 +49,11 @@ const selectRoomsTrig = ({route,navigation}) => {
         position = roomPosition(room.id,qtyRoom);
 // Now, rendering the list of rooms inside a letter group, this is what item returns:
         return (
-          <View style={[indicator(room.cor,position),listStyle.roomList]} key={room.id}>
+          <View style={[indicator(room.color,position),listStyle.roomList]} key={room.id}>
             <TouchableWithoutFeedback   onPress={() => {setSelected(!selected);}}>
               <Image source={urlCheckbox} style={{left: 30}, {top: 12}} ></Image>
              </TouchableWithoutFeedback>
-            <Text style={listStyle.name}>{room.nome} </Text>  
+            <Text style={listStyle.name}>{room.name} </Text>  
           </View>
               )
       })
