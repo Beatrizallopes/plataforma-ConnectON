@@ -2,18 +2,18 @@
 import React, { useState }  from 'react';
 import { StyleSheet, View, Text, ScrollView, TextInput, Image, SafeAreaView,TouchableWithoutFeedback } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import grupos from '../funcoes/separarGruposAlfa';
 import Input from '../components/input';
 import {listStyle,indicator,roomPosition} from './../style/listStyle'; 
+import groups from '../funcoes/splitingGroups';
 
 // Component GroupRooms: component that renders all of the groups of rooms that are registered in the database
  const GroupRooms = () => {
 // List of variables used in GroupRooms
   const navigation = useNavigation();
   var countGroups = 0;
-// Mapping the component grupos (simulating the database) that stores all the rooms into groups divided by it's first letter
-  const listItem = grupos.map((group) => {
-      var letter = group[0].nome.substring(0,1); 
+// Mapping the component groups (simulating the database) that stores all the rooms into groups divided by it's first letter
+  const listItem = groups.map((group) => {
+      var letter = group[0].name.substring(0,1); 
       var qtRooms = group.length - 1; // stores the quantity of rooms inside the group
       var groupNumber = countGroups; //  stores the position of the group in the groups array
       var newDevices = [];
@@ -21,7 +21,7 @@ import {listStyle,indicator,roomPosition} from './../style/listStyle';
       countGroups = countGroups + 1; 
 // Mapping the component group:
       const item = group.map((room) => {
-        const [favorite, setfavorite] = useState(room.ehFavorito); // state of the room: favorite or not. At first uses the initial state of the room
+        const [favorite, setfavorite] = useState(room.isFavorite); // state of the room: favorite or not. At first uses the initial state of the room
         position = roomPosition(room.id,qtRooms); 
 // Changing the favorite icon based on if the room it's favorited or not:
         var iconFavoriteURL =  require('./../images/icons/naoFavorito.png');      
@@ -30,13 +30,13 @@ import {listStyle,indicator,roomPosition} from './../style/listStyle';
         }
 // Now, rendering the each room:
         return (
-          <View style={[indicator(room.cor,position),listStyle.roomList]} key={room.id}>
+          <View style={[indicator(room.color,position),listStyle.roomList]} key={room.id}>
               <TouchableWithoutFeedback onPress={() => {setfavorite(!favorite);}}>
                   <Image source={iconFavoriteURL} style={{left: 30}, {top: 12}} ></Image>
               </TouchableWithoutFeedback>
-              <Text style={listStyle.name}>{room.ehFavorito}{room.nome}</Text> 
+              <Text style={listStyle.name}>{room.isFavorite}{room.name}</Text> 
               <TouchableWithoutFeedback onPress={() => navigation.navigate('Room',{selectedGroup:groupNumber,selectedRoom:room.id,roomCod:room.cod})}>             
-                  <Text style={styles.infoQuantity}>{room.qtdMod} 
+                  <Text style={styles.infoQuantity}>{room.qtyMod} 
                       <Image style={{borderWidth:10,borderColor:"red"}} source={require('./../images/icons/setaDireita.png')}/>         
                   </Text>
               </TouchableWithoutFeedback> 

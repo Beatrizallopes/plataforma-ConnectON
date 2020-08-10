@@ -2,21 +2,10 @@
 import React, { useState } from 'react';
 import { StyleSheet, View, Text, ScrollView, TextInput, Image, Modal, TouchableWithoutFeedback} from 'react-native';
 import listaRooms from "../dados";
-import grupos from "../funcoes/separarGruposAlfa";
+// import groups from "../funcoes/separarGruposAlfa";
 import CardAuto from "../components/automationCardDisp";
-
-// Simulating the data from a database
-var automationList = [
-  {name:"Expediente", schedule:"08:00 as 18:00", nextEvent:"00:17:34", message:"Encerrará em breve", cod:"1"},
-  {name:"Hora Extra", schedule:" ", nextEvent:"Sábado, 08:00 as 18:00", message:"Daqui a 3 dias", cod:"2"},
-  {name:"Intervalo", schedule:"12:00 as 14:00 ", nextEvent:"Segunda, 12:00 as 14:00", message:"Daqui a 5 dias", cod:"3"},
-]
-var devicesList = [
-  {name:"Ar-Condicionado Digital Inverter 17,000 Btu/h Frio 8-Polo", brand:"Sansung", model:"AR18NVFPCWKNAZ", cod:"1", temperature: 24, speed:3},
-  {name:"Ar-Condicionado Split Hi Wall LG Dual Inverter Voice 12000 ", brand:"Sansung", model:"S4-W12JA31A", cod:"2", temperature:17,speed:2},
-  {name:"Ar-Condicionado Split Hi Wall LG  Inverter ", brand:"Sansung", model:"S4-W12JA31B", cod:"3", temperature:18,speed:2},
-]
- var room = listaRooms[0];
+import groups from '../funcoes/splitingGroups';
+import {automationList,devicesList} from '../data';
 
 // Component AutomationList: renders the list of automations/triggers registered in the room
 const AutomationList = () => {
@@ -110,7 +99,7 @@ const Room = ({route,navigation}) => {
   const {selectedRoom} = route.params;
   const {selectedGroup} = route.params;
   const {newDevices} = route.params;
-  room = grupos[selectedGroup][selectedRoom]; 
+  room = groups[selectedGroup][selectedRoom]; 
 // Rendering the main component
   return (
    <ScrollView style={styles.body}>
@@ -123,7 +112,7 @@ const Room = ({route,navigation}) => {
             <Text style={styles.edit}> Editar </Text>
           </TouchableWithoutFeedback> 
      </View> 
-      <Text style={[styles.title,roomColor(room.cor)]}> {room.nome} </Text>  
+      <Text style={[styles.title,roomColor(room.color)]}> {room.name} </Text>  
       <Text style={styles.notifications}> Notificações </Text>
       <TouchableWithoutFeedback onPress={() => navigation.navigate("Notifications Room",{room:room})}>
         <Image style={{position:"absolute",marginRight: 4,right:"8%",top:"20%"}} source={require('./../images/icons/setaDireitaTransp.png')}/>

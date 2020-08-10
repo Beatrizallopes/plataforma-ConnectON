@@ -4,7 +4,6 @@ var groups = [];
 var qtyRooms = roomsList.length;
 var firstLetter;
 var groupA=[0]; groupB=[0];groupC=[0];groupD=[0];groupE=[0];groupF=[0];groupG=[0];groupH=[0];groupI=[0];groupJ=[0];groupK=[0];groupL=[0];groupM=[0];groupN=[0];groupO=[0];groupP=[0];groupQ=[0];groupR=[0];groupS=[0];groupT=[0];groupU=[0];groupV=[0];groupW=[0]; groupX=[0];groupY=[0];groupZ=[0];
-var groupA=[0]; groupB=[0];groupC=[0];groupD=[0];groupE=[0];groupF=[0];groupG=[0];groupH=[0];groupI=[0];groupJ=[0];groupK=[0];groupL=[0];groupM=[0];groupN=[0];groupO=[0];groupP=[0];groupQ=[0];groupR=[0];groupS=[0];groupT=[0];groupU=[0];groupV=[0];groupW=[0]; groupX=[0];groupY=[0];groupZ=[0];
 
 // If the group has at least one room, it is added to the groups arrays. This is done to prevent showing empty groups.
 function verifyAndAdd(group){
